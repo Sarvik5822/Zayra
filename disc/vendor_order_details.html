@@ -1,0 +1,552 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom styles to fix the sidebar */
+        body {
+            margin: 0;
+            padding-left: 16rem;
+            /* Adjust this based on the width of your sidebar */
+        }
+
+        aside {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 16rem;
+            /* Width of the sidebar */
+            height: 100vh;
+            /* Full height */
+            overflow-y: auto;
+            /* Allow scrolling if content overflows */
+            background-color: white;
+            /* Background color for the sidebar */
+            border-right: 1px solid #e5e7eb;
+            /* Border for the sidebar */
+        }
+
+        .main-content {
+            margin-left: 16rem;
+            /* Same as sidebar width */
+            padding: 1rem;
+            /* Padding for the main content */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="webcrumbs" class="flex">
+        <aside class="w-64 border-r border-gray-200 h-screen">
+            <div class="p-4" onclick="window.location.href='vendor_dashboard.html'">
+                <h1 class="text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
+            </div>
+            <nav class="p-2 space-y-1">
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='signin.html'">
+                    <span class="material-symbols-outlined">security</span>
+                    <span>Authentication</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_profile.html'">
+                    <span class="material-symbols-outlined">account_circle</span>
+                    <span>Account</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
+                    <details class="relative w-full">
+                        <summary class="list-none cursor-pointer flex items-center justify-between w-full">
+                            <div class="flex items-center space-x-3">
+                                <span class="material-symbols-outlined">shopping_cart</span>
+                                <span>Ecommerce</span>
+                            </div>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </summary>
+                        <div
+                            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='vendor_product.html'">Products</div>
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='vendor_categories.html'">Category</div>
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='vendor_order.html'">Orders</div>
+                        </div>
+                    </details>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items -center space-x-3"
+                    onclick="window.location.href='revenue_breakdown.html'">
+                    <span class="material-symbols-outlined">payment</span>
+                    <span>Revenue</span>
+                </div>
+
+            </nav>
+        </aside>
+
+        <div class="flex-1">
+            <header class="px-6 py-4">
+                <nav class="flex items-center justify-between">
+                    <div class="flex items-center space-x-8">
+                        <div class="flex items-center space-x-2 text-sm">
+                            <span class="hover:underline cursor-pointer">Home</span>
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            <span class="hover:underline cursor-pointer">Dashboard</span>
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            <span class="opacity-50">Current Page</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-6">
+                        <div class="relative">
+                            <input type="text" placeholder="Search..."
+                                class="pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all w-64" />
+                            <span class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400">search</span>
+                        </div>
+
+                        <details class="relative">
+                            <summary class="list-none cursor-pointer">
+                                <div class="relative hover:bg-gray-100 p-2 rounded-full transition-colors">
+                                    <span class="material-symbols-outlined">notifications</span>
+                                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                                </div>
+                            </summary>
+                            <div
+                                class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-100 p-4 z-50">
+                                <h3 class="font-semibold mb-2">Notifications</h3>
+                                <div class="space-y-2">
+                                    <div
+                                        class="flex items-start space-x-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                                        <span class="material-symbols-outlined mt-1">mail</span>
+                                        <div>
+                                            <p class="text-sm font-medium">New message received</p>
+                                            <p class="text-xs text-gray-500">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <details class="relative">
+                            <summary class="list-none cursor-pointer">
+                                <div
+                                    class="flex items-center space-x-2 hover:bg-gray-100 p-2 rounded-lg transition-colors">
+                                    <img src="https://ui-avatars.com/api/?name=John+Doe" alt="Profile"
+                                        class="w-8 h-8 rounded-full" />
+                                    <span class="material-symbols-outlined">expand_more</span>
+                                </div>
+                            </summary>
+                            <div
+                                class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
+                                    onclick="window.location.href='vendor_profile.html'">
+                                    <span class="material-symbols-outlined mr-2 align-middle">person</span>
+                                    Profile
+                                </div>
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
+                                    onclick="window.location.href='vendor_setting.html'">
+                                    <span class="material-symbols-outlined mr-2 align-middle">settings</span>
+                                    Settings
+                                </div>
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors border-t"
+                                    onclick="window.location.href='signin.html'" F>
+                                    <span class="material-symbols-outlined mr-2 align-middle">logout</span>
+                                    Logout
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="p-6 space-y-6">
+
+                <div class="text-2xl font-bold mb-6">Order Details</div>
+                <div class="grid grid-cols-3 gap-8">
+                    <!-- Order Details -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                        <h1 class="text-3xl font-bold mb-6 text-gray-800 cursor-default">Order Details</h1>
+                        <table class="w-full">
+                            <tbody>
+                                <tr class="group hover:bg-gray-50 transition-colors duration-200">
+                                    <td class="py-4">
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center gap-4">
+                                                <span
+                                                    class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform duration-200">calendar_month</span>
+                                                <p class="font-medium">Date Added</p>
+                                            </div>
+                                            <p class="text-gray-600">March 15, 2024</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="group hover:bg-gray-50 transition-colors duration-200">
+                                    <td class="py-4">
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center gap-4">
+                                                <span
+                                                    class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform duration-200">credit_card</span>
+                                                <p class="font-medium">Payment Method</p>
+                                            </div>
+                                            <p class="text-gray-600">Credit Card (**** 4242)</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="group hover:bg-gray-50 transition-colors duration-200">
+                                    <td class="py-4">
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center gap-4">
+                                                <span
+                                                    class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform duration-200">local_shipping</span>
+                                                <p class="font-medium">Shipping Method</p>
+                                            </div>
+                                            <p class="text-gray-600">Express Delivery (2-3 days)</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Customer Details -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                        <h1 class="text-3xl font-bold mb-6 text-gray-800 cursor-default">Customer Details</h1>
+                        <table class="w-full">
+                            <tbody>
+                                <tr class="group hover:bg-gray-50 transition-colors duration-200">
+                                    <td class="py-4">
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center gap-4">
+                                                <span
+                                                    class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform duration-200">person</span>
+                                                <p class="font-medium">Customer</p>
+                                            </div>
+                                            <p class="text-gray-600">John Doe</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="group hover:bg-gray-50 transition-colors duration-200">
+                                    <td class="py-4">
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center gap-4">
+                                                <span
+                                                    class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform duration-200">mail</span>
+                                                <p class="font-medium">Email</p>
+                                            </div>
+                                            <p class="text-gray-600">john.doe@example.com</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="group hover:bg-gray-50 transition-colors duration-200">
+                                    <td class="py-4">
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center gap-4">
+                                                <span
+                                                    class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform duration-200">phone</span>
+                                                <p class="font-medium">Phone</p>
+                                            </div>
+                                            <p class="text-gray-600">+1 (555) 123-4567</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Documents -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                        <h1 class="text-3xl font-bold mb-6 text-gray-800 cursor-default">Documents</h1>
+                        <table class="w-full">
+                            <tbody>
+                                <tr class="group hover:bg-gray-50 transition-colors duration-200">
+                                    <td class="py-4">
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center gap-4">
+                                                <span
+                                                    class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform duration-200">description</span>
+                                                <p class="font-medium">Invoice</p>
+                                            </div>
+                                            <p class="text-gray-600">INV-2024-001</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="group hover:bg-gray-50 transition-colors duration-200">
+                                    <td class="py-4">
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center gap-4">
+                                                <span
+                                                    class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform duration-200">local_shipping</span>
+                                                <p class="font-medium">Shipping</p>
+                                            </div>
+                                            <p class="text-gray-600">SHP-2024-001</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="group hover:bg-gray-50 transition-colors duration-200">
+                                    <td class="py-4">
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center gap-4">
+                                                <span
+                                                    class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform duration-200">stars</span>
+                                                <p class="font-medium">Reward Points</p>
+                                            </div>
+                                            <p class="text-gray-600">500 Points</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-8">
+                    <!-- Billing Address -->
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                        <h1 class="text-3xl font-bold mb-6 text-gray-800 cursor-default">Billing Address</h1>
+                        <div class="flex items-start gap-6">
+                            <span
+                                class="material-symbols-outlined text-5xl text-gray-600 group-hover:scale-110 transition-transform duration-200">location_on</span>
+                            <div class="flex-1">
+                                <p class="text-gray-600 leading-relaxed">
+                                    123 Main Street<br />
+                                    Apt 4B<br />
+                                    New York, NY 10001<br />
+                                    United States
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                        <h1 class="text-3xl font-bold mb-6 text-gray-800 cursor-default">Shipping Address</h1>
+                        <div class="flex items-start gap-6">
+                            <span
+                                class="material-symbols-outlined text-5xl text-gray-600 group-hover:scale-110 transition-transform duration-200">local_shipping</span>
+                            <div class="flex-1">
+                                <p class="text-gray-600 leading-relaxed">
+                                    456 Oak Avenue<br />
+                                    Suite 7C<br />
+                                    Brooklyn, NY 11201<br />
+                                    United States
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                    <h1 class="text-3xl font-bold mb-6 text-gray-800 cursor-default">Bill</h1>
+                    <table class="w-full">
+                        <thead>
+                            <tr class="text-left">
+                                <th class="py-4 px-4 font-semibold">Product</th>
+                                <th class="py-4 px-4 font-semibold">Product ID</th>
+                                <th class="py-4 px-4 font-semibold">Quantity</th>
+                                <th class="py-4 px-4 font-semibold">Unit Price</th>
+                                <th class="py-4 px-4 font-semibold">Total Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="group hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-4">
+                                    <div class="flex items-center gap-4">
+                                        <img src="https://placehold.co/40x40" alt="Premium Headphones"
+                                            class="rounded-lg object-cover" />
+                                        <span>Premium Headphones</span>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-4">PRD-001</td>
+                                <td class="py-4 px-4">2</td>
+                                <td class="py-4 px-4">$199.99</td>
+                                <td class="py-4 px-4">$399.98</td>
+                            </tr>
+                            <tr class="group hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-4">
+                                    <div class="flex items-center gap-4">
+                                        <img src="https://placehold.co/40x40" alt="Wireless Mouse"
+                                            class="rounded-lg object-cover" />
+                                        <span>Wireless Mouse</span>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-4">PRD-002</td>
+                                <td class="py-4 px-4">1</td>
+                                <td class="py-4 px-4">$49.99</td>
+                                <td class="py-4 px-4">$49.99</td>
+                            </tr>
+                            <tr class="group hover:bg-gray-50 transition-colors duration-200">
+                                <td class="py-4 px-4">
+                                    <div class="flex items-center gap-4">
+                                        <img src="https://placehold.co/40x40" alt="Mechanical Keyboard"
+                                            class="rounded-lg object-cover" />
+                                        <span>Mechanical Keyboard</span>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-4">PRD-003</td>
+                                <td class="py-4 px-4">1</td>
+                                <td class="py-4 px-4">$149.99</td>
+                                <td class="py-4 px-4">$149.99</td>
+                            </tr>
+                            <tr class="border-t">
+                                <td class="py-4 px-4" colSpan="4">
+                                    <p class="text-right font-medium">Subtotal</p>
+                                </td>
+                                <td class="py-4 px-4">$599.96</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-4" colSpan="4">
+                                    <p class="text-right font-medium">VAT (10%)</p>
+                                </td>
+                                <td class="py-4 px-4">$60.00</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-4" colSpan="4">
+                                    <p class="text-right font-medium">Shipping Rate</p>
+                                </td>
+                                <td class="py-4 px-4">$15.00</td>
+                            </tr>
+                            <tr class="border-t">
+                                <td class="py-4 px-4" colSpan="4">
+                                    <p class="text-right font-semibold text-lg">Grand Total</p>
+                                </td>
+                                <td class="py-4 px-4 font-semibold text-lg">$674.96</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        let totalPrice = 0;
+        const selectedProducts = new Set(); // To keep track of selected products
+
+        function selectProduct(id, name, price, checkbox) {
+            const selectedProductsContainer = document.getElementById('selectedProducts');
+
+            if (checkbox.checked) {
+                // If the product is selected, add it to the selected products container
+                const productDiv = document.createElement('div');
+                productDiv.id = `product-${id}`; // Unique ID for the product
+                productDiv.className = 'flex justify-between items-center p-2 border-b';
+                productDiv.innerHTML = `
+                <div>
+                    <span class="font-medium">${name}</span>
+                    <span class="text-sm text-gray-600">PRD-2024-${id.toString().padStart(4, '0')}</span>
+                </div>
+                <div class="font-medium">$${price.toFixed(2)}</div>
+            `;
+                selectedProductsContainer.appendChild(productDiv);
+                selectedProducts.add(id); // Add product ID to the set
+                totalPrice += price; // Increase total price
+            } else {
+                // If the product is unselected, remove it from the selected products container
+                const productDiv = document.getElementById(`product-${id}`);
+                if (productDiv) {
+                    selectedProductsContainer.removeChild(productDiv);
+                    selectedProducts.delete(id); // Remove product ID from the set
+                    totalPrice -= price; // Decrease total price
+                }
+            }
+
+            // Update total price display
+            document.getElementById('totalPrice').innerText = `$${totalPrice.toFixed(2)}`;
+        }
+
+        document.getElementById('saveBtn').addEventListener('click', function () {
+            // Collect data from the form
+            const orderData = {
+                orderId: '#ORD-2024-0001', // Static for now, can be dynamic if needed
+                orderDate: document.getElementById('orderDate').value,
+                paymentMethod: document.getElementById('selectedPaymentMethod').textContent,
+                shippingMethod: document.getElementById('selectedShippingMethod').textContent,
+                products: Array.from(selectedProducts).map(id => {
+                    const productRow = document.getElementById(`product-${id}`);
+                    return {
+                        id: id,
+                        name: productRow.querySelector('span.font-medium').textContent,
+                        price: parseFloat(productRow.querySelector('div.font-medium').textContent.replace('$', ''))
+                    };
+                }),
+                totalPrice: totalPrice,
+                billingAddress: {
+                    addressLine1: document.querySelector('input[placeholder="Enter Address Line 1"]').value,
+                    addressLine2: document.querySelector('input[placeholder="Enter Address Line 2"]').value,
+                    city: document.querySelector('input[placeholder="Enter City"]').value,
+                    postcode: document.querySelector('input[placeholder="Enter Postcode"]').value,
+                    state: document.querySelector('input[placeholder="Enter State"]').value,
+                    country: document.getElementById('selectedCountry').textContent
+                }
+            };
+
+            // Save data to local storage
+            localStorage.setItem('orderData', JSON.stringify(orderData));
+
+            // Provide feedback to the user
+            alert('Order data saved successfully!');
+        });
+
+        document.getElementById('cancelBtn').addEventListener('click', function () {
+            // Navigate to the desired page
+            window.location.href = 'order.html'; // Replace 'desired_page.html' with the actual URL
+        });
+
+        // Dropdown functionality for payment methods
+        document.querySelectorAll('.payment-option').forEach(option => {
+            option.addEventListener('click', function () {
+                const selectedPaymentMethod = document.getElementById('selectedPaymentMethod');
+                selectedPaymentMethod.textContent = this.textContent; // Update selected payment method
+                this.closest('details').removeAttribute('open'); // Close the dropdown
+            });
+        });
+
+        // Dropdown functionality for shipping methods
+        document.querySelectorAll('.shipping-option').forEach(option => {
+            option.addEventListener('click', function () {
+                const selectedShippingMethod = document.getElementById('selectedShippingMethod');
+                selectedShippingMethod.textContent = this.textContent; // Update selected shipping method
+                this.closest('details').removeAttribute('open'); // Close the dropdown
+            });
+        });
+
+        // Dropdown functionality for countries
+        document.querySelectorAll('.country-option').forEach(option => {
+            option.addEventListener('click', function () {
+                const selectedCountry = document.getElementById('selectedCountry');
+                selectedCountry.textContent = this.textContent; // Update selected country
+                this.closest('details').removeAttribute('open'); // Close the dropdown
+            });
+        });
+
+        // Optional: Close the dropdown when clicking outside of it
+        document.addEventListener('click', function (event) {
+            const dropdowns = document.querySelectorAll('details');
+            dropdowns.forEach(dropdown => {
+                if (!dropdown.contains(event.target)) {
+                    dropdown.removeAttribute('open'); // Close the dropdown if clicked outside
+                }
+            });
+        });
+    </script>
+    <script>
+        document.querySelectorAll(".dropdown summary").forEach((summary) => {
+            summary.addEventListener("click", function (event) {
+                event.preventDefault(); // Default behavior ko block karega
+                let details = this.parentElement;
+                if (details.hasAttribute("open")) {
+                    details.removeAttribute("open"); // Close if already open
+                } else {
+                    details.setAttribute("open", "true"); // Open if closed
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

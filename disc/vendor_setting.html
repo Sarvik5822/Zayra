@@ -1,0 +1,615 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Settings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom styles to fix the sidebar */
+        body {
+            margin: 0;
+            padding-left: 16rem;
+            /* Adjust this based on the width of your sidebar */
+        }
+
+        aside {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 16rem;
+            /* Width of the sidebar */
+            height: 100vh;
+            /* Full height */
+            overflow-y: auto;
+            /* Allow scrolling if content overflows */
+            background-color: white;
+            /* Background color for the sidebar */
+            border-right: 1px solid #e5e7eb;
+            /* Border for the sidebar */
+        }
+
+        .main-content {
+            margin-left: 16rem;
+            /* Same as sidebar width */
+            padding: 1rem;
+            /* Padding for the main content */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="webcrumbs" class="flex">
+        <aside class="w-64 border-r border-gray-200 h-screen">
+            <div class="p-4" onclick="window.location.href='vendor_dashboard.html'">
+                <h1 class="text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
+            </div>
+            <nav class="p-2 space-y-1">
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='signin.html'">
+                    <span class="material-symbols-outlined">security</span>
+                    <span>Authentication</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_profile.html'">
+                    <span class="material-symbols-outlined">account_circle</span>
+                    <span>Account</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
+                    <details class="relative w-full">
+                        <summary class="list-none cursor-pointer flex items-center justify-between w-full">
+                            <div class="flex items-center space-x-3">
+                                <span class="material-symbols-outlined">shopping_cart</span>
+                                <span>Ecommerce</span>
+                            </div>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </summary>
+                        <div
+                            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='vendor_product.html'">Products</div>
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='vendor_categories.html'">Category</div>
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='vendor_order.html'">Orders</div>
+                        </div>
+                    </details>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items -center space-x-3"
+                    onclick="window.location.href='revenue_breakdown.html'">
+                    <span class="material-symbols-outlined">payment</span>
+                    <span>Revenue</span>
+                </div>
+
+            </nav>
+        </aside>
+
+        <div class="flex-1">
+            <header class="px-6 py-4">
+                <nav class="flex items-center justify-between">
+                    <div class="flex items-center space-x-8">
+                        <div class="flex items-center space-x-2 text-sm">
+                            <span class="hover:underline cursor-pointer">Home</span>
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            <span class="hover:underline cursor-pointer">Dashboard</span>
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            <span class="opacity-50">Current Page</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-6">
+                        <div class="relative">
+                            <input type="text" placeholder="Search..."
+                                class="pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all w-64" />
+                            <span class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400">search</span>
+                        </div>
+
+                        <details class="relative">
+                            <summary class="list-none cursor-pointer">
+                                <div class="relative hover:bg-gray-100 p-2 rounded-full transition-colors">
+                                    <span class="material-symbols-outlined">notifications</span>
+                                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                                </div>
+                            </summary>
+                            <div
+                                class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-100 p-4 z-50">
+                                <h3 class="font-semibold mb-2">Notifications</h3>
+                                <div class="space-y-2">
+                                    <div
+                                        class="flex items-start space-x-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                                        <span class="material-symbols-outlined mt-1">mail</span>
+                                        <div>
+                                            <p class="text-sm font-medium">New message received</p>
+                                            <p class="text-xs text-gray-500">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <details class="relative">
+                            <summary class="list-none cursor-pointer">
+                                <div
+                                    class="flex items-center space-x-2 hover:bg-gray-100 p-2 rounded-lg transition-colors">
+                                    <img src="https://ui-avatars.com/api/?name=John+Doe" alt="Profile"
+                                        class="w-8 h-8 rounded-full" />
+                                    <span class="material-symbols-outlined">expand_more</span>
+                                </div>
+                            </summary>
+                            <div
+                                class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
+                                    onclick="window.location.href='vendor_profile.html'">
+                                    <span class="material-symbols-outlined mr-2 align-middle">person</span>
+                                    Profile
+                                </div>
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
+                                    onclick="window.location.href='vendor_setting.html'">
+                                    <span class="material-symbols-outlined mr-2 align-middle">settings</span>
+                                    Settings
+                                </div>
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors border-t"
+                                    onclick="window.location.href='signin.html'" F>
+                                    <span class="material-symbols-outlined mr-2 align-middle">logout</span>
+                                    Logout
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="p-6 space-y-6">
+
+                <div class="container mx-auto p-6">
+                    <h1 class="text-2xl font-bold mb-6">Settings</h1>
+                    <div class="flex flex-col gap-6">
+                        <div class="mt-6 bg-white rounded-xl shadow-lg p-6">
+                            <h2 class="text-2xl font-bold mb-6">Order & Shipping</h2>
+
+                            <div class="grid grid-cols-2 gap-8">
+                                <div class="space-y-6">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Processing Time</label>
+                                        <select
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+                                            <option value="">Select processing time</option>
+                                            <option value="same_day">Same Day</option>
+                                            <option value="1-3_days">1-3 Days</option>
+                                            <option value="3-5_days">3-5 Days</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Return & Refund Policy</label>
+                                        <div class="space-y-4">
+                                            <select
+                                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+                                                <option value="">Select policy type</option>
+                                                <option value="7_days">7 Days Return</option>
+                                                <option value="15_days">15 Days Return</option>
+                                                <option value="30_days">30 Days Return</option>
+                                                <option value="custom">Custom Policy</option>
+                                            </select>
+                                            <textarea
+                                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                                placeholder="Enter custom policy details..." rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-6">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Shipping Methods Supported</label>
+                                        <div class="space-y-3">
+                                            <label
+                                                class="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50 transition-all duration-200 cursor-pointer">
+                                                <input type="checkbox"
+                                                    class="rounded text-blue-500 focus:ring-blue-500" />
+                                                <span>Standard Courier</span>
+                                            </label>
+                                            <label
+                                                class="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50 transition-all duration-200 cursor-pointer">
+                                                <input type="checkbox"
+                                                    class="rounded text-blue-500 focus:ring-blue-500" />
+                                                <span>Express Delivery</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Shipping Charges</label>
+                                        <select
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 mb-4">
+                                            <option value="">Select shipping charge type</option>
+                                            <option value="free">Free Shipping</option>
+                                            <option value="flat">Flat Rate</option>
+                                            <option value="location">Based on Location</option>
+                                        </select>
+                                        <input type="number"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="Enter flat rate amount (if applicable)" />
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Enable Cash on Delivery
+                                            (COD)</label>
+                                        <div class="flex items-center space-x-4">
+                                            <label class="flex items-center space-x-2 cursor-pointer">
+                                                <input type="radio" name="cod" value="yes"
+                                                    class="text-blue-500 focus:ring-blue-500" />
+                                                <span>Yes</span>
+                                            </label>
+                                            <label class="flex items-center space-x-2 cursor-pointer">
+                                                <input type="radio" name="cod" value="no"
+                                                    class="text-blue-500 focus:ring-blue-500" />
+                                                <span>No</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 bg-white rounded-xl shadow-lg p-6">
+                            <h2 class="text-2xl font-bold mb-6">Payment & Payout</h2>
+
+                            <div class="grid grid-cols-2 gap-8">
+                                <div class="space-y-6">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Preferred Payment Method</label>
+                                        <select
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+                                            <option value="">Select payment method</option>
+                                            <option value="bank_transfer">Bank Transfer</option>
+                                            <option value="upi">UPI</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Bank Account Details</label>
+                                        <div class="space-y-4">
+                                            <input type="text"
+                                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                                placeholder="Account Number" />
+                                            <input type="text"
+                                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                                placeholder="IFSC Code" />
+                                            <input type="text"
+                                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                                placeholder="Bank Name" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-6">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Minimum Payout Threshold</label>
+                                        <input type="number"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="Enter amount (e.g., ₹5000)" />
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Automatic Payouts</label>
+                                        <div class="flex items-center space-x-4">
+                                            <label class="flex items-center space-x-2 cursor-pointer">
+                                                <input type="radio" name="autopayout" value="enable"
+                                                    class="text-blue-500 focus:ring-blue-500" />
+                                                <span>Enable</span>
+                                            </label>
+                                            <label class="flex items-center space-x-2 cursor-pointer">
+                                                <input type="radio" name="autopayout" value="disable"
+                                                    class="text-blue-500 focus:ring-blue-500" />
+                                                <span>Disable</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <a href="#"
+                                            class="inline-flex items-center space-x-2 text-blue-500 hover:text-blue-600 transition-colors duration-200">
+                                            <span class="material-symbols-outlined">history</span>
+                                            <span class="underline">View Payout History</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 bg-white rounded-xl shadow-lg p-6">
+                            <h2 class="text-2xl font-bold mb-6">Security & Privacy</h2>
+
+                            <div class="grid grid-cols-2 gap-8">
+                                <div class="space-y-6">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Change Password</label>
+                                        <div class="space-y-4">
+                                            <input type="password"
+                                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                                placeholder="Old Password" />
+                                            <input type="password"
+                                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                                placeholder="New Password" />
+                                            <input type="password"
+                                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                                placeholder="Confirm Password" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-6">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Enable Two-Factor Authentication
+                                            (2FA)</label>
+                                        <div class="flex items-center space-x-4">
+                                            <label class="flex items-center space-x-2 cursor-pointer">
+                                                <input type="radio" name="2fa" value="yes"
+                                                    class="text-blue-500 focus:ring-blue-500" />
+                                                <span>Yes</span>
+                                            </label>
+                                            <label class="flex items-center space-x-2 cursor-pointer">
+                                                <input type="radio" name="2fa" value="no"
+                                                    class="text-blue-500 focus:ring-blue-500" />
+                                                <span>No</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 bg-white rounded-xl shadow-lg p-6">
+                            <h2 class="text-2xl font-bold mb-6">Business Policies & Terms</h2>
+                            <div class="grid grid-cols-2 gap-8">
+                                <div class="space-y-6">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Return & Refund Policy</label>
+                                        <select id="returnPolicy"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 mb-4"
+                                            required>
+                                            <option value="">Select return period</option>
+                                            <option value="7_days">7 Days Return</option>
+                                            <option value="15_days">15 Days Return</option>
+                                            <option value="30_days">30 Days Return</option>
+                                        </select>
+                                        <textarea id="returnDetails"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="Additional return policy details..." rows="3"></textarea>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Exchange Policy</label>
+                                        <textarea id="exchangePolicy"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="Enter exchange policy details..." rows="3"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-6">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Warranty Policy</label>
+                                        <div class="space-y-4">
+                                            <select id="warrantyPolicy"
+                                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                                required>
+                                                <option value="">Select warranty period</option>
+                                                <option value="6_months">6 Months</option>
+                                                <option value="1_year">1 Year</option>
+                                                <option value="2_years">2 Years</option>
+                                                <option value="lifetime">Lifetime</option>
+                                            </select>
+                                            <textarea id="warrantyDetails"
+                                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                                placeholder="Additional warranty terms..." rows="2"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Custom Jewelry Order Terms</label>
+                                        <div class="space-y-3">
+                                            <label
+                                                class="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50 transition-all duration-200 cursor-pointer">
+                                                <input type="checkbox" id="nonRefundableFee"
+                                                    class="rounded text-blue-500 focus:ring-blue-500" />
+                                                <span>Non-refundable Design Fee</span>
+                                            </label>
+                                            <label
+                                                class="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50 transition-all duration-200 cursor-pointer">
+                                                <input type="checkbox" id="customSizeCharges"
+                                                    class="rounded text-blue-500 focus:ring-blue-500" />
+                                                <span>Custom Size Charges</span>
+                                            </label>
+                                            <textarea id="customOrderDetails"
+                                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                                placeholder="Additional custom order terms..." rows="2"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 bg-white rounded-xl shadow-lg p-6">
+                            <h2 class="text-2xl font-bold mb-6">Business Policies & Terms</h2>
+
+                            <div class="grid grid-cols-2 gap-8">
+                                <div class="space-y-6">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Return & Refund Policy</label>
+                                        <select id="returnPolicy"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 mb-4">
+                                            <option value="">Select return period</option>
+                                            <option value="7_days">7 Days Return</option>
+                                            <option value="15_days">15 Days Return</option>
+                                            <option value="30_days">30 Days Return</option>
+                                        </select>
+                                        <textarea id="returnDetails"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="Additional return policy details..." rows="3"></textarea>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Exchange Policy</label>
+                                        <textarea id="exchangePolicy"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="Enter exchange policy details..." rows="3"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-6">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Warranty Policy</label>
+                                        <div class="space-y-4">
+                                            <select id="warrantyPolicy"
+                                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+                                                <option value="">Select warranty period</option>
+                                                <option value="6_months">6 Months</option>
+                                                <option value="1_year">1 Year</option>
+                                                <option value="2_years">2 Years</option>
+                                                <option value="lifetime">Lifetime</option>
+                                            </select>
+                                            <textarea id="warrantyDetails"
+                                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                                placeholder="Additional warranty terms..." rows="2"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Custom Jewelry Order Terms</label>
+                                        <div class="space-y-3">
+                                            <label
+                                                class="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50 transition-all duration-200 cursor-pointer">
+                                                <input type="checkbox"
+                                                    class="rounded text-blue-500 focus:ring-blue-500" />
+                                                <span>Non-refundable Design Fee</span>
+                                            </label>
+                                            <label
+                                                class="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50 transition-all duration-200 cursor-pointer">
+                                                <input type="checkbox"
+                                                    class="rounded text-blue-500 focus:ring-blue-500" />
+                                                <span>Custom Size Charges</span>
+                                            </label>
+                                            <textarea id="customOrderTerms"
+                                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                                placeholder="Additional custom order terms..." rows="2"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 bg-white rounded-xl shadow-lg p-6">
+                            <h2 class="text-2xl font-bold mb-6">Account Management</h2>
+                            <div class="space-y-4">
+                                <div class="p-4 border rounded-lg hover:bg-gray-50 transition-all duration-200">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h3 class="text-lg font-semibold">Deactivate Account</h3>
+                                            <p class="text-sm text-gray-600">Temporarily disable your account</p>
+                                        </div>
+                                        <button
+                                            class="px-4 py-2 border border-yellow-500 text-yellow-500 rounded-lg hover:bg-yellow-50 transition-all duration-200"
+                                            onclick="deactivateAccount()">
+                                            Deactivate
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="p-4 border rounded-lg hover:bg-gray-50 transition-all duration-200">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h3 class="text-lg font-semibold">Delete Account</h3>
+                                            <p class="text-sm text-gray-600">Permanently remove your account</p>
+                                        </div>
+                                        <button
+                                            class="px-4 py-2 border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition-all duration-200"
+                                            onclick="deleteAccount()">
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="p-4 border rounded-lg hover:bg-gray-50 transition-all duration-200">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h3 class="text-lg font-semibold">Contact Admin Support</h3>
+                                            <p class="text-sm text-gray-600">For issues & help</p>
+                                        </div>
+                                        <button
+                                            class="px-4 py-2 border border-blue-500 text-blue-500 rounded-lg hover:bg-blue-50 transition-all duration-200"
+                                            onclick="contactAdmin()">
+                                            Contact
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 flex justify-end space-x-4">
+                            <button id="cancelBtn"
+                                class="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200">Cancel</button>
+                            <button id="saveBtn"
+                                class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200">Save
+                                Details</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.getElementById('browseLogo').addEventListener('click', function () {
+            document.getElementById('logoFile').click();
+        });
+
+        document.getElementById('choosePhoto').addEventListener('click', function () {
+            document.getElementById('profileFile').click();
+        });
+
+        document.getElementById('saveBtn').addEventListener('click', function () {
+            const storeName = document.getElementById('storeName').value;
+            const businessType = document.getElementById('businessType').value;
+            const gstNumber = document.getElementById('gstNumber').value;
+            const panNumber = document.getElementById('panNumber').value;
+            const streetAddress = document.getElementById('streetAddress').value;
+            const city = document.getElementById('city').value;
+            const state = document.getElementById('state').value;
+            const pinCode = document.getElementById('pinCode').value;
+            const ownerName = document.getElementById('ownerName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const bankAccount = document.getElementById('bankAccount').value;
+            const bankName = document.getElementById('bankName').value;
+            const ifscCode = document.getElementById('ifscCode').value;
+            const paymentMode = document.getElementById('paymentMode').value;
+
+            if (!storeName || !businessType || !gstNumber || !panNumber || !streetAddress || !city || !state || !pinCode || !ownerName || !email || !phone || !bankAccount || !bankName || !ifscCode || !paymentMode) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+
+            alert("Details saved successfully!");
+            // Here you can add logic to send the data to the server
+        });
+
+        document.getElementById('cancelBtn').addEventListener('click', function () {
+            if (confirm("Are you sure you want to cancel? All unsaved changes will be lost.")) {
+                // Logic to clear the form or redirect
+                window.location.reload(); // Reloads the page
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

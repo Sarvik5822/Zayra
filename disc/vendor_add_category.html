@@ -1,0 +1,329 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Category</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom styles to fix the sidebar */
+        body {
+            margin: 0;
+            padding-left: 16rem;
+            /* Adjust this based on the width of your sidebar */
+        }
+
+        aside {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 16rem;
+            /* Width of the sidebar */
+            height: 100vh;
+            /* Full height */
+            overflow-y: auto;
+            /* Allow scrolling if content overflows */
+            background-color: white;
+            /* Background color for the sidebar */
+            border-right: 1px solid #e5e7eb;
+            /* Border for the sidebar */
+        }
+
+        .main-content {
+            margin-left: 16rem;
+            /* Same as sidebar width */
+            padding: 1rem;
+            /* Padding for the main content */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="webcrumbs" class="flex">
+        <aside class="w-64 border-r border-gray-200 h-screen">
+            <div class="p-4" onclick="window.location.href='vendor_dashboard.html'">
+                <h1 class="text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
+            </div>
+            <nav class="p-2 space-y-1">
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='signin.html'">
+                    <span class="material-symbols-outlined">security</span>
+                    <span>Authentication</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_profile.html'">
+                    <span class="material-symbols-outlined">account_circle</span>
+                    <span>Account</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
+                    <details class="relative w-full">
+                        <summary class="list-none cursor-pointer flex items-center justify-between w-full">
+                            <div class="flex items-center space-x-3">
+                                <span class="material-symbols-outlined">shopping_cart</span>
+                                <span>Ecommerce</span>
+                            </div>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </summary>
+                        <div
+                            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='vendor_product.html'">Products</div>
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='vendor_categories.html'">Category</div>
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='vendor_order.html'">Orders</div>
+                        </div>
+                    </details>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items -center space-x-3"
+                    onclick="window.location.href='revenue_breakdown.html'">
+                    <span class="material-symbols-outlined">payment</span>
+                    <span>Revenue</span>
+                </div>
+
+            </nav>
+        </aside>
+
+        <div class="flex-1">
+            <header class="px-6 py-4">
+                <nav class="flex items-center justify-between">
+                    <div class="flex items-center space-x-8">
+                        <div class="flex items-center space-x-2 text-sm">
+                            <span class="hover:underline cursor-pointer">Home</span>
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            <span class="hover:underline cursor-pointer">Dashboard</span>
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            <span class="opacity-50">Current Page</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-6">
+                        <div class="relative">
+                            <input type="text" placeholder="Search..."
+                                class="pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all w-64" />
+                            <span class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400">search</span>
+                        </div>
+
+                        <details class="relative">
+                            <summary class="list-none cursor-pointer">
+                                <div class="relative hover:bg-gray-100 p-2 rounded-full transition-colors">
+                                    <span class="material-symbols-outlined">notifications</span>
+                                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                                </div>
+                            </summary>
+                            <div
+                                class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-100 p-4 z-50">
+                                <h3 class="font-semibold mb-2">Notifications</h3>
+                                <div class="space-y-2">
+                                    <div
+                                        class="flex items-start space-x-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                                        <span class="material-symbols-outlined mt-1">mail</span>
+                                        <div>
+                                            <p class="text-sm font-medium">New message received</p>
+                                            <p class="text-xs text-gray-500">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <details class="relative">
+                            <summary class="list-none cursor-pointer">
+                                <div
+                                    class="flex items-center space-x-2 hover:bg-gray-100 p-2 rounded-lg transition-colors">
+                                    <img src="https://ui-avatars.com/api/?name=John+Doe" alt="Profile"
+                                        class="w-8 h-8 rounded-full" />
+                                    <span class="material-symbols-outlined">expand_more</span>
+                                </div>
+                            </summary>
+                            <div
+                                class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
+                                    onclick="window.location.href='vendor_profile.html'">
+                                    <span class="material-symbols-outlined mr-2 align-middle">person</span>
+                                    Profile
+                                </div>
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
+                                    onclick="window.location.href='vendor_setting.html'">
+                                    <span class="material-symbols-outlined mr-2 align-middle">settings</span>
+                                    Settings
+                                </div>
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors border-t"
+                                    onclick="window.location.href='signin.html'" F>
+                                    <span class="material-symbols-outlined mr-2 align-middle">logout</span>
+                                    Logout
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="p-6 space-y-6">
+
+                <div class="container mx-auto p-6">
+                    <h1 class="text-2xl font-bold mb-6">Add Category</h1>
+                    <div class="flex flex-col gap-6">
+                        <div
+                            class="w-full bg-white rounded-lg shadow-lg p-6 transform transition-transform duration-300 hover:shadow-xl hover:-translate-y-1 flex-1">
+                            <h2 class="text-xl font-bold mb-6">Thumbnail</h2>
+                            <div
+                                class="border-2 border-dashed border-gray-300 rounded-lg p-8 hover:border-blue-400 transition-colors duration-300">
+                                <div class="flex flex-col items-center justify-center gap-4" id="uploadSection">
+                                    <span class="material-symbols-outlined text-5xl text-gray-400"
+                                        id="uploadIcon">add_photo_alternate</span>
+                                    <div class="w-full" id="uploadButtonContainer">
+                                        <label class="flex flex-col items-center justify-center cursor-pointer">
+                                            <div
+                                                class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transform transition-all duration-300 hover:scale-105">
+                                                Choose File
+                                            </div>
+                                            <input type="file" class="hidden" accept=".png,.jpg,.jpeg"
+                                                id="thumbnailInput" />
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Fixed-size image container -->
+                                <div id="imageContainer" class="relative hidden w-full h-64 overflow-hidden rounded-lg">
+                                    <img id="uploadedImage" class="w-full h-full object-cover" />
+                                    <button id="removeButton"
+                                        class="absolute top-0 right-0 bg-red-500 text-white rounded-full p-2 hover:bg-red-600">
+                                        X
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="mt-4 text-sm text-gray-600">Set the product thumbnail image. Only *.png,
+                                *.jpg, and *.jpeg image files are accepted</p>
+                        </div>
+
+                        <div
+                            class="w-full bg-white rounded-lg shadow-lg p-6 transform transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
+                            <h2 class="text-xl font-bold mb-6">General</h2>
+                            <div class="space-y-6">
+                                <div class="w-full">
+                                    <label class="block text-sm font-medium mb-2">Category Name</label>
+                                    <input type="text"
+                                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-blue-400 transition-colors duration-300"
+                                        placeholder="Enter product name" id="categoryNameInput" />
+                                    <p class="mt-2 text-sm text-gray-600">A Category name is required and recommended to
+                                        be unique.</p>
+                                </div>
+
+                                <div class="w-full">
+                                    <label class="block text-sm font-medium mb-2">Description</label>
+                                    <textarea
+                                        class="w-full h-32 px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-blue-400 transition-colors duration-300 resize-none"
+                                        placeholder="Enter category description"
+                                        id="categoryDescriptionInput"></textarea>
+                                    <p class="mt-2 text-sm text-gray-600">Set a description to the category for better
+                                        visibility.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end gap-4 mt-4">
+                            <button id="cancelBtn"
+                                class="px-6 py-2 rounded-lg border border-gray-300 hover:bg-gray-50 transform transition-all duration-300 hover:scale-105">
+                                Cancel
+                            </button>
+                            <button id="saveBtn"
+                                class="px-6 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transform transition-all duration-300 hover:scale-105">
+                                Save Changes
+                            </button>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.getElementById('saveBtn').addEventListener('click', function () {
+            // Get the input values
+            const categoryName = document.getElementById('categoryNameInput').value.trim();
+            const categoryDescription = document.getElementById('categoryDescriptionInput').value.trim();
+
+            // Validate input
+            if (!categoryName) {
+                alert('Category name is required.');
+                return;
+            }
+
+            // Create a category object
+            const newCategory = {
+                name: categoryName,
+                description: categoryDescription,
+                type: 'Primary' // You can modify this based on your requirements
+            };
+
+            // Load existing categories from local storage
+            let categories = JSON.parse(localStorage.getItem('categories')) || [];
+
+            // Add the new category to the array
+            categories.push(newCategory);
+
+            // Save updated categories to local storage
+            localStorage.setItem('categories', JSON.stringify(categories));
+
+            // Provide feedback to the user
+            alert('Category saved successfully!');
+
+            // Optionally, redirect to the categories page
+            window.location.href = 'categories.html'; // Redirect to the categories page
+        });
+
+        document.getElementById('cancelBtn').addEventListener('click', function () {
+            // Navigate to the desired page
+            window.location.href = 'categories.html'; // Replace 'desired_page.html' with the actual URL
+        });
+
+        document.getElementById('thumbnailInput').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            const imageContainer = document.getElementById('imageContainer');
+            const uploadedImage = document.getElementById('uploadedImage');
+            const removeButton = document.getElementById('removeButton');
+            const uploadSection = document.getElementById('uploadSection');
+            const uploadIcon = document.getElementById('uploadIcon');
+            const uploadButtonContainer = document.getElementById('uploadButtonContainer');
+
+            if (file) {
+                // Create a URL for the uploaded file
+                const fileURL = URL.createObjectURL(file);
+
+                // Set the image source to the uploaded file
+                uploadedImage.src = fileURL;
+
+                // Show the image container and hide the placeholder section
+                imageContainer.classList.remove('hidden');
+                uploadSection.classList.add('hidden'); // Hide the placeholder and upload button section
+
+                // Add the remove button functionality
+                removeButton.addEventListener('click', function () {
+                    // Clear the image and hide the container
+                    uploadedImage.src = '';
+                    imageContainer.classList.add('hidden');
+
+                    // Show the placeholder and upload button section again
+                    uploadSection.classList.remove('hidden');
+
+                    // Reset the file input
+                    document.getElementById('thumbnailInput').value = '';
+                });
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

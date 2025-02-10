@@ -1,0 +1,385 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom styles to fix the sidebar */
+        body {
+            margin: 0;
+            padding-left: 16rem;
+            /* Adjust this based on the width of your sidebar */
+        }
+
+        aside {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 16rem;
+            /* Width of the sidebar */
+            height: 100vh;
+            /* Full height */
+            overflow-y: auto;
+            /* Allow scrolling if content overflows */
+            background-color: white;
+            /* Background color for the sidebar */
+            border-right: 1px solid #e5e7eb;
+            /* Border for the sidebar */
+        }
+
+        .main-content {
+            margin-left: 16rem;
+            /* Same as sidebar width */
+            padding: 1rem;
+            /* Padding for the main content */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="webcrumbs" class="flex">
+        <aside class="w-64 border-r border-gray-200 h-screen">
+            <div class="p-4" onclick="window.location.href='index.html'">
+                <h1 class="text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
+            </div>
+            <nav class="p-2 space-y-1">
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='signin.html'">
+                    <span class="material-symbols-outlined">security</span>
+                    <span>Authentication</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
+                    <span class="material-symbols-outlined">account_circle</span>
+                    <span>Account</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
+                    <details class="relative w-full">
+                        <summary class="list-none cursor-pointer flex items-center justify-between w-full">
+                            <div class="flex items-center space-x-3">
+                                <span class="material-symbols-outlined">shopping_cart</span>
+                                <span>Ecommerce</span>
+                            </div>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </summary>
+                        <div
+                            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='product.html'">Products</div>
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='categories.html'">Category</div>
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='order.html'">Orders</div>
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors">Reports</div>
+                        </div>
+                    </details>
+                </div>
+                <div
+                    class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items -center space-x-3">
+                    <span class="material-symbols-outlined">group</span>
+                    <span>User Management</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
+                    <span class="material-symbols-outlined">folder</span>
+                    <span>File Management</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
+                    <span class="material-symbols-outlined">support_agent</span>
+                    <span>Customer</span>
+                </div>
+            </nav>
+        </aside>
+
+        <div class="flex-1">
+            <header class="px-6 py-4">
+                <nav class="flex items-center justify-between">
+                    <div class="flex items-center space-x-8">
+                        <div class="flex items-center space-x-2 text-sm">
+                            <span class="hover:underline cursor-pointer">Home</span>
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            <span class="hover:underline cursor-pointer">Dashboard</span>
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            <span class="opacity-50">Current Page</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-6">
+                        <div class="relative">
+                            <input type="text" placeholder="Search..."
+                                class="pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all w-64" />
+                            <span class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400">search</span>
+                        </div>
+
+                        <details class="relative">
+                            <summary class="list-none cursor-pointer">
+                                <div class="relative hover:bg-gray-100 p-2 rounded-full transition-colors">
+                                    <span class="material-symbols-outlined">notifications</span>
+                                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                                </div>
+                            </summary>
+                            <div
+                                class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-100 p-4 z-50">
+                                <h3 class="font-semibold mb-2">Notifications</h3>
+                                <div class="space-y-2">
+                                    <div
+                                        class="flex items-start space-x-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                                        <span class="material-symbols-outlined mt-1">mail</span>
+                                        <div>
+                                            <p class="text-sm font-medium">New message received</p>
+                                            <p class="text-xs text-gray-500">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <details class="relative">
+                            <summary class="list-none cursor-pointer">
+                                <div
+                                    class="flex items-center space-x-2 hover:bg-gray-100 p-2 rounded-lg transition-colors">
+                                    <img src="https://ui-avatars.com/api/?name=John+Doe" alt="Profile"
+                                        class="w-8 h-8 rounded-full" />
+                                    <span class="material-symbols-outlined">expand_more</span>
+                                </div>
+                            </summary>
+                            <div
+                                class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                    <span class="material-symbols-outlined mr-2 align-middle">person</span>
+                                    Profile
+                                </div>
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                    <span class="material-symbols-outlined mr-2 align-middle">settings</span>
+                                    Settings
+                                </div>
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors border-t">
+                                    <span class="material-symbols-outlined mr-2 align-middle">logout</span>
+                                    Logout
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="p-6 space-y-6">
+
+                <div class="container mx-auto p-6">
+                    <h1 class="text-2xl font-bold mb-6">Categories</h1>
+                    <div class="bg-white shadow-lg p-6 rounded-xl">
+                        <div
+                            class="flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0 md:space-x-4">
+                            <div class="relative w-full md:w-96">
+                                <input type="text" placeholder="Search Category"
+                                    class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all" />
+                                <span
+                                    class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400">search</span>
+                            </div>
+
+                            <div
+                                class="flex flex-col md:flex-row items-stretch md:items-center space-y-4 md:space-y-0 md:space-x-4 w-full md:w-auto">
+
+
+                                <a href="add_category.html" class="w-full md:w-auto">
+                                    <button
+                                        class="px-6 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors transform hover:scale-105 active:scale-95">
+                                        <div class="flex items-center justify-center space-x-2">
+                                            <span class="material-symbols-outlined">add</span>
+                                            <span>Add Category</span>
+                                        </div>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="text-left border-b">
+                                        <th class="py-4 font-semibold border-b border-gray-300">Category</th>
+                                        <th class="py-4 font-semibold border-b border-gray-300">Category Type</th>
+                                        <th class="py-4 font-semibold border-b border-gray-300">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="categoryTableBody">
+                                    <!-- Category rows will be dynamically added here -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="mt-6 flex items-center justify-between">
+                            <div class="text-sm text-gray-600" id="paginationInfo">
+                                Showing 1 to 10 of 50 entries
+                            </div>
+                            <div class="flex items-center space-x-2" id="paginationControls">
+                                <button id="prevPage"
+                                    class="px-3 py-1 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-all"
+                                    onclick="changePage(-1)">
+                                    <span class="material-symbols-outlined">chevron_left</span>
+                                </button>
+                                <button id="nextPage"
+                                    class="px-3 py-1 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-all"
+                                    onclick="changePage(1)">
+                                    <span class="material-symbols-outlined">chevron_right</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get breadcrumb elements
+            const homeBreadcrumb = document.getElementById('homeBreadcrumb');
+            const dashboardBreadcrumb = document.getElementById('dashboardBreadcrumb');
+            const currentPage = document.getElementById('currentPage');
+
+            // Set the current page name
+            const currentPageName = "Dashboard"; // You can change this dynamically based on the page
+            currentPage.textContent = currentPageName;
+
+            // Add event listeners for breadcrumb navigation
+            homeBreadcrumb.addEventListener('click', function () {
+                window.location.href = 'index.html'; // Change this to your home page URL
+            });
+
+            dashboardBreadcrumb.addEventListener('click', function () {
+                window.location.href = 'dashboard.html'; // Change this to your dashboard page URL
+            });
+        });
+
+        const categories = [
+            { name: "Electronics", type: "Primary" },
+            { name: "Smartphones", type: "Secondary" },
+            { name: "Laptops", type: "Secondary" },
+            { name: "Home Appliances", type: "Primary" },
+            { name: "Fashion", type: "Primary" },
+            { name: "Books", type: "Secondary" },
+            { name: "Toys", type: "Secondary" },
+            { name: "Sports", type: "Primary" },
+            { name: "Beauty", type: "Secondary" },
+            { name: "Automotive", type: "Primary" },
+            { name: "Electronics", type: "Primary" },
+            { name: "Smartphones", type: "Secondary" },
+            { name: "Laptops", type: "Secondary" },
+            { name: "Home Appliances", type: "Primary" },
+            { name: "Fashion", type: "Primary" },
+            { name: "Books", type: "Secondary" },
+            { name: "Toys", type: "Secondary" },
+            { name: "Sports", type: "Primary" },
+            { name: "Beauty", type: "Secondary" },
+            { name: "Automotive", type: "Primary" },
+            { name: "Electronics", type: "Primary" },
+            { name: "Smartphones", type: "Secondary" },
+            { name: "Laptops", type: "Secondary" },
+            { name: "Home Appliances", type: "Primary" },
+            { name: "Fashion", type: "Primary" },
+            { name: "Books", type: "Secondary" },
+            { name: "Toys", type: "Secondary" },
+            { name: "Sports", type: "Primary" },
+            { name: "Beauty", type: "Secondary" },
+            { name: "Automotive", type: "Primary" },
+            // Add more categories as needed
+        ];
+
+        const categoriesPerPage = 10;
+        let currentPage = 1;
+
+        function renderCategories() {
+            const tableBody = document.getElementById('categoryTableBody');
+            tableBody.innerHTML = ''; // Clear existing rows
+
+            const startIndex = (currentPage - 1) * categoriesPerPage;
+            const endIndex = startIndex + categoriesPerPage;
+            const paginatedCategories = categories.slice(startIndex, endIndex);
+
+            paginatedCategories.forEach(category => {
+                const row = document.createElement('tr');
+                row.className = "hover:bg-gray-50 transition-colors";
+                row.innerHTML = `
+                    <td class="py-4">
+                        <div class="flex items-center gap-3">
+                            <img src="https://icons8.com/icon/12780/electronics" alt="${category.name}"
+                                class="w-8 h-8 rounded object-cover" />
+                            ${category.name}
+                        </div>
+                    </td>
+                    <td class="py-4">${category.type}</td>
+                    <td class="py-4">
+                        <div class="flex gap-2">
+                            <button
+                                class="p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                                onclick="editCategory('${category.name}')">
+                                <span class="material-symbols-outlined cursor-pointer hover:text-blue-500 transition-colors">edit</span>
+                            </button>
+                            <button
+                                class="p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                                onclick="deleteCategory('${category.name}')">
+                            <span class="material-symbols-outlined cursor-pointer hover:text-red-500 transition-colors">delete</span>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            updatePaginationInfo();
+            updatePaginationControls();
+        }
+
+        function updatePaginationInfo() {
+            const paginationInfo = document.getElementById('paginationInfo');
+            const totalEntries = categories.length;
+            const startEntry = (currentPage - 1) * categoriesPerPage + 1;
+            const endEntry = Math.min(currentPage * categoriesPerPage, totalEntries);
+            paginationInfo.textContent = `Showing ${startEntry} to ${endEntry} of ${totalEntries} entries`;
+        }
+
+        function updatePaginationControls() {
+            const totalPages = Math.ceil(categories.length / categoriesPerPage);
+            document.getElementById('prevPage').disabled = currentPage === 1;
+            document.getElementById('nextPage').disabled = currentPage === totalPages;
+        }
+
+        function changePage(direction) {
+            const totalPages = Math.ceil(categories.length / categoriesPerPage);
+            currentPage += direction;
+
+            if (currentPage < 1) {
+                currentPage = 1;
+            } else if (currentPage > totalPages) {
+                currentPage = totalPages;
+            }
+
+            renderCategories();
+        }
+
+        function editCategory(categoryName) {
+            // Logic to edit the category
+            alert(`Edit category: ${categoryName}`);
+        }
+
+        function deleteCategory(categoryName) {
+            // Logic to delete the category
+            alert(`Delete category: ${categoryName}`);
+        }
+
+        // Initial render
+        renderCategories();
+    </script>
+
+</body>
+
+</html>

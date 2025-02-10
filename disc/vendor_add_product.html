@@ -1,0 +1,584 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Products</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom styles to fix the sidebar */
+        body {
+            margin: 0;
+            padding-left: 16rem;
+            /* Adjust this based on the width of your sidebar */
+        }
+
+        aside {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 16rem;
+            /* Width of the sidebar */
+            height: 100vh;
+            /* Full height */
+            overflow-y: auto;
+            /* Allow scrolling if content overflows */
+            background-color: white;
+            /* Background color for the sidebar */
+            border-right: 1px solid #e5e7eb;
+            /* Border for the sidebar */
+        }
+
+        .main-content {
+            margin-left: 16rem;
+            /* Same as sidebar width */
+            padding: 1rem;
+            /* Padding for the main content */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="webcrumbs" class="flex">
+        <aside class="w-64 border-r border-gray-200 h-screen">
+            <div class="p-4" onclick="window.location.href='vendor_dashboard.html'">
+                <h1 class="text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
+            </div>
+            <nav class="p-2 space-y-1">
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='signin.html'">
+                    <span class="material-symbols-outlined">security</span>
+                    <span>Authentication</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_profile.html'">
+                    <span class="material-symbols-outlined">account_circle</span>
+                    <span>Account</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
+                    <details class="relative w-full">
+                        <summary class="list-none cursor-pointer flex items-center justify-between w-full">
+                            <div class="flex items-center space-x-3">
+                                <span class="material-symbols-outlined">shopping_cart</span>
+                                <span>Ecommerce</span>
+                            </div>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </summary>
+                        <div
+                            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='vendor_product.html'">Products</div>
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='vendor_categories.html'">Category</div>
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='vendor_order.html'">Orders</div>
+                        </div>
+                    </details>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items -center space-x-3"
+                    onclick="window.location.href='revenue_breakdown.html'">
+                    <span class="material-symbols-outlined">payment</span>
+                    <span>Revenue</span>
+                </div>
+
+            </nav>
+        </aside>
+
+        <div class="flex-1">
+            <header class="px-6 py-4">
+                <nav class="flex items-center justify-between">
+                    <div class="flex items-center space-x-8">
+                        <div class="flex items-center space-x-2 text-sm">
+                            <span class="hover:underline cursor-pointer">Home</span>
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            <span class="hover:underline cursor-pointer">Dashboard</span>
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            <span class="opacity-50">Current Page</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-6">
+                        <div class="relative">
+                            <input type="text" placeholder="Search..."
+                                class="pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all w-64" />
+                            <span class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400">search</span>
+                        </div>
+
+                        <details class="relative">
+                            <summary class="list-none cursor-pointer">
+                                <div class="relative hover:bg-gray-100 p-2 rounded-full transition-colors">
+                                    <span class="material-symbols-outlined">notifications</span>
+                                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                                </div>
+                            </summary>
+                            <div
+                                class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-100 p-4 z-50">
+                                <h3 class="font-semibold mb-2">Notifications</h3>
+                                <div class="space-y-2">
+                                    <div
+                                        class="flex items-start space-x-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                                        <span class="material-symbols-outlined mt-1">mail</span>
+                                        <div>
+                                            <p class="text-sm font-medium">New message received</p>
+                                            <p class="text-xs text-gray-500">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <details class="relative">
+                            <summary class="list-none cursor-pointer">
+                                <div
+                                    class="flex items-center space-x-2 hover:bg-gray-100 p-2 rounded-lg transition-colors">
+                                    <img src="https://ui-avatars.com/api/?name=John+Doe" alt="Profile"
+                                        class="w-8 h-8 rounded-full" />
+                                    <span class="material-symbols-outlined">expand_more</span>
+                                </div>
+                            </summary>
+                            <div
+                                class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
+                                    onclick="window.location.href='vendor_profile.html'">
+                                    <span class="material-symbols-outlined mr-2 align-middle">person</span>
+                                    Profile
+                                </div>
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
+                                    onclick="window.location.href='vendor_setting.html'">
+                                    <span class="material-symbols-outlined mr-2 align-middle">settings</span>
+                                    Settings
+                                </div>
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors border-t"
+                                    onclick="window.location.href='signin.html'" F>
+                                    <span class="material-symbols-outlined mr-2 align-middle">logout</span>
+                                    Logout
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="p-6 space-y-6">
+
+                <div class="container mx-auto p-6">
+                    <h1 class="text-2xl font-bold mb-6">Products Form</h1>
+                    <div class="flex flex-col gap-6">
+                        <!-- Thumbnail Section -->
+                        <div
+                            class="w-full bg-white rounded-lg shadow-lg p-6 transform transition-transform duration-300 hover:shadow-xl hover:-translate-y-1 flex-1">
+                            <h2 class="text-xl font-bold mb-6">Thumbnail</h2>
+                            <div
+                                class="border-2 border-dashed border-gray-300 rounded-lg p-8 hover:border-blue-400 transition-colors duration-300">
+                                <div class="flex flex-col items-center justify-center gap-4" id="uploadSection">
+                                    <span class="material-symbols-outlined text-5xl text-gray-400"
+                                        id="uploadIcon">add_photo_alternate</span>
+                                    <div class="w-full" id="uploadButtonContainer">
+                                        <label class="flex flex-col items-center justify-center cursor-pointer">
+                                            <div
+                                                class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transform transition-all duration-300 hover:scale-105">
+                                                Choose File
+                                            </div>
+                                            <input type="file" class="hidden" accept=".png,.jpg,.jpeg"
+                                                id="thumbnailInput" />
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Fixed-size image container -->
+                                <div id="imageContainer" class="relative hidden w-full h-64 overflow-hidden rounded-lg">
+                                    <img id="uploadedImage" class="w-full h-full object-cover" />
+                                    <button id="removeButton"
+                                        class="absolute top-0 right-0 bg-red-500 text-white rounded-full p-2 hover:bg-red-600">
+                                        X
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="mt-4 text-sm text-gray-600">Set the product thumbnail image. Only *.png,
+                                *.jpg, and *.jpeg image files are accepted</p>
+                        </div>
+
+
+                        <!-- Product Details Section -->
+                        <div
+                            class="w-full bg-white rounded-lg shadow-lg p-6 transform transition-transform duration-300 hover:shadow-xl hover:-translate-y-1 flex-1">
+                            <h2 class="text-xl font-bold mb-6">Product Details</h2>
+                            <div class="space-y-6">
+                                <div class="w-full">
+                                    <label class="block text-sm font-medium mb-2">Categories</label>
+                                    <details class="relative w-full" id="categoryDropdown">
+                                        <summary
+                                            class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2.5 cursor-pointer hover:border-blue-400 transition-colors duration-300 list-none">
+                                            <div class="flex items-center justify-between">
+                                                <span id="selectedCategory">Select category</span>
+                                                <span class="material-symbols-outlined">expand_more</span>
+                                            </div>
+                                        </summary>
+                                        <div
+                                            class="absolute w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+                                            <div class="py-1">
+                                                <a href="#"
+                                                    class="block px-4 py-2 hover:bg-gray-100 category-option">Electronics</a>
+                                                <a href="#"
+                                                    class="block px-4 py-2 hover:bg-gray-100 category-option">Clothing</a>
+                                                <a href="#"
+                                                    class="block px-4 py-2 hover:bg-gray-100 category-option">Books</a>
+                                                <a href="#"
+                                                    class="block px-4 py-2 hover:bg-gray-100 category-option">Home &
+                                                    Garden</a>
+                                            </div>
+                                        </div>
+                                    </details>
+                                </div>
+
+                                <div class="w-full">
+                                    <label class="block text-sm font-medium mb-2">Tags</label>
+                                    <input type="text"
+                                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-blue-400 transition-colors duration-300"
+                                        placeholder="Enter tags" id="tagsInput" />
+                                    <p class="mt-2 text-sm text-gray-600">Add tags to a product.</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div
+                            class="w-full bg-white rounded-lg shadow-lg p-6 transform transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
+                            <h2 class="text-xl font-bold mb-6">General</h2>
+                            <div class="space-y-6">
+                                <div class="w-full">
+                                    <label class="block text-sm font-medium mb-2">Product Name</label>
+                                    <input type="text"
+                                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-blue-400 transition-colors duration-300"
+                                        placeholder="Enter product name" id="productNameInput" />
+                                    <p class="mt-2 text-sm text-gray-600">A product name is required and recommended to
+                                        be unique.</p>
+                                </div>
+
+                                <div class="w-full">
+                                    <label class="block text-sm font-medium mb-2">Description</label>
+                                    <textarea
+                                        class="w-full h-32 px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-blue-400 transition-colors duration-300 resize-none"
+                                        placeholder="Enter product description" id="productDescriptionInput"></textarea>
+                                    <p class="mt-2 text-sm text-gray-600">Set a description to the product for better
+                                        visibility.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-white rounded-lg shadow-lg p-6 transform transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
+                            <h2 class="text-xl font-bold mb-6">Media</h2>
+                            <div
+                                class="border-2 border-dashed border-gray-300 rounded-lg p-8 hover:border-blue-400 transition-colors duration-300">
+                                <div class="flex flex-col items-center justify-center gap-4">
+                                    <span
+                                        class="material-symbols-outlined text-5xl text-gray-400 transform transition-all duration-300 hover:scale-110 hover:text-blue-500">cloud_upload</span>
+                                    <p class="text-center">Drop files here or click to upload</p>
+                                    <div class="w-full">
+                                        <label class="flex flex-col items-center justify-center cursor-pointer">
+                                            <div
+                                                class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transform transition-all duration-300 hover:scale-105">
+                                                Choose Files
+                                            </div>
+                                            <input type="file" id="fileInput" class="hidden" accept=".png,.jpg,.jpeg"
+                                                multiple />
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="mt-4 text-sm text-gray-600">Upload up to 10 files</p>
+
+                            <!-- Media Preview Section -->
+                            <div id="mediaContainer" class="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                            </div>
+                        </div>
+
+                        <!-- Pricing Section -->
+                        <div
+                            class="bg-white rounded-lg shadow-lg p-6 transform transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
+                            <h2 class="text-xl font-bold mb-6">Pricing</h2>
+                            <div class="flex flex-col gap-6">
+                                <div>
+                                    <label class="block mb-2 font-medium">Base Price</label>
+                                    <input type="text" id="basePrice"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300" />
+                                    <p class="mt-2 text-sm text-gray-600">Set the product price.</p>
+                                </div>
+
+                                <div>
+                                    <label class="block mb-2 font-medium">Discount Type</label>
+                                    <div class="grid grid-cols-3 gap-4">
+                                        <div
+                                            class="bg-white border border-gray-200 rounded-lg p-4 hover:border-blue-400 hover:shadow-md transition-all duration-300">
+                                            <label class="flex items-center cursor-pointer">
+                                                <input type="radio" name="discount" value="none"
+                                                    class="w-4 h-4 text-blue-500" checked
+                                                    onclick="toggleDiscountFields()" />
+                                                <span class="ml-2">No Discount</span>
+                                            </label>
+                                        </div>
+                                        <div
+                                            class="bg-white border border-gray-200 rounded-lg p-4 hover:border-blue-400 hover:shadow-md transition-all duration-300">
+                                            <label class="flex items-center cursor-pointer">
+                                                <input type="radio" name="discount" value="percentage"
+                                                    class="w-4 h-4 text-blue-500" onclick="toggleDiscountFields()" />
+                                                <span class="ml-2">Percentage %</span>
+                                            </label>
+                                        </div>
+                                        <div
+                                            class="bg-white border border-gray-200 rounded-lg p-4 hover:border-blue-400 hover:shadow-md transition-all duration-300">
+                                            <label class="flex items-center cursor-pointer">
+                                                <input type="radio" name="discount" value="fixed"
+                                                    class="w-4 h-4 text-blue-500" onclick="toggleDiscountFields()" />
+                                                <span class="ml-2">Fixed Price</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="discountField" class="hidden">
+                                    <label id="discountLabel" class="block mb-2 font-medium"></label>
+                                    <input type="text" id="discountInput"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300" />
+                                    <p id="discountDescription" class="mt-2 text-sm text-gray-600"></p>
+                                </div>
+
+                                <div class="flex justify-between gap-4">
+                                    <div class="flex-1">
+                                        <label class="block mb-2 font-medium">Tax Class</label>
+                                        <input type="text" id="taxClass"
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300" />
+                                        <p class="mt-2 text-sm text-gray-600">Set the product tax class.</p>
+                                    </div>
+
+                                    <div class="flex-1">
+                                        <label class="block mb-2 font-medium">VAT Amount (%)</label>
+                                        <input type="text" id="vatAmount"
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300" />
+                                        <p class="mt-2 text-sm text-gray-600">Set the product VAT amount.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Inventory Section -->
+                        <div
+                            class="bg-white rounded-lg shadow-lg p-6 transform transition-transform duration-300 hover:shadow-xl hover:-translate-y-1 mb-6">
+                            <h2 class="text-xl font-bold mb-6">Inventory</h2>
+                            <div class="flex flex-col gap-6">
+                                <div>
+                                    <label class="block mb-2 font-medium">Product ID</label>
+                                    <input type="text" id="productId" placeholder="Enter product ID"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300" />
+                                    <p class="mt-2 text-sm text-gray-600">Enter the product ID.</p>
+                                </div>
+
+                                <div>
+                                    <label class="block mb-2 font-medium">Quantity</label>
+                                    <div class="flex justify-between gap-4">
+                                        <input type="text" id="onShelf" placeholder="On Shelf"
+                                            class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300" />
+                                        <input type="text" id="inStore" placeholder="In Store"
+                                            class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300" />
+                                    </div>
+                                    <p class="mt-2 text-sm text-gray-600">Enter the product quantity.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Shipping Section -->
+                        <div
+                            class="bg-white rounded-lg shadow-lg p-6 transform transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
+                            <h2 class="text-xl font-bold mb-6">Shipping</h2>
+                            <div class="flex flex-col gap-2">
+                                <label
+                                    class="flex items-center cursor-pointer hover:opacity-80 transition-opacity duration-300">
+                                    <input type="checkbox" id="isPhysicalProduct"
+                                        class="w-5 h-5 rounded border-gray-300 text-blue-500 focus:ring-blue-500 transition-colors duration-300" />
+                                    <span class="ml-2 font-medium">This is a physical product</span>
+                                </label>
+                                <p class="text-sm text-gray-600">
+                                    Set if the product is a physical or digital item. Physical products may require
+                                    shipping.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="flex justify-end gap-4 mt-4">
+                            <button id="cancelBtn"
+                                class="px-6 py-2 rounded-lg border border-gray-300 hover:bg-gray-50 transform transition-all duration-300 hover:scale-105">
+                                Cancel
+                            </button>
+                            <button id="saveBtn"
+                                class="px-6 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transform transition-all duration-300 hover:scale-105">
+                                Save Changes
+                            </button>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.getElementById('saveBtn').addEventListener('click', function () {
+            // Collect data from the form
+            const productData = {
+                productName: document.getElementById('productNameInput').value,
+                productDescription: document.getElementById('productDescriptionInput').value,
+                category: document.getElementById('selectedCategory').textContent,
+                tags: document.getElementById('tagsInput').value,
+                basePrice: document.getElementById('basePrice').value,
+                taxClass: document.getElementById('taxClass').value,
+                vatAmount: document.getElementById('vatAmount').value,
+                productId: document.getElementById('productId').value,
+                onShelf: document.getElementById('onShelf').value,
+                inStore: document.getElementById('inStore').value,
+                isPhysicalProduct: document.getElementById('isPhysicalProduct').checked,
+                thumbnail: document.getElementById('uploadedImage').src, // Assuming the image is uploaded
+                tags: document.getElementById('tagsInput').value,
+            };
+
+            // Save data to local storage
+            localStorage.setItem('productData', JSON.stringify(productData));
+
+            // Provide feedback to the user
+            alert('Product data saved successfully!');
+        });
+
+        document.getElementById('cancelBtn').addEventListener('click', function () {
+            // Navigate to the desired page
+            window.location.href = 'product.html'; // Replace 'desired_page.html' with the actual URL
+        });
+        function toggleDiscountFields() {
+            const discountField = document.getElementById('discountField');
+            const discountLabel = document.getElementById('discountLabel');
+            const discountDescription = document.getElementById('discountDescription');
+            const selectedDiscount = document.querySelector('input[name="discount"]:checked').value;
+
+            if (selectedDiscount === 'none') {
+                discountField.classList.add('hidden');
+            } else {
+                discountField.classList.remove('hidden');
+                if (selectedDiscount === 'percentage') {
+                    discountLabel.textContent = 'Set Discount Percentage';
+                    discountDescription.textContent = '';
+                } else if (selectedDiscount === 'fixed') {
+                    discountLabel.textContent = 'Fixed Discounted Price';
+                    discountDescription.textContent = 'Set the discounted product price. The product will be reduced at the determined fixed price.';
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get the dropdown elements
+            const categoryDropdown = document.getElementById('categoryDropdown');
+            const categorySummary = categoryDropdown.querySelector('summary');
+            const categoryOptions = categoryDropdown.querySelectorAll('.category-option');
+            const selectedCategoryText = document.getElementById('selectedCategory');
+
+            // Add click event listener to each category option
+            categoryOptions.forEach(option => {
+                option.addEventListener('click', function (event) {
+                    event.preventDefault(); // Prevent default anchor behavior
+                    const selectedCategory = this.textContent; // Get the selected category text
+                    selectedCategoryText.textContent = selectedCategory; // Update the summary text
+                    categoryDropdown.removeAttribute('open'); // Close the dropdown
+                });
+            });
+
+            // Optional: Close the dropdown when clicking outside of it
+            document.addEventListener('click', function (event) {
+                if (!categoryDropdown.contains(event.target)) {
+                    categoryDropdown.removeAttribute('open'); // Close the dropdown if clicked outside
+                }
+            });
+        });
+
+        document.getElementById('thumbnailInput').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            const imageContainer = document.getElementById('imageContainer');
+            const uploadedImage = document.getElementById('uploadedImage');
+            const removeButton = document.getElementById('removeButton');
+            const uploadSection = document.getElementById('uploadSection');
+            const uploadIcon = document.getElementById('uploadIcon');
+            const uploadButtonContainer = document.getElementById('uploadButtonContainer');
+
+            if (file) {
+                // Create a URL for the uploaded file
+                const fileURL = URL.createObjectURL(file);
+
+                // Set the image source to the uploaded file
+                uploadedImage.src = fileURL;
+
+                // Show the image container and hide the placeholder section
+                imageContainer.classList.remove('hidden');
+                uploadSection.classList.add('hidden'); // Hide the placeholder and upload button section
+
+                // Add the remove button functionality
+                removeButton.addEventListener('click', function () {
+                    // Clear the image and hide the container
+                    uploadedImage.src = '';
+                    imageContainer.classList.add('hidden');
+
+                    // Show the placeholder and upload button section again
+                    uploadSection.classList.remove('hidden');
+
+                    // Reset the file input
+                    document.getElementById('thumbnailInput').value = '';
+                });
+            }
+        });
+
+        document.getElementById('fileInput').addEventListener('change', function (event) {
+            const files = event.target.files;
+            const mediaContainer = document.getElementById('mediaContainer');
+
+            if (files) {
+                Array.from(files).forEach(file => {
+                    // Create a URL for each uploaded file
+                    const fileURL = URL.createObjectURL(file);
+
+                    // Create image element to display
+                    const imageDiv = document.createElement('div');
+                    imageDiv.classList.add('relative', 'rounded-lg', 'overflow-hidden', 'w-full', 'h-64');
+
+                    const img = document.createElement('img');
+                    img.src = fileURL;
+                    img.classList.add('w-full', 'h-full', 'object-cover');
+
+                    const removeButton = document.createElement('button');
+                    removeButton.classList.add('absolute', 'top-0', 'right-0', 'bg-red-500', 'text-white', 'rounded-full', 'p-2', 'hover:bg-red-600');
+                    removeButton.innerHTML = 'X';
+
+                    // Remove image functionality
+                    removeButton.addEventListener('click', function () {
+                        // Remove the image from the DOM
+                        mediaContainer.removeChild(imageDiv);
+                    });
+
+                    // Append image and remove button to the container
+                    imageDiv.appendChild(img);
+                    imageDiv.appendChild(removeButton);
+                    mediaContainer.appendChild(imageDiv);
+                });
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

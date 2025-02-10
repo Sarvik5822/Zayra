@@ -1,0 +1,531 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Order</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom styles to fix the sidebar */
+        body {
+            margin: 0;
+            padding-left: 16rem;
+            /* Adjust this based on the width of your sidebar */
+        }
+
+        aside {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 16rem;
+            /* Width of the sidebar */
+            height: 100vh;
+            /* Full height */
+            overflow-y: auto;
+            /* Allow scrolling if content overflows */
+            background-color: white;
+            /* Background color for the sidebar */
+            border-right: 1px solid #e5e7eb;
+            /* Border for the sidebar */
+        }
+
+        .main-content {
+            margin-left: 16rem;
+            /* Same as sidebar width */
+            padding: 1rem;
+            /* Padding for the main content */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="webcrumbs" class="flex">
+        <aside class="w-64 border-r border-gray-200 h-screen">
+            <div class="p-4" onclick="window.location.href='index.html'">
+                <h1 class="text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
+            </div>
+            <nav class="p-2 space-y-1">
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='signin.html'">
+                    <span class="material-symbols-outlined">security</span>
+                    <span>Authentication</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
+                    <span class="material-symbols-outlined">account_circle</span>
+                    <span>Account</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
+                    <details class="relative w-full">
+                        <summary class="list-none cursor-pointer flex items-center justify-between w-full">
+                            <div class="flex items-center space-x-3">
+                                <span class="material-symbols-outlined">shopping_cart</span>
+                                <span>Ecommerce</span>
+                            </div>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </summary>
+                        <div
+                            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='product.html'">Products</div>
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='categories.html'">Category</div>
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='order.html'">Orders</div>
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors">Reports</div>
+                        </div>
+                    </details>
+                </div>
+                <div
+                    class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items -center space-x-3">
+                    <span class="material-symbols-outlined">group</span>
+                    <span>User Management</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
+                    <span class="material-symbols-outlined">folder</span>
+                    <span>File Management</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
+                    <span class="material-symbols-outlined">support_agent</span>
+                    <span>Customer</span>
+                </div>
+            </nav>
+        </aside>
+
+        <div class="flex-1">
+            <header class="px-6 py-4">
+                <nav class="flex items-center justify-between">
+                    <div class="flex items-center space-x-8">
+                        <div class="flex items-center space-x-2 text-sm">
+                            <span class="hover:underline cursor-pointer">Home</span>
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            <span class="hover:underline cursor-pointer">Dashboard</span>
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            <span class="opacity-50">Current Page</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-6">
+                        <div class="relative">
+                            <input type="text" placeholder="Search..."
+                                class="pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all w-64" />
+                            <span class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400">search</span>
+                        </div>
+
+                        <details class="relative">
+                            <summary class="list-none cursor-pointer">
+                                <div class="relative hover:bg-gray-100 p-2 rounded-full transition-colors">
+                                    <span class="material-symbols-outlined">notifications</span>
+                                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                                </div>
+                            </summary>
+                            <div
+                                class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-100 p-4 z-50">
+                                <h3 class="font-semibold mb-2">Notifications</h3>
+                                <div class="space-y-2">
+                                    <div
+                                        class="flex items-start space-x-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                                        <span class="material-symbols-outlined mt-1">mail</span>
+                                        <div>
+                                            <p class="text-sm font-medium">New message received</p>
+                                            <p class="text-xs text-gray-500">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <details class="relative">
+                            <summary class="list-none cursor-pointer">
+                                <div
+                                    class="flex items-center space-x-2 hover:bg-gray-100 p-2 rounded-lg transition-colors">
+                                    <img src="https://ui-avatars.com/api/?name=John+Doe" alt="Profile"
+                                        class="w-8 h-8 rounded-full" />
+                                    <span class="material-symbols-outlined">expand_more</span>
+                                </div>
+                            </summary>
+                            <div
+                                class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                    <span class="material-symbols-outlined mr-2 align-middle">person</span>
+                                    Profile
+                                </div>
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                    <span class="material-symbols-outlined mr-2 align-middle">settings</span>
+                                    Settings
+                                </div>
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors border-t">
+                                    <span class="material-symbols-outlined mr-2 align-middle">logout</span>
+                                    Logout
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="p-6 space-y-6">
+
+                <div class="text-2xl font-bold mb-6">Add Order</div>
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 mb-6">
+                    <div class="text-xl font-semibold mb-6">Order Details</div>
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="border-b pb-4">
+                                <div class="font-medium mb-2">Order ID</div>
+                                <div class="text-sm bg-gray-50 p-3 rounded-lg">#ORD-2024-0001</div>
+                            </div>
+
+                            <div class="border-b pb-4">
+                                <div class="font-medium mb-2">Order Date</div>
+                                <input type="date" id="orderDate"
+                                    class="w-full text-sm bg-gray-50 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200 outline-none cursor-pointer" />
+                                <div class="text-sm mt-2 text-gray-600">Set the date of the order to process.</div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="border-b pb-4">
+                                <div class="font-medium mb-2">Payment Method</div>
+                                <details class="relative">
+                                    <summary
+                                        class="list-none cursor-pointer bg-gray-50 p-3 rounded-lg flex justify-between items-center hover:bg-gray-100 transition-colors duration-200">
+                                        <span id="selectedPaymentMethod">Select Payment Method</span>
+                                        <span class="material-symbols-outlined">expand_more</span>
+                                    </summary>
+                                    <div class="absolute w-full mt-1 bg-white border rounded-lg shadow-lg z-10">
+                                        <div
+                                            class="p-2 hover:bg-gray-50 cursor-pointer transition-colors duration-200 payment-option">
+                                            Cash on Delivery</div>
+                                        <div
+                                            class="p-2 hover:bg-gray-50 cursor-pointer transition-colors duration-200 payment-option">
+                                            Credit Card</div>
+                                        <div
+                                            class="p-2 hover:bg-gray-50 cursor-pointer transition-colors duration-200 payment-option">
+                                            Debit Card</div>
+                                        <div
+                                            class="p-2 hover:bg-gray-50 cursor-pointer transition-colors duration-200 payment-option">
+                                            PayPal</div>
+                                        <div
+                                            class="p-2 hover:bg-gray-50 cursor-pointer transition-colors duration-200 payment-option">
+                                            UPI</div>
+                                        <div
+                                            class="p-2 hover:bg-gray-50 cursor-pointer transition-colors duration-200 payment-option">
+                                            Internet Banking</div>
+                                        <div
+                                            class="p-2 hover:bg-gray-50 cursor-pointer transition-colors duration-200 payment-option">
+                                            Reserve Pay</div>
+                                    </div>
+                                </details>
+                                <div class="text-sm mt-2 text-gray-600">Select the payment method for this order.</div>
+                            </div>
+
+                            <div class="border-b pb-4">
+                                <div class="font-medium mb-2">Shipping Method</div>
+                                <details class="relative">
+                                    <summary
+                                        class="list-none cursor-pointer bg-gray-50 p-3 rounded-lg flex justify-between items-center hover:bg-gray-100 transition-colors duration-200">
+                                        <span id="selectedShippingMethod">Select Shipping Method</span>
+                                        <span class="material-symbols-outlined">expand_more</span>
+                                    </summary>
+                                    <div class="absolute w-full mt-1 bg-white border rounded-lg shadow-lg z-10">
+                                        <div
+                                            class="p-2 hover:bg-gray-50 cursor-pointer transition-colors duration-200 shipping-option">
+                                            Express Rate</div>
+                                        <div
+                                            class="p-2 hover:bg-gray-50 cursor-pointer transition-colors duration-200 shipping-option">
+                                            Standard Rate</div>
+                                    </div>
+                                </details>
+                                <div class="text-sm mt-2 text-gray-600">Select the shipping method for this order.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 mb-6">
+                    <div class="text-xl font-semibold mb-6">Select Products</div>
+                    <div class="mb-6">
+                        <div class="font-medium mb-2">Add products to this order</div>
+                        <div class="min-h-[100px] bg-gray-50 rounded-lg p-4 border-2 border-dashed"
+                            id="selectedProducts"></div>
+                    </div>
+
+                    <div class="mb-6">
+                        <div class="flex items-center gap-2">
+                            <div class="font-medium">Total Price</div>
+                            <div class="text-xl font-bold" id="totalPrice">$0.00</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <div class="relative w-1/2">
+                            <span
+                                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+                            <input type="text" placeholder="Search products..."
+                                class="w-full pl-10 pr-4 py-2 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200 outline-none" />
+                        </div>
+                    </div>
+
+                    <div class="max-h-[400px] overflow-y-auto">
+                        <table class="w-full">
+                            <thead class="sticky top-0 bg-white">
+                                <tr class="text-left">
+                                    <th class="pb-4 font-medium">Product</th>
+                                    <th class="pb-4 font-medium">Quantity Remaining</th>
+                                    <th class="pb-4 font-medium">Price</th>
+                                    <th class="pb-4 font-medium">Select</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y" id="productList">
+                                <script>
+                                    const products = [
+                                        { id: 1, name: "Product Name 1", quantity: 150, price: 99.99 },
+                                        { id: 2, name: "Product Name 2", quantity: 100, price: 49.99 },
+                                        { id: 3, name: "Product Name 3", quantity: 200, price: 29.99 },
+                                        { id: 4, name: "Product Name 4", quantity: 50, price: 19.99 },
+                                        { id: 5, name: "Product Name 5", quantity: 0, price: 39.99 }
+                                    ];
+
+                                    products.forEach(product => {
+                                        document.write(`
+                                            <tr class="group hover:bg-gray-50 transition-colors duration-200">
+                                                <td class="py-4">
+                                                    <div class="flex items-center gap-4">
+                                                        <div class="w-12 h-12 bg-gray-100 rounded-lg"></div>
+                                                        <div>
+                                                            <div class="font-medium">${product.name}</div>
+                                                            <div class="text-sm text-gray-600">PRD-2024-${product.id.toString().padStart(4, '0')}</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="py-4">
+                                                    <div class="font-medium">${product.quantity} units</div>
+                                                </td>
+                                                <td class="py-4">
+                                                    <div class="font-medium">$${product.price.toFixed(2)}</div>
+                                                </td>
+                                                <td class="py-4">
+                                                    <input type="checkbox" class="rounded cursor-pointer" onclick="selectProduct(${product.id}, '${product.name}', ${product.price}, this)" />
+                                                </td>
+                                            </tr>
+                                        `);
+                                    });
+                                </script>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                    <div class="text-xl font-semibold mb-6">Delivery Details</div>
+                    <div class="space-y-6">
+                        <div class="border-b pb-4">
+                            <div class="font-medium mb-4">Billing Address</div>
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <div class="font-medium mb-2">Address Line 1</div>
+                                    <input type="text"
+                                        class="w-full text-sm bg-gray-50 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200 outline-none"
+                                        placeholder="Enter Address Line 1" />
+                                </div>
+                                <div>
+                                    <div class="font-medium mb-2">Address Line 2</div>
+                                    <input type="text"
+                                        class="w-full text-sm bg-gray-50 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200 outline-none"
+                                        placeholder="Enter Address Line 2" />
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-3 gap-4 mb-4">
+                                <div>
+                                    <div class="font-medium mb-2">City</div>
+                                    <input type="text"
+                                        class="w-full text-sm bg-gray-50 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200 outline-none"
+                                        placeholder="Enter City" />
+                                </div>
+                                <div>
+                                    <div class="font-medium mb-2">Postcode</div>
+                                    <input type="text"
+                                        class="w-full text-sm bg-gray-50 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200 outline-none"
+                                        placeholder="Enter Postcode" />
+                                </div>
+                                <div>
+                                    <div class="font-medium mb-2">State</div>
+                                    <input type="text"
+                                        class="w-full text-sm bg-gray-50 p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200 outline-none"
+                                        placeholder="Enter State" />
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="font-medium mb-2">Country</div>
+                                <details class="relative">
+                                    <summary
+                                        class="list-none cursor-pointer bg-white p-3 rounded-lg flex justify-between items-center hover:bg-gray-50 transition-colors duration-200 border border-gray-200">
+                                        <div class="flex items-center gap-2">
+                                            <span id="selectedCountry" class="text-gray-700">Select Country</span>
+                                        </div>
+                                        <span class="material-symbols-outlined text-gray-500">expand_more</span>
+                                    </summary>
+                                    <div
+                                        class="absolute w-full mt-1 bg-white border rounded-lg shadow-lg z-10 max-h-[200px] overflow-y-auto">
+                                        <div
+                                            class="p-2 hover:bg-gray-50 cursor-pointer transition-colors duration-200 country-option">
+                                            United States</div>
+                                        <div
+                                            class="p-2 hover:bg-gray-50 cursor-pointer transition-colors duration-200 country-option">
+                                            United Kingdom</div>
+                                        <div
+                                            class="p-2 hover:bg-gray-50 cursor-pointer transition-colors duration-200 country-option">
+                                            Canada</div>
+                                        <div
+                                            class="p-2 hover:bg-gray-50 cursor-pointer transition-colors duration-200 country-option">
+                                            Australia</div>
+                                        <div
+                                            class="p-2 hover:bg-gray-50 cursor-pointer transition-colors duration-200 country-option">
+                                            Germany</div>
+                                    </div>
+                                </details>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-4 mt-4">
+                    <button id="cancelBtn"
+                        class="px-6 py-2 rounded-lg border border-gray-300 hover:bg-gray-50 transform transition-all duration-300 hover:scale-105">
+                        Cancel
+                    </button>
+                    <button id="saveBtn"
+                        class="px-6 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transform transition-all duration-300 hover:scale-105">
+                        Save Changes
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        let totalPrice = 0;
+        const selectedProducts = new Set(); // To keep track of selected products
+
+        function selectProduct(id, name, price, checkbox) {
+            const selectedProductsContainer = document.getElementById('selectedProducts');
+
+            if (checkbox.checked) {
+                // If the product is selected, add it to the selected products container
+                const productDiv = document.createElement('div');
+                productDiv.id = `product-${id}`; // Unique ID for the product
+                productDiv.className = 'flex justify-between items-center p-2 border-b';
+                productDiv.innerHTML = `
+                <div>
+                    <span class="font-medium">${name}</span>
+                    <span class="text-sm text-gray-600">PRD-2024-${id.toString().padStart(4, '0')}</span>
+                </div>
+                <div class="font-medium">$${price.toFixed(2)}</div>
+            `;
+                selectedProductsContainer.appendChild(productDiv);
+                selectedProducts.add(id); // Add product ID to the set
+                totalPrice += price; // Increase total price
+            } else {
+                // If the product is unselected, remove it from the selected products container
+                const productDiv = document.getElementById(`product-${id}`);
+                if (productDiv) {
+                    selectedProductsContainer.removeChild(productDiv);
+                    selectedProducts.delete(id); // Remove product ID from the set
+                    totalPrice -= price; // Decrease total price
+                }
+            }
+
+            // Update total price display
+            document.getElementById('totalPrice').innerText = `$${totalPrice.toFixed(2)}`;
+        }
+
+        document.getElementById('saveBtn').addEventListener('click', function () {
+            // Collect data from the form
+            const orderData = {
+                orderId: '#ORD-2024-0001', // Static for now, can be dynamic if needed
+                orderDate: document.getElementById('orderDate').value,
+                paymentMethod: document.getElementById('selectedPaymentMethod').textContent,
+                shippingMethod: document.getElementById('selectedShippingMethod').textContent,
+                products: Array.from(selectedProducts).map(id => {
+                    const productRow = document.getElementById(`product-${id}`);
+                    return {
+                        id: id,
+                        name: productRow.querySelector('span.font-medium').textContent,
+                        price: parseFloat(productRow.querySelector('div.font-medium').textContent.replace('$', ''))
+                    };
+                }),
+                totalPrice: totalPrice,
+                billingAddress: {
+                    addressLine1: document.querySelector('input[placeholder="Enter Address Line 1"]').value,
+                    addressLine2: document.querySelector('input[placeholder="Enter Address Line 2"]').value,
+                    city: document.querySelector('input[placeholder="Enter City"]').value,
+                    postcode: document.querySelector('input[placeholder="Enter Postcode"]').value,
+                    state: document.querySelector('input[placeholder="Enter State"]').value,
+                    country: document.getElementById('selectedCountry').textContent
+                }
+            };
+
+            // Save data to local storage
+            localStorage.setItem('orderData', JSON.stringify(orderData));
+
+            // Provide feedback to the user
+            alert('Order data saved successfully!');
+        });
+
+        document.getElementById('cancelBtn').addEventListener('click', function () {
+            // Navigate to the desired page
+            window.location.href = 'order.html'; // Replace 'desired_page.html' with the actual URL
+        });
+
+        // Dropdown functionality for payment methods
+        document.querySelectorAll('.payment-option').forEach(option => {
+            option.addEventListener('click', function () {
+                const selectedPaymentMethod = document.getElementById('selectedPaymentMethod');
+                selectedPaymentMethod.textContent = this.textContent; // Update selected payment method
+                this.closest('details').removeAttribute('open'); // Close the dropdown
+            });
+        });
+
+        // Dropdown functionality for shipping methods
+        document.querySelectorAll('.shipping-option').forEach(option => {
+            option.addEventListener('click', function () {
+                const selectedShippingMethod = document.getElementById('selectedShippingMethod');
+                selectedShippingMethod.textContent = this.textContent; // Update selected shipping method
+                this.closest('details').removeAttribute('open'); // Close the dropdown
+            });
+        });
+
+        // Dropdown functionality for countries
+        document.querySelectorAll('.country-option').forEach(option => {
+            option.addEventListener('click', function () {
+                const selectedCountry = document.getElementById('selectedCountry');
+                selectedCountry.textContent = this.textContent; // Update selected country
+                this.closest('details').removeAttribute('open'); // Close the dropdown
+            });
+        });
+
+        // Optional: Close the dropdown when clicking outside of it
+        document.addEventListener('click', function (event) {
+            const dropdowns = document.querySelectorAll('details');
+            dropdowns.forEach(dropdown => {
+                if (!dropdown.contains(event.target)) {
+                    dropdown.removeAttribute('open'); // Close the dropdown if clicked outside
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

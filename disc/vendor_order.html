@@ -1,0 +1,413 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom styles to fix the sidebar */
+        body {
+            margin: 0;
+            padding-left: 16rem;
+            /* Adjust this based on the width of your sidebar */
+        }
+
+        aside {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 16rem;
+            /* Width of the sidebar */
+            height: 100vh;
+            /* Full height */
+            overflow-y: auto;
+            /* Allow scrolling if content overflows */
+            background-color: white;
+            /* Background color for the sidebar */
+            border-right: 1px solid #e5e7eb;
+            /* Border for the sidebar */
+        }
+
+        .main-content {
+            margin-left: 16rem;
+            /* Same as sidebar width */
+            padding: 1rem;
+            /* Padding for the main content */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="webcrumbs" class="flex">
+        <aside class="w-64 border-r border-gray-200 h-screen">
+            <div class="p-4" onclick="window.location.href='vendor_dashboard.html'">
+                <h1 class="text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
+            </div>
+            <nav class="p-2 space-y-1">
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='signin.html'">
+                    <span class="material-symbols-outlined">security</span>
+                    <span>Authentication</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_profile.html'">
+                    <span class="material-symbols-outlined">account_circle</span>
+                    <span>Account</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
+                    <details class="relative w-full">
+                        <summary class="list-none cursor-pointer flex items-center justify-between w-full">
+                            <div class="flex items-center space-x-3">
+                                <span class="material-symbols-outlined">shopping_cart</span>
+                                <span>Ecommerce</span>
+                            </div>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </summary>
+                        <div
+                            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='vendor_product.html'">Products</div>
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='vendor_categories.html'">Category</div>
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='vendor_order.html'">Orders</div>
+                        </div>
+                    </details>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items -center space-x-3"
+                    onclick="window.location.href='revenue_breakdown.html'">
+                    <span class="material-symbols-outlined">payment</span>
+                    <span>Revenue</span>
+                </div>
+
+            </nav>
+        </aside>
+
+        <div class="flex-1">
+            <header class="px-6 py-4">
+                <nav class="flex items-center justify-between">
+                    <div class="flex items-center space-x-8">
+                        <div class="flex items-center space-x-2 text-sm">
+                            <span class="hover:underline cursor-pointer">Home</span>
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            <span class="hover:underline cursor-pointer">Dashboard</span>
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            <span class="opacity-50">Current Page</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-6">
+                        <div class="relative">
+                            <input type="text" placeholder="Search..."
+                                class="pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all w-64" />
+                            <span class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400">search</span>
+                        </div>
+
+                        <details class="relative">
+                            <summary class="list-none cursor-pointer">
+                                <div class="relative hover:bg-gray-100 p-2 rounded-full transition-colors">
+                                    <span class="material-symbols-outlined">notifications</span>
+                                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                                </div>
+                            </summary>
+                            <div
+                                class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-100 p-4 z-50">
+                                <h3 class="font-semibold mb-2">Notifications</h3>
+                                <div class="space-y-2">
+                                    <div
+                                        class="flex items-start space-x-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                                        <span class="material-symbols-outlined mt-1">mail</span>
+                                        <div>
+                                            <p class="text-sm font-medium">New message received</p>
+                                            <p class="text-xs text-gray-500">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <details class="relative">
+                            <summary class="list-none cursor-pointer">
+                                <div
+                                    class="flex items-center space-x-2 hover:bg-gray-100 p-2 rounded-lg transition-colors">
+                                    <img src="https://ui-avatars.com/api/?name=John+Doe" alt="Profile"
+                                        class="w-8 h-8 rounded-full" />
+                                    <span class="material-symbols-outlined">expand_more</span>
+                                </div>
+                            </summary>
+                            <div
+                                class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
+                                    onclick="window.location.href='vendor_profile.html'">
+                                    <span class="material-symbols-outlined mr-2 align-middle">person</span>
+                                    Profile
+                                </div>
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
+                                    onclick="window.location.href='vendor_setting.html'">
+                                    <span class="material-symbols-outlined mr-2 align-middle">settings</span>
+                                    Settings
+                                </div>
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors border-t"
+                                    onclick="window.location.href='signin.html'" F>
+                                    <span class="material-symbols-outlined mr-2 align-middle">logout</span>
+                                    Logout
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="p-6 space-y-6">
+
+                <div class="w-[1200px]">
+                    <h1 class="text-2xl font-bold mb-6">Ordering List</h1>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="relative w-[300px]">
+                                <span
+                                    class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400">search</span>
+                                <input type="text" id="searchInput" placeholder="Search orders..."
+                                    class="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all" />
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="relative">
+                                    <input type="date" id="datePicker"
+                                        class="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all" />
+                                </div>
+                                <details class="relative">
+                                    <summary class="list-none cursor-pointer">
+                                        <div
+                                            class="flex items-center justify-between w-full px-4 py-2.5 border border-gray-200 rounded-lg hover:border-blue-400 transition-all">
+                                            <span>Status</span>
+                                            <span class="material-symbols-outlined">expand_more</span>
+                                        </div>
+                                    </summary>
+                                    <div class="absolute top-full mt-2 w-48 bg-white border rounded-lg shadow-lg z-10">
+                                        <div class="p-2 hover:bg-gray-50 cursor-pointer" onclick="filterStatus('All')">
+                                            All</div>
+                                        <div class="p-2 hover:bg-gray-50 cursor-pointer"
+                                            onclick="filterStatus('Cancelled')">Cancelled</div>
+                                        <div class="p-2 hover:bg-gray-50 cursor-pointer"
+                                            onclick="filterStatus('Completed')">Completed</div>
+                                        <div class="p-2 hover:bg-gray-50 cursor-pointer"
+                                            onclick="filterStatus('Failed')">Failed</div>
+                                        <div class="p-2 hover:bg-gray-50 cursor-pointer"
+                                            onclick="filterStatus('Pending')">Pending</div>
+                                        <div class="p-2 hover:bg-gray-50 cursor-pointer"
+                                            onclick="filterStatus('Processing')">Processing</div>
+                                        <div class="p-2 hover:bg-gray-50 cursor-pointer"
+                                            onclick="filterStatus('Refunded')">Refunded</div>
+                                        <div class="p-2 hover:bg-gray-50 cursor-pointer"
+                                            onclick="filterStatus('Delivered')">Delivered</div>
+                                        <div class="p-2 hover:bg-gray-50 cursor-pointer"
+                                            onclick="filterStatus('Delivering')">Delivering</div>
+                                    </div>
+                                </details>
+                                <!-- <button
+                                    class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-all transform hover:scale-105"
+                                    onclick="window.location.href='add_order.html'">
+                                    <span class="material-symbols-outlined align-middle mr-2">add</span>
+                                    Add Order
+                                </button> -->
+                            </div>
+                        </div>
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b">
+                                    <th class="text-left py-4 font-semibold">Order ID</th>
+                                    <th class="text-left py-4 font-semibold">Customer</th>
+                                    <th class="text-left py-4 font-semibold">Status</th>
+                                    <th class="text-left py-4 font-semibold">Total</th>
+                                    <th class="text-left py-4 font-semibold">Date Added</th>
+                                    <th class="text-left py-4 font-semibold">Date Modified</th>
+                                    <th class="text-left py-4 font-semibold">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orderTableBody">
+                                <!-- Order rows will be dynamically added here -->
+                            </tbody>
+                        </table>
+                        <div class="mt-6 flex items-center justify-between">
+                            <div class="text-sm text-gray-600" id="paginationInfo">
+                                Showing 1 to 10 of 50 entries
+                            </div>
+                            <div class="flex items-center space-x-2" id="paginationControls">
+                                <button id="prevPage"
+                                    class="px-3 py-1 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-all"
+                                    onclick="changePage(-1)">
+                                    <span class="material-symbols-outlined">chevron_left</span>
+                                </button>
+                                <button id="nextPage"
+                                    class="px-3 py-1 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-all"
+                                    onclick="changePage(1)">
+                                    <span class="material-symbols-outlined">chevron_right</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const orders = [
+            { id: '#12345', customer: 'John Doe', status: 'Completed', total: '$299.99', dateAdded: '2023-07-20', dateModified: '2023-07-21' },
+            { id: '#12346', customer: 'Jane Smith', status: 'Pending', total: '$199.99', dateAdded: '2023-07-22', dateModified: '2023-07-23' },
+            { id: '#12347', customer: 'Alice Johnson', status: 'Processing', total: '$99.99', dateAdded: '2023-07-24', dateModified: '2023-07-25' },
+            { id: '#12348', customer: 'Bob Brown', status: 'Cancelled', total: '$49.99', dateAdded: '2023-07-26', dateModified: '2023-07-27' },
+            { id: '#12349', customer: 'Charlie Black', status: 'Completed', total: '$199.99', dateAdded: '2023-07-28', dateModified: '2023-07-29' },
+            { id: '#12350', customer: 'Diana White', status: 'Pending', total: '$299.99', dateAdded: '2023-07-30', dateModified: '2023-07-31' },
+            { id: '#12351', customer: 'Eve Green', status: 'Processing', total: '$99.99', dateAdded: '2023-08-01', dateModified: '2023-08-02' },
+            { id: '#12352', customer: 'Frank Blue', status: 'Cancelled', total: '$49.99', dateAdded: '2023-08-03', dateModified: '2023-08-04' },
+            { id: '#12353', customer: 'Grace Yellow', status: 'Completed', total: '$199.99', dateAdded: '2023-08-05', dateModified: '2023-08-06' },
+            { id: '#12354', customer: 'Hank Red', status: 'Pending', total: '$299.99', dateAdded: '2023-08-07', dateModified: '2023-08-08' }, { id: '#12345', customer: 'John Doe', status: 'Completed', total: '$299.99', dateAdded: '2023-07-20', dateModified: '2023-07-21' },
+            { id: '#12346', customer: 'Jane Smith', status: 'Pending', total: '$199.99', dateAdded: '2023-07-22', dateModified: '2023-07-23' },
+            { id: '#12347', customer: 'Alice Johnson', status: 'Processing', total: '$99.99', dateAdded: '2023-07-24', dateModified: '2023-07-25' },
+            { id: '#12348', customer: 'Bob Brown', status: 'Cancelled', total: '$49.99', dateAdded: '2023-07-26', dateModified: '2023-07-27' },
+            { id: '#12349', customer: 'Charlie Black', status: 'Completed', total: '$199.99', dateAdded: '2023-07-28', dateModified: '2023-07-29' },
+            { id: '#12350', customer: 'Diana White', status: 'Pending', total: '$299.99', dateAdded: '2023-07-30', dateModified: '2023-07-31' },
+            { id: '#12351', customer: 'Eve Green', status: 'Processing', total: '$99.99', dateAdded: '2023-08-01', dateModified: '2023-08-02' },
+            { id: '#12352', customer: 'Frank Blue', status: 'Cancelled', total: '$49.99', dateAdded: '2023-08-03', dateModified: '2023-08-04' },
+            { id: '#12353', customer: 'Grace Yellow', status: 'Completed', total: '$199.99', dateAdded: '2023-08-05', dateModified: '2023-08-06' },
+            { id: '#12354', customer: 'Hank Red', status: 'Pending', total: '$299.99', dateAdded: '2023-08-07', dateModified: '2023-08-08' },
+        ];
+
+        let currentPage = 1;
+        const ordersPerPage = 10; // Display 3 orders per page
+
+        function renderOrders() {
+            const tableBody = document.getElementById('orderTableBody');
+            tableBody.innerHTML = ''; // Clear existing rows
+
+            const startIndex = (currentPage - 1) * ordersPerPage;
+            const endIndex = startIndex + ordersPerPage;
+            const paginatedOrders = orders.slice(startIndex, endIndex);
+
+            paginatedOrders.forEach(order => {
+                const row = document.createElement('tr');
+                row.className = "border-b hover:bg-gray-50 transition-all";
+                row.innerHTML = `
+            <td class="py-4">${order.id}</td>
+            <td class="py-4">
+                <div class="flex items-center gap-3">
+                    <img src="https://webcrumbs.cloud/placeholder" alt="Customer Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-gray-100" />
+                    <span>${order.customer}</span>
+                </div>
+            </td>
+            <td class="py-4">
+                <span class="px-3 py-1 rounded-full ${getStatusClasses(order.status)}">${order.status}</span>
+            </td>
+            <td class="py-4">${order.total}</td>
+            <td class="py-4">${order.dateAdded}</td>
+            <td class="py-4">${order.dateModified}</td>
+            <td class="py-4">
+                <div class="flex gap-2">
+                    <button class="p-2 hover:bg-gray-100 rounded-full transition-all" onclick="editOrder('${order.id}')">
+                        <span class="material-symbols-outlined">edit</span>
+                    </button>
+                    <button class="p-2 hover:bg-gray-100 rounded-full transition-all" onclick="deleteOrder('${order.id}')">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                    <button class="p-2 hover:bg-gray-100 rounded-full transition-all" onclick="viewOrder('${order.id}')">
+                        <span class="material-symbols-outlined">visibility</span>
+                    </button>
+                </div>
+            </td>
+        `;
+                tableBody.appendChild(row);
+            });
+
+            updatePaginationInfo();
+            updatePaginationControls();
+        }
+
+        function viewOrder(orderId) {
+            // Redirect to the view order page with the order ID as a query parameter
+            window.location.href = `vendor_order_details.html?id=${orderId}`;
+        }
+
+        function getStatusClasses(status) {
+            switch (status) {
+                case 'Cancelled':
+                    return 'bg-pink-100 text-pink-800';
+                case 'Completed':
+                case 'Delivered':
+                    return 'bg-green-100 text-green-800';
+                case 'Failed':
+                    return 'bg-red-100 text-red-800';
+                case 'Pending':
+                    return 'bg-yellow-100 text-yellow-800';
+                case 'Processing':
+                    return 'bg-blue-100 text-blue-800';
+                case 'Refunded':
+                    return 'bg-orange-100 text-orange-800';
+                case 'Delivering':
+                    return 'bg-purple-100 text-purple-800';
+                default:
+                    return 'bg-gray-100 text-gray-800'; // Default case
+            }
+        }
+
+        function setStatus(status) {
+            alert(`Selected status: ${status}`);
+        }
+
+        function editOrder(orderId) {
+            alert(`Editing order: ${orderId}`);
+        }
+
+        function deleteOrder(orderId) {
+            const index = orders.findIndex(order => order.id === orderId);
+            if (index > -1) {
+                orders.splice(index, 1);
+                renderOrders();
+            }
+        }
+
+        function updatePaginationInfo() {
+            const paginationInfo = document.getElementById('paginationInfo');
+            const totalEntries = orders.length;
+            const startEntry = (currentPage - 1) * ordersPerPage + 1;
+            const endEntry = Math.min(currentPage * ordersPerPage, totalEntries);
+            paginationInfo.textContent = `Showing ${startEntry} to ${endEntry} of ${totalEntries} entries`;
+        }
+
+        function updatePaginationControls() {
+            const totalPages = Math.ceil(orders.length / ordersPerPage);
+            document.getElementById('prevPage').disabled = currentPage === 1;
+            document.getElementById('nextPage').disabled = currentPage === totalPages;
+        }
+
+        document.getElementById('prevPage').addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderOrders();
+            }
+        });
+
+        document.getElementById('nextPage').addEventListener('click', () => {
+            const totalPages = Math.ceil(orders.length / ordersPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderOrders();
+            }
+        });
+
+        // Initial render
+        renderOrders();
+
+    </script>
+
+</body>
+
+</html>

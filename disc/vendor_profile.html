@@ -1,0 +1,382 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom styles to fix the sidebar */
+        body {
+            margin: 0;
+            padding-left: 16rem;
+            /* Adjust this based on the width of your sidebar */
+        }
+
+        aside {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 16rem;
+            /* Width of the sidebar */
+            height: 100vh;
+            /* Full height */
+            overflow-y: auto;
+            /* Allow scrolling if content overflows */
+            background-color: white;
+            /* Background color for the sidebar */
+            border-right: 1px solid #e5e7eb;
+            /* Border for the sidebar */
+        }
+
+        .main-content {
+            margin-left: 16rem;
+            /* Same as sidebar width */
+            padding: 1rem;
+            /* Padding for the main content */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="webcrumbs" class="flex">
+        <aside class="w-64 border-r border-gray-200 h-screen">
+            <div class="p-4" onclick="window.location.href='vendor_dashboard.html'">
+                <h1 class="text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
+            </div>
+            <nav class="p-2 space-y-1">
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='signin.html'">
+                    <span class="material-symbols-outlined">security</span>
+                    <span>Authentication</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_profile.html'">
+                    <span class="material-symbols-outlined">account_circle</span>
+                    <span>Account</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
+                    <details class="relative w-full">
+                        <summary class="list-none cursor-pointer flex items-center justify-between w-full">
+                            <div class="flex items-center space-x-3">
+                                <span class="material-symbols-outlined">shopping_cart</span>
+                                <span>Ecommerce</span>
+                            </div>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </summary>
+                        <div
+                            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='vendor_product.html'">Products</div>
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='vendor_categories.html'">Category</div>
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='vendor_order.html'">Orders</div>
+                        </div>
+                    </details>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items -center space-x-3"
+                    onclick="window.location.href='revenue_breakdown.html'">
+                    <span class="material-symbols-outlined">payment</span>
+                    <span>Revenue</span>
+                </div>
+
+            </nav>
+        </aside>
+
+        <div class="flex-1">
+            <header class="px-6 py-4">
+                <nav class="flex items-center justify-between">
+                    <div class="flex items-center space-x-8">
+                        <div class="flex items-center space-x-2 text-sm">
+                            <span class="hover:underline cursor-pointer">Home</span>
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            <span class="hover:underline cursor-pointer">Dashboard</span>
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            <span class="opacity-50">Current Page</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-6">
+                        <div class="relative">
+                            <input type="text" placeholder="Search..."
+                                class="pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all w-64" />
+                            <span class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400">search</span>
+                        </div>
+
+                        <details class="relative">
+                            <summary class="list-none cursor-pointer">
+                                <div class="relative hover:bg-gray-100 p-2 rounded-full transition-colors">
+                                    <span class="material-symbols-outlined">notifications</span>
+                                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                                </div>
+                            </summary>
+                            <div
+                                class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-100 p-4 z-50">
+                                <h3 class="font-semibold mb-2">Notifications</h3>
+                                <div class="space-y-2">
+                                    <div
+                                        class="flex items-start space-x-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                                        <span class="material-symbols-outlined mt-1">mail</span>
+                                        <div>
+                                            <p class="text-sm font-medium">New message received</p>
+                                            <p class="text-xs text-gray-500">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <details class="relative">
+                            <summary class="list-none cursor-pointer">
+                                <div
+                                    class="flex items-center space-x-2 hover:bg-gray-100 p-2 rounded-lg transition-colors">
+                                    <img src="https://ui-avatars.com/api/?name=John+Doe" alt="Profile"
+                                        class="w-8 h-8 rounded-full" />
+                                    <span class="material-symbols-outlined">expand_more</span>
+                                </div>
+                            </summary>
+                            <div
+                                class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
+                                    onclick="window.location.href='vendor_profile.html'">
+                                    <span class="material-symbols-outlined mr-2 align-middle">person</span>
+                                    Profile
+                                </div>
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
+                                    onclick="window.location.href='vendor_setting.html'">
+                                    <span class="material-symbols-outlined mr-2 align-middle">settings</span>
+                                    Settings
+                                </div>
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors border-t"
+                                    onclick="window.location.href='signin.html'" F>
+                                    <span class="material-symbols-outlined mr-2 align-middle">logout</span>
+                                    Logout
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="p-6 space-y-6">
+
+                <div class="container mx-auto p-6">
+                    <h1 class="text-2xl font-bold mb-6">Profile</h1>
+                    <div class="flex flex-col gap-6">
+                        <div class="mt-6 bg-white rounded-xl shadow-lg p-6">
+                            <h2 class="text-2xl font-bold mb-6">Business Details</h2>
+                            <div class="grid grid-cols-2 gap-8">
+                                <div class="space-y-6">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Store Name</label>
+                                        <input type="text" id="storeName"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="Enter store name" required />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Business Type</label>
+                                        <select id="businessType"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            required>
+                                            <option value="">Select business type</option>
+                                            <option value="manufacturer">Jewellery Manufacturer</option>
+                                            <option value="retailer">Retailer</option>
+                                            <option value="wholesaler">Wholesaler</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">GST Number</label>
+                                        <input type="text" id="gstNumber"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="Enter GST number" required />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">PAN Number</label>
+                                        <input type="text" id="panNumber"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="Enter PAN number" required />
+                                    </div>
+                                </div>
+                                <div class="space-y-6">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Business Logo</label>
+                                        <div id="logoUpload"
+                                            class="border-2 border-dashed rounded-lg p-8 text-center hover:border-blue-500 transition-all duration-200">
+                                            <span class="material-symbols-outlined text-4xl mb-2">cloud_upload</span>
+                                            <p class="text-sm">Drag and drop your logo here or</p>
+                                            <button id="browseLogo"
+                                                class="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200">Browse
+                                                Files</button>
+                                            <input type="file" id="logoFile" class="hidden" accept="image/*" />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Business Address</label>
+                                        <div class="space-y-4">
+                                            <input type="text" id="streetAddress"
+                                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                                placeholder="Street address" required />
+                                            <input type="text" id="city"
+                                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                                placeholder="City" required />
+                                            <div class="grid grid-cols-2 gap-4">
+                                                <input type="text" id="state"
+                                                    class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                                    placeholder="State" required />
+                                                <input type="text" id="pinCode"
+                                                    class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                                    placeholder="PIN Code" required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 bg-white rounded-xl shadow-lg p-6">
+                            <h2 class="text-2xl font-bold mb-6">Contact Information</h2>
+                            <div class="grid grid-cols-3 gap-8">
+                                <div class="space-y-6">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Profile Image</label>
+                                        <div id="profileUpload"
+                                            class="border-2 border-dashed rounded-lg p-8 text-center hover:border-blue-500 transition-all duration-200">
+                                            <span class="material-symbols-outlined text-4xl mb-2">account_circle</span>
+                                            <p class="text-sm">Upload your profile picture or</p>
+                                            <button id="choosePhoto"
+                                                class="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200">Choose
+                                                Photo</button>
+                                            <input type="file" id="profileFile" class="hidden" accept="image/*" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="space-y-6 col-span-2">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Owner's Name</label>
+                                        <input type="text" id="ownerName"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="Enter owner's name" required />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Email Address</label>
+                                        <input type="email" id="email"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="Enter email address" required />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Phone Number</label>
+                                        <input type="tel" id="phone"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="Enter phone number" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 bg-white rounded-xl shadow-lg p-6">
+                            <h2 class="text-2xl font-bold mb-6">Payment & Bank Details</h2>
+                            <div class="grid grid-cols-2 gap-8">
+                                <div class="space-y-6">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Bank Account Number</label>
+                                        <input type="text" id="bankAccount"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="Enter bank account number" required />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Bank Name</label>
+                                        <input type="text" id="bankName"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="Enter bank name" required />
+                                    </div>
+                                </div>
+                                <div class="space-y-6">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">IFSC Code</label>
+                                        <input type="text" id="ifscCode"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="Enter IFSC code" required />
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Payment Mode Preference</label>
+                                        <select id="paymentMode"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            required>
+                                            <option value="">Select payment mode</option>
+                                            <option value="bank">Bank Transfer</option>
+                                            <option value="upi">UPI</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 flex justify-end space-x-4">
+                            <button id="cancelBtn"
+                                class="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200">Cancel</button>
+                            <button id="saveBtn"
+                                class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200">Save
+                                Details</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.getElementById('browseLogo').addEventListener('click', function () {
+            document.getElementById('logoFile').click();
+        });
+
+        document.getElementById('choosePhoto').addEventListener('click', function () {
+            document.getElementById('profileFile').click();
+        });
+
+        document.getElementById('saveBtn').addEventListener('click', function () {
+            const storeName = document.getElementById('storeName').value;
+            const businessType = document.getElementById('businessType').value;
+            const gstNumber = document.getElementById('gstNumber').value;
+            const panNumber = document.getElementById('panNumber').value;
+            const streetAddress = document.getElementById('streetAddress').value;
+            const city = document.getElementById('city').value;
+            const state = document.getElementById('state').value;
+            const pinCode = document.getElementById('pinCode').value;
+            const ownerName = document.getElementById('ownerName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const bankAccount = document.getElementById('bankAccount').value;
+            const bankName = document.getElementById('bankName').value;
+            const ifscCode = document.getElementById('ifscCode').value;
+            const paymentMode = document.getElementById('paymentMode').value;
+
+            if (!storeName || !businessType || !gstNumber || !panNumber || !streetAddress || !city || !state || !pinCode || !ownerName || !email || !phone || !bankAccount || !bankName || !ifscCode || !paymentMode) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+
+            alert("Details saved successfully!");
+            // Here you can add logic to send the data to the server
+        });
+
+        document.getElementById('cancelBtn').addEventListener('click', function () {
+            if (confirm("Are you sure you want to cancel? All unsaved changes will be lost.")) {
+                // Logic to clear the form or redirect
+                window.location.reload(); // Reloads the page
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>
