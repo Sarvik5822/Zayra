@@ -1,0 +1,528 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suspension Reasons & Admin Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom styles to fix the sidebar */
+        body {
+            margin: 0;
+            padding-left: 16rem;
+            /* Adjust this based on the width of your sidebar */
+        }
+
+        aside {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 16rem;
+            /* Width of the sidebar */
+            height: 100vh;
+            /* Full height */
+            overflow-y: auto;
+            /* Allow scrolling if content overflows */
+            background-color: white;
+            /* Background color for the sidebar */
+            border-right: 1px solid #e5e7eb;
+            /* Border for the sidebar */
+        }
+
+        .main-content {
+            margin-left: 16rem;
+            /* Same as sidebar width */
+            padding: 1rem;
+            /* Padding for the main content */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="webcrumbs" class="flex">
+        <aside class="w-64 border-r border-gray-200 h-screen">
+            <div class="p-4" onclick="window.location.href='index.html'">
+                <h1 class="text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
+            </div>
+            <nav class="p-2 space-y-1">
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='index.html'">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='order.html'">
+                    <span class="material-symbols-outlined">receipt</span>
+                    <span>Order</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='product.html'">
+                    <span class="material-symbols-outlined">package</span>
+                    <span>Product</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='categories.html'">
+                    <span class="material-symbols-outlined">category</span>
+                    <span>Category</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
+                    <details class="relative w-full">
+                        <summary class="list-none cursor-pointer flex items-center justify-between w-full">
+                            <div class="flex items-center space-x-3">
+                                <span class="material-symbols-outlined">business</span>
+                                <span>Vendor</span>
+                            </div>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </summary>
+                        <div
+                            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='admin_vendor_details.html'">Vendor Details</div>
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='admin_approve_vendor.html'">Vendor Approval</div>
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='admin_suspend_vendor.html'">Suspension</div>
+                        </div>
+                    </details>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='sales.html'">
+                    <span class="material-symbols-outlined">attach_money</span>
+                    <span>Sales</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='customer_listing.html'">
+                    <span class="material-symbols-outlined">support_agent</span>
+                    <span>Customer</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='admin_login.html'">
+                    <span class="material-symbols-outlined">security</span>
+                    <span>Authentication</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='admin_profile.html'">
+                    <span class="material-symbols-outlined">account_circle</span>
+                    <span>Account</span>
+                </div>
+
+
+            </nav>
+        </aside>
+
+        <div class="flex-1">
+            <header class="px-6 py-4">
+                <nav class="flex items-center justify-between">
+                    <div class="flex items-center space-x-8">
+                        <div class="flex items-center space-x-2 text-sm">
+                            <span class="hover:underline cursor-pointer">Home</span>
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            <span class="hover:underline cursor-pointer">Dashboard</span>
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            <span class="opacity-50">Current Page</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-6">
+                        <div class="relative">
+                            <input type="text" placeholder="Search..."
+                                class="pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all w-64" />
+                            <span class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400">search</span>
+                        </div>
+
+                        <details class="relative">
+                            <summary class="list-none cursor-pointer">
+                                <div class="relative hover:bg-gray-100 p-2 rounded-full transition-colors">
+                                    <span class="material-symbols-outlined">notifications</span>
+                                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                                </div>
+                            </summary>
+                            <div
+                                class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-100 p-4 z-50">
+                                <h3 class="font-semibold mb-2">Notifications</h3>
+                                <div class="space-y-2">
+                                    <div
+                                        class="flex items-start space-x-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                                        <span class="material-symbols-outlined mt-1">mail</span>
+                                        <div>
+                                            <p class="text-sm font-medium">New message received</p>
+                                            <p class="text-xs text-gray-500">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <details class="relative">
+                            <summary class="list-none cursor-pointer">
+                                <div
+                                    class="flex items-center space-x-2 hover:bg-gray-100 p-2 rounded-lg transition-colors">
+                                    <img src="https://ui-avatars.com/api/?name=John+Doe" alt="Profile"
+                                        class="w-8 h-8 rounded-full" />
+                                    <span class="material-symbols-outlined">expand_more</span>
+                                </div>
+                            </summary>
+                            <div
+                                class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                    <span class="material-symbols-outlined mr-2 align-middle">person</span>
+                                    Profile
+                                </div>
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                    <span class="material-symbols-outlined mr-2 align-middle">settings</span>
+                                    Settings
+                                </div>
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors border-t">
+                                    <span class="material-symbols-outlined mr-2 align-middle">logout</span>
+                                    Logout
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="p-6 space-y-6">
+
+                <div class="w-[1200px]">
+                    <h2 class="text-2xl font-bold mb-6">Vendor Management</h2>
+
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="flex space-x-4">
+                            <details class="relative">
+                                <summary
+                                    class="flex items-center px-4 py-2 bg-gray-100 rounded-lg cursor-pointer hover:bg-gray-200 transition-all duration-200">
+                                    <span class="material-symbols-outlined mr-2">filter_alt</span>
+                                    View All
+                                    <span class="material-symbols-outlined ml-2">expand_more</span>
+                                </summary>
+                                <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg p-2 z-10">
+                                    <div
+                                        class="p-2 hover:bg-gray-100 rounded cursor-pointer transition-all duration-200">
+                                        Active Vendors</div>
+                                    <div
+                                        class="p-2 hover:bg-gray-100 rounded cursor-pointer transition-all duration-200">
+                                        Suspended Vendors</div>
+                                    <div
+                                        class="p-2 hover:bg-gray-100 rounded cursor-pointer transition-all duration-200">
+                                        All Vendors</div>
+                                </div>
+                            </details>
+                            <div class="relative">
+                                <span
+                                    class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400">search</span>
+                                <input type="text" placeholder="Search vendors..."
+                                    class="pl-10 pr-4 py-2 border rounded-lg w-64 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="overflow-hidden rounded-xl border mb-8">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold">Vendor ID</th>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold">Business Name</th>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold">Owner Name</th>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold">Status</th>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold">Last Login</th>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y">
+                                <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                    <td class="px-6 py-4">#VEN001</td>
+                                    <td class="px-6 py-4">TechnoSolutions Pvt Ltd</td>
+                                    <td class="px-6 py-4">John Smith</td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="px-3 py-1 rounded-full text-sm bg-green-100 text-green-800">Active</span>
+                                    </td>
+                                    <td class="px-6 py-4">2 hours ago</td>
+                                    <td class="px-6 py-4">
+                                        <details class="relative">
+                                            <summary
+                                                class="flex items-center px-3 py-1.5 bg-gray-100 rounded-lg cursor-pointer hover:bg-gray-200 transition-all duration-200">
+                                                <span class="material-symbols-outlined text-sm mr-1">more_horiz</span>
+                                                Actions
+                                            </summary>
+                                            <div
+                                                class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg p-2 z-10">
+                                                <div
+                                                    class="p-2 hover:bg-gray-100 rounded cursor-pointer transition-all duration-200 flex items-center">
+                                                    <span class="material-symbols-outlined text-sm mr-2">block</span>
+                                                    Disable Account
+                                                </div>
+                                                <div
+                                                    class="p-2 hover:bg-gray-100 rounded cursor-pointer transition-all duration-200 flex items-center">
+                                                    <span class="material-symbols-outlined text-sm mr-2">warning</span>
+                                                    Suspend Account
+                                                </div>
+                                            </div>
+                                        </details>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                    <td class="px-6 py-4">#VEN002</td>
+                                    <td class="px-6 py-4">Global Traders Inc</td>
+                                    <td class="px-6 py-4">Sarah Johnson</td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="px-3 py-1 rounded-full text-sm bg-red-100 text-red-800">Suspended</span>
+                                    </td>
+                                    <td class="px-6 py-4">1 day ago</td>
+                                    <td class="px-6 py-4">
+                                        <button
+                                            class="inline-flex items-center px-3 py-1.5 bg-green-500 text-white text-sm font-medium rounded-lg hover:bg-green-600 transition-all duration-200">
+                                            <span class="material-symbols-outlined text-sm mr-1">refresh</span>
+                                            Reactivate
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bg-white rounded-xl border p-6">
+                        <h2 class="text-xl font-bold mb-6">Vendor Details</h2>
+                        <div class="grid grid-cols-2 gap-8">
+                            <div class="space-y-6">
+                                <div>
+                                    <h3 class="text-sm font-semibold mb-2">Business Information</h3>
+                                    <div class="space-y-4">
+                                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                            <span class="text-sm">Vendor Name</span>
+                                            <span class="font-medium">TechnoSolutions Pvt Ltd</span>
+                                        </div>
+                                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                            <span class="text-sm">Business Type</span>
+                                            <span class="font-medium">Manufacturer</span>
+                                        </div>
+                                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                            <span class="text-sm">Store Status</span>
+                                            <span
+                                                class="px-3 py-1 rounded-full text-sm bg-green-100 text-green-800">Active</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-semibold mb-2">Contact Information</h3>
+                                    <div class="space-y-4">
+                                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                            <span class="text-sm">Email</span>
+                                            <span class="font-medium">contact@technosolutions.com</span>
+                                        </div>
+                                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                            <span class="text-sm">Phone</span>
+                                            <span class="font-medium">+1 234 567 8900</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-y-6">
+                                <div>
+                                    <h3 class="text-sm font-semibold mb-2">Performance Metrics</h3>
+                                    <div class="space-y-4">
+                                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                            <span class="text-sm">Total Orders</span>
+                                            <span class="font-medium">1,234</span>
+                                        </div>
+                                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                            <span class="text-sm">Total Revenue</span>
+                                            <span class="font-medium">$45,678</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-semibold mb-2">Account Information</h3>
+                                    <div class="space-y-4">
+                                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                            <span class="text-sm">Last Login</span>
+                                            <span class="font-medium">2 hours ago</span>
+                                        </div>
+                                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                            <span class="text-sm">Account Created</span>
+                                            <span class="font-medium">Jan 15, 2023</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8 flex space-x-4">
+                            <button
+                                class="inline-flex items-center px-4 py-2 bg-yellow-500 text-white text-sm font-medium rounded-lg hover:bg-yellow-600 transition-all duration-200">
+                                <span class="material-symbols-outlined text-sm mr-2">block</span>
+                                Disable Account
+                            </button>
+                            <button
+                                class="inline-flex items-center px-4 py-2 bg-orange-500 text-white text-sm font-medium rounded-lg hover:bg-orange-600 transition-all duration-200">
+                                <span class="material-symbols-outlined text-sm mr-2">warning</span>
+                                Suspend Account
+                            </button>
+                            <button
+                                class="inline-flex items-center px-4 py-2 bg-red-500 text-white text-sm font-medium rounded-lg hover:bg-red-600 transition-all duration-200">
+                                <span class="material-symbols-outlined text-sm mr-2">delete</span>
+                                Delete Account
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl">
+                        <div class="bg-white rounded-xl border p-6 mt-8">
+                            <h2 class="text-xl font-bold mb-6">Suspension Reasons & Admin Notes</h2>
+                            <div class="space-y-6">
+                                <div>
+                                    <h3 class="text-sm font-semibold mb-4 flex items-center">
+                                        <span class="material-symbols-outlined mr-2 text-green-500">check_circle</span>
+                                        Reason for Suspension
+                                    </h3>
+                                    <div class="space-y-3">
+                                        <label
+                                            class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200 cursor-pointer">
+                                            <input type="radio" name="suspension-reason" value="Policy Violation"
+                                                class="h-4 w-4 text-blue-500" />
+                                            <span>Policy Violation (Fake products, misleading listings, fraud)</span>
+                                        </label>
+                                        <label
+                                            class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200 cursor-pointer">
+                                            <input type="radio" name="suspension-reason" value="Poor Performance"
+                                                class="h-4 w-4 text-blue-500" />
+                                            <span>Poor Performance (Low ratings, late deliveries, many refunds)</span>
+                                        </label>
+                                        <label
+                                            class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200 cursor-pointer">
+                                            <input type="radio" name="suspension-reason" value="Inactive"
+                                                class="h-4 w-4 text-blue-500" />
+                                            <span>Inactive for Long Period</span>
+                                        </label>
+                                        <label
+                                            class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200 cursor-pointer">
+                                            <input type="radio" name="suspension-reason" value="Requested by Vendor"
+                                                class="h-4 w-4 text-blue-500" />
+                                            <span>Requested by Vendor</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-sm font-semibold mb-4 flex items-center">
+                                        <span class="material-symbols-outlined mr-2 text-blue-500">notes</span>
+                                        Admin Notes (Optional)
+                                    </h3>
+                                    <textarea id="adminNotes" placeholder="Add internal remarks for reference"
+                                        class="w-full p-3 border rounded-lg resize-none h-32 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"></textarea>
+                                    <div class="mt-4">
+                                        <button
+                                            class="inline-flex items-center px-4 py-2 bg-gray-100 text-sm font-medium rounded-lg hover:bg-gray-200 transition-all duration-200"
+                                            onclick="attachDocuments()">
+                                            <span class="material-symbols-outlined text-sm mr-2">attach_file</span>
+                                            Attach Supporting Documents
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="pt-4 border-t">
+                                    <label class="flex items-center space-x-3 cursor-pointer">
+                                        <input type="checkbox" class="h-4 w-4 text-blue-500 rounded" />
+                                        <span class="text-sm">Notify Vendor via Email/SMS with Reason</span>
+                                    </label>
+                                </div>
+
+                                <div class="flex space-x-4 pt-4">
+                                    <button
+                                        class="inline-flex items-center px-6 py-2.5 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition-all duration-200"
+                                        onclick="saveChanges()">
+                                        <span class="material-symbols-outlined text-sm mr-2">save</span>
+                                        Save Changes
+                                    </button>
+                                    <button
+                                        class="inline-flex items-center px-6 py-2.5 bg-gray-100 text-sm font-medium rounded-lg hover:bg-gray-200 transition-all duration-200"
+                                        onclick="cancel()">
+                                        <span class="material-symbols-outlined text-sm mr-2">close</span>
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function approveVendor() {
+            alert("Vendor Approved!");
+        }
+
+        function rejectVendor() {
+            alert("Vendor Rejected!");
+        }
+
+        function suspendVendor() {
+            alert("Vendor Suspended!");
+        }
+
+        function resetPassword() {
+            alert("Password Reset Link Sent!");
+        }
+
+        function editProduct(productId) {
+            alert("Editing product: " + productId);
+            // Implement your edit logic here
+        }
+
+        function removeProduct(productId) {
+            if (confirm("Are you sure you want to remove product: " + productId + "?")) {
+                alert("Product " + productId + " removed.");
+                // Implement your remove logic here
+            }
+        }
+
+        function approveDocument(docType) {
+            alert("Approved: " + docType);
+            // Implement your approval logic here
+        }
+
+        function rejectDocument(docType) {
+            alert("Rejected: " + docType);
+            // Implement your rejection logic here
+        }
+        function attachDocuments() {
+            alert('Attach your supporting documents functionality goes here.');
+            // Implement document attachment logic here
+        }
+
+        function saveChanges() {
+            const selectedReason = document.querySelector('input[name="suspension-reason"]:checked');
+            const adminNotes = document.getElementById('adminNotes').value;
+            const notifyVendor = document.querySelector('input[type="checkbox"]').checked;
+
+            if (selectedReason) {
+                alert(`Changes saved!\nReason: ${selectedReason.value}\nAdmin Notes: ${adminNotes}\nNotify Vendor: ${notifyVendor}`);
+                // Implement save logic here
+            } else {
+                alert('Please select a reason for suspension.');
+            }
+        }
+
+        function cancel() {
+            if (confirm('Are you sure you want to cancel? All changes will be lost.')) {
+                // Implement cancel logic here
+                alert('Changes canceled.');
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,449 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom styles to fix the sidebar */
+        body {
+            margin: 0;
+            padding-left: 16rem;
+            /* Adjust this based on the width of your sidebar */
+        }
+
+        aside {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 16rem;
+            /* Width of the sidebar */
+            height: 100vh;
+            /* Full height */
+            overflow-y: auto;
+            /* Allow scrolling if content overflows */
+            background-color: white;
+            /* Background color for the sidebar */
+            border-right: 1px solid #e5e7eb;
+            /* Border for the sidebar */
+        }
+
+        .main-content {
+            margin-left: 16rem;
+            /* Same as sidebar width */
+            padding: 1rem;
+            /* Padding for the main content */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="webcrumbs" class="flex">
+        <aside class="w-64 border-r border-gray-200 h-screen">
+            <div class="p-4" onclick="window.location.href='index.html'">
+                <h1 class="text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
+            </div>
+            <nav class="p-2 space-y-1">
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='index.html'">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='order.html'">
+                    <span class="material-symbols-outlined">receipt</span>
+                    <span>Order</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='product.html'">
+                    <span class="material-symbols-outlined">package</span>
+                    <span>Product</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='category.html'">
+                    <span class="material-symbols-outlined">category</span>
+                    <span>Category</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
+                    <details class="relative w-full">
+                        <summary class="list-none cursor-pointer flex items-center justify-between w-full">
+                            <div class="flex items-center space-x-3">
+                                <span class="material-symbols-outlined">business</span>
+                                <span>Vendor</span>
+                            </div>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </summary>
+                        <div
+                            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='admin_vendor_details.html'">Vendor Details</div>
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='admin_approve_vendor.html'">Vendor Approval</div>
+                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                onclick="window.location.href='admin_suspend_vendor.html'">Suspension</div>
+                        </div>
+                    </details>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='sales.html'">
+                    <span class="material-symbols-outlined">attach_money</span>
+                    <span>Sales</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='customer_listing.html'">
+                    <span class="material-symbols-outlined">support_agent</span>
+                    <span>Customer</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='admin_login.html'">
+                    <span class="material-symbols-outlined">security</span>
+                    <span>Authentication</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='admin_profile.html'">
+                    <span class="material-symbols-outlined">account_circle</span>
+                    <span>Account</span>
+                </div>
+
+
+            </nav>
+        </aside>
+
+        <div class="flex-1">
+            <header class="px-6 py-4">
+                <nav class="flex items-center justify-between">
+                    <div class="flex items-center space-x-8">
+                        <div class="flex items-center space-x-2 text-sm">
+                            <span class="hover:underline cursor-pointer">Home</span>
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            <span class="hover:underline cursor-pointer">Dashboard</span>
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            <span class="opacity-50">Current Page</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-6">
+                        <div class="relative">
+                            <input type="text" placeholder="Search..."
+                                class="pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all w-64" />
+                            <span class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400">search</span>
+                        </div>
+
+                        <details class="relative">
+                            <summary class="list-none cursor-pointer">
+                                <div class="relative hover:bg-gray-100 p-2 rounded-full transition-colors">
+                                    <span class="material-symbols-outlined">notifications</span>
+                                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                                </div>
+                            </summary>
+                            <div
+                                class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-100 p-4 z-50">
+                                <h3 class="font-semibold mb-2">Notifications</h3>
+                                <div class="space-y-2">
+                                    <div
+                                        class="flex items-start space-x-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                                        <span class="material-symbols-outlined mt-1">mail</span>
+                                        <div>
+                                            <p class="text-sm font-medium">New message received</p>
+                                            <p class="text-xs text-gray-500">2 minutes ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <details class="relative">
+                            <summary class="list-none cursor-pointer">
+                                <div
+                                    class="flex items-center space-x-2 hover:bg-gray-100 p-2 rounded-lg transition-colors">
+                                    <img src="https://ui-avatars.com/api/?name=John+Doe" alt="Profile"
+                                        class="w-8 h-8 rounded-full" />
+                                    <span class="material-symbols-outlined">expand_more</span>
+                                </div>
+                            </summary>
+                            <div
+                                class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                    <span class="material-symbols-outlined mr-2 align-middle">person</span>
+                                    Profile
+                                </div>
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                    <span class="material-symbols-outlined mr-2 align-middle">settings</span>
+                                    Settings
+                                </div>
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors border-t"
+                                    onclick="window.location.href='signin.html'" F>
+                                    <span class="material-symbols-outlined mr-2 align-middle">logout</span>
+                                    Logout
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="p-6 space-y-6">
+
+                <h1 class="text-2xl font-bold mb-6">Settings</h1>
+                <div
+                    class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow border rounded-lg p-6 mt-6">
+                    <h3 class="text-xl font-medium mb-4">Update Store Information</h3>
+
+                    <!-- Table for Store Information -->
+                    <div class="mt-6 overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b">
+                                    <th
+                                        class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
+                                        Field</th>
+                                    <th
+                                        class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
+                                        Information</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Store Name -->
+                                <tr>
+                                    <td class="px-6 py-3 text-sm text-gray-700">Store Name</td>
+                                    <td class="px-6 py-3 text-sm text-gray-700">
+                                        <input type="text" id="storeName"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="e.g., Zayra Jewellery" required />
+                                    </td>
+                                </tr>
+
+                                <!-- Store Address -->
+                                <tr>
+                                    <td class="px-6 py-3 text-sm text-gray-700">Store Address</td>
+                                    <td class="px-6 py-3 text-sm text-gray-700">
+                                        <input type="text" id="storeAddress"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="Enter store address" required />
+                                    </td>
+                                </tr>
+
+                                <!-- Business Email -->
+                                <tr>
+                                    <td class="px-6 py-3 text-sm text-gray-700">Business Email</td>
+                                    <td class="px-6 py-3 text-sm text-gray-700">
+                                        <input type="email" id="businessEmail"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="Enter business email" required />
+                                    </td>
+                                </tr>
+
+                                <!-- Contact Number -->
+                                <tr>
+                                    <td class="px-6 py-3 text-sm text-gray-700">Contact Number</td>
+                                    <td class="px-6 py-3 text-sm text-gray-700">
+                                        <input type="tel" id="contactNumber"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="Enter contact number" required />
+                                    </td>
+                                </tr>
+
+                                <!-- Operational Hours -->
+                                <tr>
+                                    <td class="px-6 py-3 text-sm text-gray-700">Operational Hours</td>
+                                    <td class="px-6 py-3 text-sm text-gray-700">
+                                        <input type="text" id="operationalHours"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="e.g., Mon-Sun: 10 AM - 7 PM" required />
+                                    </td>
+                                </tr>
+
+                                <!-- Social Media Links -->
+                                <tr>
+                                    <td class="px-6 py-3 text-sm text-gray-700">Social Media Links</td>
+                                    <td class="px-6 py-3 text-sm text-gray-700">
+                                        <div class="space-y-4">
+                                            <input type="url" id="instagramLink"
+                                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                                placeholder="Instagram URL" />
+                                            <input type="url" id="facebookLink"
+                                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                                placeholder="Facebook URL" />
+                                            <input type="url" id="twitterLink"
+                                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                                placeholder="Twitter URL" />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Update Button -->
+                    <div class="mt-6 flex justify-end space-x-4">
+                        <button id="updateBtn"
+                            class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200">Update
+                            Store Information</button>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow border rounded-lg p-6 mt-6">
+                    <h3 class="text-xl font-medium mb-4">Change Admin Password & Security Settings</h3>
+
+                    <!-- Table for Security Settings -->
+                    <div class="mt-6 overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b">
+                                    <th
+                                        class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
+                                        Field</th>
+                                    <th
+                                        class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
+                                        Information</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Current Password -->
+                                <tr>
+                                    <td class="px-6 py-3 text-sm text-gray-700">Current Password</td>
+                                    <td class="px-6 py-3 text-sm text-gray-700">
+                                        <input type="password" id="currentPassword"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="Enter current password" required />
+                                    </td>
+                                </tr>
+
+                                <!-- New Password -->
+                                <tr>
+                                    <td class="px-6 py-3 text-sm text-gray-700">New Password</td>
+                                    <td class="px-6 py-3 text-sm text-gray-700">
+                                        <input type="password" id="newPassword"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="Enter new password" required />
+                                    </td>
+                                </tr>
+
+                                <!-- Confirm New Password -->
+                                <tr>
+                                    <td class="px-6 py-3 text-sm text-gray-700">Confirm New Password</td>
+                                    <td class="px-6 py-3 text-sm text-gray-700">
+                                        <input type="password" id="confirmNewPassword"
+                                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                                            placeholder="Confirm new password" required />
+                                    </td>
+                                </tr>
+
+                                <!-- Enable Two-Factor Authentication -->
+                                <tr>
+                                    <td class="px-6 py-3 text-sm text-gray-700">Enable Two-Factor Authentication (2FA)
+                                    </td>
+                                    <td class="px-6 py-3 text-sm text-gray-700">
+                                        <div class="flex space-x-4">
+                                            <div class="flex items-center">
+                                                <input type="radio" id="smsOption" name="2faOption" class="mr-2" />
+                                                <label for="smsOption">Via SMS</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input type="radio" id="emailOption" name="2faOption" class="mr-2" />
+                                                <label for="emailOption">Via Email</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="mt-6 flex justify-end space-x-4">
+                        <button id="updatePasswordBtn"
+                            class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200">Update
+                            Password</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get breadcrumb elements
+            const homeBreadcrumb = document.getElementById('homeBreadcrumb');
+            const dashboardBreadcrumb = document.getElementById('dashboardBreadcrumb');
+            const currentPage = document.getElementById('currentPage');
+
+            // Set the current page name
+            const currentPageName = "Dashboard"; // You can change this dynamically based on the page
+            currentPage.textContent = currentPageName;
+
+            // Add event listeners for breadcrumb navigation
+            homeBreadcrumb.addEventListener('click', function () {
+                window.location.href = 'index.html'; // Change this to your home page URL
+            });
+
+            dashboardBreadcrumb.addEventListener('click', function () {
+                window.location.href = 'dashboard.html'; // Change this to your dashboard page URL
+            });
+        });
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const ctx = document.getElementById('lineChart').getContext('2d');
+            let lineChart;
+
+            function generateDates(month) {
+                const daysInMonth = new Date(2025, month, 0).getDate();
+                return Array.from({ length: daysInMonth }, (_, i) => `${2025}-${month.toString().padStart(2, '0')}-${(i + 1).toString().padStart(2, '0')}`);
+            }
+
+            function updateChart(month) {
+                const dates = generateDates(month);
+                const data = dates.map(() => Math.floor(Math.random() * 100));
+
+                if (lineChart) {
+                    lineChart.destroy();
+                }
+
+                lineChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: dates,
+                        datasets: [{
+                            label: `Performance Data for ${month}/2025`,
+                            data: data,
+                            borderColor: 'blue',
+                            backgroundColor: 'rgba(0, 0, 255, 0.1)',
+                            borderWidth: 2,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: { title: { display: true, text: 'Date' } },
+                            y: { title: { display: true, text: 'Value' } }
+                        }
+                    }
+                });
+            }
+
+            // Ensure the select dropdown exists before attaching the event listener
+            const monthSelect = document.getElementById('monthSelect');
+            if (monthSelect) {
+                monthSelect.addEventListener('change', function () {
+                    updateChart(this.value);
+                });
+            }
+
+            updateChart(1); // Initial chart load for January
+        });
+    </script>
+
+</body>
+
+</html>

@@ -48,45 +48,71 @@
 <body>
     <div id="webcrumbs" class="flex">
         <aside class="w-64 border-r border-gray-200 h-screen">
-            <div class="p-4" onclick="window.location.href='vendor_dashboard.html'">
+            <div class="p-4" onclick="window.location.href='index.html'">
                 <h1 class="text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
             </div>
             <nav class="p-2 space-y-1">
                 <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='signin.html'">
-                    <span class="material-symbols-outlined">security</span>
-                    <span>Authentication</span>
+                    onclick="window.location.href='index.html'">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
                 </div>
                 <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='vendor_profile.html'">
-                    <span class="material-symbols-outlined">account_circle</span>
-                    <span>Account</span>
+                    onclick="window.location.href='order.html'">
+                    <span class="material-symbols-outlined">receipt</span>
+                    <span>Order</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='product.html'">
+                    <span class="material-symbols-outlined">package</span>
+                    <span>Product</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='category.html'">
+                    <span class="material-symbols-outlined">category</span>
+                    <span>Category</span>
                 </div>
                 <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
                     <details class="relative w-full">
                         <summary class="list-none cursor-pointer flex items-center justify-between w-full">
                             <div class="flex items-center space-x-3">
-                                <span class="material-symbols-outlined">shopping_cart</span>
-                                <span>Ecommerce</span>
+                                <span class="material-symbols-outlined">business</span>
+                                <span>Vendor</span>
                             </div>
                             <span class="material-symbols-outlined">expand_more</span>
                         </summary>
                         <div
                             class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
                             <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='vendor_product.html'">Products</div>
+                                onclick="window.location.href='admin_vendor_details.html'">Vendor Details</div>
                             <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='vendor_categories.html'">Category</div>
+                                onclick="window.location.href='admin_approve_vendor.html'">Vendor Approval</div>
                             <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='vendor_order.html'">Orders</div>
+                                onclick="window.location.href='admin_suspend_vendor.html'">Suspension</div>
                         </div>
                     </details>
                 </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items -center space-x-3"
-                    onclick="window.location.href='revenue_breakdown.html'">
-                    <span class="material-symbols-outlined">payment</span>
-                    <span>Revenue</span>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='sales.html'">
+                    <span class="material-symbols-outlined">attach_money</span>
+                    <span>Sales</span>
                 </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='customer_listing.html'">
+                    <span class="material-symbols-outlined">support_agent</span>
+                    <span>Customer</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='admin_login.html'">
+                    <span class="material-symbols-outlined">security</span>
+                    <span>Authentication</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='admin_profile.html'">
+                    <span class="material-symbols-outlined">account_circle</span>
+                    <span>Account</span>
+                </div>
+
 
             </nav>
         </aside>
@@ -521,6 +547,104 @@
                                     <button
                                         class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200">Next</button>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow border rounded-lg p-6 mt-6">
+                            <h3 class="text-xl font-medium mb-4">Refunds & Cancellations Summary</h3>
+
+                            <!-- Table for Refunds & Cancellations -->
+                            <div class="mt-6 overflow-x-auto">
+                                <table class="w-full">
+                                    <thead>
+                                        <tr class="border-b">
+                                            <th
+                                                class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
+                                                Order ID</th>
+                                            <th
+                                                class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
+                                                Customer Name</th>
+                                            <th
+                                                class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
+                                                Vendor</th>
+                                            <th
+                                                class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
+                                                Amount Refunded</th>
+                                            <th
+                                                class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
+                                                Reason</th>
+                                            <th
+                                                class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
+                                                Status</th>
+                                            <th
+                                                class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
+                                                Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="hover:bg-gray-100">
+                                            <td class="px-6 py-3 text-sm text-gray-700">#12345</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">John Doe</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">Vendor A</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">₹1,500</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">Product Defect</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">Pending</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">
+                                                <button
+                                                    class="px-4 py-2 text-white bg-blue-500 rounded-lg mr-2 hover:bg-blue-600">Approve</button>
+                                                <button
+                                                    class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600">Reject</button>
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-100">
+                                            <td class="px-6 py-3 text-sm text-gray-700">#12346</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">Jane Smith</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">Vendor B</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">₹2,000</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">Wrong Item Delivered</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">Approved</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">
+                                                <button
+                                                    class="px-4 py-2 text-white bg-blue-500 rounded-lg mr-2 hover:bg-blue-600"
+                                                    disabled>Approve</button>
+                                                <button
+                                                    class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600"
+                                                    disabled>Reject</button>
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-100">
+                                            <td class="px-6 py-3 text-sm text-gray-700">#12347</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">Emily White</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">Vendor C</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">₹3,000</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">Change of Mind</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">Pending</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">
+                                                <button
+                                                    class="px-4 py-2 text-white bg-blue-500 rounded-lg mr-2 hover:bg-blue-600">Approve</button>
+                                                <button
+                                                    class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600">Reject</button>
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-100">
+                                            <td class="px-6 py-3 text-sm text-gray-700">#12348</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">Michael Brown</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">Vendor D</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">₹1,200</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">Late Delivery</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">Approved</td>
+                                            <td class="px-6 py-3 text-sm text-gray-700">
+                                                <button
+                                                    class="px-4 py-2 text-white bg-blue-500 rounded-lg mr-2 hover:bg-blue-600"
+                                                    disabled>Approve</button>
+                                                <button
+                                                    class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600"
+                                                    disabled>Reject</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
 

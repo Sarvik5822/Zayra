@@ -40,6 +40,7 @@
             padding: 1rem;
             /* Padding for the main content */
         }
+        
     </style>
 </head>
 
@@ -51,48 +52,67 @@
             </div>
             <nav class="p-2 space-y-1">
                 <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='admin_login.html'">
-                    <span class="material-symbols-outlined">security</span>
-                    <span>Authentication</span>
+                    onclick="window.location.href='index.html'">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
                 </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
-                    <span class="material-symbols-outlined">account_circle</span>
-                    <span>Account</span>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='order.html'">
+                    <span class="material-symbols-outlined">receipt</span>
+                    <span>Order</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='product.html'">
+                    <span class="material-symbols-outlined">package</span>
+                    <span>Product</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='categories.html'">
+                    <span class="material-symbols-outlined">category</span>
+                    <span>Category</span>
                 </div>
                 <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
                     <details class="relative w-full">
                         <summary class="list-none cursor-pointer flex items-center justify-between w-full">
                             <div class="flex items-center space-x-3">
-                                <span class="material-symbols-outlined">shopping_cart</span>
-                                <span>Ecommerce</span>
+                                <span class="material-symbols-outlined">business</span>
+                                <span>Vendor</span>
                             </div>
                             <span class="material-symbols-outlined">expand_more</span>
                         </summary>
                         <div
                             class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
                             <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='product.html'">Products</div>
+                                onclick="window.location.href='admin_vendor_details.html'">Vendor Details</div>
                             <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='categories.html'">Category</div>
+                                onclick="window.location.href='admin_approve_vendor.html'">Vendor Approval</div>
                             <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='order.html'">Orders</div>
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors">Reports</div>
+                                onclick="window.location.href='admin_suspend_vendor.html'">Suspension</div>
                         </div>
                     </details>
                 </div>
-                <div
-                    class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items -center space-x-3">
-                    <span class="material-symbols-outlined">group</span>
-                    <span>User Management</span>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='sales.html'">
+                    <span class="material-symbols-outlined">attach_money</span>
+                    <span>Sales</span>
                 </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
-                    <span class="material-symbols-outlined">folder</span>
-                    <span>File Management</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='customer_listing.html'">
                     <span class="material-symbols-outlined">support_agent</span>
                     <span>Customer</span>
                 </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='admin_login.html'">
+                    <span class="material-symbols-outlined">security</span>
+                    <span>Authentication</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='admin_profile.html'">
+                    <span class="material-symbols-outlined">account_circle</span>
+                    <span>Account</span>
+                </div>
+
+
             </nav>
         </aside>
 
@@ -175,13 +195,13 @@
                     <h1 class="text-2xl font-bold mb-6">Dashboard</h1>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div
-                            class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all transform hover:scale-105">
+                            class="bg-blue-100 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all transform hover:scale-105">
                             <div class="flex items-center mb-4">
                                 <div class="flex items-center gap-3">
                                     <div class="p-3 bg-blue-100 rounded-lg">
                                         <span class="material-symbols-outlined text-blue-600">login</span>
                                     </div>
-                                    <h3 class="text-lg font-semibold">Total Logins</h3>
+                                    <h3 class="text-lg font-semibold">Total Customer</h3>
                                 </div>
                                 <span class="material-symbols-outlined text-green-500 ml-auto">trending_up</span>
                             </div>
@@ -190,7 +210,7 @@
                         </div>
 
                         <div
-                            class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all transform hover:scale-105">
+                            class="bg-green-100 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all transform hover:scale-105">
                             <div class="flex items-center mb-4">
                                 <div class="flex items-center gap-3">
                                     <div class="p-3 bg-green-100 rounded-lg">
@@ -205,7 +225,7 @@
                         </div>
 
                         <div
-                            class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all transform hover:scale-105">
+                            class="bg-purple-100 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all transform hover:scale-105">
                             <div class="flex items-center mb-4">
                                 <div class="flex items-center gap-3">
                                     <div class="p-3 bg-purple-100 rounded-lg">
@@ -219,17 +239,14 @@
                             <p class="text-sm text-gray-500">+2.3% from last month</p>
                         </div>
                     </div>
-
-
-
-
                 </div>
 
                 <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
                     <div class="flex items-center justify-between mb-6">
                         <h2 class="text-xl font-semibold">Overall Performance</h2>
                         <select
-                            class="px-4 py-2 border border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all cursor-pointer hover:border-blue-400">
+                            class="px-4 py-2 border border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all cursor-pointer hover:border-blue-400"
+                            id="monthSelect">
                             <option value="1">January 2025</option>
                             <option value="2">February 2025</option>
                             <option value="3">March 2025</option>
@@ -245,9 +262,10 @@
                         </select>
                     </div>
                     <div class="h-[400px] w-full">
-                        <canvas id="lineChart"></canvas>
+                        <canvas id="barChart"></canvas>
                     </div>
                 </div>
+
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
@@ -394,56 +412,88 @@
 
 
         document.addEventListener("DOMContentLoaded", function () {
-            const ctx = document.getElementById('lineChart').getContext('2d');
-            let lineChart;
+            const ctx = document.getElementById('barChart').getContext('2d');
+            let barChart;
 
+            // Function to generate dates for the selected month
             function generateDates(month) {
-                const daysInMonth = new Date(2025, month, 0).getDate();
-                return Array.from({ length: daysInMonth }, (_, i) => `${2025}-${month.toString().padStart(2, '0')}-${(i + 1).toString().padStart(2, '0')}`);
+                const daysInMonth = new Date(2025, month, 0).getDate(); // Get number of days in the month
+                return Array.from({ length: daysInMonth }, (_, i) => `${(i + 1).toString().padStart(2, '0')}`);
             }
 
-            function updateChart(month) {
+            // Function to generate random data for each day in the selected month
+            function generateDailyData(month) {
                 const dates = generateDates(month);
-                const data = dates.map(() => Math.floor(Math.random() * 100));
+                return dates.map(() => Math.floor(Math.random() * 100)); // Random data for each day
+            }
 
-                if (lineChart) {
-                    lineChart.destroy();
+            // Function to update the chart with data for the selected month
+            function updateChart(month) {
+                const dates = generateDates(month); // Get the dates for the selected month
+                const data = generateDailyData(month); // Generate random data for each day
+
+                // Destroy the previous chart if it exists
+                if (barChart) {
+                    barChart.destroy();
                 }
 
-                lineChart = new Chart(ctx, {
-                    type: 'line',
+                // Create a new bar chart
+                barChart = new Chart(ctx, {
+                    type: 'bar', // Change to bar chart
                     data: {
                         labels: dates,
                         datasets: [{
                             label: `Performance Data for ${month}/2025`,
                             data: data,
                             borderColor: 'blue',
-                            backgroundColor: 'rgba(0, 0, 255, 0.1)',
-                            borderWidth: 2,
-                            fill: true
+                            backgroundColor: 'rgba(0, 0, 255, 0.2)', // Light blue bars
+                            borderWidth: 1
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
                         scales: {
-                            x: { title: { display: true, text: 'Date' } },
-                            y: { title: { display: true, text: 'Value' } }
+                            x: {
+                                title: { display: true, text: 'Day' },
+                                grid: { display: false }
+                            },
+                            y: {
+                                title: { display: true, text: 'Value' },
+                                beginAtZero: true,
+                                grid: { display: true }
+                            }
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function (tooltipItem) {
+                                        return `Value: ${tooltipItem.raw}`;
+                                    }
+                                }
+                            }
                         }
                     }
                 });
             }
 
-            // Ensure the select dropdown exists before attaching the event listener
+            // Attach event listener to the month selection dropdown
             const monthSelect = document.getElementById('monthSelect');
+
             if (monthSelect) {
+                // Update the chart based on selected month
                 monthSelect.addEventListener('change', function () {
-                    updateChart(this.value);
+                    const selectedMonth = this.value;
+                    updateChart(selectedMonth); // Update chart for the selected month
                 });
             }
 
-            updateChart(1); // Initial chart load for January
+            // Initial chart load for January
+            updateChart(1); // Load data for January initially
         });
+
+
+
     </script>
 
 </body>

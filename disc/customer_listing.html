@@ -46,54 +46,73 @@
 
 <body>
     <div id="webcrumbs" class="flex">
-        <aside class="w-64 border-r border-gray-200 h-screen">
+         <aside class="w-64 border-r border-gray-200 h-screen">
             <div class="p-4" onclick="window.location.href='index.html'">
                 <h1 class="text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
             </div>
             <nav class="p-2 space-y-1">
                 <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='signin.html'">
-                    <span class="material-symbols-outlined">security</span>
-                    <span>Authentication</span>
+                    onclick="window.location.href='index.html'">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
                 </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
-                    <span class="material-symbols-outlined">account_circle</span>
-                    <span>Account</span>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='order.html'">
+                    <span class="material-symbols-outlined">receipt</span>
+                    <span>Order</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='product.html'">
+                    <span class="material-symbols-outlined">package</span>
+                    <span>Product</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='categories.html'">
+                    <span class="material-symbols-outlined">category</span>
+                    <span>Category</span>
                 </div>
                 <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
                     <details class="relative w-full">
                         <summary class="list-none cursor-pointer flex items-center justify-between w-full">
                             <div class="flex items-center space-x-3">
-                                <span class="material-symbols-outlined">shopping_cart</span>
-                                <span>Ecommerce</span>
+                                <span class="material-symbols-outlined">business</span>
+                                <span>Vendor</span>
                             </div>
                             <span class="material-symbols-outlined">expand_more</span>
                         </summary>
                         <div
                             class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
                             <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='product.html'">Products</div>
+                                onclick="window.location.href='admin_vendor_details.html'">Vendor Details</div>
                             <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='categories.html'">Category</div>
+                                onclick="window.location.href='admin_approve_vendor.html'">Vendor Approval</div>
                             <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='order.html'">Orders</div>
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors">Reports</div>
+                                onclick="window.location.href='admin_suspend_vendor.html'">Suspension</div>
                         </div>
                     </details>
                 </div>
-                <div
-                    class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items -center space-x-3">
-                    <span class="material-symbols-outlined">group</span>
-                    <span>User Management</span>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='sales.html'">
+                    <span class="material-symbols-outlined">attach_money</span>
+                    <span>Sales</span>
                 </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
-                    <span class="material-symbols-outlined">folder</span>
-                    <span>File Management</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='customer_listing.html'">
                     <span class="material-symbols-outlined">support_agent</span>
                     <span>Customer</span>
                 </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='admin_login.html'">
+                    <span class="material-symbols-outlined">security</span>
+                    <span>Authentication</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='admin_profile.html'">
+                    <span class="material-symbols-outlined">account_circle</span>
+                    <span>Account</span>
+                </div>
+
+
             </nav>
         </aside>
 
@@ -171,7 +190,7 @@
 
             <div class="p-6 space-y-6">
 
-                <div class="container mx-auto p-6">
+                <div class="container mx-auto p-6"> 
                     <h1 class="text-2xl font-bold mb-6">Customer Listing</h1>
                     <div class="bg-white shadow-lg p-6 rounded-xl">
                         <div
@@ -203,15 +222,104 @@
                                     </div>
                                 </details>
 
-                                <a href="add_product.html" class="w-full md:w-auto">
-                                    <button
-                                        class="px-6 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors transform hover:scale-105 active:scale-95">
-                                        <div class="flex items-center justify-center space-x-2">
-                                            <span class="material-symbols-outlined">add</span>
-                                            <span>Add Customer</span>
-                                        </div>
-                                    </button>
-                                </a>
+                                <button id="addCustomerBtn"
+                                    class="px-6 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors transform hover:scale-105 active:scale-95">
+                                    <div class="flex items-center justify-center space-x-2">
+                                        <span class="material-symbols-outlined">add</span>
+                                        <span>Add Customer</span>
+                                    </div>
+                                </button>
+
+                                <div id="modal"
+                                    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+                                    <div
+                                        class="w-[600px] bg-white rounded-lg p-8 shadow-xl max-h-[80vh] overflow-y-auto">
+                                        <h2 class="text-2xl font-semibold mb-6">Add Customer Details</h2>
+
+                                        <form class="space-y-6">
+                                            <div>
+                                                <input type="text" placeholder="Name"
+                                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300" />
+                                            </div>
+
+                                            <div>
+                                                <input type="email" placeholder="Email"
+                                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300" />
+                                            </div>
+
+                                            <div>
+                                                <textarea placeholder="Description"
+                                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300 h-24 resize-none"></textarea>
+                                            </div>
+
+                                            <div class="pt-6 border-t">
+                                                <h3 class="text-lg font-medium mb-4">Shipping Information</h3>
+
+                                                <div class="space-y-4">
+                                                    <input type="text" placeholder="Address Line 1"
+                                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300" />
+
+                                                    <input type="text" placeholder="Address Line 2"
+                                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300" />
+
+                                                    <input type="text" placeholder="Town"
+                                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300" />
+
+                                                    <div class="flex justify-between space-x-4">
+                                                        <input type="text" placeholder="State / Province"
+                                                            class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300" />
+
+                                                        <input type="text" placeholder="Post Code"
+                                                            class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300" />
+                                                    </div>
+
+                                                    <details class="relative">
+                                                        <summary
+                                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-all duration-300 list-none flex items-center justify-between">
+                                                            Select Country
+                                                            <span class="material-symbols-outlined">expand_more</span>
+                                                        </summary>
+                                                        <div
+                                                            class="absolute w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+                                                            <div class="py-1 max-h-48 overflow-y-auto">
+                                                                <div
+                                                                    class="px-4 py-2 hover:bg-gray-100 cursor-pointer transition-colors duration-200">
+                                                                    United States</div>
+                                                                <div
+                                                                    class="px-4 py-2 hover:bg-gray-100 cursor-pointer transition-colors duration-200">
+                                                                    United Kingdom</div>
+                                                                <div
+                                                                    class="px-4 py-2 hover:bg-gray-100 cursor-pointer transition-colors duration-200">
+                                                                    Canada</div>
+                                                                <div
+                                                                    class="px-4 py-2 hover:bg-gray-100 cursor-pointer transition-colors duration-200">
+                                                                    Australia</div>
+                                                            </div>
+                                                        </div>
+                                                    </details>
+                                                </div>
+                                            </div>
+
+                                            <div class="flex items-center space-x-2 mt-6">
+                                                <input type="radio" id="billing" name="billing"
+                                                    class="w-4 h-4 text-blue-500 cursor-pointer" />
+                                                <label for="billing" class="cursor-pointer">Use as a billing
+                                                    address?</label>
+                                            </div>
+
+                                            <div class="flex justify-end space-x-4 mt-8">
+                                                <button type="button" id="cancelBtn"
+                                                    class="px-6 py-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:scale-105">
+                                                    Cancel
+                                                </button>
+                                                <button type="submit"
+                                                    class="px-6 py-2.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-300 transform hover:scale-105">
+                                                    Submit
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -270,7 +378,19 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/material-icons/1.0.0/material-icons.min.js"></script>
     <script>
+        const addCustomerBtn = document.getElementById('addCustomerBtn');
+        const modal = document.getElementById('modal');
+        const cancelBtn = document.getElementById('cancelBtn');
+
+        addCustomerBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
+
+        cancelBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
         const customers = [
             { name: "John Doe", email: "john@example.com", status: "Active", ip: "192.168.1.1", createdDate: "2023-10-20" },
             { name: "Jane Smith", email: "jane@example.com", status: "Locked", ip: "192.168.1.2", createdDate: "2023-10-19" }, { name: "John Doe", email: "john@example.com", status: "Active", ip: "192.168.1.1", createdDate: "2023-10-20" },
