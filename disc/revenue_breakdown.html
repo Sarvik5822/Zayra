@@ -8,8 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* Custom styles to fix the sidebar */
@@ -41,84 +40,69 @@
             padding: 1rem;
             /* Padding for the main content */
         }
+
+        header {
+            position: fixed;
+            /* Fix the header at the top */
+            top: 0;
+            left: 16rem;
+            /* Align with the sidebar */
+            right: 0;
+            /* Stretch to the right */
+            z-index: 10;
+            /* Ensure it stays above other content */
+        }
     </style>
 </head>
-
 
 <body>
     <div id="webcrumbs" class="flex">
         <aside class="w-64 border-r border-gray-200 h-screen">
-            <div class="p-4" onclick="window.location.href='index.html'">
-                <h1 class="text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
+            <div class="bg-[#81d8d0] px-6 py-4" onclick="window.location.href='vendor_dashboard.html'">
+                <h1 class="pb-4 text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
             </div>
             <nav class="p-2 space-y-1">
                 <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='index.html'">
+                    onclick="window.location.href='vendor_dashboard.html'">
                     <span class="material-symbols-outlined">dashboard</span>
                     <span>Dashboard</span>
                 </div>
                 <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='order.html'">
+                    onclick="window.location.href='vendor_order.html'">
                     <span class="material-symbols-outlined">receipt</span>
                     <span>Order</span>
                 </div>
                 <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='product.html'">
+                    onclick="window.location.href='vendor_product.html'">
                     <span class="material-symbols-outlined">package</span>
                     <span>Product</span>
                 </div>
                 <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='category.html'">
+                    onclick="window.location.href='vendor_categories.html'">
                     <span class="material-symbols-outlined">category</span>
                     <span>Category</span>
                 </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
-                    <details class="relative w-full">
-                        <summary class="list-none cursor-pointer flex items-center justify-between w-full">
-                            <div class="flex items-center space-x-3">
-                                <span class="material-symbols-outlined">business</span>
-                                <span>Vendor</span>
-                            </div>
-                            <span class="material-symbols-outlined">expand_more</span>
-                        </summary>
-                        <div
-                            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='admin_vendor_details.html'">Vendor Details</div>
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='admin_approve_vendor.html'">Vendor Approval</div>
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='admin_suspend_vendor.html'">Suspension</div>
-                        </div>
-                    </details>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items -center space-x-3"
+                    onclick="window.location.href='revenue_breakdown.html'">
+                    <span class="material-symbols-outlined">payment</span>
+                    <span>Revenue</span>
                 </div>
                 <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='sales.html'">
-                    <span class="material-symbols-outlined">attach_money</span>
-                    <span>Sales</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='customer_listing.html'">
-                    <span class="material-symbols-outlined">support_agent</span>
-                    <span>Customer</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='admin_login.html'">
+                    onclick="window.location.href='signin.html'">
                     <span class="material-symbols-outlined">security</span>
                     <span>Authentication</span>
                 </div>
                 <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='admin_profile.html'">
+                    onclick="window.location.href='vendor_profile.html'">
                     <span class="material-symbols-outlined">account_circle</span>
                     <span>Account</span>
                 </div>
-
 
             </nav>
         </aside>
 
         <div class="flex-1">
-            <header class="px-6 py-4">
+            <header class="bg-[#81d8d0] px-6 py-4">
                 <nav class="flex items-center justify-between">
                     <div class="flex items-center space-x-8">
                         <div class="flex items-center space-x-2 text-sm">
@@ -195,7 +179,7 @@
             <div class="p-6 space-y-6">
 
                 <div class="container mx-auto p-6">
-                    <h1 class="text-2xl font-bold mb-6">Revenue</h1>
+                    <h1 class="text-2xl font-bold mt-10 mb-6">Revenue</h1>
                     <div class="bg-white shadow-lg p-6 rounded-xl">
                         <div class="grid grid-cols-4 gap-6">
                             <div
@@ -205,7 +189,7 @@
                                         class="material-symbols-outlined text-4xl text-emerald-500 flex-shrink-0">payments</span>
                                     <div class="min-w-0">
                                         <h3 class="text-lg font-semibold mb-1 truncate">Total Earnings</h3>
-                                        <p class="text-3xl font-bold truncate">$124,563.00</p>
+                                        <p class="text-lg font-bold truncate">₹12,45,000.00</p>
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-2 text-emerald-500">
@@ -221,7 +205,7 @@
                                         class="material-symbols-outlined text-4xl text-blue-500 flex-shrink-0">calendar_month</span>
                                     <div class="min-w-0">
                                         <h3 class="text-lg font-semibold mb-1 truncate">Earnings This Month</h3>
-                                        <p class="text-3xl font-bold truncate">$12,450.00</p>
+                                        <p class="text-lg font-bold truncate">₹12,45,000.00</p>
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-2 text-blue-500">
@@ -237,7 +221,7 @@
                                         class="material-symbols-outlined text-4xl text-amber-500 flex-shrink-0">pending_actions</span>
                                     <div class="min-w-0">
                                         <h3 class="text-lg font-semibold mb-1 truncate">Pending Payouts</h3>
-                                        <p class="text-3xl font-bold truncate">$4,320.00</p>
+                                        <p class="text-lg font-bold truncate">₹4,32,000.00</p>
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-2 text-amber-500">
@@ -253,7 +237,7 @@
                                         class="material-symbols-outlined text-4xl text-purple-500 flex-shrink-0">task_alt</span>
                                     <div class="min-w-0">
                                         <h3 class="text-lg font-semibold mb-1 truncate">Completed Payouts</h3>
-                                        <p class="text-3xl font-bold truncate">$108,793.00</p>
+                                        <p class="text-lg font-bold truncate">₹1,08,79,300.00</p>
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-2 text-purple-500">
@@ -266,60 +250,38 @@
                         <div class="mt-6 bg-white rounded-xl shadow-lg p-6">
                             <div class="flex justify-between items-center mb-6">
                                 <h2 class="text-2xl font-bold">Sales Overview</h2>
+                            </div>
+
+                            <div class="flex justify-between gap-6 mb-6 w-full" id="salesCards">
+                                <!-- Daily Sales Card -->
+                                <div class="bg-gray-50 rounded-lg p-4 w-full flex justify-between items-center">
+                                    <h1 class="text-3xl font-semibold mb-0">Sales</h1>
+                                    <div class="text-right">
+                                        <p class="text-3xl font-bold mb-2" id="dailySales">$2450</p>
+                                        <div class="flex items-center gap-2 text-emerald-500 justify-end">
+                                            <span class="material-symbols-outlined">trending_up</span>
+                                            <span id="dailyPercentage">+5.2% vs yesterday</span>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="flex gap-4">
-                                    <details class="relative">
+                                    <!-- Time Period Dropdown -->
+                                    <details class="relative" id="timePeriodDropdown">
                                         <summary
                                             class="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100">
                                             <span class="material-symbols-outlined">calendar_today</span>
                                             <span>Time Period</span>
                                         </summary>
                                         <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg p-2 z-10">
-                                            <div class="p-2 hover:bg-gray-50 rounded cursor-pointer">Daily</div>
-                                            <div class="p-2 hover:bg-gray-50 rounded cursor-pointer">Weekly</div>
-                                            <div class="p-2 hover:bg-gray-50 rounded cursor-pointer">Monthly</div>
+                                            <div class="p-2 hover:bg-gray-50 rounded cursor-pointer"
+                                                data-period="daily">Daily</div>
+                                            <div class="p-2 hover:bg-gray-50 rounded cursor-pointer"
+                                                data-period="weekly">Weekly</div>
+                                            <div class="p-2 hover:bg-gray-50 rounded cursor-pointer"
+                                                data-period="monthly">Monthly</div>
                                         </div>
                                     </details>
-                                    <details class="relative">
-                                        <summary
-                                            class="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100">
-                                            <span class="material-symbols-outlined">category</span>
-                                            <span>Category</span>
-                                        </summary>
-                                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg p-2 z-10">
-                                            <div class="p-2 hover:bg-gray-50 rounded cursor-pointer">Electronics</div>
-                                            <div class="p-2 hover:bg-gray-50 rounded cursor-pointer">Clothing</div>
-                                            <div class="p-2 hover:bg-gray-50 rounded cursor-pointer">Food & Beverage
-                                            </div>
-                                            <div class="p-2 hover:bg-gray-50 rounded cursor-pointer">Home & Garden</div>
-                                        </div>
-                                    </details>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-3 gap-6 mb-6">
-                                <div class="bg-gray-50 rounded-lg p-4">
-                                    <h3 class="text-lg font-semibold mb-2">Daily Sales</h3>
-                                    <p class="text-3xl font-bold mb-2">$2,450</p>
-                                    <div class="flex items-center gap-2 text-emerald-500">
-                                        <span class="material-symbols-outlined">trending_up</span>
-                                        <span>+5.2% vs yesterday</span>
-                                    </div>
-                                </div>
-                                <div class="bg-gray-50 rounded-lg p-4">
-                                    <h3 class="text-lg font-semibold mb-2">Weekly Sales</h3>
-                                    <p class="text-3xl font-bold mb-2">$18,320</p>
-                                    <div class="flex items-center gap-2 text-emerald-500">
-                                        <span class="material-symbols-outlined">trending_up</span>
-                                        <span>+8.1% vs last week</span>
-                                    </div>
-                                </div>
-                                <div class="bg-gray-50 rounded-lg p-4">
-                                    <h3 class="text-lg font-semibold mb-2">Monthly Sales</h3>
-                                    <p class="text-3xl font-bold mb-2">$64,180</p>
-                                    <div class="flex items-center gap-2 text-emerald-500">
-                                        <span class="material-symbols-outlined">trending_up</span>
-                                        <span>+12.3% vs last month</span>
-                                    </div>
                                 </div>
                             </div>
 
@@ -332,13 +294,13 @@
                             <div class="flex justify-between items-center mb-6">
                                 <h2 class="text-2xl font-bold">Revenue Table</h2>
                                 <div class="flex items-center gap-2">
-                                    <input type="text" placeholder="Search orders..."
+                                    <input id="searchInput" type="text" placeholder="Search orders..."
                                         class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200" />
                                 </div>
                             </div>
 
                             <div class="overflow-x-auto">
-                                <table class="w-full">
+                                <table class="w-full" id="revenueTable">
                                     <thead>
                                         <tr class="border-b">
                                             <th class="px-6 py-3 text-left text-sm font-semibold">Order ID</th>
@@ -349,43 +311,20 @@
                                             <th class="px-6 py-3 text-left text-sm font-semibold">Net Earnings</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="divide-y">
-                                        <tr class="hover:bg-gray-50 transition-colors duration-200">
-                                            <td class="px-6 py-4 text-sm">#ORD-2024-001</td>
-                                            <td class="px-6 py-4 text-sm">Wireless Earbuds Pro</td>
-                                            <td class="px-6 py-4 text-sm">Jan 15, 2024</td>
-                                            <td class="px-6 py-4 text-sm">$199.99</td>
-                                            <td class="px-6 py-4 text-sm">$19.99</td>
-                                            <td class="px-6 py-4 text-sm font-medium">$180.00</td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-50 transition-colors duration-200">
-                                            <td class="px-6 py-4 text-sm">#ORD-2024-002</td>
-                                            <td class="px-6 py-4 text-sm">Smart Watch Series 5</td>
-                                            <td class="px-6 py-4 text-sm">Jan 16, 2024</td>
-                                            <td class="px-6 py-4 text-sm">$299.99</td>
-                                            <td class="px-6 py-4 text-sm">$29.99</td>
-                                            <td class="px-6 py-4 text-sm font-medium">$270.00</td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-50 transition-colors duration-200">
-                                            <td class="px-6 py-4 text-sm">#ORD-2024-003</td>
-                                            <td class="px-6 py-4 text-sm">Laptop Pro 16"</td>
-                                            <td class="px-6 py-4 text-sm">Jan 17, 2024</td>
-                                            <td class="px-6 py-4 text-sm">$1,499.99</td>
-                                            <td class="px-6 py-4 text-sm">$149.99</td>
-                                            <td class="px-6 py-4 text-sm font-medium">$1,350.00</td>
-                                        </tr>
+                                    <tbody class="divide-y" id="revenueTableBody">
+                                        <!-- Table rows will be dynamically inserted here -->
                                     </tbody>
                                 </table>
                             </div>
 
                             <div class="flex justify-between items-center mt-6">
-                                <div class="text-sm text-gray-600">
+                                <div id="revenuePaginationText" class="text-sm text-gray-600">
                                     Showing 1 to 3 of 50 entries
                                 </div>
                                 <div class="flex gap-2">
-                                    <button
+                                    <button id="revenuePreviousButton"
                                         class="px-4 py-2 border rounded-lg hover:bg-gray-50 transition-all duration-200">Previous</button>
-                                    <button
+                                    <button id="revenueNextButton"
                                         class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200">Next</button>
                                 </div>
                             </div>
@@ -472,9 +411,9 @@
                                     </summary>
                                     <div class="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg z-10">
                                         <div class="py-1">
-                                            <button
+                                            <button id="filterCompleted"
                                                 class="w-full px-4 py-2 text-left hover:bg-gray-50 transition-all duration-200">Completed</button>
-                                            <button
+                                            <button id="filterPending"
                                                 class="w-full px-4 py-2 text-left hover:bg-gray-50 transition-all duration-200">Pending</button>
                                         </div>
                                     </div>
@@ -492,59 +431,20 @@
                                             <th class="px-6 py-3 text-left text-sm font-semibold">Status</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="divide-y">
-                                        <tr class="hover:bg-gray-50 transition-colors duration-200">
-                                            <td class="px-6 py-4 text-sm">#PAY-2024-001</td>
-                                            <td class="px-6 py-4 text-sm">$1,250.00</td>
-                                            <td class="px-6 py-4 text-sm">Jan 15, 2024</td>
-                                            <td class="px-6 py-4 text-sm">Bank Transfer</td>
-                                            <td class="px-6 py-4">
-                                                <span
-                                                    class="px-3 py-1 text-sm font-medium bg-emerald-100 text-emerald-700 rounded-full">Completed</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-50 transition-colors duration-200">
-                                            <td class="px-6 py-4 text-sm">#PAY-2024-002</td>
-                                            <td class="px-6 py-4 text-sm">$2,340.00</td>
-                                            <td class="px-6 py-4 text-sm">Jan 16, 2024</td>
-                                            <td class="px-6 py-4 text-sm">PayPal</td>
-                                            <td class="px-6 py-4">
-                                                <span
-                                                    class="px-3 py-1 text-sm font-medium bg-amber-100 text-amber-700 rounded-full">Pending</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-50 transition-colors duration-200">
-                                            <td class="px-6 py-4 text-sm">#PAY-2024-003</td>
-                                            <td class="px-6 py-4 text-sm">$3,120.00</td>
-                                            <td class="px-6 py-4 text-sm">Jan 17, 2024</td>
-                                            <td class="px-6 py-4 text-sm">Bank Transfer</td>
-                                            <td class="px-6 py-4">
-                                                <span
-                                                    class="px-3 py-1 text-sm font-medium bg-emerald-100 text-emerald-700 rounded-full">Completed</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-50 transition-colors duration-200">
-                                            <td class="px-6 py-4 text-sm">#PAY-2024-004</td>
-                                            <td class="px-6 py-4 text-sm">$980.00</td>
-                                            <td class="px-6 py-4 text-sm">Jan 18, 2024</td>
-                                            <td class="px-6 py-4 text-sm">PayPal</td>
-                                            <td class="px-6 py-4">
-                                                <span
-                                                    class="px-3 py-1 text-sm font-medium bg-amber-100 text-amber-700 rounded-full">Pending</span>
-                                            </td>
-                                        </tr>
+                                    <tbody class="divide-y" id="paymentTableBody">
+                                        <!-- Table rows will be dynamically inserted here -->
                                     </tbody>
                                 </table>
                             </div>
 
                             <div class="flex justify-between items-center mt-6">
-                                <div class="text-sm text-gray-600">
+                                <div id="paymentPaginationText" class="text-sm text-gray-600">
                                     Showing 1 to 4 of 25 entries
                                 </div>
                                 <div class="flex gap-2">
-                                    <button
+                                    <button id="paymentPreviousButton"
                                         class="px-4 py-2 border rounded-lg hover:bg-gray-50 transition-all duration-200">Previous</button>
-                                    <button
+                                    <button id="paymentNextButton"
                                         class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200">Next</button>
                                 </div>
                             </div>
@@ -556,7 +456,7 @@
 
                             <!-- Table for Refunds & Cancellations -->
                             <div class="mt-6 overflow-x-auto">
-                                <table class="w-full">
+                                <table class="w-full" id="refundsTable">
                                     <thead>
                                         <tr class="border-b">
                                             <th
@@ -582,67 +482,8 @@
                                                 Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr class="hover:bg-gray-100">
-                                            <td class="px-6 py-3 text-sm text-gray-700">#12345</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">John Doe</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">Vendor A</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">₹1,500</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">Product Defect</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">Pending</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">
-                                                <button
-                                                    class="px-4 py-2 text-white bg-blue-500 rounded-lg mr-2 hover:bg-blue-600">Approve</button>
-                                                <button
-                                                    class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600">Reject</button>
-                                            </td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-100">
-                                            <td class="px-6 py-3 text-sm text-gray-700">#12346</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">Jane Smith</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">Vendor B</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">₹2,000</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">Wrong Item Delivered</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">Approved</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">
-                                                <button
-                                                    class="px-4 py-2 text-white bg-blue-500 rounded-lg mr-2 hover:bg-blue-600"
-                                                    disabled>Approve</button>
-                                                <button
-                                                    class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600"
-                                                    disabled>Reject</button>
-                                            </td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-100">
-                                            <td class="px-6 py-3 text-sm text-gray-700">#12347</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">Emily White</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">Vendor C</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">₹3,000</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">Change of Mind</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">Pending</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">
-                                                <button
-                                                    class="px-4 py-2 text-white bg-blue-500 rounded-lg mr-2 hover:bg-blue-600">Approve</button>
-                                                <button
-                                                    class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600">Reject</button>
-                                            </td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-100">
-                                            <td class="px-6 py-3 text-sm text-gray-700">#12348</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">Michael Brown</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">Vendor D</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">₹1,200</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">Late Delivery</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">Approved</td>
-                                            <td class="px-6 py-3 text-sm text-gray-700">
-                                                <button
-                                                    class="px-4 py-2 text-white bg-blue-500 rounded-lg mr-2 hover:bg-blue-600"
-                                                    disabled>Approve</button>
-                                                <button
-                                                    class="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600"
-                                                    disabled>Reject</button>
-                                            </td>
-                                        </tr>
+                                    <tbody id="refundsTableBody">
+                                        <!-- Dynamic rows will be inserted here -->
                                     </tbody>
                                 </table>
                             </div>
@@ -657,13 +498,40 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const ctx = document.getElementById('lineChart').getContext('2d');
+
+        const salesData = {
+            daily: {
+                total: 2450,
+                percentage: '+5.2% vs yesterday',
+                chartData: [12, 19, 3, 5, 2, 3, 7], // Daily data (7 days)
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            weekly: {
+                total: 18320,
+                percentage: '+8.1% vs last week',
+                chartData: [20, 15, 13, 10, 18, 25, 30], // Weekly data (7 weeks)
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7']
+            },
+            monthly: {
+                total: 64180,
+                percentage: '+12.3% vs last month',
+                chartData: [30, 35, 50, 45, 40, 60, 70, 80, 90, 100, 110, 120], // Monthly data (12 months)
+                labels: [
+                    'January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'
+                ]
+            }
+        };
+
+        let currentPeriod = 'monthly'; // Default to monthly
+
         const lineChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: salesData[currentPeriod].labels,
                 datasets: [{
                     label: 'Sales',
-                    data: [12, 19, 3, 5, 2, 3, 7],
+                    data: salesData[currentPeriod].chartData,
                     borderColor: 'rgba(75, 192, 192, 1)',
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderWidth: 1,
@@ -680,6 +548,254 @@
             }
         });
 
+        // Function to update the chart and card data
+        function updateData(period) {
+            currentPeriod = period;
+
+            // Update sales cards data
+            document.getElementById('dailySales').textContent = `$${salesData[period].total}`;
+            document.getElementById('dailyPercentage').textContent = salesData[period].percentage;
+
+            // Update chart data
+            lineChart.data.labels = salesData[period].labels;
+            lineChart.data.datasets[0].data = salesData[period].chartData;
+            lineChart.update();
+        }
+
+        // Event listeners for Time Period selection
+        document.querySelectorAll('[data-period]').forEach(item => {
+            item.addEventListener('click', (e) => {
+                const period = e.target.getAttribute('data-period');
+                updateData(period);
+            });
+        });
+
+        const orders = [
+            { orderId: "#ORD-2024-001", productName: "Wireless Earbuds Pro", orderDate: "Jan 15, 2024", amountEarned: 199.99, platformFee: 19.99, netEarnings: 180.00 },
+            { orderId: "#ORD-2024-002", productName: "Smart Watch Series 5", orderDate: "Jan 16, 2024", amountEarned: 299.99, platformFee: 29.99, netEarnings: 270.00 },
+            { orderId: "#ORD-2024-003", productName: "Laptop Pro 16\"", orderDate: "Jan 17, 2024", amountEarned: 1499.99, platformFee: 149.99, netEarnings: 1350.00 },
+            { orderId: "#ORD-2024-004", productName: "Bluetooth Speaker", orderDate: "Jan 18, 2024", amountEarned: 99.99, platformFee: 9.99, netEarnings: 90.00 },
+            { orderId: "#ORD-2024-005", productName: "Gaming Mouse", orderDate: "Jan 19, 2024", amountEarned: 49.99, platformFee: 4.99, netEarnings: 45.00 },
+            { orderId: "#ORD-2024-006", productName: "4K Monitor", orderDate: "Jan 20, 2024", amountEarned: 399.99, platformFee: 39.99, netEarnings: 360.00 }
+        ];
+
+        const payments = [
+            { payoutId: "#PAY-2024-001", amount: 1250.00, date: "Jan 15, 2024", method: "Bank Transfer", status: "Completed" },
+            { payoutId: "#PAY-2024-002", amount: 2340.00, date: "Jan 16, 2024", method: "PayPal", status: "Pending" },
+            { payoutId: "#PAY-2024-003", amount: 3120.00, date: "Jan 17, 2024", method: "Bank Transfer", status: "Completed" },
+            { payoutId: "#PAY-2024-004", amount: 980.00, date: "Jan 18, 2024", method: "PayPal", status: "Pending" },
+            { payoutId: "#PAY-2024-005", amount: 500.00, date: "Jan 19, 2024", method: "Bank Transfer", status: "Completed" },
+            { payoutId: "#PAY-2024-006", amount: 1600.00, date: "Jan 20, 2024", method: "PayPal", status: "Pending" }
+        ];
+
+        // Pagination variables
+        let currentPageOrders = 1;
+        let currentPagePayments = 1;
+        const rowsPerPageOrders = 3;
+        const rowsPerPagePayments = 4;
+        let filteredOrders = [...orders];
+        let filteredPayments = [...payments];
+
+        // Render the Orders Table
+        function renderOrdersTable() {
+            const tableBody = document.getElementById('revenueTableBody');
+            tableBody.innerHTML = '';
+
+            const startIdx = (currentPageOrders - 1) * rowsPerPageOrders;
+            const endIdx = startIdx + rowsPerPageOrders;
+            const currentRows = filteredOrders.slice(startIdx, endIdx);
+
+            currentRows.forEach(order => {
+                const row = document.createElement('tr');
+                row.classList.add('hover:bg-gray-50', 'transition-colors', 'duration-200');
+                row.innerHTML = `
+            <td class="px-6 py-4 text-sm">${order.orderId}</td>
+            <td class="px-6 py-4 text-sm">${order.productName}</td>
+            <td class="px-6 py-4 text-sm">${order.orderDate}</td>
+            <td class="px-6 py-4 text-sm">$${order.amountEarned.toFixed(2)}</td>
+            <td class="px-6 py-4 text-sm">$${order.platformFee.toFixed(2)}</td>
+            <td class="px-6 py-4 text-sm">$${order.netEarnings.toFixed(2)}</td>
+        `;
+                tableBody.appendChild(row);
+            });
+
+            // Update Pagination Text
+            const paginationText = document.getElementById('revenuePaginationText');
+            paginationText.textContent = `Showing ${startIdx + 1} to ${Math.min(endIdx, filteredOrders.length)} of ${filteredOrders.length} entries`;
+
+            // Update Pagination Buttons
+            const previousButton = document.getElementById('revenuePreviousButton');
+            const nextButton = document.getElementById('revenueNextButton');
+            previousButton.disabled = currentPageOrders === 1;
+            nextButton.disabled = currentPageOrders * rowsPerPageOrders >= filteredOrders.length;
+        }
+
+        // Render the Payments Table
+        function renderPaymentsTable() {
+            const tableBody = document.getElementById('paymentTableBody');
+            tableBody.innerHTML = '';
+
+            const startIdx = (currentPagePayments - 1) * rowsPerPagePayments;
+            const endIdx = startIdx + rowsPerPagePayments;
+            const currentRows = filteredPayments.slice(startIdx, endIdx);
+
+            currentRows.forEach(payment => {
+                const row = document.createElement('tr');
+                row.classList.add('hover:bg-gray-50', 'transition-colors', 'duration-200');
+                row.innerHTML = `
+            <td class="px-6 py-4 text-sm">${payment.payoutId}</td>
+            <td class="px-6 py-4 text-sm">$${payment.amount.toFixed(2)}</td>
+            <td class="px-6 py-4 text-sm">${payment.date}</td>
+            <td class="px-6 py-4 text-sm">${payment.method}</td>
+            <td class="px-6 py-4">
+    <span class="px-2 py-1 text-xs rounded-full ${payment.status === 'Completed' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}">${payment.status}</span>
+</td>
+        `;
+                tableBody.appendChild(row);
+            });
+
+            // Update Pagination Text
+            const paginationText = document.getElementById('paymentPaginationText');
+            paginationText.textContent = `Showing ${startIdx + 1} to ${Math.min(endIdx, filteredPayments.length)} of ${filteredPayments.length} entries`;
+
+            // Update Pagination Buttons
+            const previousButton = document.getElementById('paymentPreviousButton');
+            const nextButton = document.getElementById('paymentNextButton');
+            previousButton.disabled = currentPagePayments === 1;
+            nextButton.disabled = currentPagePayments * rowsPerPagePayments >= filteredPayments.length;
+        }
+
+        // Handle Pagination
+        document.getElementById('revenuePreviousButton').addEventListener('click', () => {
+            if (currentPageOrders > 1) {
+                currentPageOrders--;
+                renderOrdersTable();
+            }
+        });
+
+        document.getElementById('revenueNextButton').addEventListener('click', () => {
+            if (currentPageOrders * rowsPerPageOrders < filteredOrders.length) {
+                currentPageOrders++;
+                renderOrdersTable();
+            }
+        });
+
+        document.getElementById('paymentPreviousButton').addEventListener('click', () => {
+            if (currentPagePayments > 1) {
+                currentPagePayments--;
+                renderPaymentsTable();
+            }
+        });
+
+        document.getElementById('paymentNextButton').addEventListener('click', () => {
+            if (currentPagePayments * rowsPerPagePayments < filteredPayments.length) {
+                currentPagePayments++;
+                renderPaymentsTable();
+            }
+        });
+
+        // Search Filter
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const searchQuery = e.target.value.toLowerCase();
+
+            filteredOrders = orders.filter(order =>
+                order.productName.toLowerCase().includes(searchQuery) ||
+                order.orderId.toLowerCase().includes(searchQuery)
+            );
+            filteredPayments = payments.filter(payment =>
+                payment.payoutId.toLowerCase().includes(searchQuery) ||
+                payment.method.toLowerCase().includes(searchQuery)
+            );
+
+            currentPageOrders = 1;  // Reset to first page after search
+            currentPagePayments = 1;
+            renderOrdersTable();
+            renderPaymentsTable();
+        });
+
+        // Filter by Payment Status
+        document.getElementById('filterCompleted').addEventListener('click', () => {
+            filteredPayments = payments.filter(payment => payment.status === 'Completed');
+            currentPagePayments = 1; // Reset to first page
+            renderPaymentsTable();
+        });
+
+        document.getElementById('filterPending').addEventListener('click', () => {
+            filteredPayments = payments.filter(payment => payment.status === 'Pending');
+            currentPagePayments = 1; // Reset to first page
+            renderPaymentsTable();
+        });
+
+        // Initial Render
+        renderOrdersTable();
+        renderPaymentsTable();
+
+        const refundsData = [
+            { orderId: '#12345', customerName: 'John Doe', vendor: 'Vendor A', amount: '₹1,500', reason: 'Product Defect', status: 'Pending' },
+            { orderId: '#12346', customerName: 'Jane Smith', vendor: 'Vendor B', amount: '₹2,000', reason: 'Wrong Item Delivered', status: 'Approved' },
+            { orderId: '#12347', customerName: 'Emily White', vendor: 'Vendor C', amount: '₹3,000', reason: 'Change of Mind', status: 'Pending' },
+            { orderId: '#12348', customerName: 'Michael Brown', vendor: 'Vendor D', amount: '₹1,200', reason: 'Late Delivery', status: 'Approved' }
+        ];
+
+        // Function to render the table
+        function renderTable() {
+            const tableBody = document.getElementById('refundsTableBody');
+            tableBody.innerHTML = ''; // Clear existing rows
+
+            refundsData.forEach(refund => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-100';
+                row.innerHTML = `
+                    <td class="px-6 py-3 text-sm text-gray-700">${refund.orderId}</td>
+                    <td class="px-6 py-3 text-sm text-gray-700">${refund.customerName}</td>
+                    <td class="px-6 py-3 text-sm text-gray-700">${refund.vendor}</td>
+                    <td class="px-6 py-3 text-sm text-gray-700">${refund.amount}</td>
+                    <td class="px-6 py-3 text-sm text-gray-700">${refund.reason}</td>
+                    <td class="px-6 py-3 text-sm text-gray-700" id="status-${refund.orderId}">${refund.status}</td>
+                    <td class="px-6 py-3 text-sm text-gray-700">
+                        <button class="approve-btn px-4 py-2 text-white bg-blue-500 rounded-lg mr-2 hover:bg-blue-600" data-order-id="${refund.orderId}" ${refund.status === 'Approved' ? 'disabled' : ''}>Approve</button>
+                        <button class="reject-btn px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600" data-order-id="${refund.orderId}" ${refund.status === 'Approved' ? 'disabled' : ''}>Reject</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            // Add event listeners for the newly created buttons
+            addEventListeners();
+        }
+
+        // Function to handle approve and reject actions
+        function handleAction(orderId, action) {
+            const refund = refundsData.find(r => r.orderId === orderId);
+            if (refund) {
+                if (action === 'approve') {
+                    refund.status = 'Approved';
+                } else if (action === 'reject') {
+                    refund.status = 'Rejected';
+                }
+                renderTable(); // Re-render the table to reflect changes
+            }
+        }
+
+        // Add event listeners to buttons
+        function addEventListeners() {
+            document.querySelectorAll('.approve-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const orderId = button.getAttribute('data-order-id');
+                    handleAction(orderId, 'approve');
+                });
+            });
+
+            document.querySelectorAll('.reject-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const orderId = button.getAttribute('data-order-id');
+                    handleAction(orderId, 'reject');
+                });
+            });
+        }
+
+        // Initial render
+        renderTable();
 
     </script>
 

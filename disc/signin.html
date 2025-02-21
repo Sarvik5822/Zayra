@@ -11,8 +11,7 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 
 <body class="flex items-center justify-center min-h-screen bg-gray-100">
@@ -47,9 +46,9 @@
 
                     <div class="flex items-center justify-between">
                         <label class="flex items-center">
-                            <input type="checkbox"
+                            <input type="checkbox" id="showPassword"
                                 class="w-4 h-4 rounded border-neutral-300 text-[#559ce2] focus:ring-[#559ce2] transition duration-200" />
-                            <span class="ml-2 text-sm">Keep session active</span>
+                            <span class="ml-2 text-sm">Show Password</span>
                         </label>
                         <a href="forgot_password.html"
                             class="text-sm text-[#559ce2] hover:text-[#4080c2] transition duration-200">Forget
@@ -101,6 +100,20 @@
 
 
     <script>
+        // Get references to the password input and the checkbox
+        const passwordInput = document.getElementById('password');
+        const showPasswordCheckbox = document.getElementById('showPassword');
+
+        // Add an event listener to the checkbox
+        showPasswordCheckbox.addEventListener('change', function () {
+            // Toggle the input type based on the checkbox state
+            if (this.checked) {
+                passwordInput.type = 'text'; // Show password
+            } else {
+                passwordInput.type = 'password'; // Hide password
+            }
+        });
+
         document.getElementById('loginForm').addEventListener('submit', function (event) {
             event.preventDefault(); // Prevent the default form submission
 
@@ -108,23 +121,43 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            // Basic validation (you can expand this as needed)
-            if (email === '' || password === '') {
+            // Basic validation
+            if (!email || !password) {
                 alert('Please fill in all fields.');
                 return;
             }
 
-            // Simulated user credentials (replace these with actual authentication logic)
-            const validEmail = "vendor@example.com"; // Example email
-            const validPassword = "password123"; // Example password
+            // Prepare the data to be sent to the API
+            const loginData = {
+                email: email,
+                password: password
+            };
 
-            // Check if the entered credentials match the valid ones
-            if (email === validEmail && password === validPassword) {
-                // Redirect to index.html on successful login
-                window.location.href = 'index.html';
-            } else {
-                alert('Invalid email or password. Please try again.');
-            }
+            // Send data to the API
+            fetch('http://192.168.1.39:9191/api/v1/vendor/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(loginData),
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(err => {
+                            throw new Error(`Error ${response.status}: ${err.error || 'Unknown error'}`);
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert('Login successful! Welcome back!');
+                    console.log('Success:', data);
+                    window.location.href = 'vendor_dashboard.html';
+                })
+                .catch((error) => {
+                    alert('Login failed: ' + error.message);
+                    console.error('Error:', error);
+                });
         });
     </script>
 

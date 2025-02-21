@@ -8,8 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* Custom styles to fix the sidebar */
@@ -41,16 +40,53 @@
             padding: 1rem;
             /* Padding for the main content */
         }
+
+        header {
+            position: fixed;
+            /* Fix the header at the top */
+            top: 0;
+            left: 16rem;
+            /* Align with the sidebar */
+            right: 0;
+            /* Stretch to the right */
+            z-index: 10;
+            /* Ensure it stays above other content */
+        }
     </style>
 </head>
 
 <body>
     <div id="webcrumbs" class="flex">
         <aside class="w-64 border-r border-gray-200 h-screen">
-            <div class="p-4" onclick="window.location.href='vendor_dashboard.html'">
-                <h1 class="text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
+            <div class="bg-[#81d8d0] px-6 py-4" onclick="window.location.href='vendor_dashboard.html'">
+                <h1 class="pb-4 text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
             </div>
             <nav class="p-2 space-y-1">
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_dashboard.html'">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_order.html'">
+                    <span class="material-symbols-outlined">receipt</span>
+                    <span>Order</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_product.html'">
+                    <span class="material-symbols-outlined">package</span>
+                    <span>Product</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_categories.html'">
+                    <span class="material-symbols-outlined">category</span>
+                    <span>Category</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items -center space-x-3"
+                    onclick="window.location.href='revenue_breakdown.html'">
+                    <span class="material-symbols-outlined">payment</span>
+                    <span>Revenue</span>
+                </div>
                 <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
                     onclick="window.location.href='signin.html'">
                     <span class="material-symbols-outlined">security</span>
@@ -61,37 +97,12 @@
                     <span class="material-symbols-outlined">account_circle</span>
                     <span>Account</span>
                 </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
-                    <details class="relative w-full">
-                        <summary class="list-none cursor-pointer flex items-center justify-between w-full">
-                            <div class="flex items-center space-x-3">
-                                <span class="material-symbols-outlined">shopping_cart</span>
-                                <span>Ecommerce</span>
-                            </div>
-                            <span class="material-symbols-outlined">expand_more</span>
-                        </summary>
-                        <div
-                            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='vendor_product.html'">Products</div>
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='vendor_categories.html'">Category</div>
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='vendor_order.html'">Orders</div>
-                        </div>
-                    </details>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items -center space-x-3"
-                    onclick="window.location.href='revenue_breakdown.html'">
-                    <span class="material-symbols-outlined">payment</span>
-                    <span>Revenue</span>
-                </div>
 
             </nav>
         </aside>
 
         <div class="flex-1">
-            <header class="px-6 py-4">
+            <header class="bg-[#81d8d0] px-6 py-4">
                 <nav class="flex items-center justify-between">
                     <div class="flex items-center space-x-8">
                         <div class="flex items-center space-x-2 text-sm">
@@ -168,12 +179,12 @@
             <div class="p-6 space-y-6">
 
                 <div class="container mx-auto p-6">
-                    <h1 class="text-2xl font-bold mb-6">Products</h1>
+                    <h1 class="text-2xl font-bold mt-10 mb-6">Products</h1>
                     <div class="bg-white shadow-lg p-6 rounded-xl">
                         <div
                             class="flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0 md:space-x-4">
                             <div class="relative w-full md:w-96">
-                                <input type="text" placeholder="Search Product"
+                                <input type="text" id="searchInput" placeholder="Search Product"
                                     class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all" />
                                 <span
                                     class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400">search</span>
@@ -189,14 +200,21 @@
                                             <span class="material-symbols-outlined">expand_more</span>
                                         </div>
                                     </summary>
-                                    <div
-                                        class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
-                                        <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors">All</div>
-                                        <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors">In-Stock
+                                    <div class="relative">
+                                        <div
+                                            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                                            <div id="all"
+                                                class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors">All
+                                            </div>
+                                            <div id="in-stock"
+                                                class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors">In-Stock
+                                            </div>
+                                            <div id="out-of-stock"
+                                                class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors">
+                                                Out-of-Stock</div>
                                         </div>
-                                        <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors">
-                                            Out-of-Stock</div>
                                     </div>
+
                                 </details>
 
                                 <a href="vendor_add_product.html" class="w-full md:w-auto">
@@ -223,8 +241,6 @@
                                         </th>
                                         <th class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap">Price
                                         </th>
-                                        <th class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap">Rate
-                                        </th>
                                         <th class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap">Status
                                         </th>
                                         <th class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap">Action
@@ -236,6 +252,7 @@
                                 </tbody>
                             </table>
                         </div>
+
 
                         <div class="mt-6 flex items-center justify-between">
                             <div class="text-sm text-gray-600" id="paginationInfo">
@@ -263,69 +280,68 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        const products = [
-            { name: "Product Name 1", id: "#12345", quantity: 100, price: "$99.99", rate: 4.5, status: "In Stock" },
-            { name: "Product Name 2", id: "#12346", quantity: 50, price: "$49.99", rate: 4.0, status: "Out of Stock" },
-            { name: "Product Name 3", id: "#12347", quantity: 75, price: "$29.99", rate: 3.5, status: "In Stock" },
-            { name: "Product Name 4", id: "#12348", quantity: 20, price: "$19.99", rate: 4.8, status: "In Stock" },
-            { name: "Product Name 5", id: "#12349", quantity: 0, price: "$39.99", rate: 2.5, status: "Out of Stock" },
-            { name: "Product Name 6", id: "#12350", quantity: 150, price: "$59.99", rate: 4.2, status: "In Stock" },
-            { name: "Product Name 7", id: "#12351", quantity: 30, price: "$89.99", rate: 3.0, status: "Out of Stock" },
-            { name: "Product Name 8", id: "#12352", quantity: 90, price: "$79.99", rate: 4.1, status: "In Stock" },
-            { name: "Product Name 9", id: "#12353", quantity: 60, price: "$69.99", rate: 4.7, status: "In Stock" },
-            { name: "Product Name 10", id: "#12354", quantity: 10, price: "$29.99", rate: 3.8, status: "Out of Stock" },
-            { name: "Product Name 11", id: "#12355", quantity: 5, price: "$99.99", rate: 4.5, status: "In Stock" },
-            { name: "Product Name 12", id: "#12356", quantity: 25, price: "$49.99", rate: 4.0, status: "Out of Stock" },
-            { name: "Product Name 13", id: "#12357", quantity: 15, price: "$29.99", rate: 3.5, status: "In Stock" },
-            { name: "Product Name 14", id: "#12358", quantity: 35, price: "$19.99", rate: 4.8, status: "In Stock" },
-            { name: "Product Name 15", id: "#12359", quantity: 0, price: "$39.99", rate: 2.5, status: "Out of Stock" },
-            { name: "Product Name 16", id: "#12360", quantity: 150, price: "$59.99", rate: 4.2, status: "In Stock" },
-            { name: "Product Name 17", id: "#12361", quantity: 30, price: "$89.99", rate: 3.0, status: "Out of Stock" },
-            { name: "Product Name 18", id: "#12362", quantity: 90, price: "$79.99", rate: 4.1, status: "In Stock" },
-            { name: "Product Name 19", id: "#12363", quantity: 60, price: "$69.99", rate: 4.7, status: "In Stock" },
-            { name: "Product Name 20", id: "# 12364", quantity: 10, price: "$29.99", rate: 3.8, status: "Out of Stock" },
-        ];
-
-        const productsPerPage = 10;
+        let products = [];
+        let filteredProducts = [];
         let currentPage = 1;
+        const productsPerPage = 10;
+
+        function fetchProducts() {
+            fetch('http://192.168.1.39:9191/api/v1/products/all') // Adjust the endpoint as necessary
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Check if data.data is an array
+                    if (Array.isArray(data.data)) {
+                        products = data.data; // Store the fetched products
+                        filteredProducts = products; // Initialize filtered products
+                        renderProducts();
+                    } else {
+                        console.error('Expected an array but got:', data);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error fetching products:', error);
+                });
+        }
 
         function renderProducts() {
+            console.log('Filtered Products:', filteredProducts); // Log the filtered products
+            console.log('Is Array:', Array.isArray(filteredProducts)); // Check if it's an array
+
             const tableBody = document.getElementById('productTableBody');
             tableBody.innerHTML = ''; // Clear existing rows
 
-            const startIndex = (currentPage - 1) * productsPerPage;
-            const endIndex = startIndex + productsPerPage;
-            const paginatedProducts = products.slice(startIndex, endIndex);
+            const start = (currentPage - 1) * productsPerPage;
+            const end = start + productsPerPage;
+            const currentProducts = filteredProducts.slice(start, end);
 
-            paginatedProducts.forEach((product, index) => {
+            currentProducts.forEach(product => {
                 const row = document.createElement('tr');
                 row.className = "hover:bg-gray-50 transition-colors";
                 row.innerHTML = `
-            <td class="px-6 py-4">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-lg bg-gray-100"></div>
-                    <span class="text-sm">${product.name}</span>
-                </div>
-            </td>
-            <td class="px-6 py-4 text-sm whitespace-nowrap">${product.id}</td>
-            <td class="px-6 py-4 text-sm whitespace-nowrap">${product.quantity}</td>
-            <td class="px-6 py-4 text-sm whitespace-nowrap">${product.price}</td>
-            <td class="px-6 py-4">
-                <div class="flex items-center">
-                    <span class="material-symbols-outlined text-yellow-400">star</span>
-                    <span class="text-sm ml-1">${product.rate}</span>
-                </div>
-            </td>
-            <td class="px-6 py-4">
-                <span class="px-2 py-1 text-xs rounded-full ${product.status === 'In Stock' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}">${product.status}</span>
-            </td>
-            <td class="px-6 py-4">
-                <div class="flex items-center space-x-3">
-                    <span class="material-symbols-outlined cursor-pointer hover:text-blue-500 transition-colors">edit</span>
-                    <span class="material-symbols-outlined cursor-pointer hover:text-red-500 transition-colors" onclick="deleteProduct(${startIndex + index})">delete</span>
-                </div>
-            </td>
-        `;
+                    <td class="px-6 py-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-lg bg-gray-100"></div>
+                            <span class="text-sm">${product.name}</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 text-sm whitespace-nowrap">${product.id}</td>
+                    <td class="px-6 py-4 text-sm whitespace-nowrap">${product.inventory}</td>
+                    <td class="px-6 py-4 text-sm whitespace-nowrap">${product.price}</td>
+                    <td class="px-6 py-4">
+                        <span class="px-2 py-1 text-xs rounded-full ${product.status === 'In Stock' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}">${product.status}</span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center space-x-3">
+                            <span class="material-symbols-outlined cursor-pointer hover:text-blue-500 transition-colors">edit</span>
+                            <span class="material-symbols-outlined cursor-pointer hover:text-red-500 transition-colors" onclick="deleteProduct(${product.id})">delete</span>
+                        </div>
+                    </td>
+                `;
                 tableBody.appendChild(row);
             });
 
@@ -333,30 +349,22 @@
             updatePaginationControls();
         }
 
-        function deleteProduct(index) {
-            // Remove the product from the array
-            products.splice(index, 1);
-
-            // Re-render the products table
-            renderProducts();
-        }
-
         function updatePaginationInfo() {
             const paginationInfo = document.getElementById('paginationInfo');
-            const totalEntries = products.length;
+            const totalEntries = filteredProducts.length;
             const startEntry = (currentPage - 1) * productsPerPage + 1;
             const endEntry = Math.min(currentPage * productsPerPage, totalEntries);
             paginationInfo.textContent = `Showing ${startEntry} to ${endEntry} of ${totalEntries} entries`;
         }
 
         function updatePaginationControls() {
-            const totalPages = Math.ceil(products.length / productsPerPage);
+            const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
             document.getElementById('prevPage').disabled = currentPage === 1;
             document.getElementById('nextPage').disabled = currentPage === totalPages;
         }
 
         function changePage(direction) {
-            const totalPages = Math.ceil(products.length / productsPerPage);
+            const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
             currentPage += direction;
 
             if (currentPage < 1) {
@@ -368,33 +376,50 @@
             renderProducts();
         }
 
-        // Initial render
-        renderProducts();
-
-        document.addEventListener('DOMContentLoaded', function () {
-            // Get the dropdown elements
-            const statusDropdown = document.querySelector('details[open]'); // Assuming there's only one details element for status
-            const statusSummary = statusDropdown.querySelector('summary');
-            const statusOptions = statusDropdown.querySelectorAll('.cursor-pointer'); // Select all options with cursor-pointer class
-            const selectedStatusText = statusSummary.querySelector('span:first-child'); // Get the first span in the summary
-
-            // Add click event listener to each status option
-            statusOptions.forEach(option => {
-                option.addEventListener('click', function (event) {
-                    event.preventDefault(); // Prevent default anchor behavior
-                    const selectedStatus = this.textContent; // Get the selected status text
-                    selectedStatusText.textContent = selectedStatus; // Update the summary text
-                    statusDropdown.removeAttribute('open'); // Close the dropdown
-                });
-            });
-
-            // Optional: Close the dropdown when clicking outside of it
-            document.addEventListener('click', function (event) {
-                if (!statusDropdown.contains(event.target)) {
-                    statusDropdown.removeAttribute('open'); // Close the dropdown if clicked outside
-                }
-            });
+        document.getElementById('all').addEventListener('click', function () {
+            filterProductsByStatus("All");
         });
+
+        document.getElementById('in-stock').addEventListener('click', function () {
+            filterProductsByStatus("In Stock");
+        });
+
+        document.getElementById('out-of-stock').addEventListener('click', function () {
+            filterProductsByStatus("Out of Stock");
+        });
+
+        function filterProductsByStatus(status) {
+            if (status === "All") {
+                filteredProducts = products;
+            } else if (status === "In Stock") {
+                filteredProducts = products.filter(product => product.status === "In Stock");
+            } else if (status === "Out of Stock") {
+                filteredProducts = products.filter(product => product.status === "Out of Stock");
+            }
+
+            currentPage = 1;
+            renderProducts();
+        }
+
+        document.getElementById('searchInput').addEventListener('input', function (event) {
+            const query = event.target.value;
+            searchProducts(query);
+        });
+
+        function searchProducts(query) {
+            if (query.trim() === "") {
+                filteredProducts = products;
+            } else {
+                filteredProducts = products.filter(product =>
+                    product.name.toLowerCase().includes(query.toLowerCase())
+                );
+            }
+
+            currentPage = 1;
+            renderProducts();
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchProducts);
     </script>
 
 </body>

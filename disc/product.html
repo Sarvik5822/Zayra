@@ -7,9 +7,7 @@
     <title>Products</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* Custom styles to fix the sidebar */
@@ -41,14 +39,26 @@
             padding: 1rem;
             /* Padding for the main content */
         }
+
+        header {
+            position: fixed;
+            /* Fix the header at the top */
+            top: 0;
+            left: 16rem;
+            /* Align with the sidebar */
+            right: 0;
+            /* Stretch to the right */
+            z-index: 10;
+            /* Ensure it stays above other content */
+        }
     </style>
 </head>
 
 <body>
     <div id="webcrumbs" class="flex">
         <aside class="w-64 border-r border-gray-200 h-screen">
-            <div class="p-4" onclick="window.location.href='index.html'">
-                <h1 class="text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
+            <div class="bg-[#81d8d0] px-6 py-4" onclick="window.location.href='index.html'">
+                <h1 class="pb-4 text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
             </div>
             <nav class="p-2 space-y-1">
                 <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
@@ -117,7 +127,7 @@
         </aside>
 
         <div class="flex-1">
-            <header class="px-6 py-4">
+            <header class="bg-[#81d8d0] px-6 py-4">
                 <nav class="flex items-center justify-between">
                     <div class="flex items-center space-x-8">
                         <div class="flex items-center space-x-2 text-sm">
@@ -170,15 +180,18 @@
                             </summary>
                             <div
                                 class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
-                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
+                                    onclick="window.location.href='admin_profile.html'">
                                     <span class="material-symbols-outlined mr-2 align-middle">person</span>
                                     Profile
                                 </div>
-                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
+                                    onclick="window.location.href='admin_setting.html'">
                                     <span class="material-symbols-outlined mr-2 align-middle">settings</span>
                                     Settings
                                 </div>
-                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors border-t">
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors border-t"
+                                    onclick="window.location.href='signin.html'" F>
                                     <span class="material-symbols-outlined mr-2 align-middle">logout</span>
                                     Logout
                                 </div>
@@ -196,7 +209,7 @@
                         <div
                             class="flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0 md:space-x-4">
                             <div class="relative w-full md:w-96">
-                                <input type="text" placeholder="Search Product"
+                                <input type="text" id="searchInput" placeholder="Search Product"
                                     class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all" />
                                 <span
                                     class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400">search</span>
@@ -214,11 +227,12 @@
                                     </summary>
                                     <div
                                         class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
-                                        <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors">All</div>
-                                        <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors">In-Stock
-                                        </div>
-                                        <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors">
-                                            Out-of-Stock</div>
+                                        <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors" id="all">
+                                            All</div>
+                                        <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                            id="in-stock">In-Stock</div>
+                                        <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
+                                            id="out-of-stock">Out-of-Stock</div>
                                     </div>
                                 </details>
 
@@ -310,6 +324,7 @@
         ];
 
         const productsPerPage = 10;
+        let filteredProducts = [];
         let currentPage = 1;
 
         function renderProducts() {
@@ -318,37 +333,37 @@
 
             const startIndex = (currentPage - 1) * productsPerPage;
             const endIndex = startIndex + productsPerPage;
-            const paginatedProducts = products.slice(startIndex, endIndex);
+            const paginatedProducts = filteredProducts.slice(startIndex, endIndex); // Use filteredProducts
 
             paginatedProducts.forEach((product, index) => {
                 const row = document.createElement('tr');
                 row.className = "hover:bg-gray-50 transition-colors";
                 row.innerHTML = `
-            <td class="px-6 py-4">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-lg bg-gray-100"></div>
-                    <span class="text-sm">${product.name}</span>
-                </div>
-            </td>
-            <td class="px-6 py-4 text-sm whitespace-nowrap">${product.id}</td>
-            <td class="px-6 py-4 text-sm whitespace-nowrap">${product.quantity}</td>
-            <td class="px-6 py-4 text-sm whitespace-nowrap">${product.price}</td>
-            <td class="px-6 py-4">
-                <div class="flex items-center">
-                    <span class="material-symbols-outlined text-yellow-400">star</span>
-                    <span class="text-sm ml-1">${product.rate}</span>
-                </div>
-            </td>
-            <td class="px-6 py-4">
-                <span class="px-2 py-1 text-xs rounded-full ${product.status === 'In Stock' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}">${product.status}</span>
-            </td>
-            <td class="px-6 py-4">
-                <div class="flex items-center space-x-3">
-                    <span class="material-symbols-outlined cursor-pointer hover:text-blue-500 transition-colors">edit</span>
-                    <span class="material-symbols-outlined cursor-pointer hover:text-red-500 transition-colors" onclick="deleteProduct(${startIndex + index})">delete</span>
-                </div>
-            </td>
-        `;
+        <td class="px-6 py-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg bg-gray-100"></div>
+                <span class="text-sm">${product.name}</span>
+            </div>
+        </td>
+        <td class="px-6 py-4 text-sm whitespace-nowrap">${product.id}</td>
+        <td class="px-6 py-4 text-sm whitespace-nowrap">${product.quantity}</td>
+        <td class="px-6 py-4 text-sm whitespace-nowrap">${product.price}</td>
+        <td class="px-6 py-4">
+            <div class="flex items-center">
+                <span class="material-symbols-outlined text-yellow-400">star</span>
+                <span class="text-sm ml-1">${product.rate}</span>
+            </div>
+        </td>
+        <td class="px-6 py-4">
+            <span class="px-2 py-1 text-xs rounded-full ${product.status === 'In Stock' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}">${product.status}</span>
+        </td>
+        <td class="px-6 py-4">
+            <div class="flex items-center space-x-3">
+                <span class="material-symbols-outlined cursor-pointer hover:text-blue-500 transition-colors">edit</span>
+                <span class="material-symbols-outlined cursor-pointer hover:text-red-500 transition-colors" onclick="deleteProduct(${startIndex + index})">delete</span>
+            </div>
+        </td>
+    `;
                 tableBody.appendChild(row);
             });
 
@@ -394,6 +409,31 @@
         // Initial render
         renderProducts();
 
+        document.getElementById('all').addEventListener('click', function () {
+            filterProductsByStatus("All");
+        });
+
+        document.getElementById('in-stock').addEventListener('click', function () {
+            filterProductsByStatus("In Stock");
+        });
+
+        document.getElementById('out-of-stock').addEventListener('click', function () {
+            filterProductsByStatus("Out of Stock");
+        });
+
+        function filterProductsByStatus(status) {
+            if (status === "All") {
+                filteredProducts = [...products]; // Reset to all products
+            } else if (status === "In Stock") {
+                filteredProducts = products.filter(product => product.status === "In Stock");
+            } else if (status === "Out of Stock") {
+                filteredProducts = products.filter(product => product.status === "Out of Stock");
+            }
+
+            currentPage = 1; // Reset to the first page
+            renderProducts(); // Render the filtered products
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             // Get the dropdown elements
             const statusDropdown = document.querySelector('details[open]'); // Assuming there's only one details element for status
@@ -418,6 +458,25 @@
                 }
             });
         });
+
+        document.getElementById('searchInput').addEventListener('input', function (event) {
+            const query = event.target.value;
+            searchProducts(query);
+        });
+
+        function searchProducts(query) {
+            if (query.trim() === "") {
+                filteredProducts = products;
+            } else {
+                filteredProducts = products.filter(product =>
+                    product.name.toLowerCase().includes(query.toLowerCase())
+                );
+            }
+
+            currentPage = 1;
+            renderProducts();
+        }
+
     </script>
 
 </body>

@@ -8,8 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* Custom styles to fix the sidebar */
@@ -41,16 +40,53 @@
             padding: 1rem;
             /* Padding for the main content */
         }
+
+        header {
+            position: fixed;
+            /* Fix the header at the top */
+            top: 0;
+            left: 16rem;
+            /* Align with the sidebar */
+            right: 0;
+            /* Stretch to the right */
+            z-index: 10;
+            /* Ensure it stays above other content */
+        }
     </style>
 </head>
 
 <body>
     <div id="webcrumbs" class="flex">
         <aside class="w-64 border-r border-gray-200 h-screen">
-            <div class="p-4" onclick="window.location.href='vendor_dashboard.html'">
-                <h1 class="text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
+            <div class="bg-[#81d8d0] px-6 py-4" onclick="window.location.href='vendor_dashboard.html'">
+                <h1 class="pb-4 text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
             </div>
             <nav class="p-2 space-y-1">
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_dashboard.html'">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_order.html'">
+                    <span class="material-symbols-outlined">receipt</span>
+                    <span>Order</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_product.html'">
+                    <span class="material-symbols-outlined">package</span>
+                    <span>Product</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_categories.html'">
+                    <span class="material-symbols-outlined">category</span>
+                    <span>Category</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items -center space-x-3"
+                    onclick="window.location.href='revenue_breakdown.html'">
+                    <span class="material-symbols-outlined">payment</span>
+                    <span>Revenue</span>
+                </div>
                 <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
                     onclick="window.location.href='signin.html'">
                     <span class="material-symbols-outlined">security</span>
@@ -61,37 +97,12 @@
                     <span class="material-symbols-outlined">account_circle</span>
                     <span>Account</span>
                 </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
-                    <details class="relative w-full">
-                        <summary class="list-none cursor-pointer flex items-center justify-between w-full">
-                            <div class="flex items-center space-x-3">
-                                <span class="material-symbols-outlined">shopping_cart</span>
-                                <span>Ecommerce</span>
-                            </div>
-                            <span class="material-symbols-outlined">expand_more</span>
-                        </summary>
-                        <div
-                            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='vendor_product.html'">Products</div>
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='vendor_categories.html'">Category</div>
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='vendor_order.html'">Orders</div>
-                        </div>
-                    </details>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items -center space-x-3"
-                    onclick="window.location.href='revenue_breakdown.html'">
-                    <span class="material-symbols-outlined">payment</span>
-                    <span>Revenue</span>
-                </div>
 
             </nav>
         </aside>
 
         <div class="flex-1">
-            <header class="px-6 py-4">
+            <header class="bg-[#81d8d0] px-6 py-4">
                 <nav class="flex items-center justify-between">
                     <div class="flex items-center space-x-8">
                         <div class="flex items-center space-x-2 text-sm">
@@ -168,7 +179,7 @@
             <div class="p-6 space-y-6">
 
                 <div class="container mx-auto p-6">
-                    <h1 class="text-2xl font-bold mb-6">Profile</h1>
+                    <h1 class="text-2xl font-bold mt-10 mb-6">Profile</h1>
                     <div class="flex flex-col gap-6">
                         <div class="mt-6 bg-white rounded-xl shadow-lg p-6">
                             <h2 class="text-2xl font-bold mb-6">Business Details</h2>

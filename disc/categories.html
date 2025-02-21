@@ -7,9 +7,7 @@
     <title>Categories</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* Custom styles to fix the sidebar */
@@ -41,14 +39,26 @@
             padding: 1rem;
             /* Padding for the main content */
         }
+
+        header {
+            position: fixed;
+            /* Fix the header at the top */
+            top: 0;
+            left: 16rem;
+            /* Align with the sidebar */
+            right: 0;
+            /* Stretch to the right */
+            z-index: 10;
+            /* Ensure it stays above other content */
+        }
     </style>
 </head>
 
 <body>
     <div id="webcrumbs" class="flex">
         <aside class="w-64 border-r border-gray-200 h-screen">
-            <div class="p-4" onclick="window.location.href='index.html'">
-                <h1 class="text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
+            <div class="bg-[#81d8d0] px-6 py-4" onclick="window.location.href='index.html'">
+                <h1 class="pb-4 text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
             </div>
             <nav class="p-2 space-y-1">
                 <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
@@ -117,7 +127,7 @@
         </aside>
 
         <div class="flex-1">
-            <header class="px-6 py-4">
+            <header class="bg-[#81d8d0] px-6 py-4">
                 <nav class="flex items-center justify-between">
                     <div class="flex items-center space-x-8">
                         <div class="flex items-center space-x-2 text-sm">
@@ -170,15 +180,18 @@
                             </summary>
                             <div
                                 class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
-                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
+                                    onclick="window.location.href='admin_profile.html'">
                                     <span class="material-symbols-outlined mr-2 align-middle">person</span>
                                     Profile
                                 </div>
-                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
+                                    onclick="window.location.href='admin_setting.html'">
                                     <span class="material-symbols-outlined mr-2 align-middle">settings</span>
                                     Settings
                                 </div>
-                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors border-t">
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors border-t"
+                                    onclick="window.location.href='signin.html'" F>
                                     <span class="material-symbols-outlined mr-2 align-middle">logout</span>
                                     Logout
                                 </div>
@@ -275,9 +288,10 @@
             });
 
             dashboardBreadcrumb.addEventListener('click', function () {
-                window.location.href = 'dashboard.html'; // Change this to your dashboard page URL
+                window.location.href = 'index.html'; // Change this to your dashboard page URL
             });
         });
+
 
         const categories = [
             { name: "Electronics", type: "Primary" },

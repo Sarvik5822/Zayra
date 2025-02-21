@@ -7,8 +7,7 @@
     <title>Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* Custom styles to fix the sidebar */
@@ -40,15 +39,26 @@
             padding: 1rem;
             /* Padding for the main content */
         }
-        
+
+        header {
+            position: fixed;
+            /* Fix the header at the top */
+            top: 0;
+            left: 16rem;
+            /* Align with the sidebar */
+            right: 0;
+            /* Stretch to the right */
+            z-index: 10;
+            /* Ensure it stays above other content */
+        }
     </style>
 </head>
 
 <body>
     <div id="webcrumbs" class="flex">
         <aside class="w-64 border-r border-gray-200 h-screen">
-            <div class="p-4" onclick="window.location.href='index.html'">
-                <h1 class="text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
+            <div class="bg-[#81d8d0] px-6 py-4" onclick="window.location.href='index.html'">
+                <h1 class="pb-4 text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
             </div>
             <nav class="p-2 space-y-1">
                 <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
@@ -117,7 +127,7 @@
         </aside>
 
         <div class="flex-1">
-            <header class="px-6 py-4">
+            <header class="bg-[#81d8d0] px-6 py-4">
                 <nav class="flex items-center justify-between">
                     <div class="flex items-center space-x-8">
                         <div class="flex items-center space-x-2 text-sm">
@@ -170,11 +180,13 @@
                             </summary>
                             <div
                                 class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
-                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
+                                    onclick="window.location.href='admin_profile.html'">
                                     <span class="material-symbols-outlined mr-2 align-middle">person</span>
                                     Profile
                                 </div>
-                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors">
+                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
+                                    onclick="window.location.href='admin_setting.html'">
                                     <span class="material-symbols-outlined mr-2 align-middle">settings</span>
                                     Settings
                                 </div>
@@ -192,7 +204,7 @@
             <div class="p-6 space-y-6">
 
                 <div class="container mx-auto p-6">
-                    <h1 class="text-2xl font-bold mb-6">Dashboard</h1>
+                    <h1 class="text-2xl font-bold mt-10 mb-6">Dashboard</h1>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div
                             class="bg-blue-100 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all transform hover:scale-105">
@@ -297,7 +309,7 @@
                             </thead>
                             <tbody class="divide-y divide-gray-100">
                                 <tr class="hover:bg-gray-50 transition-colors">
-                                    <td class="py-4">New York Vendor</td>
+                                    <td class="py-4">Malviya Nagar Vendor</td>
                                     <td class="py-4">
                                         <div class="flex items-center space-x-2">
                                             <div class="flex-1 bg-gray-200 rounded-full h-2">
@@ -308,11 +320,12 @@
                                     </td>
                                     <td class="py-4 pl-8">
                                         <button
-                                            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">View</button>
+                                            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                                            onclick="window.location.href='vendor_dashboard.html'">View</button>
                                     </td>
                                 </tr>
                                 <tr class="hover:bg-gray-50 transition-colors">
-                                    <td class="py-4">London Vendor</td>
+                                    <td class="py-4">Vaishali Vendor</td>
                                     <td class="py-4">
                                         <div class="flex items-center space-x-2">
                                             <div class="flex-1 bg-gray-200 rounded-full h-2">
@@ -323,11 +336,12 @@
                                     </td>
                                     <td class="py-4 pl-8">
                                         <button
-                                            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">View</button>
+                                            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                                            onclick="window.location.href='vendor_dashboard.html'">View</button>
                                     </td>
                                 </tr>
                                 <tr class="hover:bg-gray-50 transition-colors">
-                                    <td class="py-4">Tokyo Vendor</td>
+                                    <td class="py-4">Mansarovar Vendor</td>
                                     <td class="py-4">
                                         <div class="flex items-center space-x-2">
                                             <div class="flex-1 bg-gray-200 rounded-full h-2">
@@ -338,7 +352,8 @@
                                     </td>
                                     <td class="py-4 pl-8">
                                         <button
-                                            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">View</button>
+                                            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                                            onclick="window.location.href='vendor_dashboard.html'">View</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -354,8 +369,8 @@
                                 <img src="https://dummyimage.com/60x60" alt="Product"
                                     class="w-12 h-12 rounded-lg object-cover" />
                                 <div class="flex-1">
-                                    <h3 class="font-semibold">Premium Wireless Headphones</h3>
-                                    <p class="text-sm text-gray-500">$299.99</p>
+                                    <h3 class="font-semibold">Silver Plated AD Cocktail Necklace Set</h3>
+                                    <p class="text-sm text-gray-500">₹233</p>
                                 </div>
                                 <div class="text-green-500 font-semibold">+45%</div>
                             </div>
@@ -365,8 +380,9 @@
                                 <img src="https://dummyimage.com/60x60" alt="Product"
                                     class="w-12 h-12 rounded-lg object-cover" />
                                 <div class="flex-1">
-                                    <h3 class="font-semibold">Premium Wireless Headphones</h3>
-                                    <p class="text-sm text-gray-500">$299.99</p>
+                                    <h3 class="font-semibold">Gold plated Kundan studded Multi Color Pearl dangle
+                                        handcrafted Ethnic Earrings</h3>
+                                    <p class="text-sm text-gray-500">₹321</p>
                                 </div>
                                 <div class="text-green-500 font-semibold">+45%</div>
                             </div>
@@ -376,8 +392,9 @@
                                 <img src="https://dummyimage.com/60x60" alt="Product"
                                     class="w-12 h-12 rounded-lg object-cover" />
                                 <div class="flex-1">
-                                    <h3 class="font-semibold">Premium Wireless Headphones</h3>
-                                    <p class="text-sm text-gray-500">$299.99</p>
+                                    <h3 class="font-semibold">Statement Floral Earrings: Handpainted with Love & Dangle
+                                    </h3>
+                                    <p class="text-sm text-gray-500">₹245</p>
                                 </div>
                                 <div class="text-green-500 font-semibold">+45%</div>
                             </div>

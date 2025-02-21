@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <style>
         /* Custom styles to fix the sidebar */
@@ -40,16 +40,53 @@
             padding: 1rem;
             /* Padding for the main content */
         }
+
+        header {
+            position: fixed;
+            /* Fix the header at the top */
+            top: 0;
+            left: 16rem;
+            /* Align with the sidebar */
+            right: 0;
+            /* Stretch to the right */
+            z-index: 10;
+            /* Ensure it stays above other content */
+        }
     </style>
 </head>
 
 <body>
     <div id="webcrumbs" class="flex">
         <aside class="w-64 border-r border-gray-200 h-screen">
-            <div class="p-4" onclick="window.location.href='vendor_dashboard.html'">
-                <h1 class="text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
+            <div class="bg-[#81d8d0] px-6 py-4" onclick="window.location.href='vendor_dashboard.html'">
+                <h1 class="pb-4 text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
             </div>
             <nav class="p-2 space-y-1">
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_dashboard.html'">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_order.html'">
+                    <span class="material-symbols-outlined">receipt</span>
+                    <span>Order</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_product.html'">
+                    <span class="material-symbols-outlined">package</span>
+                    <span>Product</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_categories.html'">
+                    <span class="material-symbols-outlined">category</span>
+                    <span>Category</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items -center space-x-3"
+                    onclick="window.location.href='revenue_breakdown.html'">
+                    <span class="material-symbols-outlined">payment</span>
+                    <span>Revenue</span>
+                </div>
                 <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
                     onclick="window.location.href='signin.html'">
                     <span class="material-symbols-outlined">security</span>
@@ -60,37 +97,12 @@
                     <span class="material-symbols-outlined">account_circle</span>
                     <span>Account</span>
                 </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
-                    <details class="relative w-full">
-                        <summary class="list-none cursor-pointer flex items-center justify-between w-full">
-                            <div class="flex items-center space-x-3">
-                                <span class="material-symbols-outlined">shopping_cart</span>
-                                <span>Ecommerce</span>
-                            </div>
-                            <span class="material-symbols-outlined">expand_more</span>
-                        </summary>
-                        <div
-                            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='vendor_product.html'">Products</div>
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='vendor_categories.html'">Category</div>
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='vendor_order.html'">Orders</div>
-                        </div>
-                    </details>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items -center space-x-3"
-                    onclick="window.location.href='revenue_breakdown.html'">
-                    <span class="material-symbols-outlined">payment</span>
-                    <span>Revenue</span>
-                </div>
 
             </nav>
         </aside>
 
         <div class="flex-1">
-            <header class="px-6 py-4">
+            <header class="bg-[#81d8d0] px-6 py-4">
                 <nav class="flex items-center justify-between">
                     <div class="flex items-center space-x-8">
                         <div class="flex items-center space-x-2 text-sm">
@@ -167,14 +179,14 @@
             <div class="p-6 space-y-6">
 
                 <div class="container mx-auto p-6">
-                    <h1 class="text-2xl font-bold mb-6">Dashboard</h1>
+                    <h1 class="text-2xl font-bold mt-10 mb-6">Dashboard</h1>
                     <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
                         <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300">
                             <div class="flex items-center justify-between mb-4">
                                 <span class="material-symbols-outlined text-3xl text-blue-500">monitoring</span>
                                 <span class="text-sm text-gray-500">vs last month</span>
                             </div>
-                            <h3 class="text-2xl font-bold mb-1">$124,064</h3>
+                            <h3 class="text-2xl font-bold mb-1">₹1,24,06,400</h3>
                             <p class="text-sm text-gray-600">Total Sales</p>
                             <div class="mt-4 flex items-center text-sm text-green-500">
                                 <span class="material-symbols-outlined mr-1">trending_up</span>
@@ -213,7 +225,7 @@
                                 <span class="material-symbols-outlined text-3xl text-green-500">payments</span>
                                 <span class="text-sm text-gray-500">vs last month</span>
                             </div>
-                            <h3 class="text-2xl font-bold mb-1">$86,429</h3>
+                            <h3 class="text-2xl font-bold mb-1">₹86,42,900</h3>
                             <p class="text-sm text-gray-600">Revenue Generated</p>
                             <div class="mt-4 flex items-center text-sm text-green-500">
                                 <span class="material-symbols-outlined mr-1">trending_up</span>
@@ -223,30 +235,30 @@
                     </div>
 
                     <div class="mt-6 grid grid-cols-2 gap-6">
-                        <div class="bg-white rounded-xl shadow-lg p-6">
+                        <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
                             <div class="flex items-center justify-between mb-6">
                                 <h2 class="text-xl font-bold">Revenue Analytics</h2>
-                                <select
+                                <select id="revenueTimePeriod"
                                     class="px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
-                                    <option>Last 7 days</option>
-                                    <option>Last 30 days</option>
-                                    <option>Last 90 days</option>
+                                    <option value="7">Last 7 days</option>
+                                    <option value="30">Last 30 days</option>
+                                    <option value="90">Last 90 days</option>
                                 </select>
                             </div>
-                            <div id="revenueChart" style="height: 300px;"></div>
+                            <canvas id="revenueChart" style="height: 300px;"></canvas>
                         </div>
 
                         <div class="bg-white rounded-xl shadow-lg p-6">
                             <div class="flex items-center justify-between mb-6">
                                 <h2 class="text-xl font-bold">Orders Overview</h2>
-                                <select
+                                <select id="ordersTimePeriod"
                                     class="px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
-                                    <option>Last 7 days</option>
-                                    <option>Last 30 days</option>
-                                    <option>Last 90 days</option>
+                                    <option value="7">Last 7 days</option>
+                                    <option value="30">Last 30 days</option>
+                                    <option value="90">Last 90 days</option>
                                 </select>
                             </div>
-                            <div id="ordersChart" style="height: 300px;"></div>
+                            <canvas id="ordersChart" style="height: 300px;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -256,99 +268,133 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Revenue Analytics Chart
-            var revenueOptions = {
-                series: [{
-                    name: 'Revenue',
-                    data: [30, 40, 35, 50, 49, 60, 70]
-                }],
-                chart: {
-                    type: 'line',
-                    height: 300,
-                    toolbar: { show: false }
-                },
-                xaxis: {
-                    categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                },
-                dataLabels: { enabled: false },
-                stroke: {
-                    curve: 'smooth',
-                    width: 2
-                },
-                colors: ['#1E90FF'],
-                tooltip: {
+        const revenueData = {
+            '7': {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                data: [1200, 1500, 1800, 2000, 1700, 2200, 2500]
+            },
+            '30': {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                data: [8000, 12000, 15000, 18000]
+            },
+            '90': {
+                labels: ['Month 1', 'Month 2', 'Month 3'],
+                data: [25000, 30000, 35000]
+            }
+        };
+
+        const ordersData = {
+            '7': {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                data: [5, 10, 15, 20, 25, 30, 35]
+            },
+            '30': {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                data: [50, 100, 150, 200]
+            },
+            '90': {
+                labels: ['Month 1', 'Month 2', 'Month 3'],
+                data: [300, 400, 500]
+            }
+        };
+
+        // Initialize Revenue Chart
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        const revenueChart = new Chart(revenueCtx, {
+            type: 'line',
+            data: {
+                labels: revenueData['7'].labels,
+                datasets: [{
+                    label: 'Revenue',
+                    data: revenueData['7'].data,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderWidth: 1,
+                    fill: true,
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
                     y: {
-                        formatter: function (val) {
-                            return '$' + val + ' thousands';
-                        }
+                        beginAtZero: true
                     }
                 }
-            };
-
-            var revenueChart = new ApexCharts(document.querySelector("#revenueChart"), revenueOptions);
-            revenueChart.render();
-
-            // Orders Overview Chart
-            var ordersOptions = {
-                series: [{
-                    name: 'Orders',
-                    data: [44, 55, 57, 56, 61, 58, 63]
-                }],
-                chart: {
-                    type: 'bar',
-                    height: 300,
-                    toolbar: { show: false }
-                },
-                xaxis: {
-                    categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                },
-                dataLabels: { enabled: false },
-                colors: ['#FF6347'],
-                tooltip: {
-                    y: {
-                        formatter: function (val) {
-                            return val + ' orders';
-                        }
-                    }
-                }
-            };
-
-            var ordersChart = new ApexCharts(document.querySelector("#ordersChart"), ordersOptions);
-            ordersChart.render();
-
-            // Overall Performance Chart
-            var overallOptions = {
-                series: [{
-                    name: 'Performance',
-                    data: [65, 59, 80, 81, 56, 55]
-                }],
-                chart: {
-                    type: 'line',
-                    height: 400,
-                    toolbar: { show: false }
-                },
-                xaxis: {
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                },
-                dataLabels: { enabled: false },
-                stroke: {
-                    curve: 'smooth',
-                    width: 2
-                },
-                colors: ['#32CD32'],
-                tooltip: {
-                    y: {
-                        formatter: function (val) {
-                            return val + ' points';
-                        }
-                    }
-                }
-            };
-
-            var overallChart = new ApexCharts(document.querySelector("#overallPerformanceChart"), overallOptions);
-            overallChart.render();
+            }
         });
+
+        // Initialize Orders Chart
+        const ordersCtx = document.getElementById('ordersChart').getContext('2d');
+        const ordersChart = new Chart(ordersCtx, {
+            type: 'line',
+            data: {
+                labels: ordersData['7'].labels,
+                datasets: [{
+                    label: 'Orders',
+                    data: ordersData['7'].data,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderWidth: 1,
+                    fill: true,
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Function to update the charts based on selected time period
+        function updateRevenueChart(timePeriod) {
+            revenueChart.data.labels = revenueData[timePeriod].labels;
+            revenueChart.data.datasets[0].data = revenueData[timePeriod].data;
+            revenueChart.update();
+        }
+
+        function updateOrdersChart(timePeriod) {
+            ordersChart.data.labels = ordersData[timePeriod].labels;
+            ordersChart.data.datasets[0].data = ordersData[timePeriod].data;
+            ordersChart.update();
+        }
+
+        // Event listeners for time period selection
+        document.getElementById('revenueTimePeriod').addEventListener('change', (e) => {
+            const selectedValue = e.target.value;
+            updateRevenueChart(selectedValue);
+        });
+
+        document.getElementById('ordersTimePeriod').addEventListener('change', (e) => {
+            const selectedValue = e.target.value;
+            updateOrdersChart(selectedValue);
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Fetch user details dynamically (Replace with actual backend API call)
+            fetch('http://192.168.1.39:9191/api/v1/vendor/login') // Example API endpoint
+                .then(response => response.json())
+                .then(user => {
+                    const userName = user.name || "Unknown User";
+                    const userImage = user.image || "";
+                    const avatarImg = document.getElementById("user-avatar");
+
+                    function getInitials(name) {
+                        let initials = name.split(" ").map(n => n[0]).join("").toUpperCase();
+                        return initials.length > 2 ? initials.substring(0, 2) : initials;
+                    }
+
+                    if (userImage) {
+                        avatarImg.src = userImage;
+                    } else {
+                        avatarImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(getInitials(userName))}`;
+                    }
+                })
+                .catch(error => console.error('Error fetching user data:', error));
+        });
+
     </script>
 
 </body>

@@ -8,8 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* Custom styles to fix the sidebar */
@@ -41,16 +40,53 @@
             padding: 1rem;
             /* Padding for the main content */
         }
+
+        header {
+            position: fixed;
+            /* Fix the header at the top */
+            top: 0;
+            left: 16rem;
+            /* Align with the sidebar */
+            right: 0;
+            /* Stretch to the right */
+            z-index: 10;
+            /* Ensure it stays above other content */
+        }
     </style>
 </head>
 
 <body>
     <div id="webcrumbs" class="flex">
         <aside class="w-64 border-r border-gray-200 h-screen">
-            <div class="p-4" onclick="window.location.href='vendor_dashboard.html'">
-                <h1 class="text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
+            <div class="bg-[#81d8d0] px-6 py-4" onclick="window.location.href='vendor_dashboard.html'">
+                <h1 class="pb-4 text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
             </div>
             <nav class="p-2 space-y-1">
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_dashboard.html'">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_order.html'">
+                    <span class="material-symbols-outlined">receipt</span>
+                    <span>Order</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_product.html'">
+                    <span class="material-symbols-outlined">package</span>
+                    <span>Product</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_categories.html'">
+                    <span class="material-symbols-outlined">category</span>
+                    <span>Category</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items -center space-x-3"
+                    onclick="window.location.href='revenue_breakdown.html'">
+                    <span class="material-symbols-outlined">payment</span>
+                    <span>Revenue</span>
+                </div>
                 <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
                     onclick="window.location.href='signin.html'">
                     <span class="material-symbols-outlined">security</span>
@@ -61,45 +97,17 @@
                     <span class="material-symbols-outlined">account_circle</span>
                     <span>Account</span>
                 </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
-                    <details class="relative w-full">
-                        <summary class="list-none cursor-pointer flex items-center justify-between w-full">
-                            <div class="flex items-center space-x-3">
-                                <span class="material-symbols-outlined">shopping_cart</span>
-                                <span>Ecommerce</span>
-                            </div>
-                            <span class="material-symbols-outlined">expand_more</span>
-                        </summary>
-                        <div
-                            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='vendor_product.html'">Products</div>
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='vendor_categories.html'">Category</div>
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='vendor_order.html'">Orders</div>
-                        </div>
-                    </details>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items -center space-x-3"
-                    onclick="window.location.href='revenue_breakdown.html'">
-                    <span class="material-symbols-outlined">payment</span>
-                    <span>Revenue</span>
-                </div>
 
             </nav>
         </aside>
 
         <div class="flex-1">
-            <header class="px-6 py-4">
+            <header class="bg-[#81d8d0] px-6 py-4">
                 <nav class="flex items-center justify-between">
                     <div class="flex items-center space-x-8">
-                        <div class="flex items-center space-x-2 text-sm">
-                            <span class="hover:underline cursor-pointer">Home</span>
-                            <span class="material-symbols-outlined text-sm">chevron_right</span>
-                            <span class="hover:underline cursor-pointer">Dashboard</span>
-                            <span class="material-symbols-outlined text-sm">chevron_right</span>
-                            <span class="opacity-50">Current Page</span>
+                        <!-- Dynamic Breadcrumbs -->
+                        <div id="breadcrumbs" class="flex items-center text-sm">
+                            <!-- This will be populated dynamically -->
                         </div>
                     </div>
 
@@ -166,8 +174,20 @@
             </header>
 
             <div class="p-6 space-y-6">
-
-                <div class="text-2xl font-bold mb-6">Order Details</div>
+                <!-- <div class="w-[1200px] mx-auto p-6"></div> -->
+                <div class="flex justify-between items-center mt-20 mb-6">
+                    <div class="text-2xl font-bold">Order Details</div>
+                    <div class="space-x-4">
+                        <button id="generatePdf"
+                            class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                            Download Invoice
+                        </button>
+                        <button id="generate1Pdf"
+                            class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">
+                            Download Shipping Label
+                        </button>
+                    </div>
+                </div>
                 <div class="grid grid-cols-3 gap-8">
                     <!-- Order Details -->
                     <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
@@ -182,7 +202,7 @@
                                                     class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform duration-200">calendar_month</span>
                                                 <p class="font-medium">Date Added</p>
                                             </div>
-                                            <p class="text-gray-600">March 15, 2024</p>
+                                            <p class="text-gray-600" id="orderDate">March 15, 2024</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -194,7 +214,7 @@
                                                     class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform duration-200">credit_card</span>
                                                 <p class="font-medium">Payment Method</p>
                                             </div>
-                                            <p class="text-gray-600">Credit Card (**** 4242)</p>
+                                            <p class="text-gray-600" id="paymentMethod">Credit Card (**** 4242)</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -206,7 +226,7 @@
                                                     class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform duration-200">local_shipping</span>
                                                 <p class="font-medium">Shipping Method</p>
                                             </div>
-                                            <p class="text-gray-600">Express Delivery (2-3 days)</p>
+                                            <p class="text-gray-600" id="shippingMethod">Express Delivery (2-3 days)</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -227,7 +247,7 @@
                                                     class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform duration-200">person</span>
                                                 <p class="font-medium">Customer</p>
                                             </div>
-                                            <p class="text-gray-600">John Doe</p>
+                                            <p class="text-gray-600" id="customerName">John Doe</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -239,7 +259,7 @@
                                                     class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform duration-200">mail</span>
                                                 <p class="font-medium">Email</p>
                                             </div>
-                                            <p class="text-gray-600">john.doe@example.com</p>
+                                            <p class="text-gray-600" id="customerEmail">john.doe@example.com</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -251,7 +271,7 @@
                                                     class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform duration-200">phone</span>
                                                 <p class="font-medium">Phone</p>
                                             </div>
-                                            <p class="text-gray-600">+1 (555) 123-4567</p>
+                                            <p class="text-gray-600" id="customerPhone">+1 (555) 123-4567</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -272,7 +292,7 @@
                                                     class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform duration-200">description</span>
                                                 <p class="font-medium">Invoice</p>
                                             </div>
-                                            <p class="text-gray-600">INV-2024-001</p>
+                                            <p class="text-gray-600" id="invoiceId">INV-2024-001</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -284,7 +304,7 @@
                                                     class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform duration-200">local_shipping</span>
                                                 <p class="font-medium">Shipping</p>
                                             </div>
-                                            <p class="text-gray-600">SHP-2024-001</p>
+                                            <p class="text-gray-600" id="shippingId">SHP-2024-001</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -296,7 +316,7 @@
                                                     class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform duration-200">stars</span>
                                                 <p class="font-medium">Reward Points</p>
                                             </div>
-                                            <p class="text-gray-600">500 Points</p>
+                                            <p class="text-gray-600" id="rewardPoints">500 Points</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -313,7 +333,7 @@
                             <span
                                 class="material-symbols-outlined text-5xl text-gray-600 group-hover:scale-110 transition-transform duration-200">location_on</span>
                             <div class="flex-1">
-                                <p class="text-gray-600 leading-relaxed">
+                                <p class="text-gray-600 leading-relaxed" id="billingAddress">
                                     123 Main Street<br />
                                     Apt 4B<br />
                                     New York, NY 10001<br />
@@ -328,7 +348,7 @@
                             <span
                                 class="material-symbols-outlined text-5xl text-gray-600 group-hover:scale-110 transition-transform duration-200">local_shipping</span>
                             <div class="flex-1">
-                                <p class="text-gray-600 leading-relaxed">
+                                <p class="text-gray-600 leading-relaxed" id="shippingAddress">
                                     456 Oak Avenue<br />
                                     Suite 7C<br />
                                     Brooklyn, NY 11201<br />
@@ -338,6 +358,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
                     <h1 class="text-3xl font-bold mb-6 text-gray-800 cursor-default">Bill</h1>
                     <table class="w-full">
@@ -352,67 +373,67 @@
                         </thead>
                         <tbody>
                             <tr class="group hover:bg-gray-50 transition-colors duration-200">
-                                <td class="py-4 px-4">
+                                <td class="py-4 px-4 product-name">
                                     <div class="flex items-center gap-4">
                                         <img src="https://placehold.co/40x40" alt="Premium Headphones"
                                             class="rounded-lg object-cover" />
                                         <span>Premium Headphones</span>
                                     </div>
                                 </td>
-                                <td class="py-4 px-4">PRD-001</td>
-                                <td class="py-4 px-4">2</td>
-                                <td class="py-4 px-4">$199.99</td>
-                                <td class="py-4 px-4">$399.98</td>
+                                <td class="py-4 px-4 product-id">PRD-001</td>
+                                <td class="py-4 px-4 quantity">2</td>
+                                <td class="py-4 px-4 unit-price">$199.99</td>
+                                <td class="py-4 px-4 total-price">$399.98</td>
                             </tr>
                             <tr class="group hover:bg-gray-50 transition-colors duration-200">
-                                <td class="py-4 px-4">
+                                <td class="py-4 px-4 product-name">
                                     <div class="flex items-center gap-4">
                                         <img src="https://placehold.co/40x40" alt="Wireless Mouse"
                                             class="rounded-lg object-cover" />
                                         <span>Wireless Mouse</span>
                                     </div>
                                 </td>
-                                <td class="py-4 px-4">PRD-002</td>
-                                <td class="py-4 px-4">1</td>
-                                <td class="py-4 px-4">$49.99</td>
-                                <td class="py-4 px-4">$49.99</td>
+                                <td class="py-4 px-4 product-id">PRD-002</td>
+                                <td class="py-4 px-4 quantity">1</td>
+                                <td class="py-4 px-4 unit-price">$49.99</td>
+                                <td class="py-4 px-4 total-price">$49.99</td>
                             </tr>
                             <tr class="group hover:bg-gray-50 transition-colors duration-200">
-                                <td class="py-4 px-4">
+                                <td class="py-4 px-4 product-name">
                                     <div class="flex items-center gap-4">
                                         <img src="https://placehold.co/40x40" alt="Mechanical Keyboard"
                                             class="rounded-lg object-cover" />
                                         <span>Mechanical Keyboard</span>
                                     </div>
                                 </td>
-                                <td class="py-4 px-4">PRD-003</td>
-                                <td class="py-4 px-4">1</td>
-                                <td class="py-4 px-4">$149.99</td>
-                                <td class="py-4 px-4">$149.99</td>
+                                <td class="py-4 px-4 product-id">PRD-003</td>
+                                <td class="py-4 px-4 quantity">1</td>
+                                <td class="py-4 px-4 unit-price">$149.99</td>
+                                <td class="py-4 px-4 total-price">$149.99</td>
                             </tr>
                             <tr class="border-t">
                                 <td class="py-4 px-4" colSpan="4">
                                     <p class="text-right font-medium">Subtotal</p>
                                 </td>
-                                <td class="py-4 px-4">$599.96</td>
+                                <td class="py-4 px-4" id="subTotalAmount">$599.96</td>
                             </tr>
                             <tr>
                                 <td class="py-4 px-4" colSpan="4">
                                     <p class="text-right font-medium">VAT (10%)</p>
                                 </td>
-                                <td class="py-4 px-4">$60.00</td>
+                                <td class="py-4 px-4" id="taxAmount">$60.00</td>
                             </tr>
                             <tr>
                                 <td class="py-4 px-4" colSpan="4">
                                     <p class="text-right font-medium">Shipping Rate</p>
                                 </td>
-                                <td class="py-4 px-4">$15.00</td>
+                                <td class="py-4 px-4" id="shippingAmount">$15.00</td>
                             </tr>
                             <tr class="border-t">
                                 <td class="py-4 px-4" colSpan="4">
                                     <p class="text-right font-semibold text-lg">Grand Total</p>
                                 </td>
-                                <td class="py-4 px-4 font-semibold text-lg">$674.96</td>
+                                <td class="py-4 px-4 font-semibold text-lg" id="grandTotalAmount">$674.96</td>
                             </tr>
                         </tbody>
                     </table>
@@ -422,130 +443,347 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.22/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+
 
     <script>
-        let totalPrice = 0;
-        const selectedProducts = new Set(); // To keep track of selected products
+        // Function to update the breadcrumbs based on the current URL
+        function updateBreadcrumbs() {
+            const breadcrumbsContainer = document.getElementById('breadcrumbs');
+            const currentPath = window.location.pathname;  // Get the current page path
+            const pathSegments = currentPath.split('/').filter(Boolean); // Split the path and remove empty elements
 
-        function selectProduct(id, name, price, checkbox) {
-            const selectedProductsContainer = document.getElementById('selectedProducts');
+            const breadcrumbLinks = pathSegments.map((segment, index) => {
+                const isLastSegment = index === pathSegments.length - 1;
 
-            if (checkbox.checked) {
-                // If the product is selected, add it to the selected products container
-                const productDiv = document.createElement('div');
-                productDiv.id = `product-${id}`; // Unique ID for the product
-                productDiv.className = 'flex justify-between items-center p-2 border-b';
-                productDiv.innerHTML = `
-                <div>
-                    <span class="font-medium">${name}</span>
-                    <span class="text-sm text-gray-600">PRD-2024-${id.toString().padStart(4, '0')}</span>
-                </div>
-                <div class="font-medium">$${price.toFixed(2)}</div>
-            `;
-                selectedProductsContainer.appendChild(productDiv);
-                selectedProducts.add(id); // Add product ID to the set
-                totalPrice += price; // Increase total price
-            } else {
-                // If the product is unselected, remove it from the selected products container
-                const productDiv = document.getElementById(`product-${id}`);
-                if (productDiv) {
-                    selectedProductsContainer.removeChild(productDiv);
-                    selectedProducts.delete(id); // Remove product ID from the set
-                    totalPrice -= price; // Decrease total price
+                // Capitalize and replace hyphens with spaces for display
+                const linkText = segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
+
+                // Generate the URL for the breadcrumb link (without the file extension for simplicity)
+                let linkUrl = `/${pathSegments.slice(0, index + 1).join('/')}`;
+
+                // If the segment is a page (ends with .html), remove the extension for the breadcrumb URL
+                if (linkUrl.endsWith('.html')) {
+                    linkUrl = linkUrl.replace('.html', '');
                 }
-            }
 
-            // Update total price display
-            document.getElementById('totalPrice').innerText = `$${totalPrice.toFixed(2)}`;
+                // For the last breadcrumb, don't generate a link
+                if (isLastSegment) {
+                    return `<span class="opacity-50">${linkText}</span>`;
+                } else {
+                    return `<span class="hover:underline cursor-pointer" onclick="window.location.href='${linkUrl}'">${linkText}</span>`;
+                }
+            });
+
+            // Clear the breadcrumbs container before appending new links
+            breadcrumbsContainer.innerHTML = '';
+
+            // Append the breadcrumbs to the container
+            breadcrumbsContainer.innerHTML = breadcrumbLinks.join(' <span class="material-symbols-outlined">chevron_right</span> ');
         }
 
-        document.getElementById('saveBtn').addEventListener('click', function () {
-            // Collect data from the form
-            const orderData = {
-                orderId: '#ORD-2024-0001', // Static for now, can be dynamic if needed
-                orderDate: document.getElementById('orderDate').value,
-                paymentMethod: document.getElementById('selectedPaymentMethod').textContent,
-                shippingMethod: document.getElementById('selectedShippingMethod').textContent,
-                products: Array.from(selectedProducts).map(id => {
-                    const productRow = document.getElementById(`product-${id}`);
-                    return {
-                        id: id,
-                        name: productRow.querySelector('span.font-medium').textContent,
-                        price: parseFloat(productRow.querySelector('div.font-medium').textContent.replace('$', ''))
-                    };
-                }),
-                totalPrice: totalPrice,
-                billingAddress: {
-                    addressLine1: document.querySelector('input[placeholder="Enter Address Line 1"]').value,
-                    addressLine2: document.querySelector('input[placeholder="Enter Address Line 2"]').value,
-                    city: document.querySelector('input[placeholder="Enter City"]').value,
-                    postcode: document.querySelector('input[placeholder="Enter Postcode"]').value,
-                    state: document.querySelector('input[placeholder="Enter State"]').value,
-                    country: document.getElementById('selectedCountry').textContent
+        // Call updateBreadcrumbs when the page loads
+        window.addEventListener('DOMContentLoaded', updateBreadcrumbs);
+
+        // Also, call it whenever the URL changes (for example, when navigating with JS without reloading the page)
+        window.addEventListener('popstate', updateBreadcrumbs);
+
+        document.getElementById("generatePdf").addEventListener('click', async function () {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            const pageWidth = doc.internal.pageSize.width;
+            const marginRight = 20;
+            const leftAlignX = 20;
+            const rightAlignX = pageWidth - marginRight;
+
+            // Title
+            doc.setFontSize(30);
+            doc.setFont("helvetica", "bolditalic");
+            doc.text("Zayra", leftAlignX, 20);
+
+            let yPosition = 20;
+
+            // Invoice Details
+            const invoiceDate = new Date().toLocaleDateString();
+            const invoiceNumber = document.getElementById("invoiceId")?.innerText || "N/A";
+            const orderId = "ORD123456";
+            const gstNumber = "07AABCU9603R1Z1";
+            const panNumber = "AABCU9603R";
+
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "bold");
+
+            yPosition += 10;
+            doc.text("Date:", leftAlignX, yPosition);
+            doc.setFont("helvetica", "normal");
+            doc.text(invoiceDate, rightAlignX, yPosition, { align: "right" });
+
+            yPosition += 8;
+            doc.setFont("helvetica", "bold");
+            doc.text("Invoice No:", leftAlignX, yPosition);
+            doc.setFont("helvetica", "normal");
+            doc.text(invoiceNumber, rightAlignX, yPosition, { align: "right" });
+
+            yPosition += 8;
+            doc.setFont("helvetica", "bold");
+            doc.text("Order ID:", leftAlignX, yPosition);
+            doc.setFont("helvetica", "normal");
+            doc.text(orderId, rightAlignX, yPosition, { align: "right" });
+
+            yPosition += 8;
+            doc.setFont("helvetica", "bold");
+            doc.text("GST Number:", leftAlignX, yPosition);
+            doc.setFont("helvetica", "normal");
+            doc.text(gstNumber, rightAlignX, yPosition, { align: "right" });
+
+            yPosition += 8;
+            doc.setFont("helvetica", "bold");
+            doc.text("PAN Number:", leftAlignX, yPosition);
+            doc.setFont("helvetica", "normal");
+            doc.text(panNumber, rightAlignX, yPosition, { align: "right" });
+
+            yPosition += 15;
+
+            generatePDFContent(doc, yPosition);
+
+            doc.save("Invoice.pdf");
+        });
+
+        function generatePDFContent(doc, yPosition) {
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "bold");
+
+            const leftColumnX = 20;
+            const rightColumnX = doc.internal.pageSize.width - 20; // Align to right side
+
+            // Shipping Address (Left Aligned)
+            doc.text("Shipping Address:", leftColumnX, yPosition);
+            doc.setFont("helvetica", "normal");
+            const shippingAddress = document.getElementById("shippingAddress")?.innerText || "N/A";
+            const shippingLines = shippingAddress.split('\n');
+            shippingLines.forEach((line, index) => {
+                doc.text(line, leftColumnX, yPosition + (index + 1) * 6);
+            });
+
+            // Billing Address (Right Aligned)
+            doc.setFont("helvetica", "bold");
+            doc.text("Billing Address:", rightColumnX, yPosition, { align: "right" });
+            doc.setFont("helvetica", "normal");
+            const billingAddress = document.getElementById("billingAddress")?.innerText || "N/A";
+            const billingLines = billingAddress.split('\n');
+            billingLines.forEach((line, index) => {
+                doc.text(line, rightColumnX, yPosition + (index + 1) * 6, { align: "right" });
+            });
+
+            yPosition += Math.max(shippingLines.length, billingLines.length) * 6 + 10;
+
+            generateInvoiceTable(doc, yPosition);
+        }
+
+        function generateInvoiceTable(doc, yPosition) {
+            const tableHeaders = [['Product', 'Product ID', 'Quantity', 'Unit Price', 'Total Price']];
+
+            const productNames = document.querySelectorAll(".product-name");
+            const productIDs = document.querySelectorAll(".product-id");
+            const quantities = document.querySelectorAll(".quantity");
+            const unitPrices = document.querySelectorAll(".unit-price");
+            const totalPrices = document.querySelectorAll(".total-price");
+
+            const tableBody = [];
+            for (let i = 0; i < productNames.length; i++) {
+                tableBody.push([
+                    productNames[i].textContent.trim(),
+                    productIDs[i].textContent.trim(),
+                    quantities[i].textContent.trim(),
+                    unitPrices[i].textContent.trim(),
+                    totalPrices[i].textContent.trim()
+                ]);
+            }
+
+            doc.autoTable({
+                head: tableHeaders,
+                body: tableBody,
+                startY: yPosition,
+                tableWidth: 'auto',
+                margin: { top: 30, left: 20, right: 20, bottom: 30 },
+                theme: 'grid',
+                styles: {
+                    cellPadding: 6,
+                    fontSize: 10,
+                    lineHeight: 1.5,
+                },
+                headStyles: {
+                    fillColor: [0, 102, 204],
+                    textColor: [255, 255, 255],
+                    fontSize: 12,
+                    fontStyle: "bold"
+                },
+                bodyStyles: {
+                    textColor: [0, 0, 0]
                 }
-            };
-
-            // Save data to local storage
-            localStorage.setItem('orderData', JSON.stringify(orderData));
-
-            // Provide feedback to the user
-            alert('Order data saved successfully!');
-        });
-
-        document.getElementById('cancelBtn').addEventListener('click', function () {
-            // Navigate to the desired page
-            window.location.href = 'order.html'; // Replace 'desired_page.html' with the actual URL
-        });
-
-        // Dropdown functionality for payment methods
-        document.querySelectorAll('.payment-option').forEach(option => {
-            option.addEventListener('click', function () {
-                const selectedPaymentMethod = document.getElementById('selectedPaymentMethod');
-                selectedPaymentMethod.textContent = this.textContent; // Update selected payment method
-                this.closest('details').removeAttribute('open'); // Close the dropdown
             });
+
+            let finalY = doc.lastAutoTable.finalY + 10;
+            let rightAlignX = doc.internal.pageSize.width - 30;
+
+            if (finalY + 50 > doc.internal.pageSize.height) {
+                doc.addPage();
+                finalY = 20;
+            }
+
+            doc.text(`Sub Total: ${document.getElementById("subTotalAmount").textContent}`, rightAlignX, finalY, { align: "right" });
+            doc.text(`VAT(%): ${document.getElementById("taxAmount").textContent}`, rightAlignX, finalY + 10, { align: "right" });
+            doc.text(`Shipping Amount: ${document.getElementById("shippingAmount").textContent}`, rightAlignX, finalY + 20, { align: "right" });
+            doc.text(`Grand Total: ${document.getElementById("grandTotalAmount").textContent}`, rightAlignX, finalY + 30, { align: "right" });
+
+            finalY += 50;
+            doc.setDrawColor(0);
+            doc.setLineWidth(0.5);
+            doc.line(20, finalY, doc.internal.pageSize.width - 20, finalY);
+
+            finalY += 15;
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "bold");
+            doc.text("Thank you for shopping with us", 20, finalY);
+
+            finalY += 10;
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "italic");
+            doc.text("Please pay within 15 days from date of invoice, overdue interest @14% will be charged on delayed payments.", 20, finalY, { maxWidth: 170 });
+
+            finalY += 10;
+
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "bold");
+            doc.text("For any enquiries, call us on +91 7073409366", 20, finalY);
+        }
+
+        document.getElementById("generate1Pdf").addEventListener('click', async function () {
+            const { jsPDF } = window.jspdf;
+            const doc1 = new jsPDF();
+
+            const pageWidth = doc1.internal.pageSize.getWidth(); // Get page width
+
+            doc1.setFontSize(30);
+            doc1.setFont("helvetica", "bold");
+
+            // Calculate center position
+            const title = "Shipping Label";
+            const titleWidth = doc1.getTextWidth(title);
+            const titleX = (pageWidth - titleWidth) / 2; // Center the text horizontally
+
+            doc1.text(title, titleX, 20); // Centered Title
+
+            doc1.setFontSize(12);
+            doc1.setFont("helvetica", "bold");
+
+            let yPosition = 40; // Start below the title
+            const lineSpacing = 10; // Space between fields
+
+            // **Shipping Address**
+            doc1.text("Shipping Address:", 20, yPosition);
+            doc1.setFont("helvetica", "normal");
+            const shippingAddress = document.getElementById("shippingAddress")?.innerText || "N/A";
+            const shippingLines = shippingAddress.split('\n');
+            shippingLines.forEach((line, index) => {
+                doc1.text(line, 20, yPosition + (index + 1) * 6);
+            });
+            yPosition += (shippingLines.length * 6) + lineSpacing;
+
+            // **Billing Address**
+            doc1.setFont("helvetica", "bold");
+            doc1.text("Billing Address:", 20, yPosition);
+            doc1.setFont("helvetica", "normal");
+            const billingAddress = document.getElementById("billingAddress")?.innerText || "N/A";
+            const billingLines = billingAddress.split('\n');
+            billingLines.forEach((line, index) => {
+                doc1.text(line, 20, yPosition + (index + 1) * 6);
+            });
+            yPosition += (billingLines.length * 6) + lineSpacing;
+
+            // **Draw a horizontal line**
+            doc1.setDrawColor(0);
+            doc1.setLineWidth(0.5);
+            doc1.line(20, yPosition, 190, yPosition);
+            yPosition += lineSpacing;
+
+            // **Order Date**
+            doc1.setFont("helvetica", "bold");
+            const orderDate = document.getElementById("orderDate")?.innerText || "N/A";
+            doc1.text(`Date:`, 20, yPosition);
+            doc1.setFont("helvetica", "normal");
+            doc1.text(orderDate, 60, yPosition);
+            yPosition += lineSpacing;
+
+            // **Order Number**
+            doc1.setFont("helvetica", "bold");
+            const orderNumber = "ORD-" + Math.floor(1000 + Math.random() * 9000);
+            doc1.text("Order No:", 20, yPosition);
+            doc1.setFont("helvetica", "normal");
+            doc1.text(orderNumber, 60, yPosition);
+            yPosition += lineSpacing;
+
+            // **Shipping ID**
+            doc1.setFont("helvetica", "bold");
+            doc1.text("Shipping ID:", 20, yPosition);
+            doc1.setFont("helvetica", "normal");
+            const shippingId = document.getElementById("shippingId")?.innerText || "N/A";
+            doc1.text(shippingId, 60, yPosition);
+            yPosition += lineSpacing;
+
+            // **Shipping Method**
+            doc1.setFont("helvetica", "bold");
+            doc1.text("Shipping Method:", 20, yPosition);
+            doc1.setFont("helvetica", "normal");
+            const shippingMethod = document.getElementById("shippingMethod")?.innerText || "N/A";
+            doc1.text(shippingMethod, 60, yPosition);
+            yPosition += lineSpacing;
+
+            // **Payment Method**
+            doc1.setFont("helvetica", "bold");
+            doc1.text("Payment Method:", 20, yPosition);
+            doc1.setFont("helvetica", "normal");
+            const paymentMethod = document.getElementById("paymentMethod")?.innerText || "N/A";
+            doc1.text(paymentMethod, 60, yPosition);
+            yPosition += lineSpacing;
+
+            // **Customer Phone Number**
+            doc1.setFont("helvetica", "bold");
+            doc1.text("Customer No:", 20, yPosition);
+            doc1.setFont("helvetica", "normal");
+            const customerPhone = document.getElementById("customerPhone")?.innerText || "N/A";
+            doc1.text(customerPhone, 60, yPosition);
+            yPosition += lineSpacing;
+
+            // **Draw a horizontal line below customer number**
+            doc1.setDrawColor(0);
+            doc1.setLineWidth(0.5);
+            doc1.line(20, yPosition, 190, yPosition);
+            yPosition += lineSpacing;
+
+            // **Generate Barcode based on Order Number**
+            const barcodeCanvas = document.createElement("canvas"); // Temporary canvas element
+            JsBarcode(barcodeCanvas, orderNumber, {
+                format: "CODE128",
+                displayValue: true, // Show the order number below the barcode
+                width: 2, // Adjust width
+                height: 40 // Adjust height
+            });
+
+            // Convert barcode canvas to image
+            const barcodeImage = barcodeCanvas.toDataURL("image/png");
+
+            // Add barcode to the PDF
+            doc1.addImage(barcodeImage, "PNG", (pageWidth - 80) / 2, yPosition, 80, 20); // Center barcode
+            yPosition += 30; // Adjust space below the barcode
+
+            // Save the PDF
+            doc1.save("Shipping.pdf");
         });
 
-        // Dropdown functionality for shipping methods
-        document.querySelectorAll('.shipping-option').forEach(option => {
-            option.addEventListener('click', function () {
-                const selectedShippingMethod = document.getElementById('selectedShippingMethod');
-                selectedShippingMethod.textContent = this.textContent; // Update selected shipping method
-                this.closest('details').removeAttribute('open'); // Close the dropdown
-            });
-        });
-
-        // Dropdown functionality for countries
-        document.querySelectorAll('.country-option').forEach(option => {
-            option.addEventListener('click', function () {
-                const selectedCountry = document.getElementById('selectedCountry');
-                selectedCountry.textContent = this.textContent; // Update selected country
-                this.closest('details').removeAttribute('open'); // Close the dropdown
-            });
-        });
-
-        // Optional: Close the dropdown when clicking outside of it
-        document.addEventListener('click', function (event) {
-            const dropdowns = document.querySelectorAll('details');
-            dropdowns.forEach(dropdown => {
-                if (!dropdown.contains(event.target)) {
-                    dropdown.removeAttribute('open'); // Close the dropdown if clicked outside
-                }
-            });
-        });
-    </script>
-    <script>
-        document.querySelectorAll(".dropdown summary").forEach((summary) => {
-            summary.addEventListener("click", function (event) {
-                event.preventDefault(); // Default behavior ko block karega
-                let details = this.parentElement;
-                if (details.hasAttribute("open")) {
-                    details.removeAttribute("open"); // Close if already open
-                } else {
-                    details.setAttribute("open", "true"); // Open if closed
-                }
-            });
-        });
     </script>
 </body>
 

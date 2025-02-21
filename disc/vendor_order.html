@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -41,16 +41,53 @@
             padding: 1rem;
             /* Padding for the main content */
         }
+
+        header {
+            position: fixed;
+            /* Fix the header at the top */
+            top: 0;
+            left: 16rem;
+            /* Align with the sidebar */
+            right: 0;
+            /* Stretch to the right */
+            z-index: 10;
+            /* Ensure it stays above other content */
+        }
     </style>
 </head>
 
 <body>
     <div id="webcrumbs" class="flex">
         <aside class="w-64 border-r border-gray-200 h-screen">
-            <div class="p-4" onclick="window.location.href='vendor_dashboard.html'">
-                <h1 class="text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
+            <div class="bg-[#81d8d0] px-6 py-4" onclick="window.location.href='vendor_dashboard.html'">
+                <h1 class="pb-4 text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
             </div>
             <nav class="p-2 space-y-1">
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_dashboard.html'">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_order.html'">
+                    <span class="material-symbols-outlined">receipt</span>
+                    <span>Order</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_product.html'">
+                    <span class="material-symbols-outlined">package</span>
+                    <span>Product</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
+                    onclick="window.location.href='vendor_categories.html'">
+                    <span class="material-symbols-outlined">category</span>
+                    <span>Category</span>
+                </div>
+                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items -center space-x-3"
+                    onclick="window.location.href='revenue_breakdown.html'">
+                    <span class="material-symbols-outlined">payment</span>
+                    <span>Revenue</span>
+                </div>
                 <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
                     onclick="window.location.href='signin.html'">
                     <span class="material-symbols-outlined">security</span>
@@ -61,37 +98,12 @@
                     <span class="material-symbols-outlined">account_circle</span>
                     <span>Account</span>
                 </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
-                    <details class="relative w-full">
-                        <summary class="list-none cursor-pointer flex items-center justify-between w-full">
-                            <div class="flex items-center space-x-3">
-                                <span class="material-symbols-outlined">shopping_cart</span>
-                                <span>Ecommerce</span>
-                            </div>
-                            <span class="material-symbols-outlined">expand_more</span>
-                        </summary>
-                        <div
-                            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='vendor_product.html'">Products</div>
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='vendor_categories.html'">Category</div>
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='vendor_order.html'">Orders</div>
-                        </div>
-                    </details>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items -center space-x-3"
-                    onclick="window.location.href='revenue_breakdown.html'">
-                    <span class="material-symbols-outlined">payment</span>
-                    <span>Revenue</span>
-                </div>
 
             </nav>
         </aside>
 
         <div class="flex-1">
-            <header class="px-6 py-4">
+            <header class="bg-[#81d8d0] px-6 py-4">
                 <nav class="flex items-center justify-between">
                     <div class="flex items-center space-x-8">
                         <div class="flex items-center space-x-2 text-sm">
@@ -167,7 +179,7 @@
 
             <div class="p-6 space-y-6">
 
-                <div class="w-[1200px]">
+                <div class="w-[1200px] mt-20">
                     <h1 class="text-2xl font-bold mb-6">Ordering List</h1>
                     <div class="bg-white rounded-lg shadow-lg p-6">
                         <div class="flex items-center justify-between mb-6">
@@ -191,23 +203,23 @@
                                         </div>
                                     </summary>
                                     <div class="absolute top-full mt-2 w-48 bg-white border rounded-lg shadow-lg z-10">
-                                        <div class="p-2 hover:bg-gray-50 cursor-pointer" onclick="filterStatus('All')">
-                                            All</div>
-                                        <div class="p-2 hover:bg-gray-50 cursor-pointer"
+                                        <div class="p-2 hover:bg-gray-50 cursor-pointer status-filter"
+                                            onclick="filterStatus('All')">All</div>
+                                        <div class="p-2 hover:bg-gray-50 cursor-pointer status-filter"
                                             onclick="filterStatus('Cancelled')">Cancelled</div>
-                                        <div class="p-2 hover:bg-gray-50 cursor-pointer"
+                                        <div class="p-2 hover:bg-gray-50 cursor-pointer status-filter"
                                             onclick="filterStatus('Completed')">Completed</div>
-                                        <div class="p-2 hover:bg-gray-50 cursor-pointer"
+                                        <div class="p-2 hover:bg-gray-50 cursor-pointer status-filter"
                                             onclick="filterStatus('Failed')">Failed</div>
-                                        <div class="p-2 hover:bg-gray-50 cursor-pointer"
+                                        <div class="p-2 hover:bg-gray-50 cursor-pointer status-filter"
                                             onclick="filterStatus('Pending')">Pending</div>
-                                        <div class="p-2 hover:bg-gray-50 cursor-pointer"
+                                        <div class="p-2 hover:bg-gray-50 cursor-pointer status-filter"
                                             onclick="filterStatus('Processing')">Processing</div>
-                                        <div class="p-2 hover:bg-gray-50 cursor-pointer"
+                                        <div class="p-2 hover:bg-gray-50 cursor-pointer status-filter"
                                             onclick="filterStatus('Refunded')">Refunded</div>
-                                        <div class="p-2 hover:bg-gray-50 cursor-pointer"
+                                        <div class="p-2 hover:bg-gray-50 cursor-pointer status-filter"
                                             onclick="filterStatus('Delivered')">Delivered</div>
-                                        <div class="p-2 hover:bg-gray-50 cursor-pointer"
+                                        <div class="p-2 hover:bg-gray-50 cursor-pointer status-filter"
                                             onclick="filterStatus('Delivering')">Delivering</div>
                                     </div>
                                 </details>
@@ -272,7 +284,7 @@
             { id: '#12353', customer: 'Grace Yellow', status: 'Completed', total: '$199.99', dateAdded: '2023-08-05', dateModified: '2023-08-06' },
             { id: '#12354', customer: 'Hank Red', status: 'Pending', total: '$299.99', dateAdded: '2023-08-07', dateModified: '2023-08-08' }, { id: '#12345', customer: 'John Doe', status: 'Completed', total: '$299.99', dateAdded: '2023-07-20', dateModified: '2023-07-21' },
             { id: '#12346', customer: 'Jane Smith', status: 'Pending', total: '$199.99', dateAdded: '2023-07-22', dateModified: '2023-07-23' },
-            { id: '#12347', customer: 'Alice Johnson', status: 'Processing', total: '$99.99', dateAdded: '2023-07-24', dateModified: '2023-07-25' },
+            { id: '#12347', customer: 'Alice Johnson', status: 'Completed', total: '$99.99', dateAdded: '2023-07-24', dateModified: '2023-07-25' },
             { id: '#12348', customer: 'Bob Brown', status: 'Cancelled', total: '$49.99', dateAdded: '2023-07-26', dateModified: '2023-07-27' },
             { id: '#12349', customer: 'Charlie Black', status: 'Completed', total: '$199.99', dateAdded: '2023-07-28', dateModified: '2023-07-29' },
             { id: '#12350', customer: 'Diana White', status: 'Pending', total: '$299.99', dateAdded: '2023-07-30', dateModified: '2023-07-31' },
@@ -284,14 +296,15 @@
 
         let currentPage = 1;
         const ordersPerPage = 10; // Display 3 orders per page
+        let filteredOrders = [];
 
-        function renderOrders() {
+        function renderOrders(filteredOrders = orders) {
             const tableBody = document.getElementById('orderTableBody');
             tableBody.innerHTML = ''; // Clear existing rows
 
             const startIndex = (currentPage - 1) * ordersPerPage;
             const endIndex = startIndex + ordersPerPage;
-            const paginatedOrders = orders.slice(startIndex, endIndex);
+            const paginatedOrders = filteredOrders.slice(startIndex, endIndex);
 
             paginatedOrders.forEach(order => {
                 const row = document.createElement('tr');
@@ -327,9 +340,70 @@
                 tableBody.appendChild(row);
             });
 
-            updatePaginationInfo();
-            updatePaginationControls();
+            updatePaginationInfo(filteredOrders.length);
+            updatePaginationControls(filteredOrders.length);
         }
+
+        function searchOrders() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const filteredOrders = orders.filter(order => {
+                return order.id.toLowerCase().includes(searchInput) ||
+                    order.customer.toLowerCase().includes(searchInput);
+            });
+            currentPage = 1; // Reset to first page after searching
+            renderOrders(filteredOrders); // Re-render orders with filtered data
+        }
+
+        document.getElementById('searchInput').addEventListener('input', searchOrders);
+
+        // Update the pagination info and controls functions to accept totalEntries
+        function updatePaginationInfo(totalEntries) {
+            const paginationInfo = document.getElementById('paginationInfo');
+            const startEntry = (currentPage - 1) * ordersPerPage + 1;
+            const endEntry = Math.min(currentPage * ordersPerPage, totalEntries);
+            paginationInfo.textContent = `Showing ${startEntry} to ${endEntry} of ${totalEntries} entries`;
+        }
+
+        function updatePaginationControls(totalEntries) {
+            const totalPages = Math.ceil(totalEntries / ordersPerPage);
+            document.getElementById('prevPage').disabled = currentPage === 1;
+            document.getElementById('nextPage').disabled = currentPage === totalPages;
+        }
+
+        // Function to filter orders based on the selected date
+        function filterOrdersByDate() {
+            const selectedDate = document.getElementById('datePicker').value;
+            if (!selectedDate) {
+                // If no date is selected, reset to original orders
+                renderOrders(orders);
+            } else {
+                // Filter orders based on the selected date
+                const filteredOrders = orders.filter(order => order.dateAdded === selectedDate);
+                currentPage = 1; // Reset to first page after filtering
+                renderOrders(filteredOrders);
+            }
+        }
+
+        // Event listener for the date picker
+        document.getElementById('datePicker').addEventListener('input', filterOrdersByDate);
+
+        function filterOrdersByStatus(status) {
+            if (status === "All") {
+                filteredOrders = orders; // Show all orders
+            } else {
+                filteredOrders = orders.filter(order => order.status.toLowerCase() === status.toLowerCase());
+            }
+            currentPage = 1; // Reset to first page after filtering
+            renderOrders(filteredOrders); // Re-render orders with filtered data
+        }
+
+        // Attach event listeners to status filter options
+        document.querySelectorAll('.status-filter').forEach(option => {
+            option.addEventListener('click', function () {
+                const selectedStatus = this.textContent.trim(); // Get the selected status text
+                filterOrdersByStatus(selectedStatus);
+            });
+        });
 
         function viewOrder(orderId) {
             // Redirect to the view order page with the order ID as a query parameter
@@ -372,20 +446,6 @@
                 orders.splice(index, 1);
                 renderOrders();
             }
-        }
-
-        function updatePaginationInfo() {
-            const paginationInfo = document.getElementById('paginationInfo');
-            const totalEntries = orders.length;
-            const startEntry = (currentPage - 1) * ordersPerPage + 1;
-            const endEntry = Math.min(currentPage * ordersPerPage, totalEntries);
-            paginationInfo.textContent = `Showing ${startEntry} to ${endEntry} of ${totalEntries} entries`;
-        }
-
-        function updatePaginationControls() {
-            const totalPages = Math.ceil(orders.length / ordersPerPage);
-            document.getElementById('prevPage').disabled = currentPage === 1;
-            document.getElementById('nextPage').disabled = currentPage === totalPages;
         }
 
         document.getElementById('prevPage').addEventListener('click', () => {
