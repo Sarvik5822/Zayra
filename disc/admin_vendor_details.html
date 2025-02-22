@@ -56,155 +56,14 @@
 
 <body>
     <div id="webcrumbs" class="flex">
-        <aside class="w-64 border-r border-gray-200 h-screen">
-            <div class="bg-[#81d8d0] px-6 py-4" onclick="window.location.href='index.html'">
-                <h1 class="pb-4 text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
-            </div>
-            <nav class="p-2 space-y-1">
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='index.html'">
-                    <span class="material-symbols-outlined">dashboard</span>
-                    <span>Dashboard</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='order.html'">
-                    <span class="material-symbols-outlined">receipt</span>
-                    <span>Order</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='product.html'">
-                    <span class="material-symbols-outlined">package</span>
-                    <span>Product</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='categories.html'">
-                    <span class="material-symbols-outlined">category</span>
-                    <span>Category</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
-                    <details class="relative w-full">
-                        <summary class="list-none cursor-pointer flex items-center justify-between w-full">
-                            <div class="flex items-center space-x-3">
-                                <span class="material-symbols-outlined">business</span>
-                                <span>Vendor</span>
-                            </div>
-                            <span class="material-symbols-outlined">expand_more</span>
-                        </summary>
-                        <div
-                            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='admin_vendor_details.html'">Vendor Details</div>
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='admin_approve_vendor.html'">Vendor Approval</div>
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='admin_suspend_vendor.html'">Suspension</div>
-                        </div>
-                    </details>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='sales.html'">
-                    <span class="material-symbols-outlined">attach_money</span>
-                    <span>Sales</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='customer_listing.html'">
-                    <span class="material-symbols-outlined">support_agent</span>
-                    <span>Customer</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='admin_login.html'">
-                    <span class="material-symbols-outlined">security</span>
-                    <span>Authentication</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='admin_profile.html'">
-                    <span class="material-symbols-outlined">account_circle</span>
-                    <span>Account</span>
-                </div>
-
-
-            </nav>
-        </aside>
-
+        <div id="sidebar-container"></div> <!-- Sidebar will be inserted here -->
         <div class="flex-1">
-            <header class="bg-[#81d8d0] px-6 py-4">
-                <nav class="flex items-center justify-between">
-                    <div class="flex items-center space-x-8">
-                        <div class="flex items-center space-x-2 text-sm">
-                            <span class="hover:underline cursor-pointer">Home</span>
-                            <span class="material-symbols-outlined text-sm">chevron_right</span>
-                            <span class="hover:underline cursor-pointer">Dashboard</span>
-                            <span class="material-symbols-outlined text-sm">chevron_right</span>
-                            <span class="opacity-50">Current Page</span>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center space-x-6">
-                        <div class="relative">
-                            <input type="text" placeholder="Search..."
-                                class="pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all w-64" />
-                            <span class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400">search</span>
-                        </div>
-
-                        <details class="relative">
-                            <summary class="list-none cursor-pointer">
-                                <div class="relative hover:bg-gray-100 p-2 rounded-full transition-colors">
-                                    <span class="material-symbols-outlined">notifications</span>
-                                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                                </div>
-                            </summary>
-                            <div
-                                class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-100 p-4 z-50">
-                                <h3 class="font-semibold mb-2">Notifications</h3>
-                                <div class="space-y-2">
-                                    <div
-                                        class="flex items-start space-x-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
-                                        <span class="material-symbols-outlined mt-1">mail</span>
-                                        <div>
-                                            <p class="text-sm font-medium">New message received</p>
-                                            <p class="text-xs text-gray-500">2 minutes ago</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </details>
-
-                        <details class="relative">
-                            <summary class="list-none cursor-pointer">
-                                <div
-                                    class="flex items-center space-x-2 hover:bg-gray-100 p-2 rounded-lg transition-colors">
-                                    <img src="https://ui-avatars.com/api/?name=John+Doe" alt="Profile"
-                                        class="w-8 h-8 rounded-full" />
-                                    <span class="material-symbols-outlined">expand_more</span>
-                                </div>
-                            </summary>
-                            <div
-                                class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
-                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
-                                    onclick="window.location.href='admin_profile.html'">
-                                    <span class="material-symbols-outlined mr-2 align-middle">person</span>
-                                    Profile
-                                </div>
-                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
-                                    onclick="window.location.href='admin_setting.html'">
-                                    <span class="material-symbols-outlined mr-2 align-middle">settings</span>
-                                    Settings
-                                </div>
-                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors border-t"
-                                    onclick="window.location.href='signin.html'" F>
-                                    <span class="material-symbols-outlined mr-2 align-middle">logout</span>
-                                    Logout
-                                </div>
-                            </div>
-                        </details>
-                    </div>
-                </nav>
-            </header>
-
+            <div id="header-container"></div> <!-- Header will be inserted here -->
             <div class="p-6 space-y-6">
+                <script src="layout1.js"></script>
 
                 <div class="w-[1200px]">
-                    <h1 class="text-2xl font-bold mb-6">Vendor Information</h1>
+                    <h1 class="text-2xl font-bold mt-20 mb-6">Vendor Information</h1>
                     <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 mb-8">
                         <h2 class="text-2xl font-bold mb-6">Vendor Profile</h2>
                         <div class="grid grid-cols-2 gap-8">
@@ -262,15 +121,24 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Save Button -->
+                        <div class="mt-6 flex justify-end">
+                            <button id="saveVendorBtn"
+                                class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200">
+                                Save
+                            </button>
+                        </div>
                     </div>
+
                     <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 mb-8">
                         <h2 class="text-2xl font-bold mb-6">Account Status & Actions</h2>
                         <div class="grid grid-cols-2 gap-8">
                             <div class="space-y-6">
                                 <div>
-                                    <label class="block text-sm font-medium mb-2">Account Status</label>
+                                    <label for="account-status" class="block text-sm font-medium mb-2">Account
+                                        Status</label>
                                     <div class="flex items-center">
-                                        <span
+                                        <span id="account-status"
                                             class="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-800 text-sm font-medium">
                                             <span class="material-symbols-outlined text-sm mr-1">check_circle</span>
                                             Active
@@ -278,19 +146,22 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium mb-2">Vendor Since</label>
+                                    <label for="vendor-since" class="block text-sm font-medium mb-2">Vendor
+                                        Since</label>
                                     <div class="text-sm">January 15, 2023</div>
                                 </div>
                             </div>
                             <div class="space-y-6">
                                 <div>
-                                    <label class="block text-sm font-medium mb-2">Last Login Activity</label>
+                                    <label for="last-login" class="block text-sm font-medium mb-2">Last Login
+                                        Activity</label>
                                     <div class="text-sm">2 hours ago</div>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium mb-2">Verification Status</label>
+                                    <label for="verification-status" class="block text-sm font-medium mb-2">Verification
+                                        Status</label>
                                     <div class="flex items-center">
-                                        <span
+                                        <span id="verification-status"
                                             class="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-sm font-medium">
                                             <span class="material-symbols-outlined text-sm mr-1">verified</span>
                                             Approved
@@ -302,30 +173,31 @@
                         <div class="mt-8 grid grid-cols-4 gap-4">
                             <button
                                 class="flex items-center justify-center px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all duration-200"
-                                onclick="approveVendor()">
+                                onclick="changeStatus('approve')">
                                 <span class="material-symbols-outlined text-sm mr-2">check</span>
                                 Approve Vendor
                             </button>
                             <button
                                 class="flex items-center justify-center px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all duration-200"
-                                onclick="rejectVendor()">
+                                onclick="changeStatus('reject')">
                                 <span class="material-symbols-outlined text-sm mr-2">close</span>
                                 Reject Vendor
                             </button>
                             <button
                                 class="flex items-center justify-center px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-all duration-200"
-                                onclick="suspendVendor()">
+                                onclick="changeStatus('suspend')">
                                 <span class="material-symbols-outlined text-sm mr-2">pause</span>
                                 Suspend Vendor
                             </button>
                             <button
-                                class="flex items-center justify-center px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200"
+                                class="flex items-center justify-center px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
                                 onclick="resetPassword()">
                                 <span class="material-symbols-outlined text-sm mr-2">lock_reset</span>
                                 Reset Password
                             </button>
                         </div>
                     </div>
+
                     <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 mb-8">
                         <h2 class="text-2xl font-bold mb-6">Vendor Sales & Revenue</h2>
                         <div class="grid grid-cols-3 gap-6">
@@ -372,56 +244,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-8 p-6 bg-gray-50 rounded-xl">
-                            <div class="flex items-center justify-between mb-6">
-                                <h3 class="text-lg font-semibold">Recent Orders</h3>
-                                <button
-                                    class="text-sm text-blue-600 hover:text-blue-700 transition-colors duration-200">View
-                                    All</button>
-                            </div>
-                            <div class="space-y-4">
-                                <div
-                                    class="flex items-center justify-between p-4 bg-white rounded-lg hover:shadow-md transition-all duration-200">
-                                    <div class="flex items-center space-x-4">
-                                        <span class="material-symbols-outlined text-gray-600">inventory_2</span>
-                                        <div>
-                                            <p class="font-medium">Order #12345</p>
-                                            <p class="text-sm text-gray-600">2 hours ago</p>
-                                        </div>
-                                    </div>
-                                    <div class="text-right">
-                                        <p class="font-medium">$234.50</p>
-                                        <span
-                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                            Completed
-                                        </span>
-                                    </div>
-                                </div>
-                                <div
-                                    class="flex items-center justify-between p-4 bg-white rounded-lg hover:shadow-md transition-all duration-200">
-                                    <div class="flex items-center space-x-4">
-                                        <span class="material-symbols-outlined text-gray-600">inventory_2</span>
-                                        <div>
-                                            <p class="font-medium">Order #12344</p>
-                                            <p class="text-sm text-gray-600">5 hours ago</p>
-                                        </div>
-                                    </div>
-                                    <div class="text-right">
-                                        <p class="font-medium">$189.00</p>
-                                        <span
-                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                                            Pending
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
+
                     <!-- Vendor Product Listings -->
                     <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 mb-8">
                         <h2 class="text-2xl font-bold mb-6">Vendor Product Listings</h2>
                         <div class="overflow-x-auto">
-                            <table class="w-full">
+                            <table class="w-full" id="product-table">
                                 <thead>
                                     <tr class="bg-gray-50">
                                         <th class="px-6 py-3 text-left text-sm font-semibold">Product ID</th>
@@ -432,63 +262,45 @@
                                         <th class="px-6 py-3 text-left text-sm font-semibold">Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody class="divide-y divide-gray-200">
-                                    <tr class="hover:bg-gray-50 transition-colors duration-200">
-                                        <td class="px-6 py-4 text-sm">PRD001</td>
-                                        <td class="px-6 py-4 text-sm">Wireless Earbuds</td>
-                                        <td class="px-6 py-4 text-sm">$129.99</td>
-                                        <td class="px-6 py-4 text-sm">45</td>
-                                        <td class="px-6 py-4">
-                                            <span
-                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Approved</span>
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            <div class="flex space-x-2">
-                                                <span
-                                                    class="material-symbols-outlined cursor-pointer hover:text-blue-500 transition-colors">edit</span>
-                                                <span
-                                                    class="material-symbols-outlined cursor-pointer hover:text-red-500 transition-colors">delete</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50 transition-colors duration-200">
-                                        <td class="px-6 py-4 text-sm">PRD002</td>
-                                        <td class="px-6 py-4 text-sm">Smart Watch</td>
-                                        <td class="px-6 py-4 text-sm">$199.99</td>
-                                        <td class="px-6 py-4 text-sm">28</td>
-                                        <td class="px-6 py-4">
-                                            <span
-                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Pending</span>
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            <div class="flex space-x-2">
-                                                <span
-                                                    class="material-symbols-outlined cursor-pointer hover:text-blue-500 transition-colors">edit</span>
-                                                <span
-                                                    class="material-symbols-outlined cursor-pointer hover:text-red-500 transition-colors">delete</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50 transition-colors duration-200">
-                                        <td class="px-6 py-4 text-sm">PRD003</td>
-                                        <td class="px-6 py-4 text-sm">Bluetooth Speaker</td>
-                                        <td class="px-6 py-4 text-sm">$79.99</td>
-                                        <td class="px-6 py-4 text-sm">0</td>
-                                        <td class="px-6 py-4">
-                                            <span
-                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Rejected</span>
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            <div class="flex space-x-2">
-                                                <span
-                                                    class="material-symbols-outlined cursor-pointer hover:text-blue-500 transition-colors">edit</span>
-                                                <span
-                                                    class="material-symbols-outlined cursor-pointer hover:text-red-500 transition-colors">delete</span>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                <tbody class="divide-y divide-gray-200" id="product-list">
+                                    <!-- Product rows will be dynamically generated here -->
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+
+                    <!-- Edit Product Modal -->
+                    <div id="edit-modal"
+                        class="hidden fixed inset-0 bg-gray-100 bg-opacity-50 flex items-center justify-center">
+                        <div class="bg-white rounded-lg p-6 w-1/3">
+                            <h3 class="text-lg font-bold mb-4">Edit Product</h3>
+                            <input type="hidden" id="edit-product-id" />
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium mb-1">Product Name</label>
+                                <input type="text" id="edit-product-name" class="border rounded p-2 w-full" />
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium mb-1">Price</label>
+                                <input type="text" id="edit-product-price" class="border rounded p-2 w-full" />
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium mb-1">Stock</label>
+                                <input type="number" id="edit-product-stock" class="border rounded p-2 w-full" />
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium mb-1">Status</label>
+                                <select id="edit-product-status" class="border rounded p-2 w-full">
+                                    <option value="Approved">Approved</option>
+                                    <option value="Pending">Pending</option>
+                                    <option value="Rejected">Rejected</option>
+                                </select>
+                            </div>
+                            <div class="flex justify-end">
+                                <button onclick="saveProduct()"
+                                    class="bg-blue-500 text-white rounded px-4 py-2">Save</button>
+                                <button onclick="closeModal()"
+                                    class="ml-2 bg-gray-300 rounded px-4 py-2">Cancel</button>
+                            </div>
                         </div>
                     </div>
 
@@ -637,45 +449,49 @@
                     <!-- Verification Documents -->
                     <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 mb-8">
                         <h2 class="text-2xl font-bold mb-6">Verification Documents</h2>
-                        <div class="space-y-6">
-                            <div
-                                class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-300">
+                        <div class="space-y-6" id="document-list">
+                            <div class="document-item flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-300"
+                                data-doc-id="GST">
                                 <div class="space-y-1">
                                     <h3 class="font-semibold">GST Number</h3>
-                                    <p class="text-sm">22AAAAA0000A1Z5</p>
+                                    <p class="text-sm" id="gst-number">22AAAAA0000A1Z5</p>
+                                    <p class="text-sm text-green-600 hidden" id="gst-status">Status: Approved</p>
+                                    <p class="text-sm text-red-600 hidden" id="gst-rejection">Status: Rejected</p>
                                 </div>
                                 <div class="flex space-x-2">
                                     <button
                                         class="inline-flex items-center px-4 py-2 bg-green-500 text-white text-sm rounded-lg hover:bg-green-600 transition-colors duration-200"
-                                        onclick="approveDocument('GST Number')">
+                                        onclick="approveDocument('GST')">
                                         <span class="material-symbols-outlined text-sm mr-1">check_circle</span>
                                         Approve
                                     </button>
                                     <button
                                         class="inline-flex items-center px-4 py-2 bg-red-500 text-white text-sm rounded-lg hover:bg-red-600 transition-colors duration-200"
-                                        onclick="rejectDocument('GST Number')">
+                                        onclick="rejectDocument('GST')">
                                         <span class="material-symbols-outlined text-sm mr-1">cancel</span>
                                         Reject
                                     </button>
                                 </div>
                             </div>
 
-                            <div
-                                class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-300">
+                            <div class="document-item flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-300"
+                                data-doc-id="PAN">
                                 <div class="space-y-1">
                                     <h3 class="font-semibold">PAN Number</h3>
-                                    <p class="text-sm">AAAAA0000A</p>
+                                    <p class="text-sm" id="pan-number">AAAAA0000A</p>
+                                    <p class="text-sm text-green-600 hidden" id="pan-status">Status: Approved</p>
+                                    <p class="text-sm text-red-600 hidden" id="pan-rejection">Status: Rejected</p>
                                 </div>
                                 <div class="flex space-x-2">
                                     <button
                                         class="inline-flex items-center px-4 py-2 bg-green-500 text-white text-sm rounded-lg hover:bg-green-600 transition-colors duration-200"
-                                        onclick="approveDocument('PAN Number')">
+                                        onclick="approveDocument('PAN')">
                                         <span class="material-symbols-outlined text-sm mr-1">check_circle</span>
                                         Approve
                                     </button>
                                     <button
                                         class="inline-flex items-center px-4 py-2 bg-red-500 text-white text-sm rounded-lg hover:bg-red-600 transition-colors duration-200"
-                                        onclick="rejectDocument('PAN Number')">
+                                        onclick="rejectDocument('PAN')">
                                         <span class="material-symbols-outlined text-sm mr-1">cancel</span>
                                         Reject
                                     </button>
@@ -686,22 +502,17 @@
                                 <h3 class="font-semibold mb-3">Rejection Reason</h3>
                                 <textarea
                                     class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-                                    rows="3" placeholder="Enter reason for rejection..."></textarea>
+                                    rows="3" id="rejection-reason"
+                                    placeholder="Enter reason for rejection..."></textarea>
                                 <button
-                                    class="mt-3 px-4 py-2 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 transition-colors duration-200">
+                                    class="mt-3 px-4 py-2 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 transition-colors duration-200"
+                                    onclick="submitRejectionReason()">
                                     Submit Reason
                                 </button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mt-6 flex justify-end space-x-4">
-                        <button id="cancelBtn"
-                            class="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200">Cancel</button>
-                        <button id="saveBtn"
-                            class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200">Save
-                            Details</button>
-                    </div>
                 </div>
 
             </div>
@@ -709,42 +520,245 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        function approveVendor() {
-            alert("Vendor Approved!");
-        }
+        // Variable to track the current status of the vendor
+        let currentStatus = 'Active'; // Initial status
+        let currentVerification = 'Approved'; // Initial verification status
 
-        function rejectVendor() {
-            alert("Vendor Rejected!");
-        }
+        // Function to change the vendor's status
+        function changeStatus(action) {
+            switch (action) {
+                case 'approve':
+                    if (currentStatus !== 'Active') {
+                        currentStatus = 'Active';
+                        currentVerification = 'Approved';
+                        updateUI(currentStatus, 'green', 'check_circle', currentVerification);
+                        alert('Vendor approved successfully.');
+                    } else {
+                        alert('Vendor is already approved.');
+                    }
+                    break;
 
-        function suspendVendor() {
-            alert("Vendor Suspended!");
-        }
+                case 'reject':
+                    if (currentStatus !== 'Rejected') {
+                        currentStatus = 'Rejected';
+                        currentVerification = 'Not Approved';
+                        updateUI(currentStatus, 'red', 'close', currentVerification);
+                        alert('Vendor rejected successfully.');
+                    } else {
+                        alert('Vendor is already rejected.');
+                    }
+                    break;
 
-        function resetPassword() {
-            alert("Password Reset Link Sent!");
-        }
+                case 'suspend':
+                    if (currentStatus !== 'Suspended') {
+                        currentStatus = 'Suspended';
+                        currentVerification = 'Pending';
+                        updateUI(currentStatus, 'yellow', 'pause', currentVerification);
+                        alert('Vendor suspended successfully.');
+                    } else {
+                        alert('Vendor is already suspended.');
+                    }
+                    break;
 
-        function editProduct(productId) {
-            alert("Editing product: " + productId);
-            // Implement your edit logic here
-        }
-
-        function removeProduct(productId) {
-            if (confirm("Are you sure you want to remove product: " + productId + "?")) {
-                alert("Product " + productId + " removed.");
-                // Implement your remove logic here
+                default:
+                    console.error('Unknown action:', action);
             }
         }
 
-        function approveDocument(docType) {
-            alert("Approved: " + docType);
-            // Implement your approval logic here
+        // Function to reset the vendor's password
+        function resetPassword() {
+            // Redirect to the admin settings page
+            window.location.href = 'admin_setting.html';
         }
 
-        function rejectDocument(docType) {
-            alert("Rejected: " + docType);
-            // Implement your rejection logic here
+        // Helper function to update the account status in the UI
+        function updateUI(status, color, icon, verification) {
+            // Update the account status display
+            const statusElement = document.getElementById('account-status');
+            statusElement.textContent = status;
+            statusElement.className = `inline-flex items-center px-3 py-1 rounded-full bg-${color}-100 text-${color}-800 text-sm font-medium`;
+
+            // Update the verification status display
+            const verificationElement = document.getElementById('verification-status');
+            verificationElement.textContent = verification;
+            verificationElement.className = `inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-sm font-medium`;
+            verificationElement.querySelector('span').textContent = icon; // Update icon if needed
+        }
+
+        const products = [
+            { id: 'PRD001', name: 'Wireless Earbuds', price: 129.99, stock: 45, status: 'Approved' },
+            { id: 'PRD002', name: 'Smart Watch', price: 199.99, stock: 28, status: 'Pending' },
+            { id: 'PRD003', name: 'Bluetooth Speaker', price: 79.99, stock: 0, status: 'Rejected' }
+        ];
+
+        // Function to render the product list
+        function renderProducts() {
+            const productList = document.getElementById('product-list');
+            productList.innerHTML = ''; // Clear existing rows
+
+            products.forEach(product => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-50 transition-colors duration-200';
+                row.innerHTML = `
+                <td class="px-6 py-4 text-sm">${product.id}</td>
+                <td class="px-6 py-4 text-sm">${product.name}</td>
+                <td class="px-6 py-4 text-sm">$${product.price.toFixed(2)}</td>
+                <td class="px-6 py-4 text-sm">${product.stock}</td>
+                <td class="px-6 py-4">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusClass(product.status)}">${product.status}</span>
+                </td>
+                <td class="px-6 py-4">
+                    <div class="flex space-x-2">
+                        <span class="material-symbols-outlined cursor-pointer hover:text-blue-500 transition-colors" onclick="openEditModal('${product.id}')">edit</span>
+                        <span class="material-symbols-outlined cursor-pointer hover:text-red-500 transition-colors" onclick="deleteProduct('${product.id}')">delete</span>
+                    </div>
+                </td>
+            `;
+                productList.appendChild(row);
+            });
+        }
+
+        // Function to get status class for styling
+        function getStatusClass(status) {
+            switch (status) {
+                case 'Approved':
+                    return 'bg-green-100 text-green-800';
+                case 'Pending':
+                    return 'bg-yellow-100 text-yellow-800';
+                case 'Rejected':
+                    return 'bg-red-100 text-red-800';
+                default:
+                    return '';
+            }
+        }
+
+        // Function to open the edit modal
+        function openEditModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                document.getElementById('edit-product-id').value = product.id;
+                document.getElementById('edit-product-name').value = product.name;
+                document.getElementById('edit-product-price').value = product.price;
+                document.getElementById('edit-product-stock').value = product.stock;
+                document.getElementById('edit-product-status').value = product.status;
+                document.getElementById('edit-modal').classList.remove('hidden');
+            }
+        }
+
+        // Function to save the edited product
+        function saveProduct() {
+            const productId = document.getElementById('edit-product-id').value;
+            const productName = document.getElementById('edit-product-name').value;
+            const productPrice = parseFloat(document.getElementById('edit-product-price').value);
+            const productStock = parseInt(document.getElementById('edit-product-stock').value);
+            const productStatus = document.getElementById('edit-product-status').value;
+
+            const productIndex = products.findIndex(p => p.id === productId);
+            if (productIndex !== -1) {
+                products[productIndex] = { id: productId, name: productName, price: productPrice, stock: productStock, status: productStatus };
+                renderProducts();
+                closeModal();
+            }
+        }
+
+        // Function to delete a product
+        function deleteProduct(productId) {
+            const productIndex = products.findIndex(p => p.id === productId);
+            if (productIndex !== -1) {
+                products.splice(productIndex, 1);
+                renderProducts();
+            }
+        }
+
+        // Function to close the edit modal
+        function closeModal() {
+            document.getElementById('edit-modal').classList.add('hidden');
+        }
+
+        // Initial render of products
+        renderProducts();
+
+        // Function to approve a document
+        function approveDocument(docId) {
+            const statusElement = document.getElementById(`${docId.toLowerCase()}-status`);
+            const rejectionElement = document.getElementById(`${docId.toLowerCase()}-rejection`);
+
+            // Show approved status and hide rejection status
+            statusElement.classList.remove('hidden');
+            rejectionElement.classList.add('hidden');
+
+            // Optionally, disable buttons after approval
+            disableButtons(docId);
+        }
+
+        // Function to reject a document
+        function rejectDocument(docId) {
+            const statusElement = document.getElementById(`${docId.toLowerCase()}-status`);
+            const rejectionElement = document.getElementById(`${docId.toLowerCase()}-rejection`);
+
+            // Show rejected status and hide approved status
+            rejectionElement.classList.remove('hidden');
+            statusElement.classList.add('hidden');
+
+            // Optionally, disable buttons after rejection
+            disableButtons(docId);
+        }
+
+        // Function to disable buttons after approval or rejection
+        function disableButtons(docId) {
+            const documentItem = document.querySelector(`[data-doc-id="${docId}"]`);
+            const buttons = documentItem.querySelectorAll('button');
+            buttons.forEach(button => button.disabled = true);
+        }
+
+        // Function to submit rejection reason
+        function submitRejectionReason() {
+            const reason = document.getElementById('rejection-reason').value;
+            if (reason) {
+                alert(`Rejection reason submitted: ${reason}`);
+                document.getElementById('rejection-reason').value = ''; // Clear the textarea
+            } else {
+                alert('Please enter a rejection reason.');
+            }
+        }
+
+        document.getElementById('saveVendorBtn').addEventListener('click', function () {
+            // Gather input values
+            const vendorName = document.querySelector('input[type="text"]:nth-of-type(1)').value;
+            const businessName = document.querySelector('input[type="text"]:nth-of-type(2)').value;
+            const businessType = document.querySelector('select').value;
+            const vendorEmail = document.querySelector('input[type="email"]').value;
+            const phoneNumber = document.querySelector('input[type="tel"]').value;
+            const businessAddress = document.querySelector('textarea').value;
+
+            // Create an object to hold the vendor data
+            const vendorData = {
+                vendorName,
+                businessName,
+                businessType,
+                vendorEmail,
+                phoneNumber,
+                businessAddress
+            };
+
+            // Store the data in local storage
+            localStorage.setItem('vendorProfile', JSON.stringify(vendorData));
+
+            // Optionally, clear the form fields after saving
+            clearForm();
+
+            // Optionally, alert the user that the data has been saved
+            alert('Vendor profile saved successfully!');
+        });
+
+        function clearForm() {
+            // Clear all input fields
+            document.querySelector('input[type="text"]:nth-of-type(1)').value = '';
+            document.querySelector('input[type="text"]:nth-of-type(2)').value = '';
+            document.querySelector('select').selectedIndex = 0; // Reset to first option
+            document.querySelector('input[type="email"]').value = '';
+            document.querySelector('input[type="tel"]').value = '';
+            document.querySelector('textarea').value = '';
         }
 
     </script>

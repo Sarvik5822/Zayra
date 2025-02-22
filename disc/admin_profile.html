@@ -56,156 +56,14 @@
 
 <body>
     <div id="webcrumbs" class="flex">
-        <aside class="w-64 border-r border-gray-200 h-screen">
-            <div class="bg-[#81d8d0] px-6 py-4" onclick="window.location.href='index.html'">
-                <h1 class="pb-4 text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
-            </div>
-            <nav class="p-2 space-y-1">
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='index.html'">
-                    <span class="material-symbols-outlined">dashboard</span>
-                    <span>Dashboard</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='order.html'">
-                    <span class="material-symbols-outlined">receipt</span>
-                    <span>Order</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='product.html'">
-                    <span class="material-symbols-outlined">package</span>
-                    <span>Product</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='categories.html'">
-                    <span class="material-symbols-outlined">category</span>
-                    <span>Category</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
-                    <details class="relative w-full">
-                        <summary class="list-none cursor-pointer flex items-center justify-between w-full">
-                            <div class="flex items-center space-x-3">
-                                <span class="material-symbols-outlined">business</span>
-                                <span>Vendor</span>
-                            </div>
-                            <span class="material-symbols-outlined">expand_more</span>
-                        </summary>
-                        <div
-                            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='admin_vendor_details.html'">Vendor Details</div>
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='admin_approve_vendor.html'">Vendor Approval</div>
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='admin_suspend_vendor.html'">Suspension</div>
-                        </div>
-                    </details>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='sales.html'">
-                    <span class="material-symbols-outlined">attach_money</span>
-                    <span>Sales</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='customer_listing.html'">
-                    <span class="material-symbols-outlined">support_agent</span>
-                    <span>Customer</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='admin_login.html'">
-                    <span class="material-symbols-outlined">security</span>
-                    <span>Authentication</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='admin_profile.html'">
-                    <span class="material-symbols-outlined">account_circle</span>
-                    <span>Account</span>
-                </div>
-
-
-            </nav>
-        </aside>
-
+        <div id="sidebar-container"></div> <!-- Sidebar will be inserted here -->
         <div class="flex-1">
-            <header class="bg-[#81d8d0] px-6 py-4">
-                <nav class="flex items-center justify-between">
-                    <div class="flex items-center space-x-8">
-                        <div class="flex items-center space-x-2 text-sm">
-                            <span class="hover:underline cursor-pointer">Home</span>
-                            <span class="material-symbols-outlined text-sm">chevron_right</span>
-                            <span class="hover:underline cursor-pointer">Dashboard</span>
-                            <span class="material-symbols-outlined text-sm">chevron_right</span>
-                            <span class="opacity-50">Current Page</span>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center space-x-6">
-                        <div class="relative">
-                            <input type="text" placeholder="Search..."
-                                class="pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all w-64" />
-                            <span class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400">search</span>
-                        </div>
-
-                        <details class="relative">
-                            <summary class="list-none cursor-pointer">
-                                <div class="relative hover:bg-gray-100 p-2 rounded-full transition-colors">
-                                    <span class="material-symbols-outlined">notifications</span>
-                                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                                </div>
-                            </summary>
-                            <div
-                                class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-100 p-4 z-50">
-                                <h3 class="font-semibold mb-2">Notifications</h3>
-                                <div class="space-y-2">
-                                    <div
-                                        class="flex items-start space-x-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
-                                        <span class="material-symbols-outlined mt-1">mail</span>
-                                        <div>
-                                            <p class="text-sm font-medium">New message received</p>
-                                            <p class="text-xs text-gray-500">2 minutes ago</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </details>
-
-                        <details class="relative">
-                            <summary class="list-none cursor-pointer">
-                                <div
-                                    class="flex items-center space-x-2 hover:bg-gray-100 p-2 rounded-lg transition-colors">
-                                    <img src="https://ui-avatars.com/api/?name=John+Doe" alt="Profile"
-                                        class="w-8 h-8 rounded-full" />
-                                    <span class="material-symbols-outlined">expand_more</span>
-                                </div>
-                            </summary>
-                            <div
-                                class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
-                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
-                                    onclick="window.location.href='admin_profile.html'">
-                                    <span class="material-symbols-outlined mr-2 align-middle">person</span>
-                                    Profile
-                                </div>
-                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
-                                    onclick="window.location.href='admin_setting.html'">
-                                    <span class="material-symbols-outlined mr-2 align-middle">settings</span>
-                                    Settings
-                                </div>
-                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors border-t"
-                                    onclick="window.location.href='signin.html'" F>
-                                    <span class="material-symbols-outlined mr-2 align-middle">logout</span>
-                                    Logout
-                                </div>
-                            </div>
-                        </details>
-                    </div>
-                </nav>
-            </header>
-
+            <div id="header-container"></div> <!-- Header will be inserted here -->
             <div class="p-6 space-y-6">
+                <script src="layout1.js"></script>
 
-                <h1 class="text-2xl font-bold mb-6">Profile</h1>
-                <div
-                    class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow border rounded-lg p-6 mt-6">
+                <h1 class="text-2xl font-bold mt-20 mb-6">Profile</h1>
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow rounded-lg p-6 mt-6">
                     <h3 class="text-xl font-medium mb-4">Personal Information</h3>
 
                     <!-- Profile Information -->
@@ -263,8 +121,7 @@
                     </div>
                 </div>
 
-                <div
-                    class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow border rounded-lg p-6 mt-6">
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow rounded-lg p-6 mt-6">
                     <h3 class="text-xl font-medium mb-4">Change Admin Password & Security Settings</h3>
 
                     <!-- Table for Security Settings -->
@@ -345,27 +202,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Get breadcrumb elements
-            const homeBreadcrumb = document.getElementById('homeBreadcrumb');
-            const dashboardBreadcrumb = document.getElementById('dashboardBreadcrumb');
-            const currentPage = document.getElementById('currentPage');
-
-            // Set the current page name
-            const currentPageName = "Dashboard"; // You can change this dynamically based on the page
-            currentPage.textContent = currentPageName;
-
-            // Add event listeners for breadcrumb navigation
-            homeBreadcrumb.addEventListener('click', function () {
-                window.location.href = 'index.html'; // Change this to your home page URL
-            });
-
-            dashboardBreadcrumb.addEventListener('click', function () {
-                window.location.href = 'dashboard.html'; // Change this to your dashboard page URL
-            });
-        });
-
-
         document.addEventListener("DOMContentLoaded", function () {
             const ctx = document.getElementById('lineChart').getContext('2d');
             let lineChart;

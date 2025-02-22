@@ -56,193 +56,55 @@
 
 <body>
     <div id="webcrumbs" class="flex">
-        <aside class="w-64 border-r border-gray-200 h-screen">
-            <div class="bg-[#81d8d0] px-6 py-4" onclick="window.location.href='index.html'">
-                <h1 class="pb-4 text-2xl font-bold hover:scale-105 transition-transform cursor-pointer">Zayra</h1>
-            </div>
-            <nav class="p-2 space-y-1">
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='index.html'">
-                    <span class="material-symbols-outlined">dashboard</span>
-                    <span>Dashboard</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='order.html'">
-                    <span class="material-symbols-outlined">receipt</span>
-                    <span>Order</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='product.html'">
-                    <span class="material-symbols-outlined">package</span>
-                    <span>Product</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='categories.html'">
-                    <span class="material-symbols-outlined">category</span>
-                    <span>Category</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3">
-                    <details class="relative w-full">
-                        <summary class="list-none cursor-pointer flex items-center justify-between w-full">
-                            <div class="flex items-center space-x-3">
-                                <span class="material-symbols-outlined">business</span>
-                                <span>Vendor</span>
-                            </div>
-                            <span class="material-symbols-outlined">expand_more</span>
-                        </summary>
-                        <div
-                            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='admin_vendor_details.html'">Vendor Details</div>
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='admin_approve_vendor.html'">Vendor Approval</div>
-                            <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                onclick="window.location.href='admin_suspend_vendor.html'">Suspension</div>
-                        </div>
-                    </details>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='sales.html'">
-                    <span class="material-symbols-outlined">attach_money</span>
-                    <span>Sales</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='customer_listing.html'">
-                    <span class="material-symbols-outlined">support_agent</span>
-                    <span>Customer</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='admin_login.html'">
-                    <span class="material-symbols-outlined">security</span>
-                    <span>Authentication</span>
-                </div>
-                <div class="p-3 rounded-lg hover:bg-gray-100 transition-all cursor-pointer flex items-center space-x-3"
-                    onclick="window.location.href='admin_profile.html'">
-                    <span class="material-symbols-outlined">account_circle</span>
-                    <span>Account</span>
-                </div>
-
-
-            </nav>
-        </aside>
-
+        <div id="sidebar-container"></div> <!-- Sidebar will be inserted here -->
         <div class="flex-1">
-            <header class="bg-[#81d8d0] px-6 py-4">
-                <nav class="flex items-center justify-between">
-                    <div class="flex items-center space-x-8">
-                        <div class="flex items-center space-x-2 text-sm">
-                            <span class="hover:underline cursor-pointer">Home</span>
-                            <span class="material-symbols-outlined text-sm">chevron_right</span>
-                            <span class="hover:underline cursor-pointer">Dashboard</span>
-                            <span class="material-symbols-outlined text-sm">chevron_right</span>
-                            <span class="opacity-50">Current Page</span>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center space-x-6">
-                        <div class="relative">
-                            <input type="text" placeholder="Search..."
-                                class="pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all w-64" />
-                            <span class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400">search</span>
-                        </div>
-
-                        <details class="relative">
-                            <summary class="list-none cursor-pointer">
-                                <div class="relative hover:bg-gray-100 p-2 rounded-full transition-colors">
-                                    <span class="material-symbols-outlined">notifications</span>
-                                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                                </div>
-                            </summary>
-                            <div
-                                class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-100 p-4 z-50">
-                                <h3 class="font-semibold mb-2">Notifications</h3>
-                                <div class="space-y-2">
-                                    <div
-                                        class="flex items-start space-x-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
-                                        <span class="material-symbols-outlined mt-1">mail</span>
-                                        <div>
-                                            <p class="text-sm font-medium">New message received</p>
-                                            <p class="text-xs text-gray-500">2 minutes ago</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </details>
-
-                        <details class="relative">
-                            <summary class="list-none cursor-pointer">
-                                <div
-                                    class="flex items-center space-x-2 hover:bg-gray-100 p-2 rounded-lg transition-colors">
-                                    <img src="https://ui-avatars.com/api/?name=John+Doe" alt="Profile"
-                                        class="w-8 h-8 rounded-full" />
-                                    <span class="material-symbols-outlined">expand_more</span>
-                                </div>
-                            </summary>
-                            <div
-                                class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
-                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
-                                    onclick="window.location.href='admin_profile.html'">
-                                    <span class="material-symbols-outlined mr-2 align-middle">person</span>
-                                    Profile
-                                </div>
-                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors"
-                                    onclick="window.location.href='admin_setting.html'">
-                                    <span class="material-symbols-outlined mr-2 align-middle">settings</span>
-                                    Settings
-                                </div>
-                                <div class="p-2 hover:bg-gray-50 cursor-pointer transition-colors border-t"
-                                    onclick="window.location.href='signin.html'" F>
-                                    <span class="material-symbols-outlined mr-2 align-middle">logout</span>
-                                    Logout
-                                </div>
-                            </div>
-                        </details>
-                    </div>
-                </nav>
-            </header>
-
+            <div id="header-container"></div> <!-- Header will be inserted here -->
             <div class="p-6 space-y-6">
+                <script src="layout1.js"></script>
 
                 <div class="w-[1200px]">
-                    <h1 class="text-2xl font-bold mb-6">Approve New Vendor</h1>
-                    <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 mb-6">
+                    <h1 class="text-2xl font-bold mt-20 mb-6">Approve New Vendor</h1>
+                    <!-- Vendor Application Details -->
+                    <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 mb-6"
+                        id="application-details">
                         <h2 class="text-2xl font-bold mb-6">Vendor Application Details</h2>
                         <div class="space-y-6">
                             <div class="grid grid-cols-2 gap-6">
                                 <div class="space-y-1">
                                     <h3 class="font-semibold text-gray-600">Business Name</h3>
-                                    <p class="text-lg">TechnoSolutions Pvt Ltd</p>
+                                    <p class="text-lg" id="business-name">TechnoSolutions Pvt Ltd</p>
                                 </div>
                                 <div class="space-y-1">
                                     <h3 class="font-semibold text-gray-600">Business Type</h3>
-                                    <p class="text-lg">Manufacturer</p>
+                                    <p class="text-lg" id="business-type">Manufacturer</p>
                                 </div>
                                 <div class="space-y-1">
                                     <h3 class="font-semibold text-gray-600">Owner Name</h3>
-                                    <p class="text-lg">John Smith</p>
+                                    <p class="text-lg" id="owner-name">John Smith</p>
                                 </div>
                                 <div class="space-y-1">
                                     <h3 class="font-semibold text-gray-600">Email Address</h3>
-                                    <p class="text-lg">john.smith@technosolutions.com</p>
+                                    <p class="text-lg" id="email-address">john.smith@technosolutions.com</p>
                                 </div>
                                 <div class="space-y-1">
                                     <h3 class="font-semibold text-gray-600">Phone Number</h3>
-                                    <p class="text-lg">+1 (555) 123-4567</p>
+                                    <p class="text-lg" id="phone-number">+1 (555) 123-4567</p>
                                 </div>
                                 <div class="space-y-1">
                                     <h3 class="font-semibold text-gray-600">Business Address</h3>
-                                    <p class="text-lg">123 Business Avenue, Tech Park, Silicon Valley, CA 94025</p>
+                                    <p class="text-lg" id="business-address">123 Business Avenue, Tech Park, Silicon
+                                        Valley, CA 94025</p>
                                 </div>
                             </div>
 
                             <div class="pt-6 border-t">
                                 <div class="flex justify-end space-x-4">
-                                    <button
+                                    <button id="approve-button"
                                         class="inline-flex items-center px-6 py-3 bg-green-500 text-white text-sm font-medium rounded-lg hover:bg-green-600 transition-colors duration-200 transform hover:scale-105">
                                         <span class="material-symbols-outlined text-sm mr-2">check_circle</span>
                                         Approve Application
                                     </button>
-                                    <button
+                                    <button id="reject-button"
                                         class="inline-flex items-center px-6 py-3 bg-red-500 text-white text-sm font-medium rounded-lg hover:bg-red-600 transition-colors duration-200 transform hover:scale-105">
                                         <span class="material-symbols-outlined text-sm mr-2">cancel</span>
                                         Reject Application
@@ -250,12 +112,13 @@
                                 </div>
                             </div>
 
-                            <div class="mt-6">
+                            <div class="mt-6" id="rejection-section" style="display: none;">
                                 <h3 class="font-semibold mb-3">Rejection Reason</h3>
                                 <textarea
                                     class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-                                    rows="3" placeholder="Enter reason for rejection..."></textarea>
-                                <button
+                                    rows="3" id="rejection-reason"
+                                    placeholder="Enter reason for rejection..."></textarea>
+                                <button id="submit-reason-button"
                                     class="mt-4 px-6 py-3 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition-colors duration-200 transform hover:scale-105">
                                     Submit Reason
                                 </button>
@@ -263,7 +126,7 @@
                         </div>
                     </div>
 
-                    <div
+                    <!-- <div
                         class="bg-white rounded-xl shadow-lg p-8 mt-8 hover:shadow-xl transition-all duration-300 mb-6">
                         <h2 class="text-2xl font-bold mb-6">Verification Documents</h2>
                         <div class="space-y-6">
@@ -316,61 +179,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="bg-white rounded-xl shadow-lg p-8 mt-8 hover:shadow-xl transition-all duration-300">
-                        <h2 class="text-2xl font-bold mb-6">Product & Store Information</h2>
-                        <div class="space-y-8">
-                            <div class="grid grid-cols-2 gap-6">
-                                <div class="space-y-4">
-                                    <h3 class="font-semibold text-gray-600">Store Logo</h3>
-                                    <div
-                                        class="border-2 border-dashed border-gray-300 rounded-lg p-8 hover:border-blue-500 transition-all duration-200">
-                                        <div class="flex flex-col items-center space-y-2">
-                                            <span
-                                                class="material-symbols-outlined text-4xl text-gray-400">cloud_upload</span>
-                                            <p class="text-sm text-gray-500">Upload store logo</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="space-y-4">
-                                    <h3 class="font-semibold text-gray-600">Store Banner</h3>
-                                    <div
-                                        class="border-2 border-dashed border-gray-300 rounded-lg p-8 hover:border-blue-500 transition-all duration-200">
-                                        <div class="flex flex-col items-center space-y-2">
-                                            <span
-                                                class="material-symbols-outlined text-4xl text-gray-400">cloud_upload</span>
-                                            <p class="text-sm text-gray-500">Upload store banner</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="space-y-4">
-                                <h3 class="font-semibold text-gray-600">Store Description</h3>
-                                <textarea
-                                    class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-                                    rows="4" placeholder="Enter store description..."></textarea>
-                            </div>
-
-                            <div class="pt-6 border-t">
-                                <div class="flex justify-end space-x-4">
-                                    <button
-                                        class="inline-flex items-center px-6 py-3 bg-green-500 text-white text-sm font-medium rounded-lg hover:bg-green-600 transition-colors duration-200 transform hover:scale-105">
-                                        <span class="material-symbols-outlined text-sm mr-2">check_circle</span>
-                                        Approve Store Setup
-                                    </button>
-                                    <button
-                                        class="inline-flex items-center px-6 py-3 bg-red-500 text-white text-sm font-medium rounded-lg hover:bg-red-600 transition-colors duration-200 transform hover:scale-105">
-                                        <span class="material-symbols-outlined text-sm mr-2">cancel</span>
-                                        Reject Store Setup
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="bg-white rounded-xl shadow-lg p-8 mt-8 hover:shadow-xl transition-all duration-300 mt-8">
                         <h2 class="text-2xl font-bold mb-6">Payment & Payout Details</h2>
                         <form id="paymentForm" class="space-y-6">
                             <div class="grid grid-cols-2 gap-6">
@@ -405,93 +216,14 @@
                                 </div>
                             </div>
 
-                            <div class="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                            <div class="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200" id="feedbackMessage"
+                                style="display: none;">
                                 <div class="flex items-center space-x-3">
                                     <span class="material-symbols-outlined text-blue-500">info</span>
-                                    <p class="text-sm text-blue-700">All payment details will be verified before
-                                        approval for payouts. Please ensure the information provided is accurate.</p>
+                                    <p class="text-sm text-blue-700" id="feedbackText"></p>
                                 </div>
                             </div>
                         </form>
-                    </div>
-
-                    <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300">
-                        <h2 class="text-2xl font-bold mb-6">Approval & Rejection Actions</h2>
-                        <div class="space-y-8">
-                            <div class="grid grid-cols-3 gap-6">
-                                <div class="bg-green-50 rounded-xl p-6 hover:shadow-lg transition-all duration-300">
-                                    <div class="flex flex-col space-y-4">
-                                        <span
-                                            class="material-symbols-outlined text-3xl text-green-500">how_to_reg</span>
-                                        <h3 class="text-lg font-semibold">Approve Vendor Registration</h3>
-                                        <div class="space-y-2">
-                                            <p class="text-sm text-gray-600">• Vendor receives an approval email with
-                                                login details</p>
-                                            <p class="text-sm text-gray-600">• Vendor can start adding products and
-                                                selling</p>
-                                        </div>
-                                        <button
-                                            class="mt-4 inline-flex items-center px-4 py-2 bg-green-500 text-white text-sm font-medium rounded-lg hover:bg-green-600 transition-all duration-200 transform hover:scale-105"
-                                            onclick="approveVendor()">
-                                            <span class="material-symbols-outlined text-sm mr-2">check_circle</span>
-                                            Approve Vendor
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <div class="bg-red-50 rounded-xl p-6 hover:shadow-lg transition-all duration-300">
-                                    <div class="flex flex-col space-y-4">
-                                        <span class="material-symbols-outlined text-3xl text-red-500">cancel</span>
-                                        <h3 class="text-lg font-semibold">Reject Vendor Registration</h3>
-                                        <div class="space-y-2">
-                                            <p class="text-sm text-gray-600">• Requires reason for rejection</p>
-                                            <p class="text-sm text-gray-600">• Vendor gets notified with rejection
-                                                reason</p>
-                                        </div>
-                                        <button
-                                            class="mt-4 inline-flex items-center px-4 py-2 bg-red-500 text-white text-sm font-medium rounded-lg hover:bg-red-600 transition-all duration-200 transform hover:scale-105"
-                                            onclick="rejectVendor()">
-                                            <span class="material-symbols-outlined text-sm mr-2">block</span>
-                                            Reject Vendor
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <div class="bg-blue-50 rounded-xl p-6 hover:shadow-lg transition-all duration-300">
-                                    <div class="flex flex-col space-y-4">
-                                        <span class="material-symbols-outlined text-3xl text-blue-500">mail</span>
-                                        <h3 class="text-lg font-semibold">Request More Information</h3>
-                                        <div class="space-y-2">
-                                            <p class="text-sm text-gray-600">• Send message to vendor for missing
-                                                details</p>
-                                            <p class="text-sm text-gray-600">• Specify required documents or information
-                                            </p>
-                                        </div>
-                                        <button
-                                            class="mt-4 inline-flex items-center px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition-all duration-200 transform hover:scale-105"
-                                            onclick="requestInfo()">
-                                            <span class="material-symbols-outlined text-sm mr-2">mail</span>
-                                            Request Info
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mt-6 p-6 bg-gray-50 rounded-xl">
-                                <h3 class="font-semibold mb-4">Message to Vendor</h3>
-                                <textarea id="vendorMessage"
-                                    class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-                                    rows="4" placeholder="Enter your message to the vendor..."></textarea>
-                                <button
-                                    class="mt-4 inline-flex items-center px-6 py-3 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition-all duration-200 transform hover:scale-105"
-                                    onclick="sendMessage()">
-                                    <span class="material-symbols-outlined text-sm mr-2">send</span>
-                                    Send Message
-                                </button>
-                            </div>
-
-
-                        </div>
                     </div>
 
                 </div>
@@ -501,42 +233,102 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        function approveVendor() {
-            alert("Vendor Approved!");
-        }
+        // Load application status from local storage
+        document.addEventListener('DOMContentLoaded', function () {
+            const applicationStatus = localStorage.getItem('applicationStatus');
+            const rejectionReason = localStorage.getItem('rejectionReason');
 
-        function rejectVendor() {
-            alert("Vendor Rejected!");
-        }
-
-        function suspendVendor() {
-            alert("Vendor Suspended!");
-        }
-
-        function resetPassword() {
-            alert("Password Reset Link Sent!");
-        }
-
-        function editProduct(productId) {
-            alert("Editing product: " + productId);
-            // Implement your edit logic here
-        }
-
-        function removeProduct(productId) {
-            if (confirm("Are you sure you want to remove product: " + productId + "?")) {
-                alert("Product " + productId + " removed.");
-                // Implement your remove logic here
+            if (applicationStatus === 'approved') {
+                alert('Application Approved!');
+                disableButtons();
+            } else if (applicationStatus === 'rejected') {
+                document.getElementById('rejection-section').style.display = 'block';
+                document.getElementById('rejection-reason').value = rejectionReason;
             }
+        });
+
+        // Function to approve the application
+        document.getElementById('approve-button').addEventListener('click', function () {
+            localStorage.setItem('applicationStatus', 'approved');
+            alert('Application Approved!');
+            disableButtons();
+        });
+
+        // Function to reject the application
+        document.getElementById('reject-button').addEventListener('click', function () {
+            document.getElementById('rejection-section').style.display = 'block';
+        });
+
+        // Function to submit the rejection reason
+        document.getElementById('submit-reason-button').addEventListener('click', function () {
+            const reason = document.getElementById('rejection-reason').value;
+            if (reason) {
+                localStorage.setItem('applicationStatus', 'rejected');
+                localStorage.setItem('rejectionReason', reason);
+                alert(`Rejection reason submitted: ${reason}`);
+                document.getElementById('rejection-reason').value = ''; // Clear the textarea
+                document.getElementById('rejection-section').style.display = 'none'; // Hide the rejection section
+                disableButtons();
+            } else {
+                alert('Please enter a rejection reason.');
+            }
+        });
+
+        // Function to disable buttons after approval or rejection
+        function disableButtons() {
+            document.getElementById('approve-button').disabled = true;
+            document.getElementById('reject-button').disabled = true;
         }
 
-        function approveDocument(docType) {
-            alert("Approved: " + docType);
-            // Implement your approval logic here
-        }
+        document.getElementById('paymentForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
 
-        function rejectDocument(docType) {
-            alert("Rejected: " + docType);
-            // Implement your rejection logic here
+            // Get input values
+            const bankAccountNumber = document.getElementById('bankAccountNumber').value;
+            const bankNameIFSC = document.getElementById('bankNameIFSC').value;
+            const upiId = document.getElementById('upiId').value;
+
+            // Basic validation
+            if (!bankAccountNumber || !bankNameIFSC) {
+                showFeedback('Please fill in all required fields.', 'error');
+                return;
+            }
+
+            // Simulate sending data to the server
+            const paymentDetails = {
+                bankAccountNumber: bankAccountNumber,
+                bankNameIFSC: bankNameIFSC,
+                upiId: upiId
+            };
+
+            console.log('Payment Details Submitted:', paymentDetails);
+
+            // Simulate a successful response
+            setTimeout(() => {
+                showFeedback('Payment details have been successfully submitted!', 'success');
+                // Optionally reset the form
+                document.getElementById('paymentForm').reset();
+            }, 1000);
+        });
+
+        function showFeedback(message, type) {
+            const feedbackMessage = document.getElementById('feedbackMessage');
+            const feedbackText = document.getElementById('feedbackText');
+
+            feedbackText.textContent = message;
+            feedbackMessage.style.display = 'block';
+
+            if (type === 'error') {
+                feedbackMessage.classList.remove('bg-blue-50', 'border-blue-200');
+                feedbackMessage.classList.add('bg-red-50', 'border-red-200');
+                feedbackText.classList.remove('text-blue-700');
+                feedbackText.classList.add('text-red-700');
+            } else {
+                feedbackMessage.classList.remove('bg-red-50', 'border-red-200');
+                feedbackMessage.classList.add('bg-blue-50', 'border-blue-200');
+                feedbackText.classList.remove('text-red-700');
+                feedbackText.classList.add('text-blue-700');
+            }
         }
 
     </script>
