@@ -380,6 +380,21 @@
                         </div>
                     </div>
 
+                    <div id="actionToast"
+                        class="fixed top-5 right-5 z-50 hidden bg-white rounded-lg shadow-lg p-4 transition-opacity duration-300 transform translate-y-2 opacity-0"
+                        role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="flex items-center justify-between">
+                            <strong class="font-bold">Notification</strong>
+                            <button type="button" class="text-gray-400 hover:text-gray-600" onclick="hideActionToast()"
+                                aria-label="Close">
+                                <span class="material-symbols-outlined">close</span>
+                            </button>
+                        </div>
+                        <div class="mt-2 text-gray-800" id="toastMessage">
+                            Action completed successfully!
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
@@ -720,6 +735,46 @@
         // Initialize both sections
         renderOrderHistory();
         renderVendorReviews();
+        function changeStatus(action) {
+            switch (action) {
+                case 'approve':
+                    if (currentStatus !== 'Active') {
+                        currentStatus = 'Active';
+                        currentVerification = 'Approved';
+                        updateUI(currentStatus, 'green', 'check_circle', currentVerification);
+                        showActionToast('Vendor approved successfully.'); // Show toast
+                    } else {
+                        alert('Vendor is already approved.');
+                    }
+                    break;
+
+                case 'reject':
+                    if (currentStatus !== 'Rejected') {
+                        currentStatus = 'Rejected';
+                        currentVerification = 'Not Approved';
+                        updateUI(currentStatus, 'red', 'close', currentVerification);
+                        showActionToast('Vendor rejected successfully.'); // Show toast
+                    } else {
+                        alert('Vendor is already rejected.');
+                    }
+                    break;
+
+                case 'suspend':
+                    if (currentStatus !== 'Suspended') {
+                        currentStatus = 'Suspended';
+                        currentVerification = 'Pending';
+                        updateUI(currentStatus, 'yellow', 'pause', currentVerification);
+                        showActionToast('Vendor suspended successfully.'); // Show toast
+                    } else {
+                        alert('Vendor is already suspended.');
+                    }
+                    break;
+
+                default:
+                    console.error('Unknown action:', action);
+            }
+        }
+
 
     </script>
 
