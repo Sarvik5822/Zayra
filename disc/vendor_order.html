@@ -9,14 +9,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* Custom styles to fix the sidebar */
         body {
             margin: 0;
             padding-left: 16rem;
-            /* Adjust this based on the width of your sidebar */
         }
 
         aside {
@@ -24,48 +22,70 @@
             top: 0;
             left: 0;
             width: 16rem;
-            /* Width of the sidebar */
             height: 100vh;
-            /* Full height */
             overflow-y: auto;
-            /* Allow scrolling if content overflows */
             background-color: white;
-            /* Background color for the sidebar */
             border-right: 1px solid #e5e7eb;
-            /* Border for the sidebar */
         }
 
         .main-content {
             margin-left: 16rem;
-            /* Same as sidebar width */
             padding: 1rem;
-            /* Padding for the main content */
         }
 
         header {
             position: fixed;
-            /* Fix the header at the top */
             top: 0;
             left: 16rem;
-            /* Align with the sidebar */
             right: 0;
-            /* Stretch to the right */
             z-index: 10;
-            /* Ensure it stays above other content */
         }
     </style>
 </head>
 
 <body>
     <div id="webcrumbs" class="flex">
+        <div id="editOrderModal" class="fixed inset-0 flex items-center justify-center bg-opacity-50 hidden z-50">
+            <div class="bg-white rounded-lg p-6 w-96">
+                <h2 class="text-xl font-bold mb-4">Edit Order</h2>
+                <form id="editOrderForm">
+                    <div class="mb-4">
+                        <label for="editOrderId" class="block text-sm font-medium text-gray-700">Order ID</label>
+                        <input type="text" id="editOrderId" class="mt-1 block w-full border rounded-lg p-2" readonly />
+                    </div>
+                    <div class="mb-4">
+                        <label for="editStatus" class="block text-sm font-medium text-gray-700">Status</label>
+                        <select id="editStatus" class="mt-1 block w-full border rounded-lg p-2">
+                            <option value="Pending">Pending</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Cancelled">Cancelled</option>
+                            <option value="Failed">Failed</option>
+                            <option value="Refunded">Refunded</option>
+                            <option value="Delivered">Delivered</option>
+                            <option value="Delivering">Delivering</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="editTotal" class="block text-sm font-medium text-gray-700">Total</label>
+                        <input type="text" id="editTotal" class="mt-1 block w-full border rounded-lg p-2" required />
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="button" class="bg-gray-300 text-gray-800 px-4 py-2 rounded-lg mr-2"
+                            onclick="closeModal()">Cancel</button>
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <div id="sidebar-container"></div> <!-- Sidebar will be inserted here -->
         <div class="flex-1">
             <div id="header-container"></div> <!-- Header will be inserted here -->
             <div class="p-6 space-y-6">
-
-
+                <script src="layout.js"></script>
                 <div class="w-[1200px] mt-20">
-                    <h1 class="text-2xl font-bold mb-6">Ordering List</h1>
+                    <h1 class="text-2xl font-bold mt-20 mb-6">Ordering List</h1>
                     <div class="bg-white rounded-lg shadow-lg p-6">
                         <div class="flex items-center justify-between mb-6">
                             <div class="relative w-[300px]">
@@ -108,23 +128,15 @@
                                             onclick="filterStatus('Delivering')">Delivering</div>
                                     </div>
                                 </details>
-                                <!-- <button
-                                    class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-all transform hover:scale-105"
-                                    onclick="window.location.href='add_order.html'">
-                                    <span class="material-symbols-outlined align-middle mr-2">add</span>
-                                    Add Order
-                                </button> -->
                             </div>
                         </div>
                         <table class="w-full">
                             <thead>
                                 <tr class="border-b">
                                     <th class="text-left py-4 font-semibold">Order ID</th>
-                                    <th class="text-left py-4 font-semibold">Customer</th>
                                     <th class="text-left py-4 font-semibold">Status</th>
                                     <th class="text-left py-4 font-semibold">Total</th>
                                     <th class="text-left py-4 font-semibold">Date Added</th>
-                                    <th class="text-left py-4 font-semibold">Date Modified</th>
                                     <th class="text-left py-4 font-semibold">Actions</th>
                                 </tr>
                             </thead>
@@ -152,39 +164,62 @@
                     </div>
                 </div>
 
+                <div id="toast"
+                    class="fixed top-5 right-5 z-50 hidden bg-white rounded-lg shadow-lg p-4 transition-opacity duration-300 transform translate-y-2 opacity-0"
+                    role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="flex items-center justify-between">
+                        <strong class="font-bold">Notification</strong>
+                        <small class="text-gray-500">Just now</small>
+                        <button type="button" class="text-gray-400 hover:text-gray-600" onclick="hideToast()"
+                            aria-label="Close">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                    </div>
+                    <div class="mt-2 text-gray-800" id="toastMessage">
+                        Order updated successfully!
+                    </div>
+                </div>
+
+                <div id="deleteToast"
+                    class="fixed top-5 right-5 z-50 hidden bg-white rounded-lg shadow-lg p-4 transition-opacity duration-300 transform translate-y-2 opacity-0"
+                    role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="flex items-center justify-between">
+                        <strong class="font-bold">Notification</strong>
+                        <small class="text-gray-500">Just now</small>
+                        <button type="button" class="text-gray-400 hover:text-gray-600" onclick="hideDeleteToast()"
+                            aria-label="Close">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                    </div>
+                    <div class="mt-2 text-gray-800">
+                        Order deleted successfully!
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="layout.js"></script>
+
     <script>
-        const orders = [
-            { id: '#12345', customer: 'John Doe', status: 'Completed', total: '$299.99', dateAdded: '2023-07-20', dateModified: '2023-07-21' },
-            { id: '#12346', customer: 'Jane Smith', status: 'Pending', total: '$199.99', dateAdded: '2023-07-22', dateModified: '2023-07-23' },
-            { id: '#12347', customer: 'Alice Johnson', status: 'Processing', total: '$99.99', dateAdded: '2023-07-24', dateModified: '2023-07-25' },
-            { id: '#12348', customer: 'Bob Brown', status: 'Cancelled', total: '$49.99', dateAdded: '2023-07-26', dateModified: '2023-07-27' },
-            { id: '#12349', customer: 'Charlie Black', status: 'Completed', total: '$199.99', dateAdded: '2023-07-28', dateModified: '2023-07-29' },
-            { id: '#12350', customer: 'Diana White', status: 'Pending', total: '$299.99', dateAdded: '2023-07-30', dateModified: '2023-07-31' },
-            { id: '#12351', customer: 'Eve Green', status: 'Processing', total: '$99.99', dateAdded: '2023-08-01', dateModified: '2023-08-02' },
-            { id: '#12352', customer: 'Frank Blue', status: 'Cancelled', total: '$49.99', dateAdded: '2023-08-03', dateModified: '2023-08-04' },
-            { id: '#12353', customer: 'Grace Yellow', status: 'Completed', total: '$199.99', dateAdded: '2023-08-05', dateModified: '2023-08-06' },
-            { id: '#12354', customer: 'Hank Red', status: 'Pending', total: '$299.99', dateAdded: '2023-08-07', dateModified: '2023-08-08' }, { id: '#12345', customer: 'John Doe', status: 'Completed', total: '$299.99', dateAdded: '2023-07-20', dateModified: '2023-07-21' },
-            { id: '#12346', customer: 'Jane Smith', status: 'Pending', total: '$199.99', dateAdded: '2023-07-22', dateModified: '2023-07-23' },
-            { id: '#12347', customer: 'Alice Johnson', status: 'Completed', total: '$99.99', dateAdded: '2023-07-24', dateModified: '2023-07-25' },
-            { id: '#12348', customer: 'Bob Brown', status: 'Cancelled', total: '$49.99', dateAdded: '2023-07-26', dateModified: '2023-07-27' },
-            { id: '#12349', customer: 'Charlie Black', status: 'Completed', total: '$199.99', dateAdded: '2023-07-28', dateModified: '2023-07-29' },
-            { id: '#12350', customer: 'Diana White', status: 'Pending', total: '$299.99', dateAdded: '2023-07-30', dateModified: '2023-07-31' },
-            { id: '#12351', customer: 'Eve Green', status: 'Processing', total: '$99.99', dateAdded: '2023-08-01', dateModified: '2023-08-02' },
-            { id: '#12352', customer: 'Frank Blue', status: 'Cancelled', total: '$49.99', dateAdded: '2023-08-03', dateModified: '2023-08-04' },
-            { id: '#12353', customer: 'Grace Yellow', status: 'Completed', total: '$199.99', dateAdded: '2023-08-05', dateModified: '2023-08-06' },
-            { id: '#12354', customer: 'Hank Red', status: 'Pending', total: '$299.99', dateAdded: '2023-08-07', dateModified: '2023-08-08' },
-        ];
-
         let currentPage = 1;
-        const ordersPerPage = 10; // Display 3 orders per page
-        let filteredOrders = [];
+        const ordersPerPage = 10; // Display 10 orders per page
+        let filteredOrders = []; // To hold filtered orders
 
-        function renderOrders(filteredOrders = orders) {
+        // Load orders from local storage on page load
+        window.onload = function () {
+            const storedOrders = localStorage.getItem('orders');
+            if (storedOrders) {
+                // Load orders from localStorage
+                orders = JSON.parse(storedOrders); // Parse the JSON string back into an object
+                filteredOrders = [...orders]; // Initialize filtered orders
+            } else {
+                // If no orders are stored, you can initialize with default orders or leave it empty
+                filteredOrders = [];
+            }
+            renderOrders(); // Initial render
+        };
+
+        function renderOrders() {
             const tableBody = document.getElementById('orderTableBody');
             tableBody.innerHTML = ''; // Clear existing rows
 
@@ -196,100 +231,32 @@
                 const row = document.createElement('tr');
                 row.className = "border-b hover:bg-gray-50 transition-all";
                 row.innerHTML = `
-            <td class="py-4">${order.id}</td>
-            <td class="py-4">
-                <div class="flex items-center gap-3">
-                    <img src="https://webcrumbs.cloud/placeholder" alt="Customer Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-gray-100" />
-                    <span>${order.customer}</span>
-                </div>
-            </td>
-            <td class="py-4">
-                <span class="px-3 py-1 rounded-full ${getStatusClasses(order.status)}">${order.status}</span>
-            </td>
-            <td class="py-4">${order.total}</td>
-            <td class="py-4">${order.dateAdded}</td>
-            <td class="py-4">${order.dateModified}</td>
-            <td class="py-4">
-                <div class="flex gap-2">
-                    <button class="p-2 hover:bg-gray-100 rounded-full transition-all" onclick="editOrder('${order.id}')">
-                        <span class="material-symbols-outlined">edit</span>
-                    </button>
-                    <button class="p-2 hover:bg-gray-100 rounded-full transition-all" onclick="deleteOrder('${order.id}')">
-                        <span class="material-symbols-outlined">delete</span>
-                    </button>
-                    <button class="p-2 hover:bg-gray-100 rounded-full transition-all" onclick="viewOrder('${order.id}')">
-                        <span class="material-symbols-outlined">visibility</span>
-                    </button>
-                </div>
-            </td>
-        `;
+                    <td class="py-4">${order.id}</td>
+                    <td class="py-4">
+                        <span class="px-3 py-1 rounded-full ${getStatusClasses(order.status)}">${order.status}</span>
+                    </td>
+                    <td class="py-4">₹${order.totalPrice}</td>
+                    <td class="py-4">${order.orderDate}</td>
+                    <td class="py-4">
+                        <div class="flex gap-2">
+                            <button class="p-2 hover:bg-gray-100 rounded-full transition-all" onclick="editOrder('${order.id}')">
+                                <span class="material-symbols-outlined">edit</span>
+                            </button>
+                            <button class="p-2 hover:bg-gray-100 rounded-full transition-all" onclick="deleteOrder('${order.id}')">
+                                <span class="material-symbols-outlined">delete</span>
+                            </button>
+                            <button class="p-2 hover:bg-gray-100 rounded-full transition-all" onclick="viewOrder('${order.id}')">
+                                <span class="material-symbols-outlined">visibility</span>
+                            </button>
+                        </div>
+                    </td>
+                `;
                 tableBody.appendChild(row);
             });
 
-            updatePaginationInfo(filteredOrders.length);
-            updatePaginationControls(filteredOrders.length);
+            updatePaginationInfo();
+            updatePaginationControls();
         }
-
-        function searchOrders() {
-            const searchInput = document.getElementById('searchInput').value.toLowerCase();
-            const filteredOrders = orders.filter(order => {
-                return order.id.toLowerCase().includes(searchInput) ||
-                    order.customer.toLowerCase().includes(searchInput);
-            });
-            currentPage = 1; // Reset to first page after searching
-            renderOrders(filteredOrders); // Re-render orders with filtered data
-        }
-
-        document.getElementById('searchInput').addEventListener('input', searchOrders);
-
-        // Update the pagination info and controls functions to accept totalEntries
-        function updatePaginationInfo(totalEntries) {
-            const paginationInfo = document.getElementById('paginationInfo');
-            const startEntry = (currentPage - 1) * ordersPerPage + 1;
-            const endEntry = Math.min(currentPage * ordersPerPage, totalEntries);
-            paginationInfo.textContent = `Showing ${startEntry} to ${endEntry} of ${totalEntries} entries`;
-        }
-
-        function updatePaginationControls(totalEntries) {
-            const totalPages = Math.ceil(totalEntries / ordersPerPage);
-            document.getElementById('prevPage').disabled = currentPage === 1;
-            document.getElementById('nextPage').disabled = currentPage === totalPages;
-        }
-
-        // Function to filter orders based on the selected date
-        function filterOrdersByDate() {
-            const selectedDate = document.getElementById('datePicker').value;
-            if (!selectedDate) {
-                // If no date is selected, reset to original orders
-                renderOrders(orders);
-            } else {
-                // Filter orders based on the selected date
-                const filteredOrders = orders.filter(order => order.dateAdded === selectedDate);
-                currentPage = 1; // Reset to first page after filtering
-                renderOrders(filteredOrders);
-            }
-        }
-
-        // Event listener for the date picker
-        document.getElementById('datePicker').addEventListener('input', filterOrdersByDate);
-
-        function filterOrdersByStatus(status) {
-            if (status === "All") {
-                filteredOrders = orders; // Show all orders
-            } else {
-                filteredOrders = orders.filter(order => order.status.toLowerCase() === status.toLowerCase());
-            }
-            currentPage = 1; // Reset to first page after filtering
-            renderOrders(filteredOrders); // Re-render orders with filtered data
-        }
-
-        // Attach event listeners to status filter options
-        document.querySelectorAll('.status-filter').forEach(option => {
-            option.addEventListener('click', function () {
-                const selectedStatus = this.textContent.trim(); // Get the selected status text
-                filterOrdersByStatus(selectedStatus);
-            });
-        });
 
         function viewOrder(orderId) {
             // Redirect to the view order page with the order ID as a query parameter
@@ -318,20 +285,105 @@
             }
         }
 
-        function setStatus(status) {
-            alert(`Selected status: ${status}`);
+        function editOrder(orderId) {
+            const order = filteredOrders.find(order => order.id === orderId);
+            if (order) {
+                document.getElementById('editOrderId').value = order.id;
+                document.getElementById('editStatus').value = order.status;
+                document.getElementById('editTotal').value = order.total;
+
+                // Show the modal
+                document.getElementById('editOrderModal').classList.remove('hidden');
+            }
         }
 
-        function editOrder(orderId) {
-            alert(`Editing order: ${orderId}`);
+        // Close the modal
+        function closeModal() {
+            document.getElementById('editOrderModal').classList.add('hidden');
+        }
+
+        // Handle form submission
+        document.getElementById('editOrderForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const orderId = document.getElementById('editOrderId').value;
+            const updatedStatus = document.getElementById('editStatus').value;
+            const updatedTotal = document.getElementById('editTotal').value;
+
+            // Update the order in the filteredOrders array
+            const orderIndex = filteredOrders.findIndex(order => order.id === orderId);
+            if (orderIndex > -1) {
+                filteredOrders[orderIndex].status = updatedStatus;
+                filteredOrders[orderIndex].total = updatedTotal;
+
+                // Save updated orders to local storage
+                localStorage.setItem('orders', JSON.stringify(filteredOrders));
+
+                // Re-render the orders
+                renderOrders();
+                closeModal();
+                showToast('Order updated successfully!'); // Show toast on successful edit
+            }
+        });
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+
+            // Set the message
+            toastMessage.textContent = message;
+
+            // Show the toast
+            toast.classList.remove('hidden');
+            toast.classList.remove('opacity-0');
+            toast.classList.add('opacity-100');
+
+            // Hide the toast after a few seconds
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                toast.classList.remove('opacity-100');
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                }, 300); // Wait for the fade-out transition to complete
+            }, 3000); // Show for 3 seconds
+        }
+
+        function hideToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('opacity-0');
+            toast.classList.remove('opacity-100');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 300); // Wait for the fade-out transition to complete
         }
 
         function deleteOrder(orderId) {
-            const index = orders.findIndex(order => order.id === orderId);
+            const index = filteredOrders.findIndex(order => order.id === orderId);
             if (index > -1) {
-                orders.splice(index, 1);
+                // Remove the order from the filteredOrders array
+                filteredOrders.splice(index, 1);
+
+                // Update local storage
+                localStorage.setItem('orders', JSON.stringify(filteredOrders));
+
+                // Re-render the orders
                 renderOrders();
+                showToast('Order deleted successfully!'); // Show toast on successful delete
             }
+        }
+
+        function updatePaginationInfo() {
+            const paginationInfo = document.getElementById('paginationInfo');
+            const totalEntries = filteredOrders.length;
+            const startEntry = (currentPage - 1) * ordersPerPage + 1;
+            const endEntry = Math.min(currentPage * ordersPerPage, totalEntries);
+            paginationInfo.textContent = `Showing ${startEntry} to ${endEntry} of ${totalEntries} entries`;
+        }
+
+        function updatePaginationControls() {
+            const totalPages = Math.ceil(filteredOrders.length / ordersPerPage);
+            document.getElementById('prevPage').disabled = currentPage === 1;
+            document.getElementById('nextPage').disabled = currentPage === totalPages;
         }
 
         document.getElementById('prevPage').addEventListener('click', () => {
@@ -342,11 +394,49 @@
         });
 
         document.getElementById('nextPage').addEventListener('click', () => {
-            const totalPages = Math.ceil(orders.length / ordersPerPage);
+            const totalPages = Math.ceil(filteredOrders.length / ordersPerPage);
             if (currentPage < totalPages) {
                 currentPage++;
                 renderOrders();
             }
+        });
+
+        // Filter orders by status
+        function filterStatus(status) {
+            if (status === 'All') {
+                filteredOrders = [...orders]; // Show all orders
+            } else {
+                filteredOrders = orders.filter(order => order.status === status);
+            }
+            currentPage = 1; // Reset to first page after filtering
+            renderOrders(filteredOrders); // Re-render orders with filtered data
+        }
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function () {
+            const searchTerm = this.value.toLowerCase();  // Get the input value and convert to lowercase
+
+            // Filter the orders based on the orderId or customer name
+            filteredOrders = orders.filter(order =>
+                order.id.toLowerCase().includes(searchTerm) || order.customer.toLowerCase().includes(searchTerm)
+            );
+
+            currentPage = 1; // Reset to first page when a new search is made
+            renderOrders(filteredOrders); // Re-render the table with filtered orders
+        });
+
+        // Event listener for the date picker
+        document.getElementById('datePicker').addEventListener('input', function () {
+            const selectedDate = this.value;
+            if (!selectedDate) {
+                // If no date is selected, reset to original orders
+                filteredOrders = [...orders];
+            } else {
+                // Filter orders based on the selected date
+                filteredOrders = orders.filter(order => order.dateAdded === selectedDate);
+            }
+            currentPage = 1; // Reset to first page after filtering
+            renderOrders(filteredOrders); // Re-render orders with filtered data
         });
 
         // Initial render

@@ -92,35 +92,7 @@ function createHeader() {
                     <!-- Breadcrumb will be inserted here -->
                 </div>
 
-                <div class="flex items-center space-x-6">
-                    <div class="relative">
-                        <input type="text" placeholder="Search..."
-                            class="pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all w-64" />
-                        <span class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400">search</span>
-                    </div>
-
-                    <details class="relative">
-                        <summary class="list-none cursor-pointer">
-                            <div class="relative hover:bg-gray-100 p-2 rounded-full transition-colors">
-                                <span class="material-symbols-outlined">notifications</span>
-                                <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                            </div>
-                        </summary>
-                        <div class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-100 p-4 z-50">
-                            <h3 class="font-semibold mb-2">Notifications</h3>
-                            <div class="space-y-2">
-                                <div class="flex items-start space-x-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
-                                    <span class="material-symbols-outlined mt-1">mail</span>
-                                    <div>
-                                        <p class="text-sm font-medium">New message received</p>
-                                        <p class="text-xs text-gray-500">2 minutes ago</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </details>
-
-                    <details class="relative">
+                <details class="relative">
                         <summary class="list-none cursor-pointer">
                             <div class="flex items-center space-x-2 hover:bg-gray-100 p-2 rounded-lg transition-colors">
                                 <img src="https://ui-avatars.com/api/?name=John+Doe" alt="Profile"

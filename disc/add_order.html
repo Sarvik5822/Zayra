@@ -138,7 +138,7 @@
                     <div class="mb-6">
                         <div class="flex items-center gap-2">
                             <div class="font-medium">Total Price</div>
-                            <div class="text-xl font-bold" id="totalPrice">$0.00</div>
+                            <div class="text-xl font-bold" id="totalPrice">₹0.00</div>
                         </div>
                     </div>
 
@@ -192,7 +192,7 @@
                                                     <div class="font-medium">${product.quantity} units</div>
                                                 </td>
                                                 <td class="py-4">
-                                                    <div class="font-medium">$${product.price.toFixed(2)}</div>
+                                                    <div class="font-medium">₹${product.price.toFixed(2)}</div>
                                                 </td>
                                                 <td class="py-4">
                                                     <input type="checkbox" class="rounded cursor-pointer" onclick="selectProduct(${product.id}, '${product.name}', ${product.price}, this)" />
@@ -274,19 +274,28 @@
                                         class="absolute w-full mt-1 bg-white border rounded-lg shadow-lg z-10 max-h-[200px] overflow-y-auto">
                                         <div
                                             class="p-2 hover:bg-gray-50 cursor-pointer transition-colors duration-200 country-option">
-                                            United States</div>
+                                            Afghanistan</div>
                                         <div
                                             class="p-2 hover:bg-gray-50 cursor-pointer transition-colors duration-200 country-option">
-                                            United Kingdom</div>
+                                            Bangladesh</div>
                                         <div
                                             class="p-2 hover:bg-gray-50 cursor-pointer transition-colors duration-200 country-option">
-                                            Canada</div>
+                                            Bhutan</div>
                                         <div
                                             class="p-2 hover:bg-gray-50 cursor-pointer transition-colors duration-200 country-option">
-                                            Australia</div>
+                                            India</div>
                                         <div
                                             class="p-2 hover:bg-gray-50 cursor-pointer transition-colors duration-200 country-option">
-                                            Germany</div>
+                                            Maldives</div>
+                                        <div
+                                            class="p-2 hover:bg-gray-50 cursor-pointer transition-colors duration-200 country-option">
+                                            Nepal</div>
+                                        <div
+                                            class="p-2 hover:bg-gray-50 cursor-pointer transition-colors duration-200 country-option">
+                                            Pakistan</div>
+                                        <div
+                                            class="p-2 hover:bg-gray-50 cursor-pointer transition-colors duration-200 country-option">
+                                            Sri Lanka</div>
                                     </div>
                                 </details>
                             </div>
@@ -308,6 +317,21 @@
 
             </div>
         </div>
+        <div id="saveToast"
+            class="fixed top-5 right-5 z-50 hidden bg-white rounded-lg shadow-lg p-4 transition-opacity duration-300 transform translate-y-2 opacity-0"
+            role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="flex items-center justify-between">
+                <strong class="font-bold">Notification</strong>
+                <small class="text-gray-500">Just now</small>
+                <button type="button" class="text-gray-400 hover:text-gray-600" onclick="hideSaveToast()"
+                    aria-label="Close">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="mt-2 text-gray-800" id="toastMessage">
+                Order data saved successfully!
+            </div>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -324,12 +348,12 @@
                 productDiv.id = `product-${id}`; // Unique ID for the product
                 productDiv.className = 'flex justify-between items-center p-2 border-b';
                 productDiv.innerHTML = `
-                <div>
-                    <span class="font-medium">${name}</span>
-                    <span class="text-sm text-gray-600">PRD-2024-${id.toString().padStart(4, '0')}</span>
-                </div>
-                <div class="font-medium">$${price.toFixed(2)}</div>
-            `;
+                    <div>
+                        <span class="font-medium">${name}</span>
+                        <span class="text-sm text-gray-600">PRD-2024-${id.toString().padStart(4, '0')}</span>
+                    </div>
+                    <div class="font-medium">₹${price.toFixed(2)}</div>
+                `;
                 selectedProductsContainer.appendChild(productDiv);
                 selectedProducts.add(id); // Add product ID to the set
                 totalPrice += price; // Increase total price
@@ -344,13 +368,13 @@
             }
 
             // Update total price display
-            document.getElementById('totalPrice').innerText = `$${totalPrice.toFixed(2)}`;
+            document.getElementById('totalPrice').innerText = `₹${totalPrice.toFixed(2)}`;
         }
 
         document.getElementById('saveBtn').addEventListener('click', function () {
             // Collect data from the form
             const orderData = {
-                orderId: '#ORD-2024-0001', // Static for now, can be dynamic if needed
+                id: `#ORD-${Date.now()}`, // Generate a unique order ID
                 orderDate: document.getElementById('orderDate').value,
                 paymentMethod: document.getElementById('selectedPaymentMethod').textContent,
                 shippingMethod: document.getElementById('selectedShippingMethod').textContent,
@@ -359,7 +383,7 @@
                     return {
                         id: id,
                         name: productRow.querySelector('span.font-medium').textContent,
-                        price: parseFloat(productRow.querySelector('div.font-medium').textContent.replace('$', ''))
+                        price: parseFloat(productRow.querySelector('div.font-medium').textContent.replace('₹', ''))
                     };
                 }),
                 totalPrice: totalPrice,
@@ -374,16 +398,38 @@
             };
 
             // Save data to local storage
-            localStorage.setItem('orderData', JSON.stringify(orderData));
+            const existingOrders = JSON.parse(localStorage.getItem('orders')) || [];
+            existingOrders.push(orderData); // Add the new order to the existing orders
+            localStorage.setItem('orders', JSON.stringify(existingOrders)); // Save back to local storage
 
-            // Provide feedback to the user
-            alert('Order data saved successfully!');
+            // Show toast notification
+            showSaveToast();
         });
 
         document.getElementById('cancelBtn').addEventListener('click', function () {
             // Navigate to the desired page
             window.location.href = 'order.html'; // Replace 'desired_page.html' with the actual URL
         });
+
+        // Toast functionality
+        function showSaveToast() {
+            const saveToast = document.getElementById('saveToast');
+            saveToast.classList.remove('hidden');
+            saveToast.classList.remove('opacity-0');
+            saveToast.classList.add('opacity-100');
+
+            setTimeout(() => {
+                hideSaveToast();
+            }, 3000);
+        }
+
+        function hideSaveToast() {
+            const saveToast = document.getElementById('saveToast');
+            saveToast.classList.add('opacity-0');
+            setTimeout(() => {
+                saveToast.classList.add('hidden');
+            }, 300); // Wait for the fade-out transition to complete
+        }
 
         // Dropdown functionality for payment methods
         document.querySelectorAll('.payment-option').forEach(option => {

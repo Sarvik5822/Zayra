@@ -133,21 +133,12 @@
                                             placeholder="Enter flat rate amount (if applicable)" />
                                     </div>
 
-                                    <div>
-                                        <label class="block text-sm font-medium mb-2">Enable Cash on Delivery
-                                            (COD)</label>
-                                        <div class="flex items-center space-x-4">
-                                            <label class="flex items-center space-x-2 cursor-pointer">
-                                                <input type="radio" name="cod" value="yes"
-                                                    class="text-blue-500 focus:ring-blue-500" />
-                                                <span>Yes</span>
-                                            </label>
-                                            <label class="flex items-center space-x-2 cursor-pointer">
-                                                <input type="radio" name="cod" value="no"
-                                                    class="text-blue-500 focus:ring-blue-500" />
-                                                <span>No</span>
-                                            </label>
-                                        </div>
+                                    <div class="mt-6 flex justify-end space-x-4">
+                                        <button id="cancelBtn"
+                                            class="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200">Cancel</button>
+                                        <button id="saveBtn"
+                                            class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200">Save
+                                            Details</button>
                                     </div>
                                 </div>
                             </div>
@@ -208,14 +199,14 @@
                                         </div>
                                     </div>
 
-                                    <div>
-                                        <a href="#"
-                                            class="inline-flex items-center space-x-2 text-blue-500 hover:text-blue-600 transition-colors duration-200">
-                                            <span class="material-symbols-outlined">history</span>
-                                            <span class="underline">View Payout History</span>
-                                        </a>
-                                    </div>
                                 </div>
+                            </div>
+                            <div class="mt-6 flex justify-end space-x-4">
+                                <button id="cancelBtn"
+                                    class="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200">Cancel</button>
+                                <button id="saveBtn"
+                                    class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200">Save
+                                    Details</button>
                             </div>
                         </div>
 
@@ -239,25 +230,14 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="space-y-6">
-                                    <div>
-                                        <label class="block text-sm font-medium mb-2">Enable Two-Factor Authentication
-                                            (2FA)</label>
-                                        <div class="flex items-center space-x-4">
-                                            <label class="flex items-center space-x-2 cursor-pointer">
-                                                <input type="radio" name="2fa" value="yes"
-                                                    class="text-blue-500 focus:ring-blue-500" />
-                                                <span>Yes</span>
-                                            </label>
-                                            <label class="flex items-center space-x-2 cursor-pointer">
-                                                <input type="radio" name="2fa" value="no"
-                                                    class="text-blue-500 focus:ring-blue-500" />
-                                                <span>No</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="mt-6 flex justify-end space-x-4">
+                                <button id="cancelBtn"
+                                    class="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200">Cancel</button>
+                                <button id="saveBtn"
+                                    class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200">Save
+                                    Details</button>
                             </div>
                         </div>
 
@@ -328,6 +308,13 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="mt-6 flex justify-end space-x-4">
+                                <button id="cancelBtn"
+                                    class="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200">Cancel</button>
+                                <button id="saveBtn"
+                                    class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200">Save
+                                    Details</button>
                             </div>
                         </div>
 
@@ -447,13 +434,6 @@
                             </div>
                         </div>
 
-                        <div class="mt-6 flex justify-end space-x-4">
-                            <button id="cancelBtn"
-                                class="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200">Cancel</button>
-                            <button id="saveBtn"
-                                class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200">Save
-                                Details</button>
-                        </div>
 
                     </div>
                 </div>
@@ -463,47 +443,90 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        document.getElementById('browseLogo').addEventListener('click', function () {
-            document.getElementById('logoFile').click();
-        });
+        // Load data from local storage on page load
+        window.onload = function () {
+            const settings = JSON.parse(localStorage.getItem('vendorSettings')) || {};
 
-        document.getElementById('choosePhoto').addEventListener('click', function () {
-            document.getElementById('profileFile').click();
-        });
+            // Populate form fields with saved settings
+            document.getElementById('processingTime').value = settings.processingTime || '';
+            document.getElementById('returnPolicy').value = settings.returnPolicy || '';
+            document.getElementById('returnDetails').value = settings.returnDetails || '';
+            document.getElementById('exchangePolicy').value = settings.exchangePolicy || '';
+            document.getElementById('warrantyPolicy').value = settings.warrantyPolicy || '';
+            document.getElementById('warrantyDetails').value = settings.warrantyDetails || '';
+            document.getElementById('accountNumber').value = settings.accountNumber || '';
+            document.getElementById('ifscCode').value = settings.ifscCode || '';
+            document.getElementById('bankName').value = settings.bankName || '';
+            document.getElementById('minPayoutThreshold').value = settings.minPayoutThreshold || '';
+            document.getElementById('preferredPaymentMethod').value = settings.preferredPaymentMethod || '';
+            document.getElementById('flatRateAmount').value = settings.flatRateAmount || '';
 
-        document.getElementById('saveBtn').addEventListener('click', function () {
-            const storeName = document.getElementById('storeName').value;
-            const businessType = document.getElementById('businessType').value;
-            const gstNumber = document.getElementById('gstNumber').value;
-            const panNumber = document.getElementById('panNumber').value;
-            const streetAddress = document.getElementById('streetAddress').value;
-            const city = document.getElementById('city').value;
-            const state = document.getElementById('state').value;
-            const pinCode = document.getElementById('pinCode').value;
-            const ownerName = document.getElementById('ownerName').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const bankAccount = document.getElementById('bankAccount').value;
-            const bankName = document.getElementById('bankName').value;
-            const ifscCode = document.getElementById('ifscCode').value;
-            const paymentMode = document.getElementById('paymentMode').value;
-
-            if (!storeName || !businessType || !gstNumber || !panNumber || !streetAddress || !city || !state || !pinCode || !ownerName || !email || !phone || !bankAccount || !bankName || !ifscCode || !paymentMode) {
-                alert("Please fill in all required fields.");
-                return;
+            // Check checkboxes
+            document.getElementById('standardCourier').checked = settings.standardCourier || false;
+            document.getElementById('expressDelivery').checked = settings.expressDelivery || false;
+            if (settings.cod) {
+                document.querySelector(`input[name="cod"][value="${settings.cod}"]`).checked = true;
             }
+            if (settings.autopayout) {
+                document.querySelector(`input[name="autopayout"][value="${settings.autopayout}"]`).checked = true;
+            }
+            if (settings.twoFactorAuth) {
+                document.querySelector(`input[name="2fa"][value="${settings.twoFactorAuth}"]`).checked = true;
+            }
+        };
 
+        // Save settings to local storage
+        document.getElementById('saveBtn').addEventListener('click', function () {
+            const settings = {
+                processingTime: document.getElementById('processingTime').value,
+                returnPolicy: document.getElementById('returnPolicy').value,
+                returnDetails: document.getElementById('returnDetails').value,
+                exchangePolicy: document.getElementById('exchangePolicy').value,
+                warrantyPolicy: document.getElementById('warrantyPolicy').value,
+                warrantyDetails: document.getElementById('warrantyDetails').value,
+                accountNumber: document.getElementById('accountNumber').value,
+                ifscCode: document.getElementById('ifscCode').value,
+                bankName: document.getElementById('bankName').value,
+                minPayoutThreshold: document.getElementById('minPayoutThreshold').value,
+                preferredPaymentMethod: document.getElementById('preferredPaymentMethod').value,
+                flatRateAmount: document.getElementById('flatRateAmount').value,
+                standardCourier: document.getElementById('standardCourier').checked,
+                expressDelivery: document.getElementById('expressDelivery').checked,
+                cod: document.querySelector('input[name="cod"]:checked').value,
+                autopayout: document.querySelector('input[name="autopayout"]:checked').value,
+                twoFactorAuth: document.querySelector('input[name="2fa"]:checked').value,
+            };
+
+            localStorage.setItem('vendorSettings', JSON.stringify(settings));
             alert("Details saved successfully!");
-            // Here you can add logic to send the data to the server
         });
 
+        // Cancel button functionality
         document.getElementById('cancelBtn').addEventListener('click', function () {
             if (confirm("Are you sure you want to cancel? All unsaved changes will be lost.")) {
-                // Logic to clear the form or redirect
                 window.location.reload(); // Reloads the page
             }
         });
 
+        // Placeholder functions for account management
+        function deactivateAccount() {
+            if (confirm("Are you sure you want to deactivate your account?")) {
+                alert("Account deactivated successfully.");
+                // Add logic to handle account deactivation
+            }
+        }
+
+        function deleteAccount() {
+            if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+                alert("Account deleted successfully.");
+                // Add logic to handle account deletion
+            }
+        }
+
+        function contactAdmin() {
+            alert("Contacting admin support...");
+            // Add logic to handle contacting admin support
+        }
     </script>
 
 </body>

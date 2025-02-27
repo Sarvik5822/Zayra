@@ -15,7 +15,6 @@
         body {
             margin: 0;
             padding-left: 16rem;
-            /* Adjust this based on the width of your sidebar */
         }
 
         aside {
@@ -23,34 +22,23 @@
             top: 0;
             left: 0;
             width: 16rem;
-            /* Width of the sidebar */
             height: 100vh;
-            /* Full height */
             overflow-y: auto;
-            /* Allow scrolling if content overflows */
             background-color: white;
-            /* Background color for the sidebar */
             border-right: 1px solid #e5e7eb;
-            /* Border for the sidebar */
         }
 
         .main-content {
             margin-left: 16rem;
-            /* Same as sidebar width */
             padding: 1rem;
-            /* Padding for the main content */
         }
 
         header {
             position: fixed;
-            /* Fix the header at the top */
             top: 0;
             left: 16rem;
-            /* Align with the sidebar */
             right: 0;
-            /* Stretch to the right */
             z-index: 10;
-            /* Ensure it stays above other content */
         }
     </style>
 </head>
@@ -143,7 +131,7 @@
                                 <div class="bg-gray-50 rounded-lg p-4 w-full flex justify-between items-center">
                                     <h1 class="text-3xl font-semibold mb-0">Sales</h1>
                                     <div class="text-right">
-                                        <p class="text-3xl font-bold mb-2" id="dailySales">$2450</p>
+                                        <p class="text-3xl font-bold mb-2" id="dailySales">₹2450</p>
                                         <div class="flex items-center gap-2 text-emerald-500 justify-end">
                                             <span class="material-symbols-outlined">trending_up</span>
                                             <span id="dailyPercentage">+5.2% vs yesterday</span>
@@ -375,6 +363,22 @@
                             </div>
                         </div>
 
+                        <div id="toast"
+                            class="fixed top-5 right-5 z-50 hidden bg-white rounded-lg shadow-lg p-4 transition-opacity duration-300 transform translate-y-2 opacity-0"
+                            role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="flex items-center justify-between">
+                                <strong class="font-bold">Notification</strong>
+                                <small class="text-gray-500">Just now</small>
+                                <button type="button" class="text-gray-400 hover:text-gray-600" onclick="hideToast()"
+                                    aria-label="Close">
+                                    <span class="material-symbols-outlined">close</span>
+                                </button>
+                            </div>
+                            <div class="mt-2 text-gray-800" id="toastMessage">
+                                Action completed successfully!
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -439,7 +443,7 @@
             currentPeriod = period;
 
             // Update sales cards data
-            document.getElementById('dailySales').textContent = `$${salesData[period].total}`;
+            document.getElementById('dailySales').textContent = `₹${salesData[period].total}`;
             document.getElementById('dailyPercentage').textContent = salesData[period].percentage;
 
             // Update chart data
@@ -457,22 +461,24 @@
         });
 
         const orders = [
-            { orderId: "#ORD-2024-001", productName: "Wireless Earbuds Pro", orderDate: "Jan 15, 2024", amountEarned: 199.99, platformFee: 19.99, netEarnings: 180.00 },
-            { orderId: "#ORD-2024-002", productName: "Smart Watch Series 5", orderDate: "Jan 16, 2024", amountEarned: 299.99, platformFee: 29.99, netEarnings: 270.00 },
-            { orderId: "#ORD-2024-003", productName: "Laptop Pro 16\"", orderDate: "Jan 17, 2024", amountEarned: 1499.99, platformFee: 149.99, netEarnings: 1350.00 },
-            { orderId: "#ORD-2024-004", productName: "Bluetooth Speaker", orderDate: "Jan 18, 2024", amountEarned: 99.99, platformFee: 9.99, netEarnings: 90.00 },
-            { orderId: "#ORD-2024-005", productName: "Gaming Mouse", orderDate: "Jan 19, 2024", amountEarned: 49.99, platformFee: 4.99, netEarnings: 45.00 },
-            { orderId: "#ORD-2024-006", productName: "4K Monitor", orderDate: "Jan 20, 2024", amountEarned: 399.99, platformFee: 39.99, netEarnings: 360.00 }
+            { orderId: "#ORD-2024-001", productName: "Sterling Silver Necklace", orderDate: "15 Jan, 2024", amountEarned: 4999.00, platformFee: 499.00, netEarnings: 4500.00 },
+            { orderId: "#ORD-2024-002", productName: "14K Gold Pendant", orderDate: "16 Jan, 2024", amountEarned: 7999.00, platformFee: 799.00, netEarnings: 7200.00 },
+            { orderId: "#ORD-2024-003", productName: "Diamond Stud Earrings", orderDate: "17 Jan, 2024", amountEarned: 14999.00, platformFee: 1499.00, netEarnings: 13500.00 },
+            { orderId: "#ORD-2024-004", productName: "Silver Toe Ring", orderDate: "18 Jan, 2024", amountEarned: 1499.00, platformFee: 149.00, netEarnings: 1350.00 },
+            { orderId: "#ORD-2024-005", productName: "Kundan Necklace Set", orderDate: "19 Jan, 2024", amountEarned: 8999.00, platformFee: 899.00, netEarnings: 8100.00 },
+            { orderId: "#ORD-2024-006", productName: "Platinum Wedding Band", orderDate: "20 Jan, 2024", amountEarned: 24999.00, platformFee: 2499.00, netEarnings: 22500.00 }
         ];
 
+
         const payments = [
-            { payoutId: "#PAY-2024-001", amount: 1250.00, date: "Jan 15, 2024", method: "Bank Transfer", status: "Completed" },
-            { payoutId: "#PAY-2024-002", amount: 2340.00, date: "Jan 16, 2024", method: "PayPal", status: "Pending" },
-            { payoutId: "#PAY-2024-003", amount: 3120.00, date: "Jan 17, 2024", method: "Bank Transfer", status: "Completed" },
-            { payoutId: "#PAY-2024-004", amount: 980.00, date: "Jan 18, 2024", method: "PayPal", status: "Pending" },
-            { payoutId: "#PAY-2024-005", amount: 500.00, date: "Jan 19, 2024", method: "Bank Transfer", status: "Completed" },
-            { payoutId: "#PAY-2024-006", amount: 1600.00, date: "Jan 20, 2024", method: "PayPal", status: "Pending" }
+            { payoutId: "#PAY-2024-001", amount: 12500.00, date: "15 Jan, 2024", method: "Bank Transfer", status: "Completed" },
+            { payoutId: "#PAY-2024-002", amount: 23400.00, date: "16 Jan, 2024", method: "UPI", status: "Pending" },
+            { payoutId: "#PAY-2024-003", amount: 31200.00, date: "17 Jan, 2024", method: "Bank Transfer", status: "Completed" },
+            { payoutId: "#PAY-2024-004", amount: 9800.00, date: "18 Jan, 2024", method: "UPI", status: "Pending" },
+            { payoutId: "#PAY-2024-005", amount: 5000.00, date: "19 Jan, 2024", method: "Bank Transfer", status: "Completed" },
+            { payoutId: "#PAY-2024-006", amount: 16000.00, date: "20 Jan, 2024", method: "UPI", status: "Pending" }
         ];
+
 
         // Pagination variables
         let currentPageOrders = 1;
@@ -498,9 +504,9 @@
             <td class="px-6 py-4 text-sm">${order.orderId}</td>
             <td class="px-6 py-4 text-sm">${order.productName}</td>
             <td class="px-6 py-4 text-sm">${order.orderDate}</td>
-            <td class="px-6 py-4 text-sm">$${order.amountEarned.toFixed(2)}</td>
-            <td class="px-6 py-4 text-sm">$${order.platformFee.toFixed(2)}</td>
-            <td class="px-6 py-4 text-sm">$${order.netEarnings.toFixed(2)}</td>
+            <td class="px-6 py-4 text-sm">₹${order.amountEarned.toFixed(2)}</td>
+            <td class="px-6 py-4 text-sm">₹${order.platformFee.toFixed(2)}</td>
+            <td class="px-6 py-4 text-sm">₹${order.netEarnings.toFixed(2)}</td>
         `;
                 tableBody.appendChild(row);
             });
@@ -530,7 +536,7 @@
                 row.classList.add('hover:bg-gray-50', 'transition-colors', 'duration-200');
                 row.innerHTML = `
             <td class="px-6 py-4 text-sm">${payment.payoutId}</td>
-            <td class="px-6 py-4 text-sm">$${payment.amount.toFixed(2)}</td>
+            <td class="px-6 py-4 text-sm">₹${payment.amount.toFixed(2)}</td>
             <td class="px-6 py-4 text-sm">${payment.date}</td>
             <td class="px-6 py-4 text-sm">${payment.method}</td>
             <td class="px-6 py-4">
@@ -638,10 +644,11 @@
                     <td class="px-6 py-3 text-sm text-gray-700">${refund.amount}</td>
                     <td class="px-6 py-3 text-sm text-gray-700">${refund.reason}</td>
                     <td class="px-6 py-3 text-sm text-gray-700" id="status-${refund.orderId}">${refund.status}</td>
-                    <td class="px-6 py-3 text-sm text-gray-700">
+                    <td class="px-6 py
+                    < td class="px-6 py-3 text-sm text-gray-700" >
                         <button class="approve-btn px-4 py-2 text-white bg-blue-500 rounded-lg mr-2 hover:bg-blue-600" data-order-id="${refund.orderId}" ${refund.status === 'Approved' ? 'disabled' : ''}>Approve</button>
                         <button class="reject-btn px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600" data-order-id="${refund.orderId}" ${refund.status === 'Approved' ? 'disabled' : ''}>Reject</button>
-                    </td>
+                    </td >
                 `;
                 tableBody.appendChild(row);
             });
@@ -678,6 +685,51 @@
                     handleAction(orderId, 'reject');
                 });
             });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+
+            // Set the message
+            toastMessage.textContent = message;
+
+            // Show the toast
+            toast.classList.remove('hidden', 'opacity-0');
+            toast.classList.add('opacity-100');
+
+            // Hide the toast after a few seconds
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                toast.classList.remove('opacity-100');
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                }, 300); // Wait for the fade-out transition to complete
+            }, 3000); // Show for 3 seconds
+        }
+
+        function hideToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('opacity-0');
+            toast.classList.remove('opacity-100');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 300); // Wait for the fade-out transition to complete
+        }
+
+        // Function to handle approve and reject actions
+        function handleAction(orderId, action) {
+            const refund = refundsData.find(r => r.orderId === orderId);
+            if (refund) {
+                if (action === 'approve') {
+                    refund.status = 'Approved';
+                    showToast(`Refund for ${orderId} has been approved.`);
+                } else if (action === 'reject') {
+                    refund.status = 'Rejected';
+                    showToast(`Refund for ${orderId} has been rejected.`);
+                }
+                renderTable(); // Re-render the table to reflect changes
+            }
         }
 
         // Initial render

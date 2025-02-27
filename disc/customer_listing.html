@@ -14,7 +14,6 @@
         body {
             margin: 0;
             padding-left: 16rem;
-            /* Adjust this based on the width of your sidebar */
         }
 
         aside {
@@ -22,45 +21,98 @@
             top: 0;
             left: 0;
             width: 16rem;
-            /* Width of the sidebar */
             height: 100vh;
-            /* Full height */
             overflow-y: auto;
-            /* Allow scrolling if content overflows */
             background-color: white;
-            /* Background color for the sidebar */
             border-right: 1px solid #e5e7eb;
-            /* Border for the sidebar */
         }
 
         .main-content {
             margin-left: 16rem;
-            /* Same as sidebar width */
             padding: 1rem;
-            /* Padding for the main content */
         }
 
         header {
             position: fixed;
-            /* Fix the header at the top */
             top: 0;
             left: 16rem;
-            /* Align with the sidebar */
             right: 0;
-            /* Stretch to the right */
             z-index: 10;
-            /* Ensure it stays above other content */
         }
     </style>
 </head>
 
 <body>
     <div id="webcrumbs" class="flex">
+        <!-- Modal Overlay -->
+        <div id="modalOverlay" class="inset-0 fixed bg-opacity-50 hidden z-50"
+            style="backdrop-filter: blur(10px); border: 2px solid black;"></div>
+
+        <!-- Add Customer Modal -->
+        <div id="modal" class="fixed inset-0 flex items-center justify-center hidden z-50">
+            <div class="w-[600px] bg-white rounded-lg p-8 shadow-xl max-h-[80vh] overflow-y-auto relative">
+                <button id="closeBtn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">&times;</button>
+                <h2 class="text-2xl font-semibold mb-6">Add Customer Details</h2>
+                <form id="customerForm" class="space-y-6">
+                    <div>
+                        <input type="text" id="customerName" placeholder="Name"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300" />
+                    </div>
+                    <div>
+                        <input type="email" id="customerEmail" placeholder="Email"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300" />
+                    </div>
+                    <div>
+                        <textarea id="customerDescription" placeholder="Description"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300 h-24 resize-none"></textarea>
+                    </div>
+                    <div class="pt-6 border-t">
+                        <h3 class="text-lg font-medium mb-4">Shipping Information</h3>
+                        <div class="space-y-4">
+                            <input type="text" id="addressLine1" placeholder="Address Line 1"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300" />
+                            <input type="text" id="addressLine2" placeholder="Address Line 2"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300" />
+                            <input type="text" id="town" placeholder="Town"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300" />
+                            <div class="flex justify-between space-x-4">
+                                <input type="text" id="state" placeholder="State / Province"
+                                    class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300" />
+                                <input type="text" id="postCode" placeholder="Post Code"
+                                    class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300" />
+                            </div>
+                            <div>
+                                <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
+                                <select id="country" class="mt-1 block w-full border rounded-lg p-2">
+                                    <option value="">Select Country</option>
+                                    <option value="Afghanistan">Afghanistan</option>
+                                    <option value="Bangladesh">Bangladesh</option>
+                                    <option value="Bhutan">Bhutan</option>
+                                    <option value="India">India</option>
+                                    <option value="Maldives">Maldives</option>
+                                    <option value="Nepal">Nepal</option>
+                                    <option value="Pakistan">Pakistan</option>
+                                    <option value="Sri Lanka">Sri Lanka</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end space-x-4 mt-8">
+                        <button type="button" id="cancelBtn"
+                            class="px-6 py-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:scale-105">Cancel</button>
+                        <button type="submit"
+                            class="px-6 py-2.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-300 transform hover:scale-105">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <div id="sidebar-container"></div> <!-- Sidebar will be inserted here -->
         <div class="flex-1">
             <div id="header-container"></div> <!-- Header will be inserted here -->
             <div class="p-6 space-y-6">
-                <script src="layout1.js"></script>
+                <script src="layout1.js"></script> //dashboard
 
                 <div class="container mx-auto p-6">
                     <h1 class="text-2xl font-bold mt-10 mb-6">Customer Listing</h1>
@@ -86,94 +138,20 @@
                                     </summary>
                                     <div
                                         class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
-                                        <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors" id="all">
+                                        <div class="p-2.5 hover:bg-gray-50 cursor-pointer" id="all">
                                             All</div>
-                                        <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                            id="active">Active</div>
-                                        <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                            id="locked">Locked</div>
+                                        <div class="p-2.5 hover:bg-gray-50 cursor-pointer" id="active">Active</div>
+                                        <div class="p-2.5 hover:bg-gray-50 cursor-pointer" id="locked">Locked</div>
                                     </div>
                                 </details>
 
                                 <button id="addCustomerBtn"
                                     class="px-6 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors transform hover:scale-105 active:scale-95">
                                     <div class="flex items-center justify-center space-x-2">
-                                        <span class ="material-symbols-outlined">add</span>
+                                        <span class="material-symbols-outlined">add</span>
                                         <span>Add Customer</span>
                                     </div>
                                 </button>
-                                <!-- bg-black fixed-->
-                                <div id="modalOverlay" class=" inset-0 fixed bg-opacity-50 hidden" style="backdrop-filter: blur(10px); border: 2px solid black;"></div>
-
-                                <div id="modal" class="fixed inset-0 flex items-center justify-center hidden">
-                                    <div
-                                        class="w-[600px] bg-white rounded-lg p-8 shadow-xl max-h-[80vh] overflow-y-auto relative">
-                                        <button id="closeBtn"
-                                            class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">&times;</button>
-                                        <h2 class="text-2xl font-semibold mb-6">Add Customer Details NEW</h2>
-                                        <form class="space-y-6">
-                                            <div>
-                                                <input type="text" placeholder="Name"
-                                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300" />
-                                            </div>
-                                            <div>
-                                                <input type="email" placeholder="Email"
-                                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300" />
-                                            </div>
-                                            <div>
-                                                <textarea placeholder="Description"
-                                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300 h-24 resize-none"></textarea>
-                                            </div>
-                                            <div class="pt-6 border-t">
-                                                <h3 class="text-lg font-medium mb-4">Shipping Information</h3>
-                                                <div class="space-y-4">
-                                                    <input type="text" placeholder="Address Line 1"
-                                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300" />
-                                                    <input type="text" placeholder="Address Line 2"
-                                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300" />
-                                                    <input type="text" placeholder="Town"
-                                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300" />
-                                                    <div class="flex justify-between space-x-4">
-                                                        <input type="text" placeholder="State / Province"
-                                                            class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300" />
-                                                        <input type="text" placeholder="Post Code"
-                                                            class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-300" />
-                                                    </div>
-                                                    <details class="relative">
-                                                        <summary
-                                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-all duration-300 list-none flex items-center justify-between">
-                                                            Select Country<span
-                                                                class="material-symbols-outlined">expand_more</span>
-                                                        </summary>
-                                                        <div
-                                                            class="absolute w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
-                                                            <div class="py-1 max-h-48 overflow-y-auto">
-                                                                <div
-                                                                    class="px-4 py-2 hover:bg-gray-100 cursor-pointer transition-colors duration-200">
-                                                                    United States</div>
-                                                                <div
-                                                                    class="px-4 py-2 hover:bg-gray-100 cursor-pointer transition-colors duration-200">
-                                                                    United Kingdom</div>
-                                                                <div
-                                                                    class="px-4 py-2 hover:bg-gray-100 cursor-pointer transition-colors duration-200">
-                                                                    Canada</div>
-                                                                <div
-                                                                    class="px-4 py-2 hover:bg-gray-100 cursor-pointer transition-colors duration-200">
-                                                                    Australia</div>
-                                                            </div>
-                                                        </div>
-                                                    </details>
-                                                </div>
-                                            </div>
-                                            <div class="flex justify-end space-x-4 mt-8">
-                                                <button type="button" id="cancelBtn"
-                                                    class="px-6 py-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:scale-105">Cancel</button>
-                                                <button type="submit"
-                                                    class="px-6 py-2.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-300 transform hover:scale-105">Submit</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
@@ -190,9 +168,6 @@
                                         <th
                                             class="py-4 px-6 font-semibold hover:bg-gray-50 transition-colors duration-200">
                                             Status</th>
-                                        <th
-                                            class="py-4 px-6 font-semibold hover:bg-gray-50 transition-colors duration-200">
-                                            IP Address</th>
                                         <th
                                             class="py-4 px-6 font-semibold hover:bg-gray-50 transition-colors duration-200">
                                             Created Date</th>
@@ -240,6 +215,13 @@
         const closeBtn = document.getElementById("closeBtn");
         const cancelBtn = document.getElementById("cancelBtn");
         const body = document.body;
+        const customerForm = document.getElementById("customerForm"); // Select the form element
+
+        // Initialize variables
+        let customers = JSON.parse(localStorage.getItem('customers')) || [];
+        let currentPage = 1;
+        const customersPerPage = 10;
+        let filteredCustomers = [...customers]; // Initialize filteredCustomers to all customers initially
 
         function openModal() {
             modal.classList.remove("hidden");
@@ -258,26 +240,53 @@
         cancelBtn.addEventListener("click", closeModal);
         modalOverlay.addEventListener("click", closeModal);
 
-        const customers = [
-            { name: "John Doe", email: "john@example.com", status: "Active", ip: "192.168.1.1", createdDate: "2023-10-20" },
-            { name: "Jane Smith", email: "jane@example.com", status: "Locked", ip: "192.168.1.2", createdDate: "2023-10-19" }, { name: "John Doe", email: "john@example.com", status: "Active", ip: "192.168.1.1", createdDate: "2023-10-20" },
-            { name: "Jane Smith", email: "jane@example.com", status: "Locked", ip: "192.168.1.2", createdDate: "2023-10-19" }, { name: "John Doe", email: "john@example.com", status: "Active", ip: "192.168.1.1", createdDate: "2023-10-20" },
-            { name: "Jane Smith", email: "jane@example.com", status: "Locked", ip: "192.168.1.2", createdDate: "2023-10-19" }, { name: "John Doe", email: "john@example.com", status: "Active", ip: "192.168.1.1", createdDate: "2023-10-20" },
-            { name: "Jane Smith", email: "jane@example.com", status: "Locked", ip: "192.168.1.2", createdDate: "2023-10-19" }, { name: "John Doe", email: "john@example.com", status: "Active", ip: "192.168.1.1", createdDate: "2023-10-20" },
-            { name: "Jane Smith", email: "jane@example.com", status: "Locked", ip: "192.168.1.2", createdDate: "2023-10-19" }, { name: "John Doe", email: "john@example.com", status: "Active", ip: "192.168.1.1", createdDate: "2023-10-20" },
-            { name: "Jane Smith", email: "jane@example.com", status: "Locked", ip: "192.168.1.2", createdDate: "2023-10-19" }, { name: "John Doe", email: "john@example.com", status: "Active", ip: "192.168.1.1", createdDate: "2023-10-20" },
-             { name: "Jane Smith", email: "jane@example.com", status: "Locked", ip: "192.168.1.2", createdDate: "2023-10-19" }, { name: "John Doe", email: "john@example.com", status: "Active", ip: "192.168.1.1", createdDate: "2023-10-20" },
-            { name: "Jane Smith", email: "jane@example.com", status: "Locked", ip: "192.168.1.2", createdDate: "2023-10-19" }, { name: "John Doe", email: "john@example.com", status: "Active", ip: "192.168.1.1", createdDate: "2023-10-20" },
-            { name: "Jane Smith", email: "jane@example.com", status: "Locked", ip: "192.168.1.2", createdDate: "2023-10-19" }, { name: "John Doe", email: "john@example.com", status: "Active", ip: "192.168.1.1", createdDate: "2023-10-20" },
-            { name: "Jane Smith", email: "jane@example.com", status: "Locked", ip: "192.168.1.2", createdDate: "2023-10-19" }, { name: "John Doe", email: "john@example.com", status: "Active", ip: "192.168.1.1", createdDate: "2023-10-20" },
-            { name: "Jane Smith", email: "jane@example.com", status: "Locked", ip: "192.168.1.2", createdDate: "2023-10-19" }, { name: "John Doe", email: "john@example.com", status: "Active", ip: "192.168.1.1", createdDate: "2023-10-20" },
-            { name: "Jane Smith", email: "jane@example.com", status: "Locked", ip: "192.168.1.2", createdDate: "2023-10-19" },
-        ];
+        // Handle form submission
+        customerForm.addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent the default form submission
 
-        const customersPerPage = 10;
-        let currentPage = 1;
-        let filteredCustomers = [];
+            // Get input values
+            const name = document.getElementById("customerName").value;
+            const email = document.getElementById("customerEmail").value;
+            const description = document.getElementById("customerDescription").value;
+            const addressLine1 = document.getElementById("addressLine1").value;
+            const addressLine2 = document.getElementById("addressLine2").value;
+            const town = document.getElementById("town").value;
+            const state = document.getElementById("state").value;
+            const postCode = document.getElementById("postCode").value;
+            const country = document.getElementById("country").value; // Get selected country from the dropdown
 
+            // Create a new customer object
+            const newCustomer = {
+                name,
+                email,
+                status: "Active", // Default status
+                createdDate: new Date().toISOString().split('T')[0], // Current date
+                description,
+                address: {
+                    line1: addressLine1,
+                    line2: addressLine2,
+                    town,
+                    state,
+                    postCode,
+                    country
+                }
+            };
+
+            // Add the new customer to the customers array
+            customers.push(newCustomer);
+
+            // Store updated customers array in local storage
+            localStorage.setItem('customers', JSON.stringify(customers));
+
+            // Close the modal and reset the form
+            closeModal();
+            customerForm.reset();
+
+            // Re-render the customer list
+            renderCustomers();
+        });
+
+        // Render customers from local storage
         function renderCustomers() {
             const tableBody = document.getElementById('customerTableBody');
             tableBody.innerHTML = ''; // Clear existing rows
@@ -295,7 +304,6 @@
                     <td class="py-4 px-6">
                         <span class="px-3 py-1 rounded-full ${customer.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">${customer.status}</span>
                     </td>
-                    <td class="py-4 px-6">${customer.ip}</td>
                     <td class="py-4 px-6">${customer.createdDate}</td>
                     <td class="py-4 px-6">
                         <div class="flex gap-2">
@@ -315,6 +323,9 @@
             updatePaginationControls();
         }
 
+        // Initial render
+        renderCustomers();
+
         function viewCustomer(name) {
             // Redirect to the customer detail page with the customer's name as a query parameter
             window.location.href = `customer_detail.html?name=${encodeURIComponent(name)}`;
@@ -324,6 +335,7 @@
             const index = customers.findIndex(customer => customer.name === name);
             if (index > -1) {
                 customers.splice(index, 1); // Remove the customer from the array
+                localStorage.setItem('customers', JSON.stringify(customers)); // Update local storage
                 renderCustomers(); // Re-render the customer list
             }
         }

@@ -15,7 +15,6 @@
         body {
             margin: 0;
             padding-left: 16rem;
-            /* Adjust this based on the width of your sidebar */
         }
 
         aside {
@@ -23,40 +22,57 @@
             top: 0;
             left: 0;
             width: 16rem;
-            /* Width of the sidebar */
             height: 100vh;
-            /* Full height */
             overflow-y: auto;
-            /* Allow scrolling if content overflows */
             background-color: white;
-            /* Background color for the sidebar */
             border-right: 1px solid #e5e7eb;
-            /* Border for the sidebar */
         }
 
         .main-content {
             margin-left: 16rem;
-            /* Same as sidebar width */
             padding: 1rem;
-            /* Padding for the main content */
         }
 
         header {
             position: fixed;
-            /* Fix the header at the top */
             top: 0;
             left: 16rem;
-            /* Align with the sidebar */
             right: 0;
-            /* Stretch to the right */
             z-index: 10;
-            /* Ensure it stays above other content */
         }
     </style>
 </head>
 
 <body>
     <div id="webcrumbs" class="flex">
+        <!-- Edit Category Modal -->
+        <div id="editCategoryModal" class="fixed inset-0 flex items-center justify-center bg-opacity-50 hidden z-50">
+            <div class="bg-white rounded-lg p-6 w-96">
+                <h2 class="text-xl font-bold mb-4">Edit Category</h2>
+                <form id="editCategoryForm">
+                    <div class="mb-4">
+                        <label for="editCategoryName" class="block text-sm font-medium text-gray-700">Category
+                            Name</label>
+                        <input type="text" id="editCategoryName" class="mt-1 block w-full border rounded-lg p-2"
+                            required />
+                    </div>
+                    <div class="mb-4">
+                        <label for="editCategoryType" class="block text-sm font-medium text-gray-700">Category
+                            Type</label>
+                        <select id="editCategoryType" class="mt-1 block w-full border rounded-lg p-2">
+                            <option value="Primary">Primary</option>
+                            <option value="Secondary">Secondary</option>
+                        </select>
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="button" class="bg-gray-300 text-gray-800 px-4 py-2 rounded-lg mr-2"
+                            onclick="closeEditModal()">Cancel</button>
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <div id="sidebar-container"></div> <!-- Sidebar will be inserted here -->
         <div class="flex-1">
             <div id="header-container"></div> <!-- Header will be inserted here -->
@@ -71,15 +87,12 @@
                             <div class="relative w-full md:w-96">
                                 <input type="text" id="categorySearchInput" placeholder="Search Category"
                                     class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all" />
-
                                 <span
                                     class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400">search</span>
                             </div>
 
                             <div
                                 class="flex flex-col md:flex-row items-stretch md:items-center space-y-4 md:space-y-0 md:space-x-4 w-full md:w-auto">
-
-
                                 <a href="vendor_add_category.html" class="w-full md:w-auto">
                                     <button
                                         class="px-6 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors transform hover:scale-105 active:scale-95">
@@ -124,52 +137,48 @@
                                 </button>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
+                <div id="toast"
+                    class="fixed top-5 right-5 z-50 hidden bg-white rounded-lg shadow-lg p-4 transition-opacity duration-300 transform translate-y-2 opacity-0"
+                    role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="flex items-center justify-between">
+                        <strong class="font-bold">Notification</strong>
+                        <small class="text-gray-500">Just now</small>
+                        <button type="button" class="text-gray-400 hover:text-gray-600" onclick="hideToast()"
+                            aria-label="Close">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                    </div>
+                    <div class="mt-2 text-gray-800" id="toastMessage">
+                        Category updated successfully!
+                    </div>
+                </div>
+
+                <div id="deleteToast"
+                    class="fixed top-5 right-5 z-50 hidden bg-white rounded-lg shadow-lg p-4 transition-opacity duration-300 transform translate-y-2 opacity-0"
+                    role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="flex items-center justify-between">
+                        <strong class="font-bold">Notification</strong>
+                        <small class="text-gray-500">Just now</small>
+                        <button type="button" class="text-gray-400 hover:text-gray-600" onclick="hideDeleteToast()"
+                            aria-label="Close">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                    </div>
+                    <div class="mt-2 text-gray-800">
+                        Category deleted successfully!
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        const categories = [
-            { name: "Electronics", type: "Primary" },
-            { name: "Smartphones", type: "Secondary" },
-            { name: "Laptops", type: "Secondary" },
-            { name: "Home Appliances", type: "Primary" },
-            { name: "Fashion", type: "Primary" },
-            { name: "Books", type: "Secondary" },
-            { name: "Toys", type: "Secondary" },
-            { name: "Sports", type: "Primary" },
-            { name: "Beauty", type: "Secondary" },
-            { name: "Automotive", type: "Primary" },
-            { name: "Electronics", type: "Primary" },
-            { name: "Smartphones", type: "Secondary" },
-            { name: "Laptops", type: "Secondary" },
-            { name: "Home Appliances", type: "Primary" },
-            { name: "Fashion", type: "Primary" },
-            { name: "Books", type: "Secondary" },
-            { name: "Toys", type: "Secondary" },
-            { name: "Sports", type: "Primary" },
-            { name: "Beauty", type: "Secondary" },
-            { name: "Automotive", type: "Primary" },
-            { name: "Electronics", type: "Primary" },
-            { name: "Smartphones", type: "Secondary" },
-            { name: "Laptops", type: "Secondary" },
-            { name: "Home Appliances", type: "Primary" },
-            { name: "Fashion", type: "Primary" },
-            { name: "Books", type: "Secondary" },
-            { name: "Toys", type: "Secondary" },
-            { name: "Sports", type: "Primary" },
-            { name: "Beauty", type: "Secondary" },
-            { name: "Automotive", type: "Primary" },
-            // Add more categories as needed
-        ];
-
-        const categoriesPerPage = 10;
         let currentPage = 1;
-        let filteredCategories = categories; // Initialize filteredCategories to all categories initially
+        const categoriesPerPage = 10; // Display 10 categories per page
+        let filteredCategories = []; // To hold filtered categories
 
         // Function to render the categories
         function renderCategories() {
@@ -184,29 +193,19 @@
                 const row = document.createElement('tr');
                 row.className = "hover:bg-gray-50 transition-colors";
                 row.innerHTML = `
-                <td class="py-4">
-                    <div class="flex items-center gap-3">
-                        <img src="https://icons8.com/icon/12780/electronics" alt="${category.name}"
-                            class="w-8 h-8 rounded object-cover" />
-                        ${category.name}
-                    </div>
-                </td>
-                <td class="py-4">${category.type}</td>
-                <td class="py-4">
-                    <div class="flex gap-2">
-                        <button
-                            class="p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
-                            onclick="editCategory('${category.name}')">
-                            <span class="material-symbols-outlined cursor-pointer hover:text-blue-500 transition-colors">edit</span>
-                        </button>
-                        <button
-                            class="p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
-                            onclick="deleteCategory('${category.name}')">
-                        <span class="material-symbols-outlined cursor-pointer hover:text-red-500 transition-colors">delete</span>
-                        </button>
-                    </div>
-                </td>
-            `;
+                    <td class="py-4">${category.name}</td>
+                    <td class="py-4">${category.type}</td>
+                    <td class="py-4">
+                        <div class="flex gap-2">
+                            <button class="p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200" onclick="editCategory('${category.name}')">
+                                <span class="material-symbols-outlined cursor-pointer hover:text-blue-500 transition-colors">edit</span>
+                            </button>
+                            <button class="p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200" onclick="deleteCategory('${category.name}')">
+                                <span class="material-symbols-outlined cursor-pointer hover:text-red-500 transition-colors">delete</span>
+                            </button>
+                        </div>
+                    </td>
+                `;
                 tableBody.appendChild(row);
             });
 
@@ -244,14 +243,69 @@
             renderCategories();
         }
 
-        // Function to edit category (stub, replace with actual logic)
+        let currentEditingCategoryIndex = null; // To keep track of the category being edited
+
         function editCategory(categoryName) {
-            alert(`Edit category: ${categoryName}`);
+            // Find the category to edit
+            const categoryIndex = filteredCategories.findIndex(category => category.name === categoryName);
+            if (categoryIndex > -1) {
+                currentEditingCategoryIndex = categoryIndex; // Store the index of the category being edited
+                const category = filteredCategories[categoryIndex];
+
+                // Populate the modal with the current category details
+                document.getElementById('editCategoryName').value = category.name;
+                document.getElementById('editCategoryType').value = category.type;
+
+                // Show the modal
+                document.getElementById('editCategoryModal').classList.remove('hidden');
+            }
         }
 
-        // Function to delete category (stub, replace with actual logic)
+        // Close the modal
+        function closeEditModal() {
+            document.getElementById('editCategoryModal').classList.add('hidden');
+        }
+
+        // Handle form submission
+        document.getElementById('editCategoryForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const updatedCategoryName = document.getElementById('editCategoryName').value;
+            const updatedCategoryType = document.getElementById('editCategoryType').value;
+
+            // Update the category in the filteredCategories array
+            if (currentEditingCategoryIndex !== null) {
+                filteredCategories[currentEditingCategoryIndex].name = updatedCategoryName;
+                filteredCategories[currentEditingCategoryIndex].type = updatedCategoryType;
+
+                // Save updated categories to local storage
+                localStorage.setItem('categories', JSON.stringify(filteredCategories));
+
+                // Re-render the categories
+                renderCategories();
+                closeEditModal();
+                showToast('Category updated successfully!'); // Show toast on successful edit
+            }
+        });
+
+        // Load categories from local storage on page load
+        window.onload = function () {
+            const storedCategories = localStorage.getItem('categories');
+            if (storedCategories) {
+                filteredCategories = JSON.parse(storedCategories);
+            }
+            renderCategories();
+        };
+
+        // Function to delete category
         function deleteCategory(categoryName) {
-            alert(`Delete category: ${categoryName}`);
+            const index = filteredCategories.findIndex(category => category.name === categoryName);
+            if (index > -1) {
+                filteredCategories.splice(index, 1);
+                localStorage.setItem('categories', JSON.stringify(filteredCategories));
+                renderCategories();
+                showToast('Category deleted successfully!'); // Show toast on successful delete
+            }
         }
 
         // Event listener for the category search input field
@@ -263,10 +317,11 @@
         // Function to filter categories based on search query
         function searchCategories(query) {
             if (query.trim() === "") {
-                filteredCategories = categories; // Reset to all categories if search is empty
+                filteredCategories = JSON.parse(localStorage.getItem('categories')) || []; // Reset to all categories if search is empty
             } else {
                 // Filter categories based on name (case insensitive)
-                filteredCategories = categories.filter(category => {
+                filteredCategories = JSON.parse(localStorage.getItem('categories')) || [];
+                filteredCategories = filteredCategories.filter(category => {
                     // Check if the category name includes the search query
                     return category.name.toLowerCase().includes(query.toLowerCase());
                 });
@@ -274,6 +329,38 @@
 
             currentPage = 1; // Reset to the first page after filtering
             renderCategories(); // Re-render categories with filtered data
+        }
+
+        // Toast functionality
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+
+            // Set the message
+            toastMessage.textContent = message;
+
+            // Show the toast
+            toast.classList.remove('hidden');
+            toast.classList.remove('opacity-0');
+            toast.classList.add('opacity-100');
+
+            // Hide the toast after a few seconds
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                toast.classList.remove('opacity-100');
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                }, 300); // Wait for the fade-out transition to complete
+            }, 3000); // Show for 3 seconds
+        }
+
+        function hideToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('opacity-0');
+            toast.classList.remove('opacity-100');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 300); // Wait for the fade-out transition to complete
         }
 
         // Initial render

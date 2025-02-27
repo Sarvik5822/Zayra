@@ -64,14 +64,15 @@
                 <div class="container mx-auto p-6">
                     <h1 class="text-2xl font-bold mt-10 mb-6">Dashboard</h1>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Total Customers Card -->
                         <div
                             class="bg-blue-100 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all transform hover:scale-105">
                             <div class="flex items-center mb-4">
                                 <div class="flex items-center gap-3">
                                     <div class="p-3 bg-blue-100 rounded-lg">
-                                        <span class="material-symbols-outlined text-blue-600">login</span>
+                                        <span class="material-symbols-outlined text-blue-600">person</span>
                                     </div>
-                                    <h3 class="text-lg font-semibold">Total Customer</h3>
+                                    <h3 class="text-lg font-semibold">Total Customers</h3>
                                 </div>
                                 <span class="material-symbols-outlined text-green-500 ml-auto">trending_up</span>
                             </div>
@@ -79,6 +80,7 @@
                             <p class="text-sm text-gray-500">+12% from last month</p>
                         </div>
 
+                        <!-- Total Sales Card -->
                         <div
                             class="bg-green-100 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all transform hover:scale-105">
                             <div class="flex items-center mb-4">
@@ -90,10 +92,11 @@
                                 </div>
                                 <span class="material-symbols-outlined text-green-500 ml-auto">trending_up</span>
                             </div>
-                            <p class="text-3xl font-bold mb-2">$284,392</p>
+                            <p class="text-3xl font-bold mb-2">₹28,439,200</p> <!-- Updated for INR -->
                             <p class="text-sm text-gray-500">+8% from last month</p>
                         </div>
 
+                        <!-- Profit/Loss Card -->
                         <div
                             class="bg-purple-100 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all transform hover:scale-105">
                             <div class="flex items-center mb-4">
@@ -109,6 +112,7 @@
                             <p class="text-sm text-gray-500">+2.3% from last month</p>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
@@ -269,7 +273,7 @@
             // Get breadcrumb elements
             const homeBreadcrumb = document.getElementById('homeBreadcrumb');
             const dashboardBreadcrumb = document.getElementById('dashboardBreadcrumb');
-            const currentPage = document.getElementById('currentPage');
+            const currentPage = document.getElementById('currentPage'); a
 
             // Set the current page name
             const currentPageName = "Dashboard"; // You can change this dynamically based on the page

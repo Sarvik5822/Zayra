@@ -1,132 +1,431 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Products</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom styles to fix the sidebar */
+        body {
+            margin: 0;
+            padding-left: 16rem;
+        }
+
+        aside {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 16rem;
+            height: 100vh;
+            overflow-y: auto;
+            background-color: white;
+            border-right: 1px solid #e5e7eb;
+        }
+
+        .main-content {
+            margin-left: 16rem;
+            padding: 1rem;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 16rem;
+            right: 0;
+            z-index: 10;
+        }
+    </style>
 </head>
 
-<body class="flex items-center justify-center min-h-screen bg-gray-100">
-    <div id="webcrumbs">
-        <div class="w-[400px] bg-white rounded-lg shadow-xl p-8">
-            <form id="productForm" class="space-y-6">
-                <div class="text-center">
-                    <h1 class="text-2xl font-bold mb-2">Add Product</h1>
-                    <p class="text-neutral-600">Fill in the details to add a new product</p>
+<body>
+    <div id="webcrumbs" class="flex">
+        <div id="sidebar-container"></div> <!-- Sidebar will be inserted here -->
+        <div class="flex-1">
+            <div id="header-container"></div> <!-- Header will be inserted here -->
+            <div class="p-6 space-y-6">
+                <div class="container mx-auto p-6">
+                    <h1 class="text-2xl font-bold mt-10 mb-6">Products Form</h1>
+                    <div class="flex flex-col gap-6">
+
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                            <h2 class="text-xl font-bold mb-6">Media</h2>
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-8">
+                                <div class="flex flex-col items-center justify-center gap-4">
+                                    <span class="material-symbols-outlined text-5xl text-gray-400">cloud_upload</span>
+                                    <p class="text-center">Drop files here or click to upload</p>
+                                    <div class="w-full">
+                                        <label class="flex flex-col items-center justify-center cursor-pointer">
+                                            <div class="bg-blue-500 text-white px-6 py-2 rounded-lg">Choose Files</div>
+                                            <input type="file" id="fileInput" class="hidden" accept=".png,.jpg,.jpeg"
+                                                multiple />
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="mt-4 text-sm text-gray-600">Upload up to 10 files</p>
+                            <div id="mediaContainer" class="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                            <h2 class="text-xl font-bold mb-6">General</h2>
+                            <div class="space-y-6">
+                                <div class="w-full">
+                                    <label class="block text-sm font-medium mb-2">Product Name</label>
+                                    <input type="text" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg"
+                                        placeholder="Enter product name" id="productNameInput" />
+                                </div>
+
+                                <div class="w-full">
+                                    <label class="block text-sm font-medium mb-2">Description</label>
+                                    <textarea
+                                        class="w-full h-32 px-4 py-2.5 border border-gray-300 rounded-lg resize-none"
+                                        placeholder="Enter product description" id="productDescriptionInput"></textarea>
+                                </div>
+
+                                <div class="w-full">
+                                    <label class="block text-sm font-medium mb-2">Categories</label>
+                                    <details class="relative w-full" id="categoryDropdown">
+                                        <summary
+                                            class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2.5 cursor-pointer hover:border-blue-400 transition-colors duration-300 list-none">
+                                            <div class="flex items-center justify-between">
+                                                <span id="selectedCategory">Select category</span>
+                                                <span class="material-symbols-outlined">expand_more</span>
+                                            </div>
+                                        </summary>
+                                        <div
+                                            class="absolute w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
+                                            <div class="py-1">
+                                                <a href="#"
+                                                    class="block px-4 py-2 hover:bg-gray-100 category-option">Rings</a>
+                                                <a href="#"
+                                                    class="block px-4 py-2 hover:bg-gray-100 category-option">Necklaces</a>
+                                                <a href="#"
+                                                    class="block px-4 py-2 hover:bg-gray-100 category-option">Earrings</a>
+                                                <a href="#"
+                                                    class="block px-4 py-2 hover:bg-gray-100 category-option">Bracelets</a>
+                                                <a href="#"
+                                                    class="block px-4 py-2 hover:bg-gray-100 category-option">Anklets</a>
+                                                <a href="#"
+                                                    class="block px-4 py-2 hover:bg-gray-100 category-option">Watches</a>
+                                            </div>
+                                        </div>
+                                    </details>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                            <h2 class="text-xl font-bold mb-6">Pricing</h2>
+                            <div class="flex flex-col gap-6">
+                                <div>
+                                    <label class="block mb-2 font-medium">Base Price</label>
+                                    <input type="number" id="basePrice"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg" />
+                                </div>
+
+                                <div>
+                                    <label class="block mb-2 font-medium">Discount Type</label>
+                                    <div class="grid grid-cols-3 gap-4">
+                                        <div class="bg-white border border-gray-200 rounded-lg p-4">
+                                            <label class="flex items-center cursor-pointer">
+                                                <input type="radio" name="discount" value="none"
+                                                    class="w-4 h-4 text-blue-500" checked
+                                                    onclick="toggleDiscountFields()" />
+                                                <span class="ml-2">No Discount</span>
+                                            </label>
+                                        </div>
+                                        <div class="bg-white border border-gray-200 rounded-lg p-4">
+                                            <label class="flex items-center cursor-pointer">
+                                                <input type="radio" name="discount" value="percentage"
+                                                    class="w-4 h-4 text-blue-500" onclick="toggleDiscountFields()" />
+                                                <span class="ml-2">Percentage %</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="discountField" class="hidden">
+                                    <label id="discountLabel" class="block mb-2 font-medium"></label>
+                                    <input type="number" id="discountInput"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg" />
+                                </div>
+
+                                <div class="flex justify-between gap-4">
+                                    <div class="flex-1">
+                                        <label class="block mb-2 font-medium">GST Amount (%)</label>
+                                        <input type="number" id="gstAmount" value="5" readonly
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 cursor-not-allowed" />
+                                    </div>
+
+                                    <div class="flex-1">
+                                        <label class="block mb-2 font-medium">Final Price</label>
+                                        <input type="number" id="finalPrice" readonly
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 cursor-not-allowed" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                            <h2 class="text-xl font-bold mb-6">Inventory</h2>
+                            <div class="flex flex-col gap-6">
+                                <div>
+                                    <label class="block mb-2 font-medium">Product ID</label>
+                                    <input type="text" id="productId" placeholder="Enter product ID"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg" />
+                                </div>
+
+                                <div>
+                                    <label class="block mb-2 font-medium">Quantity</label>
+                                    <div class="flex justify-between gap-4">
+                                        <input type="number" id="onShelf" placeholder="On Shelf"
+                                            class="flex-1 px-4 py-2 border border-gray-300 rounded-lg" />
+                                        <input type="text" id="inStore" placeholder="In Store"
+                                            class="flex-1 px-4 py-2 border border-gray-300 rounded-lg" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end gap-4 mt-4">
+                            <button id="cancelBtn"
+                                class="px-6 py-2 rounded-lg border border-gray-300 hover:bg-gray-50">Cancel</button>
+                            <button id="saveBtn"
+                                class="px-6 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600">Save
+                                Changes</button>
+                        </div>
+
+                    </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Product Name</label>
-                        <input type="text" id="productName" placeholder="Enter product name" required
-                            class="w-full px-4 py-2 rounded-lg border border-neutral-300 focus:ring-2 focus:ring-[#559ce2] focus:border-transparent outline-none transition duration-200" />
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Brand</label>
-                        <input type="text" id="brand" placeholder="Enter brand name" required
-                            class="w-full px-4 py-2 rounded-lg border border-neutral-300 focus:ring-2 focus:ring-[#559ce2] focus:border-transparent outline-none transition duration-200" />
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Price</label>
-                        <input type="number" id="price" placeholder="Enter product price" required
-                            class="w-full px-4 py-2 rounded-lg border border-neutral-300 focus:ring-2 focus:ring-[#559ce2] focus:border-transparent outline-none transition duration-200" />
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Inventory</label>
-                        <input type="number" id="inventory" placeholder="Enter inventory count" required
-                            class="w-full px-4 py-2 rounded-lg border border-neutral-300 focus:ring-2 focus:ring-[#559ce2] focus:border-transparent outline-none transition duration-200" />
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Description</label>
-                        <textarea id="description" placeholder="Enter product description" required
-                            class="w-full h-32 px-4 py-2 rounded-lg border border-neutral-300 focus:ring-2 focus:ring-[#559ce2] focus:border-transparent outline-none transition duration-200"></textarea>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Category</label>
-                        <select id="category" required
-                            class="w-full px-4 py-2 rounded-lg border border-neutral-300 focus:ring-2 focus:ring-[#559ce2] focus:border-transparent outline-none transition duration-200">
-                            <option value="">Select a category</option>
-                            <option value="necklace">Necklace</option>
-                            <option value="earrings">Earrings</option>
-                           <option value="finger_ring">Finger Ring</option>
-                            <option value="bangles">Bangles</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Upload Images</label>
-                        <input type="file" id="images" accept=".png,.jpg,.jpeg" multiple
-                            class="w-full border border-neutral-300 rounded-lg p-2" />
-                    </div>
-                </div>
-
-                <button type="submit"
-                    class="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-[#4080c2] active:bg-[#3070b2] transition duration-200 transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
-                    <span class="material-symbols-outlined">add</span>
-                    Add Product
+        <div id="saveToast" class="fixed top-5 right-5 z-50 hidden bg-white rounded-lg shadow-lg p-4" role="alert"
+            aria-live="assertive" aria-atomic="true">
+            <div class="flex items-center justify-between">
+                <strong class="font-bold">Notification</strong>
+                <button type="button" class="text-gray-400 hover:text-gray-600" onclick="hideSaveToast()"
+                    aria-label="Close">
+                    <span class="material-symbols-outlined">close</span>
                 </button>
-
-                <p class="text-center text-sm">
-                    Want to go back?
-                    <a href="vendor_product.html" class="text-[#559ce2] hover:text-[#4080c2] ml-1 transition duration-200">View Products</a>
-                </p>
-            </form>
+            </div>
+            <div class="mt-2 text-gray-800">Product data saved successfully!</div>
         </div>
     </div>
 
+    <script src="layout.js"></script>
     <script>
-        document.getElementById('productForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent the default form submission
+        const mediaContainer = document.getElementById('mediaContainer');
+        const fileInput = document.getElementById('fileInput');
 
-            // Get the values from the input fields
-            const productData = {
-                name: document.getElementById('productName').value,
-                brand: document.getElementById('brand').value,
-                price: parseFloat(document.getElementById('price').value),
-                inventory: parseInt(document.getElementById('inventory').value),
-                description: document.getElementById('description').value,
-                category: document.getElementById('category').value,
-                image: document.getElementById("images").value,
-                // Handle images if needed
-            };
+        fileInput.addEventListener('change', function (event) {
+            const files = Array.from(event.target.files);
+            if (files.length + mediaContainer.children.length > 10) {
+                alert('You can only upload a maximum of 10 images.');
+                return;
+            }
 
-            // Send data to the API
-            fetch('http://192.168.1.39:9191/api/v1/products/add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(productData),
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Handle success response
-                alert('Product added successfully!');
-                console.log('Success:', data);
-                window.location.href = 'vendor_product.html'; // Redirect to the product list page
-            })
-            .catch((error) => {
-                // Handle error response
-                alert('There was a problem with the request: ' + error.message);
-                console.error('Error:', error);
+            files.forEach(file => {
+                const fileURL = URL.createObjectURL(file);
+                const imageDiv = document.createElement('div');
+                imageDiv.classList.add('relative', 'rounded-lg', 'overflow-hidden', 'w-full', 'h-64');
+
+                const img = document.createElement('img');
+                img.src = fileURL;
+                img.classList.add('w-full', 'h-full', 'object-cover');
+
+                const removeButton = document.createElement('button');
+                removeButton.classList.add('absolute', 'top-0', 'right-0', 'bg-red-500', 'text-white', 'rounded-full', 'p-2', 'hover:bg-red-600');
+                removeButton.innerHTML = 'X';
+
+                removeButton.addEventListener('click', function () {
+                    mediaContainer.removeChild(imageDiv);
+                });
+
+                imageDiv.appendChild(img);
+                imageDiv.appendChild(removeButton);
+                mediaContainer.appendChild(imageDiv);
             });
         });
+
+        document.getElementById('saveBtn').addEventListener('click', function () {
+            const productData = {
+                productName: document.getElementById('productNameInput').value,
+                productDescription: document.getElementById('productDescriptionInput').value,
+                category: document.getElementById('selectedCategory').textContent,
+                basePrice: document.getElementById('basePrice').value,
+                gstAmount: document.getElementById('gstAmount').value,
+                finalPrice: document.getElementById('finalPrice').value,
+                productId: document.getElementById('productId').value,
+                onShelf: document.getElementById('onShelf').value,
+                inStore: document.getElementById('inStore').value,
+                mediaFiles: Array.from(mediaContainer.children).map(imageDiv => {
+                    return imageDiv.querySelector('img').src;
+                })
+            };
+
+            localStorage.setItem('productData', JSON.stringify(productData));
+            showSaveToast(); // Show toast instead of alert
+        });
+
+        function showSaveToast() {
+            const saveToast = document.getElementById('saveToast');
+            saveToast.classList.remove('hidden');
+            saveToast.classList.add('opacity-100');
+            saveToast.classList.add('translate-y-0');
+
+            setTimeout(() => {
+                hideSaveToast();
+            }, 3000);
+        }
+
+        function hideSaveToast() {
+            const saveToast = document.getElementById('saveToast');
+            saveToast.classList.add('opacity-0');
+            saveToast.classList.add('translate-y-2');
+
+            setTimeout(() => {
+                saveToast.classList.add('hidden');
+                saveToast.classList.remove('translate-y-0');
+            }, 1000);
+        }
+
+        document.getElementById('cancelBtn').addEventListener('click', function () {
+            window.location.href = 'vendor_product.html';
+        });
+
+        function toggleDiscountFields() {
+            const discountField = document.getElementById('discountField');
+            const discountLabel = document.getElementById('discountLabel');
+            const selectedDiscount = document.querySelector('input[name="discount"]:checked').value;
+
+            if (selectedDiscount === 'none') {
+                discountField.classList.add('hidden');
+            } else {
+                discountField.classList.remove('hidden');
+                if (selectedDiscount === 'percentage') {
+                    discountLabel.textContent = 'Set Discount Percentage';
+                }
+            }
+            calculateFinalPrice(); // Recalculate final price when discount type changes
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const categoryDropdown = document.getElementById('categoryDropdown');
+            const categoryOptions = categoryDropdown.querySelectorAll('.category-option');
+            const selectedCategoryText = document.getElementById('selectedCategory');
+
+            categoryOptions.forEach(option => {
+                option.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const selectedCategory = this.textContent;
+                    selectedCategoryText.textContent = selectedCategory;
+                    categoryDropdown.removeAttribute('open');
+                });
+            });
+
+            document.addEventListener('click', function (event) {
+                if (!categoryDropdown.contains(event.target)) {
+                    categoryDropdown.removeAttribute('open');
+                }
+            });
+
+            // Add event listeners to input fields to validate on input
+            const requiredFields = [
+                document.getElementById('productNameInput'),
+                document.getElementById('productDescriptionInput'),
+                document.getElementById('basePrice'),
+                document.getElementById('productId'),
+                document.getElementById('onShelf'),
+                document.getElementById('inStore')
+            ];
+
+            requiredFields.forEach(field => {
+                field.addEventListener('input', validateFields);
+            });
+
+            document.getElementById('saveBtn').addEventListener('click', function () {
+                if (!areFieldsValid()) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+
+                const productData = {
+                    id: document.getElementById('productId').value,
+                    name: document.getElementById('productNameInput').value,
+                    description: document.getElementById('productDescriptionInput').value,
+                    category: document.getElementById('selectedCategory').textContent,
+                    basePrice: document.getElementById('basePrice').value,
+                    gstAmount: document.getElementById('gstAmount').value,
+                    finalPrice: document.getElementById('finalPrice').value,
+                    onShelf: document.getElementById('onShelf').value,
+                    inStore: document.getElementById('inStore').value,
+                    mediaFiles: Array.from(mediaContainer.children).map(imageDiv => {
+                        return imageDiv.querySelector('img').src;
+                    }),
+                    quantity: parseInt(document.getElementById('onShelf').value),
+                    status: document.getElementById('onShelf').value > 0 ? "In Stock" : "Out of Stock"
+                };
+
+                // Retrieve existing products from local storage
+                const products = JSON.parse(localStorage.getItem('products')) || [];
+                // Add the new product to the array
+                products.push(productData);
+                // Save the updated products array back to local storage
+                localStorage.setItem('products', JSON.stringify(products));
+
+                showSaveToast(); // Show toast instead of alert
+            });
+
+            function validateFields() {
+                const allFilled = requiredFields.every(field => field.value.trim() !== '');
+                document.getElementById('saveBtn').disabled = !allFilled;
+            }
+
+            function areFieldsValid() {
+                return requiredFields.every(field => field.value.trim() !== '') && selectedCategoryText.textContent !== 'Select category';
+            }
+
+            // Initial validation on page load
+            validateFields();
+        });
+
+        function calculateFinalPrice() {
+            const basePrice = parseFloat(document.getElementById('basePrice').value) || 0;
+            const discountType = document.querySelector('input[name="discount"]:checked').value;
+            const gstAmount = parseFloat(document.getElementById('gstAmount').value) || 0;
+            let discount = 0;
+
+            if (discountType === 'percentage') {
+                discount = parseFloat(document.getElementById('discountInput').value) || 0;
+                discount = (discount / 100) * basePrice;
+            }
+
+            const priceAfterDiscount = basePrice - discount;
+            const gstValue = (gstAmount / 100) * priceAfterDiscount;
+            const finalPrice = priceAfterDiscount + gstValue;
+
+            document.getElementById('finalPrice').value = finalPrice.toFixed(2);
+        }
+
+        document.getElementById('basePrice').addEventListener('input', calculateFinalPrice);
+        document.getElementById('discountInput').addEventListener('input', calculateFinalPrice);
+
+        const discountRadios = document.querySelectorAll('input[name="discount"]');
+        discountRadios.forEach(radio => {
+            radio.addEventListener('change', function () {
+                toggleDiscountFields();
+                calculateFinalPrice();
+            });
+        });
+
     </script>
 
 </body>

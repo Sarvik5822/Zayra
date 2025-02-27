@@ -7,6 +7,7 @@
     <title>Products</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -14,7 +15,6 @@
         body {
             margin: 0;
             padding-left: 16rem;
-            /* Adjust this based on the width of your sidebar */
         }
 
         aside {
@@ -22,40 +22,92 @@
             top: 0;
             left: 0;
             width: 16rem;
-            /* Width of the sidebar */
             height: 100vh;
-            /* Full height */
             overflow-y: auto;
-            /* Allow scrolling if content overflows */
             background-color: white;
-            /* Background color for the sidebar */
             border-right: 1px solid #e5e7eb;
-            /* Border for the sidebar */
         }
 
         .main-content {
             margin-left: 16rem;
-            /* Same as sidebar width */
             padding: 1rem;
-            /* Padding for the main content */
         }
 
         header {
             position: fixed;
-            /* Fix the header at the top */
             top: 0;
             left: 16rem;
-            /* Align with the sidebar */
             right: 0;
-            /* Stretch to the right */
             z-index: 10;
-            /* Ensure it stays above other content */
         }
     </style>
 </head>
 
 <body>
     <div id="webcrumbs" class="flex">
+        <div id="editProductModal" class="fixed inset-0 flex items-center justify-center bg-opacity-50 hidden z-50">
+            <div class="bg-white rounded-lg shadow-lg p-6 w-96 max-h-[80vh] overflow-y-auto relative">
+                <button id="closeModal" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 cursor-pointer">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+                <h2 class="text-lg font-bold mb-4">Edit Product</h2>
+                <form id="editProductForm">
+                    <div class="mb-4">
+                        <label for="productId" class="block text-sm font-medium text-gray-700">Product ID</label>
+                        <input type="text" id="productId"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2" readonly />
+                    </div>
+                    <div class="mb-4">
+                        <label for="productName" class="block text-sm font-medium text-gray-700">Product Name</label>
+                        <input type="text" id="productName"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2" />
+                    </div>
+                    <div class="mb-4">
+                        <label for="categories" class="block text-sm font-medium text-gray-700">Category</label>
+                        <select id="categories" class="mt-1 block w-full border border-gray-300 rounded-md p-2">
+                            <option value="Necklace">Necklace</option>
+                            <option value="Bracelet">Bracelet</option>
+                            <option value="Ring">Ring</option>
+                            <option value="Earrings">Earrings</option>
+                            <option value="Brooch">Brooch</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                        <textarea id="description"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2"></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label for="finalPrice" class="block text-sm font-medium text-gray-700">Price</label>
+                        <input type="text" id="finalPrice"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2" />
+                    </div>
+                    <div class="mb-4">
+                        <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity</label>
+                        <input type="number" id="quantity"
+                            class="mt-1 block w-full border border-gray-300 rounded-md p-2" />
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700">Rating</label>
+                        <div id="starRating" class="flex space-x-1">
+                            <span class="material-symbols-outlined cursor-pointer" data-value="1">star</span>
+                            <span class="material-symbols-outlined cursor-pointer" data-value="2">star</span>
+                            <span class="material-symbols-outlined cursor-pointer" data-value="3">star</span>
+                            <span class="material-symbols-outlined cursor-pointer" data-value="4">star</span>
+                            <span class="material-symbols-outlined cursor-pointer" data-value="5">star</span>
+                        </div>
+                        <input type="hidden" id="rating" value="0" />
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="button" id="cancelButton"
+                            class="mr-2 px-4 py-2 bg-gray-300 rounded-md cursor-pointer">Cancel</button>
+                        <button type="submit"
+                            class="px-4 py-2 bg-blue-500 text-white rounded-md cursor-pointer">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <div id="sidebar-container"></div> <!-- Sidebar will be inserted here -->
         <div class="flex-1">
             <div id="header-container"></div> <!-- Header will be inserted here -->
@@ -84,18 +136,23 @@
                                             <span class="material-symbols-outlined">expand_more</span>
                                         </div>
                                     </summary>
-                                    <div
-                                        class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
-                                        <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors" id="all">
-                                            All</div>
-                                        <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                            id="in-stock">In-Stock</div>
-                                        <div class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors"
-                                            id="out-of-stock">Out-of-Stock</div>
+                                    <div class="relative">
+                                        <div
+                                            class="absolute left-0 right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                                            <div id="all"
+                                                class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors">All
+                                            </div>
+                                            <div id="in-stock"
+                                                class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors">In-Stock
+                                            </div>
+                                            <div id="out-of-stock"
+                                                class="p-2.5 hover:bg-gray-50 cursor-pointer transition-colors">
+                                                Out-of-Stock</div>
+                                        </div>
                                     </div>
                                 </details>
 
-                                <a href="add_product.html" class="w-full md:w-auto">
+                                <a href="vendor_add_product.html" class="w-full md:w-auto">
                                     <button
                                         class="px-6 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors transform hover:scale-105 active:scale-95">
                                         <div class="flex items-center justify-center space-x-2">
@@ -118,8 +175,6 @@
                                         <th class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap">Quantity
                                         </th>
                                         <th class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap">Price
-                                        </th>
-                                        <th class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap">Rate
                                         </th>
                                         <th class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap">Status
                                         </th>
@@ -156,35 +211,45 @@
 
             </div>
         </div>
+
+        <div id="toast"
+            class="fixed top-5 right-5 z-50 hidden bg-white rounded-lg shadow-lg p-4 transition-opacity duration-300 transform translate-y-2 opacity-0"
+            role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="flex items-center justify-between">
+                <strong class="font-bold">Notification</strong>
+                <small class="text-gray-500">Just now</small>
+                <button type="button" class="text-gray-400 hover:text-gray-600" onclick="hideToast()"
+                    aria-label="Close">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="mt-2 text-gray-800">
+                Product updated successfully!
+            </div>
+        </div>
+
+        <div id="deleteToast"
+            class="fixed top-5 right-5 z-50 hidden bg-white rounded-lg shadow-lg p-4 transition-opacity duration-300 transform translate-y-2 opacity-0"
+            role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="flex items-center justify-between">
+                <strong class="font-bold">Notification</strong>
+                <small class="text-gray-500">Just now</small>
+                <button type="button" class="text-gray-400 hover:text-gray-600" onclick="hideDeleteToast()"
+                    aria-label="Close">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="mt-2 text-gray-800">
+                Product deleted successfully!
+            </div>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        const products = [
-            { name: "Product Name 1", id: "#12345", quantity: 100, price: "$99.99", rate: 4.5, status: "In Stock" },
-            { name: "Product Name 2", id: "#12346", quantity: 50, price: "$49.99", rate: 4.0, status: "Out of Stock" },
-            { name: "Product Name 3", id: "#12347", quantity: 75, price: "$29.99", rate: 3.5, status: "In Stock" },
-            { name: "Product Name 4", id: "#12348", quantity: 20, price: "$19.99", rate: 4.8, status: "In Stock" },
-            { name: "Product Name 5", id: "#12349", quantity: 0, price: "$39.99", rate: 2.5, status: "Out of Stock" },
-            { name: "Product Name 6", id: "#12350", quantity: 150, price: "$59.99", rate: 4.2, status: "In Stock" },
-            { name: "Product Name 7", id: "#12351", quantity: 30, price: "$89.99", rate: 3.0, status: "Out of Stock" },
-            { name: "Product Name 8", id: "#12352", quantity: 90, price: "$79.99", rate: 4.1, status: "In Stock" },
-            { name: "Product Name 9", id: "#12353", quantity: 60, price: "$69.99", rate: 4.7, status: "In Stock" },
-            { name: "Product Name 10", id: "#12354", quantity: 10, price: "$29.99", rate: 3.8, status: "Out of Stock" },
-            { name: "Product Name 11", id: "#12355", quantity: 5, price: "$99.99", rate: 4.5, status: "In Stock" },
-            { name: "Product Name 12", id: "#12356", quantity: 25, price: "$49.99", rate: 4.0, status: "Out of Stock" },
-            { name: "Product Name 13", id: "#12357", quantity: 15, price: "$29.99", rate: 3.5, status: "In Stock" },
-            { name: "Product Name 14", id: "#12358", quantity: 35, price: "$19.99", rate: 4.8, status: "In Stock" },
-            { name: "Product Name 15", id: "#12359", quantity: 0, price: "$39.99", rate: 2.5, status: "Out of Stock" },
-            { name: "Product Name 16", id: "#12360", quantity: 150, price: "$59.99", rate: 4.2, status: "In Stock" },
-            { name: "Product Name 17", id: "#12361", quantity: 30, price: "$89.99", rate: 3.0, status: "Out of Stock" },
-            { name: "Product Name 18", id: "#12362", quantity: 90, price: "$79.99", rate: 4.1, status: "In Stock" },
-            { name: "Product Name 19", id: "#12363", quantity: 60, price: "$69.99", rate: 4.7, status: "In Stock" },
-            { name: "Product Name 20", id: "# 12364", quantity: 10, price: "$29.99", rate: 3.8, status: "Out of Stock" },
-        ];
-
-        const productsPerPage = 10;
-        let filteredProducts = [];
+        let products = JSON.parse(localStorage.getItem('products')) || []; // Retrieve products from local storage
+        let filteredProducts = [...products]; // Initialize filteredProducts to all products initially
         let currentPage = 1;
+        const productsPerPage = 10;
 
         function renderProducts() {
             const tableBody = document.getElementById('productTableBody');
@@ -194,35 +259,29 @@
             const endIndex = startIndex + productsPerPage;
             const paginatedProducts = filteredProducts.slice(startIndex, endIndex); // Use filteredProducts
 
-            paginatedProducts.forEach((product, index) => {
+            paginatedProducts.forEach((product) => {
                 const row = document.createElement('tr');
                 row.className = "hover:bg-gray-50 transition-colors";
                 row.innerHTML = `
-        <td class="px-6 py-4">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-lg bg-gray-100"></div>
-                <span class="text-sm">${product.name}</span>
-            </div>
-        </td>
-        <td class="px-6 py-4 text-sm whitespace-nowrap">${product.id}</td>
-        <td class="px-6 py-4 text-sm whitespace-nowrap">${product.quantity}</td>
-        <td class="px-6 py-4 text-sm whitespace-nowrap">${product.price}</td>
-        <td class="px-6 py-4">
-            <div class="flex items-center">
-                <span class="material-symbols-outlined text-yellow-400">star</span>
-                <span class="text-sm ml-1">${product.rate}</span>
-            </div>
-        </td>
-        <td class="px-6 py-4">
-            <span class="px-2 py-1 text-xs rounded-full ${product.status === 'In Stock' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}">${product.status}</span>
-        </td>
-        <td class="px-6 py-4">
-            <div class="flex items-center space-x-3">
-                <span class="material-symbols-outlined cursor-pointer hover:text-blue-500 transition-colors">edit</span>
-                <span class="material-symbols-outlined cursor-pointer hover:text-red-500 transition-colors" onclick="deleteProduct(${startIndex + index})">delete</span>
-            </div>
-        </td>
-    `;
+                    <td class="px-6 py-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-lg bg-gray-100"></div>
+                            <span class="text-sm">${product.name}</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 text-sm whitespace-nowrap">${product.id}</td>
+                    <td class="px-6 py-4 text-sm whitespace-nowrap">${product.quantity}</td>
+                    <td class="px-6 py-4 text-sm whitespace-nowrap">₹${product.finalPrice || 'N/A'}</td>
+                    <td class="px-6 py-4">
+                        <span class="px-2 py-1 text-xs rounded-full ${product.status === 'In Stock' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}">${product.status}</span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center space-x-3">
+                            <span class="material-symbols-outlined cursor-pointer hover:text-blue-500 transition-colors" onclick="openEditModal(${products.indexOf(product)})">edit</span>
+                            <span class="material-symbols-outlined cursor-pointer hover:text-red-500 transition-colors" onclick="deleteProduct(${products.indexOf(product)})">delete</span>
+                        </div>
+                    </td>
+                `;
                 tableBody.appendChild(row);
             });
 
@@ -230,30 +289,22 @@
             updatePaginationControls();
         }
 
-        function deleteProduct(index) {
-            // Remove the product from the array
-            products.splice(index, 1);
-
-            // Re-render the products table
-            renderProducts();
-        }
-
         function updatePaginationInfo() {
             const paginationInfo = document.getElementById('paginationInfo');
-            const totalEntries = products.length;
+            const totalEntries = filteredProducts.length;
             const startEntry = (currentPage - 1) * productsPerPage + 1;
             const endEntry = Math.min(currentPage * productsPerPage, totalEntries);
             paginationInfo.textContent = `Showing ${startEntry} to ${endEntry} of ${totalEntries} entries`;
         }
 
         function updatePaginationControls() {
-            const totalPages = Math.ceil(products.length / productsPerPage);
+            const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
             document.getElementById('prevPage').disabled = currentPage === 1;
             document.getElementById('nextPage').disabled = currentPage === totalPages;
         }
 
         function changePage(direction) {
-            const totalPages = Math.ceil(products.length / productsPerPage);
+            const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
             currentPage += direction;
 
             if (currentPage < 1) {
@@ -264,9 +315,6 @@
 
             renderProducts();
         }
-
-        // Initial render
-        renderProducts();
 
         document.getElementById('all').addEventListener('click', function () {
             filterProductsByStatus("All");
@@ -282,41 +330,16 @@
 
         function filterProductsByStatus(status) {
             if (status === "All") {
-                filteredProducts = [...products]; // Reset to all products
+                filteredProducts = products;
             } else if (status === "In Stock") {
                 filteredProducts = products.filter(product => product.status === "In Stock");
             } else if (status === "Out of Stock") {
                 filteredProducts = products.filter(product => product.status === "Out of Stock");
             }
 
-            currentPage = 1; // Reset to the first page
-            renderProducts(); // Render the filtered products
+            currentPage = 1;
+            renderProducts();
         }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            // Get the dropdown elements
-            const statusDropdown = document.querySelector('details[open]'); // Assuming there's only one details element for status
-            const statusSummary = statusDropdown.querySelector('summary');
-            const statusOptions = statusDropdown.querySelectorAll('.cursor-pointer'); // Select all options with cursor-pointer class
-            const selectedStatusText = statusSummary.querySelector('span:first-child'); // Get the first span in the summary
-
-            // Add click event listener to each status option
-            statusOptions.forEach(option => {
-                option.addEventListener('click', function (event) {
-                    event.preventDefault(); // Prevent default anchor behavior
-                    const selectedStatus = this.textContent; // Get the selected status text
-                    selectedStatusText.textContent = selectedStatus; // Update the summary text
-                    statusDropdown.removeAttribute('open'); // Close the dropdown
-                });
-            });
-
-            // Optional: Close the dropdown when clicking outside of it
-            document.addEventListener('click', function (event) {
-                if (!statusDropdown.contains(event.target)) {
-                    statusDropdown.removeAttribute('open'); // Close the dropdown if clicked outside
-                }
-            });
-        });
 
         document.getElementById('searchInput').addEventListener('input', function (event) {
             const query = event.target.value;
@@ -335,6 +358,115 @@
             currentPage = 1;
             renderProducts();
         }
+
+        function openEditModal(index) {
+            const product = products[index];
+
+            if (!product) {
+                console.error('Product not found for index:', index);
+                return; // Exit if the product is not found
+            }
+            document.getElementById('productId').value = product.id;
+            document.getElementById('productName').value = product.name;
+            document.getElementById('finalPrice').value = product.finalPrice; // Ensure price is set correctly
+            document.getElementById('quantity').value = product.quantity;
+            document.getElementById('rating').value = product.rate; // Set the rating
+            updateStarRating(product.rate); // Update star rating display
+            document.getElementById('editProductModal').classList.remove('hidden');
+
+            document.getElementById('editProductForm').onsubmit = function (event) {
+                event.preventDefault();
+                updateProduct(index);
+            };
+        }
+
+        // Add event listeners to the stars for rating selection
+        document.querySelectorAll('#starRating .material-symbols-outlined').forEach(star => {
+            star.addEventListener('click', function () {
+                const ratingValue = this.getAttribute('data-value');
+                document.getElementById('rating').value = ratingValue; // Set the hidden input value
+                updateStarRating(ratingValue); // Update star display
+            });
+        });
+
+        function updateStarRating(rating) {
+            const stars = document.querySelectorAll('#starRating .material-symbols-outlined');
+            stars.forEach(star => {
+                const starValue = star.getAttribute('data-value');
+                star.style.color = starValue <= rating ? 'gold' : 'gray';
+            });
+        }
+
+        function updateProduct(index) {
+            const updatedProduct = {
+                id: document.getElementById('productId').value,
+                name: document.getElementById('productName').value,
+                quantity: parseInt(document.getElementById('quantity').value),
+                finalPrice: document.getElementById('finalPrice').value.replace('₹', '').trim(), // Remove ₹ for storage
+                rate: parseFloat(document.getElementById('rating').value), // Get rating from hidden input
+                status: document.getElementById('quantity').value > 0 ? "In Stock" : "Out of Stock"
+            };
+
+            console.log('Updated product:', updatedProduct); // Debugging
+            products[index] = updatedProduct;
+            localStorage.setItem('products', JSON.stringify(products));
+            renderProducts();
+            showToast();
+            closeEditModal();
+        }
+
+        function deleteProduct(index) {
+            const deletedProduct = products[index];
+            products.splice(index, 1);
+            localStorage.setItem('products', JSON.stringify(products));
+            renderProducts();
+            showDeleteToast(deletedProduct.name);
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('hidden', 'opacity-0');
+            toast.classList.add('opacity-100', 'translate-y-0');
+            setTimeout(() => hideToast(), 3000);
+        }
+
+        function hideToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('opacity-0', 'translate-y-2');
+            setTimeout(() => toast.classList.add('hidden'), 1000);
+        }
+
+        function showDeleteToast(productName) {
+            const deleteToast = document.getElementById('deleteToast');
+            deleteToast.querySelector('.mt-2').textContent = `${productName} deleted successfully!`;
+            deleteToast.classList.remove('hidden', 'opacity-0');
+            deleteToast.classList.add('opacity-100', 'translate-y-0');
+            setTimeout(() => hideDeleteToast(), 3000);
+        }
+
+        function hideDeleteToast() {
+            const deleteToast = document.getElementById('deleteToast');
+            deleteToast.classList.add('opacity-0', 'translate-y-2');
+            setTimeout(() => deleteToast.classList.add('hidden'), 1000);
+        }
+
+        function closeEditModal() {
+            document.getElementById('editProductModal').classList.add('hidden');
+            document.getElementById('editProductForm').reset();
+            updateStarRating(0);
+        }
+
+        document.getElementById('closeModal').addEventListener('click', closeEditModal);
+        document.getElementById('cancelButton').addEventListener('click', closeEditModal);
+
+        // Initial render
+        renderProducts();
+
+        window.addEventListener('storage', function (event) {
+            if (event.key === 'products') {
+                renderProducts(); // Re-render products when local storage changes
+            }
+        });
 
     </script>
 

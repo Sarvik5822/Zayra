@@ -64,232 +64,219 @@
 
                 <div class="container mx-auto p-6">
                     <h1 class="text-2xl font-bold mt-10 mb-6">Sales</h1>
-                    <div
-                        class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow rounded-lg p-6 space-y-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-xl font-medium">Key Revenue Metrics</h2>
+                    <!-- <div
+                        class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow rounded-lg p-6 space-y-6"> -->
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-medium">Key Revenue Metrics</h2>
 
+                    </div>
+
+                    <div class="flex justify-center items-center gap-6">
+                        <div
+                            class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow rounded-lg p-6 space-y-6">
+                            <div class="flex items-center justify-between">
+                                <span class="material-symbols-outlined text-3xl text-blue-500">payments</span>
+                                <span class="text-sm text-gray-500">Total Revenue</span>
+                            </div>
+                            <h4 class="text-2xl font-bold mt-4">₹5,00,000</h4>
                         </div>
 
-                        <div class="flex justify-center items-center gap-6">
-                            <div
-                                class="p-6 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105">
-                                <div class="flex items-center justify-between">
-                                    <span class="material-symbols-outlined text-3xl text-blue-500">payments</span>
-                                    <span class="text-sm text-gray-500">Total Revenue</span>
-                                </div>
-                                <h4 class="text-2xl font-bold mt-4">₹5,00,000</h4>
+                        <div
+                            class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow rounded-lg p-6 space-y-6">
+                            <div class="flex items-center justify-between">
+                                <span class="material-symbols-outlined text-3xl text-green-500">shopping_cart</span>
+                                <span class="text-sm text-gray-500">Total Orders</span>
                             </div>
-
-                            <div
-                                class="p-6 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105">
-                                <div class="flex items-center justify-between">
-                                    <span class="material-symbols-outlined text-3xl text-green-500">shopping_cart</span>
-                                    <span class="text-sm text-gray-500">Total Orders</span>
-                                </div>
-                                <h4 class="text-2xl font-bold mt-4">1,200 Orders</h4>
-                            </div>
-
-                            <div
-                                class="p-6 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105">
-                                <div class="flex items-center justify-between">
-                                    <span class="material-symbols-outlined text-3xl text-purple-500">group</span>
-                                    <span class="text-sm text-gray-500">Total Customers</span>
-                                </div>
-                                <h4 class="text-2xl font-bold mt-4">850 Customers</h4>
-                            </div>
-
-                            <div
-                                class="p-6 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105">
-                                <div class="flex items-center justify-between">
-                                    <span class="material-symbols-outlined text-3xl text-orange-500">store</span>
-                                    <span class="text-sm text-gray-500">Active Vendors</span>
-                                </div>
-                                <h4 class="text-2xl font-bold mt-4">50 Vendors</h4>
-                            </div>
+                            <h4 class="text-2xl font-bold mt-4">1,200</h4>
                         </div>
-                    </div>
 
-                </div>
+                        <div
+                            class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow rounded-lg p-6 space-y-6">
+                            <div class="flex items-center justify-between">
+                                <span class="material-symbols-outlined text-3xl text-purple-500">group</span>
+                                <span class="text-sm text-gray-500">Total Customers</span>
+                            </div>
+                            <h4 class="text-2xl font-bold mt-4">850</h4>
+                        </div>
 
-                <div class="flex gap-6">
-                    <!-- Total Sales Over Time (Line Graph) -->
-                    <div
-                        class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow rounded-lg p-6 w-full">
-                        <h2 class="text-xl font-medium mb-4">Total Sales Over Time</h2>
-                        <canvas id="salesChart"></canvas>
-                    </div>
-
-                    <!-- Order Volume & Revenue Comparison (Bar Graph) -->
-                    <div
-                        class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow rounded-lg p-6 w-full">
-                        <h2 class="text-xl font-medium mb-4">Order Volume & Revenue Comparison</h2>
-                        <canvas id="comparisonChart"></canvas>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow rounded-lg p-6 mt-6">
-                    <h2 class="text-xl font-medium mb-4">Most Purchased Jewellery Items</h2>
-
-                    <!-- Table for Jewellery Items -->
-                    <div class="mt-6 overflow-x-auto">
-                        <table class="w-full">
-                            <thead>
-                                <tr class="border-b">
-                                    <th
-                                        class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
-                                        Product Name</th>
-                                    <th
-                                        class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
-                                        Category</th>
-                                    <th
-                                        class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
-                                        Total Sales</th>
-                                    <th
-                                        class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
-                                        Revenue Generated</th>
-                                    <th
-                                        class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
-                                        Stock Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="hover:bg-gray-100">
-                                    <td class="px-6 py-3 text-sm text-gray-700">
-                                        <img src="path_to_icon/necklace_icon.png" alt="Gold Necklace"
-                                            class="inline-block w-6 h-6 mr-2">
-                                        Gold Necklace
-                                    </td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">Necklaces</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">350</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">₹3,50,000</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700"><span
-                                            class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-600">In
-                                            Stock</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-100">
-                                    <td class="px-6 py-3 text-sm text-gray-700">
-                                        <img src="path_to_icon/earrings_icon.png" alt="Silver Earrings"
-                                            class="inline-block w-6 h-6 mr-2">
-                                        Silver Earrings
-                                    </td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">Earrings</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">200</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">₹1,80,000</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700"><span
-                                            class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-600">In
-                                            Stock</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-100">
-                                    <td class="px-6 py-3 text-sm text-gray-700">
-                                        <img src="path_to_icon/ring_icon.png" alt="Diamond Ring"
-                                            class="inline-block w-6 h-6 mr-2">
-                                        Diamond Ring
-                                    </td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">Rings</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">120</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">₹2,40,000</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700"><span
-                                            class="px-2 py-1 text-xs rounded-full bg-amber-100 text-amber-700">Low
-                                            Stock</span></td>
-                                </tr>
-                                <tr class="hover:bg-gray-100">
-                                    <td class="px-6 py-3 text-sm text-gray-700">
-                                        <img src="path_to_icon/bracelet_icon.png" alt="Gold Bracelet"
-                                            class="inline-block w-6 h-6 mr-2">
-                                        Gold Bracelet
-                                    </td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">Bracelets</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">150</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">₹1,50,000</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700"><span
-                                            class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-600">In
-                                            Stock</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow rounded-lg p-6 mt-6">
-                    <h2 class="text-xl font-medium mb-4">Vendor Performance</h2>
-
-                    <!-- Table for Vendor Performance -->
-                    <div class="mt-6 overflow-x-auto">
-                        <table class="w-full">
-                            <thead>
-                                <tr class="border-b">
-                                    <th
-                                        class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
-                                        Vendor Name</th>
-                                    <th
-                                        class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
-                                        Total Sales</th>
-                                    <th
-                                        class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
-                                        Revenue Generated</th>
-                                    <th
-                                        class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
-                                        Avg. Order Value</th>
-                                    <th
-                                        class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
-                                        Refunds</th>
-                                    <th
-                                        class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
-                                        Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="hover:bg-gray-100">
-                                    <td class="px-6 py-3 text-sm text-gray-700">Vendor A</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">500</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">₹5,00,000</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">₹1,000</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">5</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700"><span
-                                            class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-600">Active</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-100">
-                                    <td class="px-6 py-3 text-sm text-gray-700">Vendor B</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">300</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">₹3,00,000</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">₹1,200</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">3</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700"><span
-                                            class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-600">Inactive</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-100">
-                                    <td class="px-6 py-3 text-sm text-gray-700">Vendor C</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">800</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">₹8,00,000</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">₹1,000</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">10</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700"><span
-                                            class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-600">Active</span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-100">
-                                    <td class="px-6 py-3 text-sm text-gray-700">Vendor D</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">600</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">₹6,00,000</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">₹1,500</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700">2</td>
-                                    <td class="px-6 py-3 text-sm text-gray-700"><span
-                                            class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-600">Active</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div
+                            class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow rounded-lg p-6 space-y-6">
+                            <div class="flex items-center justify-between">
+                                <span class="material-symbols-outlined text-3xl text-orange-500">store</span>
+                                <span class="text-sm text-gray-500">Active Vendors</span>
+                            </div>
+                            <h4 class="text-2xl font-bold mt-4">50</h4>
+                        </div>
                     </div>
                 </div>
 
             </div>
+
+            <div class="flex gap-6">
+                <!-- Total Sales Over Time (Line Graph) -->
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow rounded-lg p-6 w-full">
+                    <h2 class="text-xl font-medium mb-4">Total Sales Over Time</h2>
+                    <canvas id="salesChart"></canvas>
+                </div>
+
+                <!-- Order Volume & Revenue Comparison (Bar Graph) -->
+                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow rounded-lg p-6 w-full">
+                    <h2 class="text-xl font-medium mb-4">Order Volume & Revenue Comparison</h2>
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow rounded-lg p-6 mt-6">
+                <h2 class="text-xl font-medium mb-4">Most Purchased Jewellery Items</h2>
+
+                <!-- Table for Jewellery Items -->
+                <div class="mt-6 overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b">
+                                <th class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
+                                    Product Name</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
+                                    Category</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
+                                    Total Sales</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
+                                    Revenue Generated</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
+                                    Stock Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-gray-100">
+                                <td class="px-6 py-3 text-sm text-gray-700">
+                                    <img src="path_to_icon/necklace_icon.png" alt="Gold Necklace"
+                                        class="inline-block w-6 h-6 mr-2">
+                                    Gold Necklace
+                                </td>
+                                <td class="px-6 py-3 text-sm text-gray-700">Necklaces</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">350</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">₹3,50,000</td>
+                                <td class="px-6 py-3 text-sm text-gray-700"><span
+                                        class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-600">In
+                                        Stock</span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-100">
+                                <td class="px-6 py-3 text-sm text-gray-700">
+                                    <img src="path_to_icon/earrings_icon.png" alt="Silver Earrings"
+                                        class="inline-block w-6 h-6 mr-2">
+                                    Silver Earrings
+                                </td>
+                                <td class="px-6 py-3 text-sm text-gray-700">Earrings</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">200</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">₹1,80,000</td>
+                                <td class="px-6 py-3 text-sm text-gray-700"><span
+                                        class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-600">In
+                                        Stock</span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-100">
+                                <td class="px-6 py-3 text-sm text-gray-700">
+                                    <img src="path_to_icon/ring_icon.png" alt="Diamond Ring"
+                                        class="inline-block w-6 h-6 mr-2">
+                                    Diamond Ring
+                                </td>
+                                <td class="px-6 py-3 text-sm text-gray-700">Rings</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">120</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">₹2,40,000</td>
+                                <td class="px-6 py-3 text-sm text-gray-700"><span
+                                        class="px-2 py-1 text-xs rounded-full bg-amber-100 text-amber-700">Low
+                                        Stock</span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-100">
+                                <td class="px-6 py-3 text-sm text-gray-700">
+                                    <img src="path_to_icon/bracelet_icon.png" alt="Gold Bracelet"
+                                        class="inline-block w-6 h-6 mr-2">
+                                    Gold Bracelet
+                                </td>
+                                <td class="px-6 py-3 text-sm text-gray-700">Bracelets</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">150</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">₹1,50,000</td>
+                                <td class="px-6 py-3 text-sm text-gray-700"><span
+                                        class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-600">In
+                                        Stock</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow rounded-lg p-6 mt-6">
+                <h2 class="text-xl font-medium mb-4">Vendor Performance</h2>
+
+                <!-- Table for Vendor Performance -->
+                <div class="mt-6 overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b">
+                                <th class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
+                                    Vendor Name</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
+                                    Total Sales</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
+                                    Revenue Generated</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
+                                    Avg. Order Value</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
+                                    Refunds</th>
+                                <th class="px-6 py-3 text-left text-sm font-semibold whitespace-nowrap text-gray-500">
+                                    Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-gray-100">
+                                <td class="px-6 py-3 text-sm text-gray-700">Vendor A</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">500</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">₹5,00,000</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">₹1,000</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">5</td>
+                                <td class="px-6 py-3 text-sm text-gray-700"><span
+                                        class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-600">Active</span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-100">
+                                <td class="px-6 py-3 text-sm text-gray-700">Vendor B</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">300</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">₹3,00,000</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">₹1,200</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">3</td>
+                                <td class="px-6 py-3 text-sm text-gray-700"><span
+                                        class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-600">Inactive</span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-100">
+                                <td class="px-6 py-3 text-sm text-gray-700">Vendor C</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">800</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">₹8,00,000</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">₹1,000</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">10</td>
+                                <td class="px-6 py-3 text-sm text-gray-700"><span
+                                        class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-600">Active</span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-100">
+                                <td class="px-6 py-3 text-sm text-gray-700">Vendor D</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">600</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">₹6,00,000</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">₹1,500</td>
+                                <td class="px-6 py-3 text-sm text-gray-700">2</td>
+                                <td class="px-6 py-3 text-sm text-gray-700"><span
+                                        class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-600">Active</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
+    </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>

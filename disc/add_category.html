@@ -127,6 +127,22 @@
 
             </div>
         </div>
+
+        <div id="saveToast"
+            class="fixed top-5 right-5 z-50 hidden bg-white rounded-lg shadow-lg p-4 transition-opacity duration-300 transform translate-y-2 opacity-0"
+            role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="flex items-center justify-between">
+                <strong class="font-bold">Notification</strong>
+                <small class="text-gray-500">Just now</small>
+                <button type="button" class="text-gray-400 hover:text-gray-600" onclick="hideSaveToast()"
+                    aria-label="Close">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="mt-2 text-gray-800">
+                Category saved successfully!
+            </div>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
@@ -157,8 +173,8 @@
             // Save updated categories to local storage
             localStorage.setItem('categories', JSON.stringify(categories));
 
-            // Provide feedback to the user
-            alert('Category saved successfully!');
+            // Show toast notification
+            showSaveToast();
 
             // Optionally, redirect to the categories page
             window.location.href = 'categories.html'; // Redirect to the categories page
@@ -168,6 +184,30 @@
             // Navigate to the desired page
             window.location.href = 'categories.html'; // Replace 'desired_page.html' with the actual URL
         });
+
+        // Toast functionality
+        function showSaveToast() {
+            const saveToast = document.getElementById('saveToast');
+            saveToast.classList.remove('hidden');
+            saveToast.classList.remove('opacity-0');
+            saveToast.classList.add('opacity-100');
+            saveToast.classList.add('translate-y-0');
+
+            setTimeout(() => {
+                hideSaveToast();
+            }, 3000);
+        }
+
+        function hideSaveToast() {
+            const saveToast = document.getElementById('saveToast');
+            saveToast.classList.add('opacity-0');
+            saveToast.classList.add('translate-y-2');
+
+            setTimeout(() => {
+                saveToast.classList.add('hidden');
+                saveToast.classList.remove('translate-y-0');
+            }, 1000);
+        }
 
         document.getElementById('thumbnailInput').addEventListener('change', function (event) {
             const file = event.target.files[0];
